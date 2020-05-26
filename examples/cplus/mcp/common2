@@ -1,0 +1,19 @@
+% File 'common2'
+
+:- include 'common1'.
+
+:- sorts
+  group.               % group objects should be defined elsewhere
+
+:- variables
+  N,N1                         :: afValue;
+  G                            :: group.
+
+:- constants
+  num(group,location)          :: additiveFluent(afValue);
+  howmany(vessel,group)        :: attribute(afValue) of cross(vessel).
+
+cross(V) increments num(G,L) by N if to(V)=L & howmany(V,G)=N 
+   unless ab3(V,G,L).
+cross(V) decrements num(G,L) by N if loc(V)=L & howmany(V,G)=N 
+   unless ab4(V,G,L).

@@ -1,0 +1,17 @@
+:- macros 
+  n -> 3.
+
+:- variables 
+ K  :: 0..n-1.
+
+:- constants
+    has         :: inertialFluent(0..n);
+    buy         :: exogenousAction.
+ 
+buy causes has=K+1 if has=K.
+nonexecutable buy if has=n. 
+
+:- query 
+  maxstep :: 3;
+  0: buy;
+  1: buy.

@@ -1,0 +1,55 @@
+Before continuing, please ensure that your system has the autoconfig suite
+installed (autoconfig, automake, and autoheader), if your system is a Debian 
+based distribution (such as Debian, Ubuntu, or Mint) this can be done by 
+running the command:
+
+	sudo apt-get install autoconf automake libtool make
+
+Additionally, new versions of CPlus2ASP now depend on the Boost libraries 
+version 1.44+. If you're running Ubuntu 11.10 (Oneiric) or later this can 
+be done by using the command
+
+	sudo apt-get install libboost-all-dev
+
+Otherwise, you should see if Boost 1.44+ has a package for your distribution 
+or compile and install Boost from source (available at www.boost.org).
+
+
+Finally, the system has requires Bison, Flex, and RE2C in order to create
+many of the source files. Once again, the following command is sufficient
+on Debian based installations:
+
+	sudo apt-get install bison flex re2c
+
+In order to install CPlus2ASP, you can run the command
+
+	./bootstrap && ./configure && make && sudo make install
+
+on systems with sudo installed, or the command
+
+	./bootstrap && ./configure && make && su -c "make install"
+
+on other systems assuming you have access to the root account.
+
+The system requires as2transition to run correctly. If your system has Git
+then as2transition will be downloaded and compiled automatically while execuiting
+the command above. Otherwise, you will need to download the Zip file for
+as2transition (located at https://github.com/babb517/as2transition/archive/master.zip),
+unzip it, and link it to 'externals/as2transition' subdirectory. Assuming 
+that you're in the directory containing your cplus2asp root directory, this 
+can be done with the following commands:
+
+	wget --output-document=as2transition.zip https://github.com/babb517/as2transition/archive/master.zip
+	mkdir -p as2transition
+	unzip as2transition.zip -d as2transition
+	rmdir cplus2asp/externals/as2transition
+	ln -s as2transition cplus2asp/externals/as2transition
+
+
+Before running CPlus2ASP, you should also ensure your system has F2LP v1.3+ 
+and iclingo v3.0.5+ installed as these are required for the regular operation 
+of CPlus2ASP (clingo, gringo, and oclingo are also required for certain running 
+modes). All of these can be obtained at the following locations:
+
+	f2lp: 			http://reasoning.eas.asu.edu/f2lp/
+	*clingo & gringo: 	http://potassco.sourceforge.net/

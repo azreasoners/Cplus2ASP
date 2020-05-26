@@ -1,0 +1,30 @@
+% File 'jmc10': McCarthy's Elaboration No. 10
+
+:- include basic; departing.
+
+:- objects
+  jc                          :: group.
+ 
+:- constants
+  walk                        :: exogenousAction;
+  walk_to                     :: attribute(location) of walk.
+
+% jc is a subgroup of missionaries
+constraint num(jc,L)=<num(mi,L) unless ab14(L).
+nonexecutable cross(V) if howmany(V,jc)>howmany(V,mi) unless ab15(V).
+
+% jc can be present at most one location
+constraint num(jc,L)=1 ->> num(jc,L1)=0 where L\=L1.
+nonexecutable walk if howmany(V,jc)>0 unless ab17(V).
+
+% cannot walk to the same location
+nonexecutable walk_to=L if num(jc,L)>0 unless ab18(L).
+
+walk increments num(mi,L) by 1 if walk_to=L unless ab19(L).
+walk decrements num(mi,L) by 1 if walk_to=L1 & L\=L1 unless ab20(L,L1).
+
+walk increments num(jc,L) by 1 if walk_to=L unless ab21(L).
+walk decrements num(jc,L) by 1 if walk_to=L1 & L\=L1 unless ab22(L,L1).
+
+walk increments departing(mi,L) by 1 if walk_to=L1 & L\=L1 unless ab23(L,L1).
+walk increments departing(jc,L) by 1 if walk_to=L1 & L\=L1 unless ab23(L,L1).

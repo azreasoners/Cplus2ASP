@@ -1,0 +1,258 @@
+
+#include <sstream>
+
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+
+#include "bcplus/parser/detail/Scanner.h"
+#include "bcplus/parser/detail/lemon_parser.h"
+
+#include "bcplus/Location.h"
+#include "bcplus/parser/Token.h"
+
+#include "bcplus/parser/detail/ScannerSource.h"
+#include "bcplus/parser/detail/ScannerRawSource.h"
+#include "bcplus/parser/detail/ScannerTokenSource.h"
+#include "bcplus/parser/detail/ScannerFileSource.h"
+#include "bcplus/parser/detail/ScannerBufferSource.h"
+
+namespace u = babb::utils; 
+namespace fs = boost::filesystem;
+
+namespace bcplus {
+namespace parser {
+namespace detail {
+
+Scanner::Scanner(Configuration const* config)
+	: _cond(yycNORMAL), _config(config), _in_macro(false) {
+	// Intentionally left blank
+}
+
+Scanner::~Scanner() {
+	// Intentionally left blank
+}
+
+bool Scanner::push_front(fs::path const& file, bool squelch) {
+	u::ref_ptr<ScannerFileSource> src = new ScannerFileSource(_config, file, squelch);
+	if (!src->good()) return false;
+	_sources.push_front(src.get());
+	return true;
+}
+
+bool Scanner::push_back(fs::path const& file, bool squelch) {
+	u::ref_ptr<ScannerFileSource> src = new ScannerFileSource(_config, file, squelch);
+	if (!src->good()) return false;
+	_sources.push_back(src.get());
+	return true;
+}
+
+void Scanner::push_front(char const* buffer, Location const& loc, bool track_position) {
+	u::ref_ptr<ScannerBufferSource> src = new ScannerBufferSource(_config, buffer, loc, track_position);
+	_sources.push_front(src.get());
+}
+
+void Scanner::push_back(char const* buffer, Location const& loc, bool track_position) {
+	u::ref_ptr<ScannerBufferSource> src = new ScannerBufferSource(_config, buffer, loc, track_position);
+	_sources.push_back(src.get());
+}
+
+void Scanner::push_back(Token* token) {
+	if (!_sources.size() || _sources.back()->type() != ScannerSource::Type::TOKENS) {
+		_sources.push_back(new ScannerTokenSource(token));
+	} else ((ScannerTokenSource*)_sources.back().get())->push_back(token);
+}
+
+void Scanner::push_front(Token* token) {
+	if (!_sources.size() || _sources.front()->type() != ScannerSource::Type::TOKENS) {
+		_sources.push_front(new ScannerTokenSource(token));
+	} else ((ScannerTokenSource*)_sources.front().get())->push_front(token);
+}
+
+void Scanner::push_back(TokenList* tokens) {
+	if (!_sources.size() || _sources.back()->type() != ScannerSource::Type::TOKENS) {
+		_sources.push_back(new ScannerTokenSource(tokens));
+	} else ((ScannerTokenSource*)_sources.back().get())->push_back(tokens);
+}
+
+void Scanner::push_front(TokenList* tokens) {
+	if (!_sources.size() || _sources.front()->type() != ScannerSource::Type::TOKENS) {
+		_sources.push_front(new ScannerTokenSource(tokens));
+	} else ((ScannerTokenSource*)_sources.front().get())->push_front(tokens);
+}
+
+
+Token* Scanner::readToken() {
+	u::ref_ptr<Token> token = NULL;
+	if (!size()) {
+		Location l = loc();
+		token  = new Token(T_EOF, new ReferencedString("<EOF>"), l, l);
+	} else {
+		do {
+			ScannerSource* src = _sources.front();
+#ifndef NDEBUG
+			_config->ostream(Verb::TRACE_SCANNER) << "TRACE: " << size() << " sources, reading from \"" 
+				<< (src->loc().file() ? src->loc().file()->native() : std::string("<NULL>")) << "\"." << std::endl;
+#endif
+			switch(src->type()) {
+			case ScannerSource::Type::RAW:
+				token = tokenize((ScannerRawSource*)src);
+				break;
+			case ScannerSource::Type::TOKENS:
+				token = ((ScannerTokenSource*)src)->next();
+				break;
+			}
+	
+			if (!token || token->type() == T_ERR_IO) {
+#ifndef NDEBUG
+				_config->ostream(Verb::TRACE_SCANNER) << "TRACE: Scanner encountered IO error." << std::endl;
+#endif
+				_sources.pop_front();
+			} else if (token->type() == T_EOF) {
+#ifndef NDEBUG
+				_config->ostream(Verb::TRACE_SCANNER) << "TRACE: Scanner encountered end of input source." << std::endl;
+#endif
+				_sources.pop_front();
+			}
+		} while (token && token->type() == T_EOF && size());
+	}
+	
+	if (!token) {
+		Location l = loc();
+#ifndef NDEBUG
+		_config->ostream(Verb::TRACE_SCANNER) << "TRACE: Scanner got a null token." << std::endl;
+#endif
+		token  = new Token(T_ERR_IO, new ReferencedString("<IO ERROR>"), l, l);
+	}
+
+#ifndef NDEBUG
+	_config->ostream(Verb::TRACE_SCANNER) << "TRACE: " << token->beginLoc() << ": (" << token->typeString() << "): \"" << *token << "\": Read from scanner." << std::endl;
+#endif
+
+	return token.release();
+}
+
+#define BLK_INIT \
+	blk.str(""); \
+	use_blk = true; \
+	source->token() = source->cursor();
+
+#define BLK_LINE \
+	source->newline(); \
+    blk.write(source->token(), (size_t)(source->cursor() - source->token())); \
+	source->token() = source->cursor();		
+
+#define BLK_FINISH(sz) \
+	blk.write(source->token(), (size_t)(source->cursor() - source->token() - sz));
+
+Token* Scanner::tokenize(ScannerRawSource* source) {
+	if (source->eof()) return new Token(T_EOF, new ReferencedString("<EOF>"), source->loc(), source->loc());
+	else if (!source->good()) return new Token(T_ERR_IO, new ReferencedString("<IO ERROR>"), source->loc(), source->loc());
+
+
+	std::stringstream blk;
+	int ret;
+	Location begin;
+	bool use_blk = false;
+	size_t preskip = 0;
+	size_t postskip = 0;
+
+re2c_start:
+	source->token() = source->cursor();
+	begin = source->loc();
+
+	if (_cond == yycNORMAL) {
+	/*!re2c
+		
+		re2c:define:YYCTYPE						= char;
+		re2c:define:YYMARKER					= source->marker();
+		re2c:define:YYCURSOR					= source->cursor();
+		re2c:define:YYLIMIT						= source->limit();
+		re2c:define:YYGETCONDITION				= _cond;
+		re2c:define:YYGETCONDITION:naked		= 1;
+		re2c:define:YYFILL						= source->fill;
+
+		WS								 		= [ \t\v\f];
+		NL								 		= [\n];
+		EOF										= [\X0000];
+
+		re2c:labelprefix = yy1_;
+		
+		<NORMAL> NL								{ source->newline();		 			goto re2c_start; 					}
+		<NORMAL> WS								{ 										goto re2c_start; 					}
+		<NORMAL> EOF							{ ret = T_EOF; 							goto re2c_finish; 					}
+		
+		<NORMAL> "%"							{ _cond = yycCOMMENT; 							goto yyc_COMMENT;	 				}
+		<NORMAL> [/][*]							{ 
+												  _cond = yycBLK_COMMENT; 
+												  BLK_INIT;
+												  blk << "% "; 
+												  goto yyc_BLK_COMMENT; 				
+												}
+
+
+		<DBL_STRING, SG_STRING, ASP_GR, ASP_CP, LUA_GR, LUA_CP, F2LP_GR, F2LP_CP, PRE_ARG, ARG, MACO> . {
+												  goto re2c_notcmt;
+												}
+
+		<COMMENT> NL							{ 
+												  source->cursor()--; 
+												  _cond = yycNORMAL; 
+												  ret = T_COMMENT;			
+												  goto re2c_finish;
+												}
+		<COMMENT> [^\n]+						{ 												goto yyc_COMMENT;					}
+		<COMMENT> EOF							{ 
+												  source->cursor()--; 
+												  _cond = yycNORMAL; 
+												  ret = T_COMMENT;			
+												  goto re2c_finish;					
+												}
+
+		<BLK_COMMENT> NL						{ 
+												  BLK_LINE;
+												  blk << "% "; 
+												  goto yyc_BLK_COMMENT;				
+												}
+		<BLK_COMMENT> [*][/]					{ 
+												  BLK_FINISH(2);
+												  _cond = yycNORMAL; 
+												  ret = T_COMMENT; 
+												  goto re2c_finish;					
+												}
+		<BLK_COMMENT> EOF						{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_BLK_COMMENT;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<BLK_COMMENT> .							{												goto yyc_BLK_COMMENT;				}
+
+		<*> .									{ goto re2c_notcmt; }
+	*/
+	}
+re2c_notcmt:
+	source->cursor() = source->token();
+	return tokenize_2(source);
+
+re2c_finish:
+	u::ref_ptr<ReferencedString> str = new ReferencedString();
+	if (ret != T_EOF) {
+		if (use_blk)
+			str->assign(blk.str());
+		else
+			str->assign(source->token() + preskip, (size_t)(source->cursor() - source->token() - preskip - postskip));
+	} else {
+		str->assign("<EOF>");
+	}
+
+	return new Token(ret, str, begin, source->loc());
+}
+
+void Scanner::close() {
+	_sources.clear();
+}
+
+
+
+}}}

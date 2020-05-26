@@ -1,0 +1,32 @@
+% File "code_blocks.cp".
+
+:- begin_lua.
+
+-- LUA code block
+
+function a() 
+	-- LUA function
+	math.randomseed(os.time())
+	math.random()
+	return math.random(0, 1000)
+end
+
+:- end_lua.
+
+
+:- begin_f2lp.
+
+% F2LP code block.
+a(X) -> p(X).
+
+:- end_f2lp.
+
+
+:- begin_asp.
+
+a(@a()).
+
+% ASP Code block
+
+:- end_asp.
+

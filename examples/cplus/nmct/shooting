@@ -1,0 +1,39 @@
+:- sorts
+  turkey.
+
+:- objects 
+  turkey1, turkey2    :: turkey.
+
+:- variables
+  T                   :: turkey.
+
+:- constants
+  loaded,
+  alive(turkey)       :: inertialFluent;
+  target              :: inertialFluent(turkey+none);
+  load,
+  aim(turkey),
+  shoot               :: exogenousAction.
+
+
+load causes loaded.
+load causes target=none.
+
+aim(T) causes target=T.
+
+shoot causes -alive(T) if target=T.
+shoot causes -loaded.
+nonexecutable shoot if -loaded.
+
+nonexecutable aim(T) , shoot.
+
+
+:- query 
+maxstep :: 6;
+label::100;
+0: alive(T) , target=none , -loaded;
+maxstep:
+   -alive(T).
+
+
+

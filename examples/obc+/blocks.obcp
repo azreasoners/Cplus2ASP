@@ -1,0 +1,81 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: 'blocks.obc': The blocks world
+% Author: Joseph Babb
+% Date: 10/07/2012
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The agent is tasked with creating a specific
+% arrangement of stacked blocks given a set of
+% blocks currently on the table. Meanwhile, an
+% external antagonist has the ability to 'rain'
+% more blocks on the table at any given time.
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Based on the example provided with:
+%             oClingo v. 3.0.92
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- sorts
+  location >> block;
+  block >> (nblock, rblock).
+
+:- objects
+  table                         :: location;
+  1..6       					:: nblock;
+  a,b,c,d						:: rblock.
+  
+:- constants
+  loc(block)                    :: simpleFluent(location*);
+  move(block,location)          :: exogenousAction;
+  rained(block)					:: simpleFluent;
+  ext_rain(rblock,location*)	:: externalAction.
+
+:- variables
+  B,B1,B2                       :: block;
+  BR							:: rblock;
+  L,L1                          :: location.
+
+% Inertia
+inertial loc(B).
+inertial rained(B).
+
+% move one block each step
+nonexecutable move(B,L) & move(B1,L1) where B1 < B.
+nonexecutable move(B,L) & move(B1,L1) where L1 < L.
+
+% block is at new location if moved to it
+move(B,L) causes loc(B)=L.
+
+% only move blocks that don't have blocks on top of them
+nonexecutable move(B,L) if loc(B1)=B.
+  
+% only move blocks on blocks that don't have blocks on them
+nonexecutable move(B,B1) if loc(B2)=B1.
+
+% Don't move blocks to the same location
+nonexecutable move(B,L) if loc(B)=L.
+
+% A block shouldn't be on top of itself.
+impossible loc(B)=B.
+
+% Don't move blocks that did not rain yet
+nonexecutable move(BR,L) if ~rained(BR).
+
+% Don't move blocks onto blocks that haven't rained yet.
+nonexecutable move(B,BR) if ~rained(BR).
+
+% It's raining blocks
+ext_rain(BR,L) causes loc(BR)=L.
+ext_rain(BR,L) causes rained(BR).
+
+% Addition: If a block hasn't rained, its location is undefined.
+impossible ~rained(BR) & loc(BR)=L where L \= none.
+
+:- hide all.
+:- show move(B,L), loc(B)=L, ext_rain(BR,L).
+
+
+:- query
+  0:       loc(1)=2 & loc(2)=table & loc(3)=4 &
+           loc(4)=table & loc(5)=6 & loc(6)=table &
+		   ~rained(a) & ~rained(b) & ~rained(c) & ~rained(d);
+  maxstep: loc(1)=table & loc(2)=1 & loc(3)=2 &
+           loc(4)=table & loc(5)=4 & loc(6)=5.

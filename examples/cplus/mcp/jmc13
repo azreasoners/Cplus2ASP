@@ -1,0 +1,23 @@
+% File 'jmc13':  McCarthy's elaboration No. 13
+
+:- include basic; departing.
+
+:- constants
+  useBridge                        :: exogenousAction;
+  useBridge_from,
+  useBridge_to                     :: attribute(location) of useBridge;
+  useBridge_howmany(group)         :: attribute(afValue) of useBridge.
+
+useBridge increments num(G,L) by N 
+   if useBridge_to=L & useBridge_howmany(G)=N unless ab14(G,L).
+useBridge decrements num(G,L) by N 
+   if useBridge_from=L & useBridge_howmany(G)=N unless ab15(G,L).
+useBridge increments departing(G,L) by N
+   if useBridge_from=L & useBridge_howmany(G)=N unless ab16(G,L).
+
+nonexecutable useBridge if useBridge_from=L & useBridge_to=L1
+     unless ab17(G,L) where -((L=bank1 & L1=bank2) ++ (L=bank2 & L1=bank1)).
+
+always useBridge ->> useBridge_howmany(mi)+useBridge_howmany(ca)>0 & 
+                     useBridge_howmany(mi)+useBridge_howmany(ca)=<2 
+    unless ab18.

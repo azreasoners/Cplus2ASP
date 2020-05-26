@@ -1,0 +1,132 @@
+% File 'spacecraft.query'
+
+:- maxAdditive :: 7.
+
+:- macros 
+  mass -> 1;
+  maxForce -> 2.
+
+:- include 'spacecraft.cp'.
+
+:- query
+maxstep :: 1;
+ 0: (pos(x) = -1  &  pos(y) =  0  &  pos(z) =  1);
+ 0: (vel(x) =  0  &  vel(y) =  1  &  vel(z) =  1);
+% 0: (force(jet1,x)=0 & force(jet1,y)=2 & force(jet1,z)=-1);
+% 0: (force(jet2,x)=2 & force(jet2,y)=2 & force(jet2,z)=-1);
+ 1: (pos(x) =  0  &  pos(y) =  3  &  pos(z) =  1).
+
+%:- hide all.
+%:- show pos(Ax)=P; vel(Ax)=V; fire(J); force(J,Ax)=F.
+
+
+/* 
+| ?- loadf 'spacecraft-test'.
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/macros.std
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/spacecraft-test
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/spacecraft
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/additive
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/arithmetic
+% in transition mode...
+% 458 atoms, 5698 rules, 27222 clauses (5460 new atoms)
+% Grounding time: 12.56 seconds
+% Completion time: 4.09 seconds
+% Total time: 16.65 seconds
+
+yes
+| ?- set(num,all).
+
+yes
+| ?- query 0.
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 5918 atoms (including new atoms), 27222 clauses
+% Writing input clauses... done.  (0.49 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.48 seconds (prep 0.33 seconds, search 0.15 seconds)
+
+Solution 1:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)= -2)  fire(jet2,force(x)=1,force(y)=2,force(z)=0)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 2:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)= -2)  fire(jet2,force(x)=0,force(y)=2,force(z)=0)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 3:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)=0)  fire(jet2,force(x)=0,force(y)=2,force(z)= -2)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 4:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)=0)  fire(jet2,force(x)=1,force(y)=2,force(z)= -2)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 5:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)= -1)  fire(jet2,force(x)=0,force(y)=2,force(z)= -1)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 6:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)= -1)  fire(jet2,force(x)=1,force(y)=2,force(z)= -1)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 7:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)= -1)  fire(jet2,force(x)=2,force(y)=2,force(z)= -1)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 8:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)= -2)  fire(jet2,force(x)=2,force(y)=2,force(z)=0)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+Solution 9:
+
+0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+
+ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)=0)  fire(jet2,force(x)=2,force(y)=2,force(z)= -2)  
+
+1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+
+
+
+yes
+| ?- 
+*/

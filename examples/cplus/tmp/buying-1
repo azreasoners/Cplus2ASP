@@ -1,0 +1,17 @@
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '7'.
+% Pragma: Running Query 'Query '1''.
+% Pragma: Minimum Step = '1', Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+	0:  has(buyer,money)=6
+
+	ACTIONS:  buy(magazine) buy(newspaper) howmany(magazine)=1 howmany(newspaper)=2
+
+	1:  has(buyer,money)=1
+
+SATISFIABLE
+Models      : 1+    
+Time        : 0.010
+Prepare   : 0.010
+Prepro.   : 0.000

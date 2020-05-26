@@ -1,0 +1,62 @@
+% File: 3-towers-of-hanoi
+
+:- sorts
+  peg; 
+  location >> disk.
+
+:- objects
+  p1,p2,p3          :: peg;
+  table             :: location;
+  d1,d2,d3          :: disk.
+
+:- variables
+  P,P1              :: peg;
+  L                 :: location;
+  D                 :: disk.
+
+:- constants
+  top(peg)          :: inertialFluent(location);
+  loc(disk)         :: inertialFluent(location);
+  size(location)    :: 0..3;
+  move(peg,peg)     :: exogenousAction.
+
+
+exogenous size(L).
+
+constraint loc(D)=L ->> size(D)<size(L).
+
+nonexecutable move(P,P1) if top(P)=table.
+
+% top(P) := loc(top(P))    
+move(P,P1) causes top(P)=L if top(P)=D & loc(D)=L.
+
+% loc(top(P)) := top(P1)    
+move(P,P1) causes loc(D)=L if top(P)=D & top(P1)=L.
+
+% top(P1) := top(P)         
+move(P,P1) causes top(P1)=D if top(P)=D.
+
+noconcurrency.
+
+:- query
+label :: test;
+0: size(table)=3 & size(d1)=2 & size(d2)=1 & size(d3)=0
+   & loc(d1)=table &  loc(d2)=d1 &  loc(d3)=d2 &
+   top(p1)=d3 & top(p2)=table & top(p3)=table;
+maxstep:
+   loc(d1)=table & loc(d2)=d1 & loc(d3)=d2 & top(p3)=d3.
+
+:- query
+maxstep :: 6..7;
+0: size(table)=3 & size(d1)=2 & size(d2)=1 & size(d3)=0 &
+   loc(d1)=table &  loc(d2)=d1 &  loc(d3)=d2 &
+   top(p1)=d3 & top(p2)=table & top(p3)=table;
+maxstep:
+   loc(d1)=table & loc(d2)=d1 & loc(d3)=d2 & top(p3)=d3.
+
+:- query
+label :: 1;
+maxstep :: 0;
+0: size(table)=3 & size(d1)=1 & size(d2)=2 & size(d3)=0 &
+   loc(d1)=table &  loc(d2)=d1 &  loc(d3)=d2 &
+   top(p1)=d3 & top(p2)=table & top(p3)=table.

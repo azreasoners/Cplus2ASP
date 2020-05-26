@@ -1,0 +1,343 @@
+/* 
+ * Copyright (c) 2010-2013 <Joseph Babb, Michael Cassollary, Joohyung Lee>
+ *
+ * For information on how to contact the authors, please visit
+ *	http://reasoning.eas.asu.edu/cplus2asp
+ *
+ * This file is part of the cplus2asp system.
+ *
+ * cplus2asp is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * cplus2asp is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <string>
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <cctype>
+
+#include "babb/utils/memory.h"
+
+#include "as2transition/TransitionFormatter.h"
+#include "as2transition/TransitionPath.h"
+#include "as2transition/Predicate.h"
+#include "as2transition/parser/PredicateParser.h"
+#include "as2transition/Config.h"
+
+namespace u = babb::utils;
+
+namespace as2transition {
+
+/**
+ * Checks if the provided string consists of just integers.
+ * @param str The string to check.
+ * @return True if str contains only [0-9].
+ */
+bool isIntegerString(std::string const& str) {
+	char const* c_str = str.c_str();
+
+	size_t sz = str.size();
+	for (size_t i = 0; i < sz; i++) {
+		if (!isdigit(c_str[i])) return false;
+	} 
+	return true;
+}
+
+void TransitionFormatter::help(std::ostream& out, bool shorthand) {
+	out
+		<< "  --format=FORMAT" << " OR --FORMAT " << ((shorthand) ? " OR -r / -i / -e / -s" : "")	<< std::endl 
+		<< "         Specifies a format to use for each of the constants being output. FORMAT can "	<< std::endl
+		<< "         be any of the following: "														<< std::endl
+		<< "              raw   - Displays all constants as they appear from the solver."			<< std::endl
+		<< "              inner - Strips and displays the inner <pre> from h(<pred>,<t>) style "	<< std::endl
+		<< "                      (or similar), atoms."												<< std::endl
+		<< "              eql   - Similar to 'inner' but also formats all inner eql(<c>,<v>) "		<< std::endl
+		<< "                      (or eq(<c>,<v>)) as <c>=<v>."										<< std::endl
+		<< "              short - Similar to 'eql' but also compresses boolean <c>=true and"		<< std::endl
+		<< "                      <c>=false to c and -c, respectively. (Default Value.)"			<< std::endl
+		  																							<< std::endl
+		<< "  --all" << ((shorthand) ? " OR -a" : "")												<< std::endl
+		<< "         Displays all positive predicates."												<< std::endl 
+		<< "  --ALL" << ((shorthand) ? " OR -A" : "")												<< std::endl
+		<< "   	      Displays all predicates, positive and negative." 								<< std::endl
+		<< "  --negated[=true|false]" << ((shorthand) ? " OR -n" : "")								<< std::endl
+		<< "         Sets whether to show negative constants which the value of 'none' or 'false'"	<< std::endl
+		<< "  --strong-negation[=true|false]"														<< std::endl
+		<< "         Sets whether to show predicates of the form -p."						 		<< std::endl
+		<< "  --contribs[=true|false]" << ((shorthand) ? " OR -c" : "")								<< std::endl
+		<< "         Sets whether to show formatted \"contribution\" and \"x_contrib\" constants"	<< std::endl
+		<< "         which are used as intermediates for C+ additive constants."					<< std::endl
+		<< "  --xpreds[=true|false]" << ((shorthand) ? " OR -x" : "")								<< std::endl
+		<< "         Sets whether to show constants who's (inner) names begin with \"x_\" which"	<< std::endl
+		<< "         are used as temporary constants in CPlus2ASP."									<< std::endl
+																									<< std::endl 
+		<< "  --separate-actions[=true|false]" 														<< std::endl
+		<< "         Sets whether to show action constants in a separate section."					<< std::endl
+		<< "  --separate-ext[=true|false]"															<< std::endl
+		<< "         Sets whether to show external constants in a separate section."				<< std::endl
+																									<< std::endl
+		<< "  --strip-sanitization[=true|false]" << ((shorthand) ? " OR -z" : "")					<< std::endl
+		<< "         Sets whether the sanitization prefixes saniConst_ and saniObj_ should be "		<< std::endl
+		<< "         removed from in front of constants and objects, respectively."					<< std::endl
+		<< "  --strip-prefix[=true|false]" << ((shorthand) ? " OR -p" : "")							<< std::endl
+		<< "         Sets whether the non-reified constant prefixes (c_X_X, e_X_X, and o_) should "	<< std::endl
+		<< "         be removed from in front of constants and objects."							<< std::endl
+																									<< std::endl
+		<< "  --line" << ((shorthand) ? " OR -l" : "")												<< std::endl
+		<< "         Prints out each predicate on a separate line." 								<< std::endl
+		<< "  --none=VALUE" << ((shorthand) ? " OR -n=VALUE" : "")									<< std::endl
+		<< "          Sets [VALUE] to be treated as an alias for 'none'. Useful if 'none' has been"	<< std::endl
+		<< "          replaced with an integer to circumvent a bug in Gringo 3.X.X's unification"	<< std::endl
+		<< "          checking that sometimes prevents grounding." 									<< std::endl;
+}
+
+bool TransitionFormatter::parseOption(char const* opt, bool shorthand) {
+	char const* marker = opt;
+	char const* cursor = opt;
+
+	/*!re2c
+        re2c:define:YYCTYPE = "char";
+        re2c:define:YYCURSOR = cursor;
+        re2c:yyfill:enable = 0;
+        re2c:define:YYMARKER = marker;
+        re2c:indent:top = 1;
+
+		"--format="[a-z]+							{ return setOption(Option::FMT,opt+strlen("--format="));					}
+		"--raw"										{ return setOption(Option::FMT,"raw");										}
+		"--inner"									{ return setOption(Option::FMT,"inner");									}
+		"--eql"										{ return setOption(Option::FMT,"eql"); 										}
+		"--short"									{ return setOption(Option::FMT,"short");									}
+
+		"--all"										{ return setOption(Option::SHOW_ALMOST_ALL); 								}
+		"--ALL"										{ return setOption(Option::SHOW_ALL); 										}
+
+		"--negated"									{ return setOption(Option::SHOW_NEGATED, "true");							}
+		"--negated="[a-z]+							{ return setOption(Option::SHOW_NEGATED, opt+strlen("--negated=")); 		}
+		"--strong-negated"							{ return setOption(Option::SHOW_STRONG_NEGATED, "true");					}
+		"--strong-negated="[a-z]+					{ return setOption(Option::SHOW_STRONG_NEGATED, opt+strlen("--strong-negated="));}
+		"--contribs"								{ return setOption(Option::SHOW_CONTRIBS, "true");					 		}
+		"--contribs="[a-z]+							{ return setOption(Option::SHOW_CONTRIBS, opt+strlen("--contribs=")); 		}
+		"--xpreds"									{ return setOption(Option::SHOW_XPREDS, "true"); 		return true; 		}
+		"--xpreds="[a-z]+							{ return setOption(Option::SHOW_XPREDS, opt+strlen("--xpreds="));	 		}
+
+		"--separate-actions"						{ return setOption(Option::SEP_ACTIONS, "true");							}
+		"--separate-actions="[a-z]+					{ return setOption(Option::SEP_ACTIONS, opt+strlen("--separate-actions="));	}
+
+		"--separate-ext"							{ return setOption(Option::SEP_ABS, "true");								}
+		"--separate-ext="[a-z]+						{ return setOption(Option::SEP_ABS, opt+strlen("--separate-abs="));		 	}
+		
+		"--strip-sanitization"						{ return setOption(Option::STRIP_SAN, "true");								}
+		"--strip-sanitization="[a-z]+				{ return setOption(Option::STRIP_SAN, opt+strlen("--strip-sanitization=")); }
+		
+		"--strip-prefix"							{ return setOption(Option::STRIP_PREFIX, "true");							}
+		"--strip-prefix="[a-z]+						{ return setOption(Option::STRIP_PREFIX, opt+strlen("--strip-prefix=")); }
+
+		"--line"									{ return setOption(Option::LINES);											}
+		"--none="[^\000]+							{ return setOption(Option::NONE_ALIAS,opt+strlen("--none="));				}
+
+		.											{ goto no_long_match; 													}
+	*/
+no_long_match:
+	if (!shorthand) return false;
+	cursor = opt;
+	marker = opt;
+
+	/*!re2c
+
+		"-r"										{ return setOption(Option::FMT,"raw"); 				}
+		"-i"										{ return setOption(Option::FMT,"inner");			}
+		"-e"										{ return setOption(Option::FMT,"eql"); 				}
+		"-s"										{ return setOption(Option::FMT,"short");	 		}
+
+		"-a"										{ return setOption(Option::SHOW_ALMOST_ALL); 		}
+		"-A"										{ return setOption(Option::SHOW_ALL); 				}
+
+		"-n"										{ return setOption(Option::SHOW_NEGATED,"true"); 	}
+		"-c"										{ return setOption(Option::SHOW_CONTRIBS,"true");	}
+		"-x"										{ return setOption(Option::SHOW_XPREDS,"true"); 	}
+
+		"-z"										{ return setOption(Option::STRIP_SAN, "true"); 		}
+		"-p"										{ return setOption(Option::STRIP_PREFIX, "true");	}
+
+		"-l"										{ return setOption(Option::LINES);					}
+
+		.											{ return false; }
+	*/
+
+}
+
+// Sets the specified option
+bool TransitionFormatter::setOption(Option::type opt, char const* val) {
+
+	switch (opt) {
+	case Option::FMT:
+		if (!val)						return false;
+		if (!strcmp(val,"raw")) 		config()->format(Config::PredFormat::RAW);
+		else if (!strcmp(val, "inner"))config()->format(Config::PredFormat::INNER);
+		else if (!strcmp(val, "eql")) 	config()->format(Config::PredFormat::EQL);
+		else if (!strcmp(val, "short"))config()->format(Config::PredFormat::SHORT);
+		else 							return false;
+		return true;
+
+	case Option::SHOW_ALL:
+		config()->showmask(~0);
+		return true;
+
+	case Option::SHOW_ALMOST_ALL:
+		config()->showmask(config()->showmask() | Config::PredType::CONTRIBUTION | Config::PredType::XPREDICATE);
+		return true;
+
+	case Option::SHOW_NEGATED:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->showmask(config()->showmask() | Config::PredType::NEGATIVE);
+		else if (!strcmp(val,"false"))	config()->showmask(config()->showmask() & ~Config::PredType::NEGATIVE);
+		else 							return false;
+		return true;
+
+	case Option::SHOW_STRONG_NEGATED:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->showmask(config()->showmask() | Config::PredType::STRONG_NEGATION);
+		else if (!strcmp(val,"false"))	config()->showmask(config()->showmask() & ~Config::PredType::STRONG_NEGATION);
+		else 							return false;
+		return true;
+
+	case Option::SHOW_CONTRIBS:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->showmask(config()->showmask() | Config::PredType::CONTRIBUTION);
+		else if (!strcmp(val,"false"))	config()->showmask(config()->showmask() & ~Config::PredType::CONTRIBUTION);
+		else 							return false;
+		return true;
+
+	case Option::SHOW_XPREDS:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->showmask(config()->showmask() | Config::PredType::XPREDICATE);
+		else if (!strcmp(val,"false"))	config()->showmask(config()->showmask() & ~Config::PredType::XPREDICATE);
+		else 							return false;
+		return true;
+
+	case Option::SEP_ACTIONS:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->separateActions(true);
+		else if (!strcmp(val,"false"))	config()->separateActions(false);
+		else 							return false;
+		return true;
+
+	case Option::SEP_ABS:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->separateExternal(true);
+		else if (!strcmp(val,"false"))	config()->separateExternal(false);
+		else 							return false;
+		return true;
+
+	case Option::STRIP_SAN:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->stripSanitization(true);
+		else if (!strcmp(val,"false"))	config()->stripSanitization(false);
+		else 							return false;
+		return true;
+	
+	case Option::STRIP_PREFIX:
+		if (!val)						return false;
+		if (!strcmp(val,"true"))		config()->stripPrefix(true);
+		else if (!strcmp(val,"false"))	config()->stripPrefix(false);
+		else 							return false;
+		return true;
+
+	case Option::LINES:
+		config()->onePredPerLine(true);
+		return true;
+
+	case Option::NONE_ALIAS:
+		config()->noneAlias(new ReferencedString(val));
+		return true;
+
+	default:
+		return false;
+	}
+}
+
+
+
+/**
+ * Reads in and processes the answer set line(s) that are next in the provided stream.
+ * @param in The in stream to read from.
+ * @param output The output stream to write to.
+ * @param solutionNum The current solution # we're working with.
+ * @param config The system configuration.
+ * @param nextToken The next token to be read.
+ */
+TransitionPath* TransitionFormatter::format(std::istream& in, bool ignorenl) const {
+	TransitionPath* path = new TransitionPath(config());
+	std::string token, tmp;
+	
+/*
+	Config::Solver::type solver = config()->solver();
+
+	// read next candidate token
+	bool newline;
+	newline = readTokenOrNewline(in, token);
+
+	// Skip any answer set header...
+	if (token == "Stable") {
+		// smodels
+		newline = readTokenOrNewline(in, token); // 'Models:'
+		if (!newline) newline = readTokenOrNewline(in, token);
+		if (solver == Config::Solver::UNKNOWN) solver = Config::Solver::SMODELS;
+	} else if (token == "Answer") {
+		// cmodels
+		newline = readTokenOrNewline(in, token); // 'set:'
+		if (!newline) newline = readTokenOrNewline(in, token);
+		if (solver == Config::Solver::UNKNOWN) solver = Config::Solver::CMODELS;
+	} else if (token[token.size()-1] == '.' && isIntegerString(token.substr(0,token.size()-1))) {
+		// oclingo
+		if(solver == Config::Solver::UNKNOWN) solver = Config::Solver::OCLINGO;
+	}
+*/
+
+	// Read until we reach the next line.
+	u::ref_ptr<parser::PredicateParser> parser = new parser::PredicateParser(in, true);
+	parser->parse();
+
+	// Transfer each of the predicates into the path...
+	for (parser::PredicateParser::iterator it = parser->begin(); it != parser->end(); it++) {
+		path->add(*it);
+	}
+
+	return path;
+}
+
+
+
+// Reads characters from the in stream until either a complete token or a newline character has been read.
+bool TransitionFormatter::readTokenOrNewline(std::istream& in, std::string& out, bool ws) {
+	char c;
+
+	out = "";
+	while (in.good() && isspace(in.peek())) {
+		c = in.get();
+		if (c == '\n') {
+			out += c;
+			return true;
+		} else if (ws) {
+			out += c;
+		}
+	}
+
+	while (in.good() && !isspace(in.peek())) {
+		out += in.get();
+	}
+
+
+	return false;
+}
+};

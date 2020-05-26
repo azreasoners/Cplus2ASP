@@ -1,0 +1,785 @@
+
+#include <sstream>
+
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+
+#include "bcplus/parser/detail/Scanner.h"
+#include "bcplus/parser/detail/lemon_parser.h"
+
+#include "bcplus/Location.h"
+#include "bcplus/parser/Token.h"
+
+#include "bcplus/parser/detail/ScannerSource.h"
+#include "bcplus/parser/detail/ScannerRawSource.h"
+#include "bcplus/parser/detail/ScannerTokenSource.h"
+#include "bcplus/parser/detail/ScannerFileSource.h"
+#include "bcplus/parser/detail/ScannerBufferSource.h"
+
+namespace u = babb::utils; 
+namespace fs = boost::filesystem;
+
+namespace bcplus {
+namespace parser {
+namespace detail {
+
+
+#define BLK_INIT \
+	blk.str(""); \
+	use_blk = true; \
+	source->token() = source->cursor();
+
+#define BLK_LINE \
+	source->newline(); \
+    blk.write(source->token(), (size_t)(source->cursor() - source->token())); \
+	source->token() = source->cursor();		
+
+#define BLK_FINISH(sz) \
+	blk.write(source->token(), (size_t)(source->cursor() - source->token() - sz));
+
+Token* Scanner::tokenize_3(ScannerRawSource* source) {
+	if (source->eof()) return new Token(T_EOF, new ReferencedString("<EOF>"), source->loc(), source->loc());
+	else if (!source->good()) return new Token(T_ERR_IO, new ReferencedString("<IO ERROR>"), source->loc(), source->loc());
+
+
+	std::stringstream blk;
+	int ret;
+	Location begin;
+	bool use_blk = false;
+	size_t preskip = 0;
+	size_t postskip = 0;
+
+	int parens = 0;
+	bool dbl_quote = false;
+	bool sgl_quote = false;
+	bool ln_cmt = false;
+	bool blk_cmt = false;
+
+	char const* marker = NULL;
+
+	marker = source->token() = source->cursor();
+	begin = source->loc();
+
+	/*!re2c
+		
+		re2c:define:YYCTYPE						= char;
+		re2c:define:YYMARKER					= source->marker();
+		re2c:define:YYCURSOR					= source->cursor();
+		re2c:define:YYLIMIT						= source->limit();
+		re2c:define:YYGETCONDITION				= _cond;
+		re2c:define:YYGETCONDITION:naked		= 1;
+		re2c:define:YYFILL						= source->fill;
+		re2c:define:YYCTXMARKER					= marker;
+
+		ALPH 									= [a-zA-Z_];
+		AN 										= [a-zA-Z0-9_];
+		NUM										= [0-9];
+		WS								 		= [ \t\v\f];
+		NL								 		= [\n];
+		EOF										= [\X0000];
+
+		INTEGER									= NUM+;
+		IDENTIFIER								= ALPH AN*;
+		
+		re2c:labelprefix = yy3_;
+		
+
+		<NORMAL> ":-"							{ ret = T_COLON_DASH;					goto re2c_finish;					}
+		<NORMAL> "::"							{ ret = T_DBL_COLON;					goto re2c_finish;					}
+		<NORMAL> ":"							{ ret = T_COLON;						goto re2c_finish;					}
+		<NORMAL> "~"							{ ret = T_TILDE;						goto re2c_finish;					}
+		<NORMAL> "->>"							{ ret = T_IMPL;							goto re2c_finish;					}
+		<NORMAL> "-"							{ ret = T_DASH;							goto re2c_finish;					}
+		<NORMAL> "<->"							{ ret = T_EQUIV;						goto re2c_finish;					}
+		<NORMAL> "<-"							{ ret = T_ARROW_LDASH;					goto re2c_finish;					}
+		<NORMAL> "<>"							{ ret = T_NEQ;							goto re2c_finish;					}
+		<NORMAL> "<"							{ ret = T_LTHAN;						goto re2c_finish;					}
+		<NORMAL> "<="							{ ret = T_LTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> ">"							{ ret = T_GTHAN;						goto re2c_finish;					}
+		<NORMAL> ">="							{ ret = T_GTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> ">>"							{ ret = T_DBL_GTHAN;					goto re2c_finish;					}
+		<NORMAL> "@<"							{ ret = T_LTHAN;						goto re2c_finish;					}
+		<NORMAL> "@>"							{ ret = T_GTHAN;						goto re2c_finish;					}
+		<NORMAL> "@<="							{ ret = T_LTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "@>="							{ ret = T_GTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "@=<"							{ ret = T_LTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "@=>"							{ ret = T_GTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "=<"							{ ret = T_LTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "=>"							{ ret = T_GTHAN_EQ;						goto re2c_finish;					}
+		<NORMAL> "=="							{ ret = T_DBL_EQ;						goto re2c_finish;					}
+		<NORMAL> "="							{ ret = T_EQ;							goto re2c_finish;					}
+		<NORMAL> "&&"							{ ret = T_DBL_AMP;						goto re2c_finish;					}
+		<NORMAL> "&"							{ ret = T_AMP;							goto re2c_finish;					}
+		<NORMAL> "++"							{ ret = T_DBL_PLUS;						goto re2c_finish;					}
+		<NORMAL> "+"							{ ret = T_PLUS;							goto re2c_finish;					}
+		<NORMAL> ".."							{ ret = T_DBL_PERIOD;					goto re2c_finish;					}
+		<NORMAL> "."							{ ret = T_PERIOD; _in_macro = false;	goto re2c_finish;					}
+		<NORMAL> "\\="							{ ret = T_NEQ;							goto re2c_finish;					}
+		<NORMAL> "\\/"							{ ret = T_BIG_DISJ;						goto re2c_finish;					}
+		<NORMAL> "//"							{ ret = T_INT_DIV;						goto re2c_finish;					}
+		<NORMAL> "/\\"							{ ret = T_BIG_CONJ;						goto re2c_finish;					}
+		<NORMAL> ","							{ ret = T_COMMA;						goto re2c_finish;					}
+		<NORMAL> ";"							{ ret = T_SEMICOLON;					goto re2c_finish;					}
+		<NORMAL> "|"							{ ret = T_PIPE;							goto re2c_finish;					}
+		<NORMAL> "#"							{ ret = T_POUND;						goto re2c_finish;					}
+		<NORMAL> "*"							{ ret = T_STAR;							goto re2c_finish;					}
+		<NORMAL> "^"							{ ret = T_CARROT;						goto re2c_finish;					}
+		<NORMAL> "@"							{ ret = T_AT;							goto re2c_finish;					}
+		<NORMAL> "["							{ ret = T_BRACKET_L;					goto re2c_finish;					}
+		<NORMAL> "]"							{ ret = T_BRACKET_R;					goto re2c_finish;					}
+		<NORMAL> "{"							{ ret = T_CBRACKET_L;					goto re2c_finish;					}
+		<NORMAL> "}"							{ ret = T_CBRACKET_R;					goto re2c_finish;					}
+		<NORMAL> "("							{ ret = T_PAREN_L;						goto re2c_finish;					}
+		<NORMAL> ")"							{ ret = T_PAREN_R;						goto re2c_finish;					}
+
+
+
+		<NORMAL> ["]							{ _cond = yycDBL_STRING;	preskip = 1;		goto yyc_DBL_STRING;				}
+		<NORMAL> [']							{ _cond = yycSGL_STRING; 	preskip = 1;		goto yyc_SGL_STRING;				}
+	
+
+		<NORMAL>":-" WS* "begin_asp" WS* [.]
+												{
+												  _cond = yycASP_CP;
+												  BLK_INIT;
+												  goto yyc_ASP_CP;
+												}
+		<NORMAL>":-" WS* "begin" WS+ "asp" WS* [.]
+												{
+												  _cond = yycASP_CP;
+												  BLK_INIT;
+												  goto yyc_ASP_CP;
+												}
+		<NORMAL> "#begin_asp" WS* [.]?			{
+												  _cond = yycASP_GR;
+												  BLK_INIT;
+												  goto yyc_ASP_GR;
+												}
+		<NORMAL>":-" WS* "begin_lua" WS* [.] 
+												{
+												  _cond = yycLUA_CP;
+												  BLK_INIT;
+												  goto yyc_LUA_CP;
+												}
+		<NORMAL>":-" WS* "begin" WS+ "lua" WS* [.] 
+												{
+												  _cond = yycLUA_CP;
+												  BLK_INIT;
+												  goto yyc_LUA_CP;
+												}
+		<NORMAL> "#begin_lua" WS* [.]? 
+												{
+												  _cond = yycLUA_GR;
+												  BLK_INIT;
+												  goto yyc_LUA_GR;
+												}
+
+		<NORMAL>":-" WS* "begin_python" WS* [.] 
+												{
+												  _cond = yycPYTHON_CP;
+												  BLK_INIT;
+												  goto yyc_PYTHON_CP;
+												}
+		<NORMAL>":-" WS* "begin" WS+ "python" WS* [.] 
+												{
+												  _cond = yycPYTHON_CP;
+												  BLK_INIT;
+												  goto yyc_PYTHON_CP;
+												}
+		<NORMAL> "#begin_python" WS* [.]? 
+												{
+												  _cond = yycPYTHON_GR;
+												  BLK_INIT;
+												  goto yyc_PYTHON_GR;
+												}
+		<NORMAL>":-" WS* "begin_f2lp" WS* [.]
+												{
+												  _cond = yycF2LP_CP;
+												  BLK_INIT;
+												  goto yyc_F2LP_CP;
+												}
+		<NORMAL>":-" WS* "begin" WS+ "f2lp" WS* [.]
+												{
+												  _cond = yycF2LP_CP;
+												  BLK_INIT;
+												  goto yyc_F2LP_CP;
+												}
+		<NORMAL> "#begin_f2lp" WS* [.]?			{
+												  _cond = yycF2LP_GR;
+												  BLK_INIT;
+												  goto yyc_F2LP_GR;
+												}
+		<NORMAL> IDENTIFIER/ WS* "("			{ 
+												  ret = T_IDENTIFIER;
+												  _cond = yycPRE_ARG;
+												  goto re2c_finish;					
+												}
+		<NORMAL> "->"							{ 
+												  ret = T_ARROW_RDASH; 
+												  if (_in_macro) _cond = yycMACRO;		
+												  goto re2c_finish;	
+												}
+
+		<NORMAL> INTEGER						{ ret = T_INTEGER;								goto re2c_finish;				}
+		<NORMAL> IDENTIFIER						{ ret = T_IDENTIFIER;							goto re2c_finish;				}
+		<NORMAL> "#" IDENTIFIER					{ ret = T_POUND_IDENTIFIER;						goto re2c_finish;				}
+		<NORMAL> "#" INTEGER					{ ret = T_POUND_INTEGER;						goto re2c_finish;				}
+		<NORMAL> "@" IDENTIFIER					{ ret = T_AT_IDENTIFIER;		preskip = 1;	goto re2c_finish;				}
+
+		<DBL_STRING> NL							{ source->newline();				 			goto yyc_DBL_STRING; 				}
+		<DBL_STRING> [\\]["]					{ 												goto yyc_DBL_STRING; 				}
+		<DBL_STRING> ["]						{ 
+												  _cond = yycNORMAL; 
+												  ret = T_STRING_LITERAL;	
+												  postskip = 1;
+												  goto re2c_finish;					
+												}
+		<DBL_STRING> .							{												goto yyc_DBL_STRING;				}
+		<DBL_STRING> EOF						{
+												  ret = T_ERR_UNTERMINATED_STRING;
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		
+		<SGL_STRING> NL							{ source->newline();				 			goto yyc_SGL_STRING; 				}
+		<SGL_STRING> [\\][']					{ 												goto yyc_SGL_STRING; 				}
+		<SGL_STRING> [']						{ 
+												  _cond = yycNORMAL; 
+												  ret = T_STRING_LITERAL;	
+												  postskip = 1;
+												  goto re2c_finish;					
+												}
+		<SGL_STRING> .							{												goto yyc_SGL_STRING;				}
+		<SGL_STRING> EOF						{ 
+												  ret = T_ERR_UNTERMINATED_STRING;				
+												  _cond = yycNORMAL;
+												  source->cursor--;
+												  goto re2c_finish;					
+												}
+
+		<ASP_GR> NL								{ 
+									 			  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_ASP_GR;				
+												}
+		<ASP_GR> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_ASP_GR;
+												}
+		<ASP_GR> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_ASP_GR;
+												}
+		<ASP_GR> [%]							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;
+												  goto yyc_ASP_GR;
+												}
+		<ASP_GR> "#end_asp" WS* [.]				{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+										 		    _cond = yycNORMAL; 
+										 		    ret = T_ASP_GR; 
+										 		    goto re2c_finish;					
+												  } else goto yyc_ASP_GR;
+												}
+		<ASP_GR> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_ASP;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<ASP_GR> .								{												goto yyc_ASP_GR;					}
+
+		<ASP_CP> NL								{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_ASP_CP;					
+												}
+		<ASP_CP> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_ASP_CP;
+												}
+		<ASP_CP> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_ASP_CP;
+												}
+		<ASP_CP> [%]							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;
+												  goto yyc_ASP_CP;
+												}
+		
+		<ASP_CP> ":-" WS* "end_asp" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+												 	 _cond = yycNORMAL; 
+												 	 ret = T_ASP_CP; 
+												 	 goto re2c_finish;					
+												  } else goto yyc_ASP_CP;
+												}
+		<ASP_CP> ":-" WS* "end" WS+ "asp" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+												 	 _cond = yycNORMAL; 
+												 	 ret = T_ASP_CP; 
+												 	 goto re2c_finish;					
+												  } else goto yyc_ASP_CP;
+												}
+
+
+		<ASP_CP> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_ASP;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<ASP_CP> .								{												goto yyc_ASP_CP;					}
+
+
+		<LUA_GR> NL								{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_LUA_GR;				
+												}
+		<LUA_GR> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_LUA_GR;
+												}
+		<LUA_GR> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_LUA_GR;
+												}
+		<LUA_GR> "--"							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) {
+													  ln_cmt = true;
+												  }
+												  goto yyc_LUA_GR;
+												}
+		<LUA_GR> "--{"							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) {
+													  blk_cmt = true;
+												  }
+												  goto yyc_LUA_GR;
+												}
+		<LUA_GR> "}"							{
+												  blk_cmt = false;
+												  goto yyc_LUA_GR;
+												}
+		<LUA_GR> "#end_lua" WS* [.]				{ 
+												  if (!blk_cmt && !ln_cmt && !sgl_quote && !dbl_quote) {
+													  _cond = yycNORMAL; 
+													  ret = T_LUA_GR; 
+													  goto re2c_finish;					
+												  } else goto yyc_LUA_GR;
+												}
+		<LUA_GR> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_LUA;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+
+		<LUA_GR> .								{												goto yyc_LUA_GR;					}
+
+
+		<PYTHON_GR> NL							{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_PYTHON_GR;				
+												}
+		<PYTHON_GR> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> "--"							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) {
+													  ln_cmt = true;
+												  }
+												  goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> "--{"							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) {
+													  blk_cmt = true;
+												  }
+												  goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> "}"							{
+												  blk_cmt = false;
+												  goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> "#end_python" WS* [.]				{ 
+												  if (!blk_cmt && !ln_cmt && !sgl_quote && !dbl_quote) {
+													  _cond = yycNORMAL; 
+													  ret = T_PYTHON_GR; 
+													  goto re2c_finish;					
+												  } else goto yyc_PYTHON_GR;
+												}
+		<PYTHON_GR> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_PYTHON;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+
+		<PYTHON_GR> .								{												goto yyc_PYTHON_GR;					}
+
+
+		<LUA_CP> NL								{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_LUA_CP;					
+												}
+		<LUA_CP> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_LUA_CP;
+												}
+		<LUA_CP> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_LUA_CP;
+												}
+		<LUA_CP> "--"							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) {
+													  ln_cmt = true;
+												  }
+												  goto yyc_LUA_CP;
+												}
+		<LUA_CP> "--{"							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) {
+													  blk_cmt = true;
+												  }
+												  goto yyc_LUA_CP;
+												}
+		<LUA_CP> "}"							{
+												  blk_cmt = false;
+												  goto yyc_LUA_CP;
+												}
+		<LUA_CP> ":-" WS* "end_lua" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+												    _cond = yycNORMAL; 
+												    ret = T_LUA_CP; 
+												    goto re2c_finish;					
+												  } else goto yyc_LUA_CP;
+												}
+		<LUA_CP> ":-" WS* "end" WS+ "lua" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+													  _cond = yycNORMAL; 
+													  ret = T_LUA_CP; 
+													  goto re2c_finish;					
+												  } else goto yyc_LUA_CP;
+												}
+		<LUA_CP> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_LUA;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+
+		<LUA_CP> .								{												goto yyc_LUA_CP;					}
+
+
+		<PYTHON_CP> NL							{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_PYTHON_CP;					
+												}
+		<PYTHON_CP> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> "--"							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) {
+													  ln_cmt = true;
+												  }
+												  goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> "--{"							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) {
+													  blk_cmt = true;
+												  }
+												  goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> "}"							{
+												  blk_cmt = false;
+												  goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> ":-" WS* "end_python" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+												    _cond = yycNORMAL; 
+												    ret = T_PYTHON_CP; 
+												    goto re2c_finish;					
+												  } else goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> ":-" WS* "end" WS+ "python" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+													  _cond = yycNORMAL; 
+													  ret = T_PYTHON_CP; 
+													  goto re2c_finish;					
+												  } else goto yyc_PYTHON_CP;
+												}
+		<PYTHON_CP> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_PYTHON;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<PYTHON_CP> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_PYTHON;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+
+		<PYTHON_CP> .								{												goto yyc_PYTHON_CP;					}
+
+
+
+		<F2LP_GR> NL							{ 
+												  BLK_LINE;
+												  ln_cmt = false;
+												  goto yyc_F2LP_GR;				
+												}
+		<F2LP_GR> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_F2LP_GR;
+												}
+		<F2LP_GR> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_F2LP_GR;
+												}
+		<F2LP_GR> [%]							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;
+												  goto yyc_F2LP_GR;
+												}  
+		<F2LP_GR> [/][*]						{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) blk_cmt = true;
+												  goto yyc_F2LP_GR;
+												}
+		<F2LP_GR> [*][/]						{
+												  blk_cmt = false;
+												  goto yyc_F2LP_GR;
+												} 
+
+		<F2LP_GR> "#end_f2lp" WS* [.]			{
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) { 
+													  _cond = yycNORMAL; 
+													  ret = T_F2LP_GR; 	
+													  goto re2c_finish;				
+												  } else goto yyc_F2LP_GR;	
+												}
+		<F2LP_GR> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_F2LP;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<F2LP_GR> .								{												goto yyc_F2LP_GR;					}
+
+		<F2LP_CP> NL							{ 
+												  BLK_LINE;
+												  ln_cmt = false; 	
+												  goto yyc_F2LP_CP;	
+												}
+		<F2LP_CP> [']							{
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;
+												  goto yyc_F2LP_CP;
+												}
+		<F2LP_CP> ["]							{
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;
+												  goto yyc_F2LP_CP;
+												}
+		<F2LP_CP> [%]							{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;
+												  goto yyc_F2LP_CP;
+												}  
+		<F2LP_CP> ":-" WS* "end_f2lp" WS* [.]
+												{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) {
+													  _cond = yycNORMAL; 
+													  ret = T_F2LP_CP; 
+													  goto re2c_finish;					
+												  } else goto yyc_F2LP_CP;
+												}
+		<F2LP_CP> ":-" WS* "end" WS+ "f2lp" WS* [.]
+												{
+												  if (!ln_cmt && !blk_cmt && !sgl_quote && !dbl_quote) { 
+													  _cond = yycNORMAL; 
+													  ret = T_F2LP_CP; 
+													  goto re2c_finish;					
+												  } else goto yyc_F2LP_CP;
+												}
+		<F2LP_CP> EOF							{ 
+												  BLK_FINISH(1);
+												  ret = T_ERR_UNTERMINATED_F2LP;			
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  goto re2c_finish;					
+												}
+		<F2LP_CP> .								{												goto yyc_F2LP_CP;					}
+	
+
+		<PRE_ARG> "("							{
+												  ret = T_PAREN_L;
+												  _cond = yycARG;
+												  goto re2c_finish;
+												}
+		<PRE_ARG> ","							{
+												  ret = T_COMMA;
+												  _cond = yycARG;
+												  goto re2c_finish;
+												}
+		<PRE_ARG> ")"							{
+												  ret = T_PAREN_R;
+												  _cond = yycNORMAL;
+												  goto re2c_finish;
+												}
+								
+
+
+		<ARG> NL								{
+												  source->newline();
+												  ln_cmt = false;
+												  goto yyc_ARG;
+												}
+		<ARG> [%]								{
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;		
+												  goto yyc_ARG;
+												}
+		<ARG> [/][*]							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) blk_cmt = true;
+												  goto yyc_ARG;
+												}
+		<ARG> [*][/]							{
+												  blk_cmt = false;
+												  goto yyc_ARG;
+												} 
+
+		<ARG> "("								{ 
+												  if (sgl_quote || dbl_quote || ln_cmt || blk_cmt) goto yyc_ARG;
+												  parens++;
+												  goto yyc_ARG;
+												}
+		<ARG> ")"								{
+												  if (sgl_quote || dbl_quote || ln_cmt || blk_cmt) goto yyc_ARG;
+												  if (--parens < 0) {
+													source->cursor()--;
+													ret = T_ARG;
+												    _cond = yycPRE_ARG;
+													goto re2c_finish;
+												  }
+
+												  goto yyc_ARG;
+												}
+		<ARG> ","								{
+												  if (sgl_quote || dbl_quote || ln_cmt || blk_cmt) goto yyc_ARG;
+												  source->cursor()--;
+												  ret = T_ARG;
+												  _cond = yycPRE_ARG;
+												  goto re2c_finish;
+																				  
+												}
+		<ARG> ["]								{ 
+												  if (!sgl_quote && !ln_cmt && !blk_cmt) dbl_quote = !dbl_quote;		
+												  goto yyc_ARG;						
+												}
+		<ARG> [']								{ 
+												  if (!dbl_quote && !ln_cmt && !blk_cmt) sgl_quote = !sgl_quote;		
+												  goto yyc_ARG;						
+												}
+		<ARG> EOF								{
+													// Figure out why we're still here...
+													if (parens > 0 ) {
+														_cond = yycNORMAL;
+														ret = T_ERR_PAREN_MISMATCH;
+													} else if (sgl_quote || dbl_quote) {
+														_cond = yycNORMAL;
+														ret = T_ERR_UNTERMINATED_STRING;
+													}else {
+														_cond = yycNORMAL;
+														ret = T_ERR_SYNTAX;
+													}
+													goto re2c_finish;
+												}
+		<ARG> .									{ 												goto yyc_ARG;						}
+
+		<MACRO> NL								{
+												  source->newline();
+												  ln_cmt = false;
+												  goto yyc_MACRO;
+												}
+		<MACRO> [%]								{ 
+												  if (!blk_cmt && !sgl_quote && !dbl_quote) ln_cmt = true;
+												  goto yyc_MACRO;
+												}
+		<MACRO> [/][*]							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) blk_cmt = true;
+												  goto yyc_MACRO;
+												}
+		<MACRO> [*][/]							{
+												  if (!ln_cmt && !sgl_quote && !dbl_quote) blk_cmt = false;
+												  goto yyc_MACRO;
+												}
+		<MACRO> ["]								{ 
+												  if (!ln_cmt && !blk_cmt && !sgl_quote)  dbl_quote = !dbl_quote; 	
+												  goto yyc_MACRO;						
+												}
+		<MACRO> [']								{ 
+												  if (!ln_cmt && !blk_cmt && !dbl_quote)  sgl_quote = !sgl_quote;	
+												  goto yyc_MACRO;						
+												}
+		<MACRO> [.;]							{
+												  if (sgl_quote || dbl_quote || blk_cmt || ln_cmt) goto yyc_MACRO;
+												  _cond = yycNORMAL;
+												  source->cursor()--;
+												  ret = T_MACRO_STRING;
+												  goto re2c_finish;
+												}
+		<MACRO> EOF								{
+													if (sgl_quote || dbl_quote) {
+														_cond = yycNORMAL;
+														ret = T_ERR_UNTERMINATED_STRING;
+													} else {
+														_cond = yycNORMAL;
+														ret = T_ERR_SYNTAX;
+													} goto re2c_finish;
+												}
+		<MACRO> .								{ if (_cond == yycARG) std::cout << "crap." <<std::endl;  												goto yyc_MACRO;						}
+
+
+		<BLK_COMMENT,COMMENT> .					{ ret = T_ERR_UNKNOWN_SYMBOL;					goto re2c_finish;					}
+		<*> .									{ ret = T_ERR_UNKNOWN_SYMBOL;					goto re2c_finish;					}
+
+	*/
+re2c_finish:
+	u::ref_ptr<ReferencedString> str = new ReferencedString();
+	if (ret != T_EOF) {
+		if (use_blk)
+			str->assign(blk.str());
+		else
+			str->assign(source->token() + preskip, (size_t)(source->cursor() - source->token() - preskip - postskip));
+	} else {
+		str->assign("<EOF>");
+	}
+
+	return new Token(ret, str, begin, source->loc());
+}
+
+}}}

@@ -1,0 +1,430 @@
+# Spacecraft integer Benchmarking Script
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (incremental)
+# ----------------------------------------------------------------------------------------------------------------------
+
+cplus2asp spacecraft-25-10-benchmark.cp query=0 --mode=incremental --stats --none-alias
+
+% Warning: Option '--none-alias' has been deprecated in favor of specifying an explicit none alias value.
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '25'.
+% Pragma: Running Query 'Query '0''.
+% Pragma: Minimum Step = '0', Maximum Step = '100'.
+% Pragma: Searching for 1 solutions.
+=============== step 1 ===============
+Models   : 0
+Time     : 5.180 (g: 2.300, p: 2.880, s: 0.000)
+Rules    : 359060
+Choices  : 0
+Conflicts: 0
+=============== step 2 ===============
+Models   : 0
+Time     : 3.520 (g: 2.480, p: 1.040, s: 0.000)
+Rules    : 356237
+Choices  : 0
+Conflicts: 0
+=============== step 3 ===============
+Models   : 0
+Time     : 4.070 (g: 2.590, p: 1.460, s: 0.020)
+Rules    : 356237
+Choices  : 14
+Conflicts: 12
+=============== step 4 ===============
+Solution: 1
+        0:  pos(x)=0 pos(y)=0 pos(z)=0 vel(x)=0 vel(y)=0 vel(z)=0
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=0 force(jet1,y)=2 force(jet1,z)=2 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=2
+
+        1:  pos(x)=1 pos(y)=2 pos(z)=2 vel(x)=2 vel(y)=4 vel(z)=4
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=-2 force(jet1,z)=-2 force(jet2,x)=1 force(jet2,y)=2 force(jet2,z)=2
+
+        2:  pos(x)=4 pos(y)=6 pos(z)=6 vel(x)=4 vel(y)=4 vel(z)=4
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=-1 force(jet1,z)=-1 force(jet2,x)=-1 force(jet2,y)=-1 force(jet2,z)=-1
+
+        3:  pos(x)=8 pos(y)=9 pos(z)=9 vel(x)=4 vel(y)=2 vel(z)=2
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=-2 force(jet1,y)=-2 force(jet1,z)=-2 force(jet2,x)=-2 force(jet2,y)=0 force(jet2,z)=0
+
+        4:  pos(x)=10 pos(y)=10 pos(z)=10 vel(x)=0 vel(y)=0 vel(z)=0
+
+Models   : 1
+Time     : 5.050 (g: 2.630, p: 2.080, s: 0.330)
+Rules    : 356237
+Choices  : 934
+Conflicts: 245
+=============== Summary ===============
+SATISFIABLE
+Models      : 1+
+Total Steps : 4
+Time        : 17.870
+Prepare   : 10.000
+Prepro.   : 7.460
+Choices     : 948
+Conflicts   : 257
+Restarts    : 1
+Atoms       : 732860
+Rules       : 1427771 (1: 1363589 2: 164 3: 1594 5: 62424)
+Bodies      : 759570
+Equivalences: 1443666 (Atom=Atom: 690974 Body=Body: 1080 Other: 751612)
+Tight       : Yes
+Variables   : 358247 (Eliminated:    0)
+Constraints : 815046 (Binary: 78.7% Ternary:  0.1% Other: 21.2%)
+Lemmas      : 256    (Binary:  3.9% Ternary: 22.3% Other: 73.8%)
+Conflicts : 256    (Average Length: 170.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (static)
+# ----------------------------------------------------------------------------------------------------------------------
+
+$ cplus2asp spacecraft-25-10-benchmark.cp --mode=static-auto query=0 --none-alias --stats
+% Warning: Option '--none-alias' has been deprecated in favor of specifying an explicit none alias value.
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '25'.
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '0'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.010
+Prepare   : 0.000
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 2812
+Rules       : 2829   (1: 2511 2: 12 3: 306)
+Bodies      : 35
+Equivalences: 5006   (Atom=Atom: 2486 Body=Body: 0 Other: 2520)
+Tight       : Yes
+Variables   : 324    (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 5.090
+Prepare   : 2.300
+Prepro.   : 2.790
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 185323
+Rules       : 359060 (1: 342776 2: 50 3: 628 5: 15606)
+Bodies      : 189912
+Equivalences: 356205 (Atom=Atom: 171233 Body=Body: 270 Other: 184702)
+Tight       : Yes
+Variables   : 172288 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '2'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 10.910
+Prepare   : 4.730
+Prepro.   : 6.180
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 367834
+Rules       : 715291 (1: 683041 2: 88 3: 950 5: 31212)
+Bodies      : 379789
+Equivalences: 714078 (Atom=Atom: 343334 Body=Body: 540 Other: 370204)
+Tight       : Yes
+Variables   : 344252 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '3'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 20.120
+Prepare   : 7.360
+Prepro.   : 12.710
+Choices     : 33
+Conflicts   : 31
+Restarts    : 0
+Atoms       : 550345
+Rules       : 1071522 (1: 1023306 2: 126 3: 1272 5: 46818)
+Bodies      : 569666
+Equivalences: 1071954 (Atom=Atom: 515435 Body=Body: 810 Other: 555709)
+Tight       : Yes
+Variables   : 516216 (Eliminated:    0)
+Constraints : 33024  (Binary: 55.4% Ternary:  3.1% Other: 41.4%)
+Lemmas      : 31     (Binary: 16.1% Ternary:  6.5% Other: 77.4%)
+Conflicts : 31     (Average Length: 5.3)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '4'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+        0:  pos(x)=0 pos(y)=0 pos(z)=0 vel(x)=0 vel(y)=0 vel(z)=0
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=2 force(jet1,y)=2 force(jet1,z)=0 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=2
+
+        1:  pos(x)=2 pos(y)=2 pos(z)=1 vel(x)=4 vel(y)=4 vel(z)=2
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=0 force(jet1,y)=-1 force(jet1,z)=1 force(jet2,x)=-2 force(jet2,y)=-1 force(jet2,z)=1
+
+        2:  pos(x)=5 pos(y)=5 pos(z)=4 vel(x)=2 vel(y)=2 vel(z)=4
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=1 force(jet1,z)=1 force(jet2,x)=1 force(jet2,y)=1 force(jet2,z)=-1
+
+        3:  pos(x)=8 pos(y)=8 pos(z)=8 vel(x)=4 vel(y)=4 vel(z)=4
+
+        ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=-2 force(jet1,y)=-2 force(jet1,z)=-2 force(jet2,x)=-2 force(jet2,y)=-2 force(jet2,z)=-2
+
+        4:  pos(x)=10 pos(y)=10 pos(z)=10 vel(x)=0 vel(y)=0 vel(z)=0
+
+SATISFIABLE
+Models      : 1+
+Time        : 34.840
+Prepare   : 9.700
+Prepro.   : 21.770
+Choices     : 3601
+Conflicts   : 1057
+Restarts    : 4
+Atoms       : 732856
+Rules       : 1427753 (1: 1363571 2: 164 3: 1594 5: 62424)
+Bodies      : 759543
+Equivalences: 1429830 (Atom=Atom: 687536 Body=Body: 1080 Other: 741214)
+Tight       : Yes
+Variables   : 688180 (Eliminated:    0)
+Constraints : 217318 (Binary: 75.0% Ternary:  0.8% Other: 24.2%)
+Lemmas      : 1057   (Binary:  4.1% Ternary:  5.9% Other: 90.1%)
+Conflicts : 1057   (Average Length: 126.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v1 
+# ----------------------------------------------------------------------------------------------------------------------
+
+$ cplus2asp.old --translator "cplus2asp.bin.old" spacecraft-25-10-benchmark.cp --grounder-solver "clingo" -grsoopt "--stats" query=0 -c none=50000
+maxAdditive hint found, auto-setting maxAddtive to 25.
+
+% Running Query 0 with maxstep=0.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: inertialFluent/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 0.040
+Prepare   : 0.030
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 6405
+Rules       : 22022  (1: 21410 2: 306 3: 306)
+Bodies      : 1236
+Equivalences: 11897  (Atom=Atom: 5484 Body=Body: 0 Other: 6413)
+Tight       : Yes
+Variables   : 1225   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=1.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: inertialFluent/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 20.160
+Prepare   : 9.380
+Prepro.   : 10.780
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 194972
+Rules       : 429929 (1: 412463 2: 1232 3: 628 5: 15606)
+Bodies      : 195319
+Equivalences: 367039 (Atom=Atom: 173398 Body=Body: 300 Other: 193341)
+Tight       : Yes
+Variables   : 194847 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=2.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: inertialFluent/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 47.790
+Prepare   : 20.360
+Prepro.   : 22.430
+Choices     : 159
+Conflicts   : 74
+Restarts    : 0
+Atoms       : 383539
+Rules       : 837836 (1: 803516 2: 2158 3: 950 5: 31212)
+Bodies      : 389402
+Equivalences: 722025 (Atom=Atom: 341312 Body=Body: 600 Other: 380113)
+Tight       : Yes
+Variables   : 388625 (Eliminated:    0)
+Constraints : 121604 (Binary: 64.8% Ternary:  7.0% Other: 28.3%)
+Lemmas      : 74     (Binary:  2.7% Ternary:  0.0% Other: 97.3%)
+Conflicts : 74     (Average Length: 8.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=3.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: inertialFluent/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 122.480
+Prepare   : 29.030
+Prepro.   : 33.690
+Choices     : 1607
+Conflicts   : 573
+Restarts    : 3
+Atoms       : 572106
+Rules       : 1245743 (1: 1194569 2: 3084 3: 1272 5: 46818)
+Bodies      : 583485
+Equivalences: 1077014 (Atom=Atom: 509226 Body=Body: 900 Other: 566888)
+Tight       : Yes
+Variables   : 582400 (Eliminated:    0)
+Constraints : 697260 (Binary: 76.7% Ternary:  1.3% Other: 22.0%)
+Lemmas      : 573    (Binary:  1.7% Ternary:  3.3% Other: 94.9%)
+Conflicts : 573    (Average Length: 70.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=4.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: inertialFluent/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+
+Solution: 1
+         action(fire(jet1)) action(fire(jet2)) action(force(jet1,x)) action(force(jet1,y)) action(force(jet1,z)) action(force(jet2,x)) action(force(jet2,y)) action(force(jet2,z)) action_attribute(fire(jet1),force(jet1,x)) action_attribute(fire(jet1),force(jet1,y)) action_attribute(fire(jet1),force(jet1,z)) action_attribute(fire(jet2),force(jet2,x)) action_attribute(fire(jet2),force(jet2,y)) action_attribute(fire(jet2),force(jet2,z)) additiveFluent(vel(x)) additiveFluent(vel(y)) additiveFluent(vel(z)) attribute(force(jet1,x)) attribute(force(jet1,y)) attribute(force(jet1,z)) attribute(force(jet2,x)) attribute(force(jet2,y)) attribute(force(jet2,z)) axis(x) axis(y) axis(z) constant_sort(fire(jet1),boolean) constant_sort(fire(jet2),boolean) constant_sort(force(jet1,x),integer_star) constant_sort(force(jet1,y),integer_star) constant_sort(force(jet1,z),integer_star) constant_sort(force(jet2,x),integer_star) constant_sort(force(jet2,y),integer_star) constant_sort(force(jet2,z),integer_star) constant_sort(pos(x),integer) constant_sort(pos(y),integer) constant_sort(pos(z),integer) constant_sort(vel(x),integer) constant_sort(vel(y),integer) constant_sort(vel(z),integer) exogenousAction(fire(jet1)) exogenousAction(fire(jet2)) fluent(pos(x)) fluent(pos(y)) fluent(pos(z)) fluent(vel(x)) fluent(vel(y)) fluent(vel(z)) integer(-1) integer(-10) integer(-11) integer(-12) integer(-13) integer(-14) integer(-15) integer(-16) integer(-17) integer(-18) integer(-19) integer(-2) integer(-20) integer(-21) integer(-22) integer(-23) integer(-24) integer(-25) integer(-3) integer(-4) integer(-5) integer(-6) integer(-7) integer(-8) integer(-9) integer(0) integer(1) integer(10) integer(11) integer(12) integer(13) integer(14) integer(15) integer(16) integer(17) integer(18) integer(19) integer(2) integer(20) integer(21) integer(22) integer(23) integer(24) integer(25) integer(3) integer(4) integer(5) integer(6) integer(7) integer(8) integer(9) integer_star(-1) integer_star(-10) integer_star(-11) integer_star(-12) integer_star(-13) integer_star(-14) integer_star(-15) integer_star(-16) integer_star(-17) integer_star(-18) integer_star(-19) integer_star(-2) integer_star(-20) integer_star(-21) integer_star(-22) integer_star(-23) integer_star(-24) integer_star(-25) integer_star(-3) integer_star(-4) integer_star(-5) integer_star(-6) integer_star(-7) integer_star(-8) integer_star(-9) integer_star(0) integer_star(1) integer_star(10) integer_star(11) integer_star(12) integer_star(13) integer_star(14) integer_star(15) integer_star(16) integer_star(17) integer_star(18) integer_star(19) integer_star(2) integer_star(20) integer_star(21) integer_star(22) integer_star(23) integer_star(24) integer_star(25) integer_star(3) integer_star(4) integer_star(5) integer_star(50000) integer_star(6) integer_star(7) integer_star(8) integer_star(9) jet(jet1) jet(jet2) query_label(0) simpleFluent(pos(x)) simpleFluent(pos(y)) simpleFluent(pos(z)) simpleFluent(vel(x)) simpleFluent(vel(y)) simpleFluent(vel(z)) sort(axis) sort(integer) sort(integer_star) sort(jet)
+
+        0:  fire(jet1) fire(jet2) force(jet1,x)=2 force(jet1,y)=0 force(jet1,z)=0 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=2 pos(x)=0 pos(y)=0 pos(z)=0 vel(x)=0 vel(y)=0 vel(z)=0
+
+        1:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=1 force(jet1,z)=2 force(jet2,x)=-1 force(jet2,y)=1 force(jet2,z)=2 pos(x)=2 pos(y)=1 pos(z)=1 vel(x)=4 vel(y)=2 vel(z)=2
+
+        2:  fire(jet1) fire(jet2) force(jet1,x)=-2 force(jet1,y)=-2 force(jet1,z)=-2 force(jet2,x)=0 force(jet2,y)=2 force(jet2,z)=-2 pos(x)=6 pos(y)=4 pos(z)=5 vel(x)=4 vel(y)=4 vel(z)=6
+
+        3:  fire(jet1) fire(jet2) force(jet1,x)=-2 force(jet1,y)=-2 force(jet1,z)=-1 force(jet2,x)=0 force(jet2,y)=-2 force(jet2,z)=-1 pos(x)=9 pos(y)=8 pos(z)=9 vel(x)=2 vel(y)=4 vel(z)=2
+
+        4:  pos(x)=10 pos(y)=10 pos(z)=10 vel(x)=0 vel(y)=0 vel(z)=0
+
+SATISFIABLE
+Models      : 1+
+Time        : 497.970
+Prepare   : 37.750
+Prepro.   : 44.740
+Choices     : 15424
+Conflicts   : 5453
+Restarts    : 8
+Atoms       : 760673
+Rules       : 1653650 (1: 1585622 2: 4010 3: 1594 5: 62424)
+Bodies      : 777568
+Equivalences: 1432003 (Atom=Atom: 677140 Body=Body: 1200 Other: 753663)
+Tight       : Yes
+Variables   : 776175 (Eliminated:    0)
+Constraints : 1632514 (Binary: 78.3% Ternary:  0.6% Other: 21.1%)
+Lemmas      : 5453   (Binary:  6.7% Ternary:  4.4% Other: 88.9%)
+Conflicts : 5453   (Average Length: 530.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CCALC 
+# ----------------------------------------------------------------------------------------------------------------------
+

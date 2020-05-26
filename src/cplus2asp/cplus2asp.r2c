@@ -1,0 +1,3550 @@
+/* 
+ * Copyright (c) 2010-2013 <Joseph Babb, Michael Cassollary, Joohyung Lee>
+ *
+ * For information on how to contact the authors, please visit
+ *	http://reasoning.eas.asu.edu/cplus2asp
+ *
+ * This file is part of the cplus2asp system.
+ *
+ * cplus2asp is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * cplus2asp is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+/** @file cplus2asp.cpp
+ *  @brief Calls a tool chain of a translator, pre-processor, answer set solver, and post-processor on a CCalc program translated to ASP syntax.
+ *  @author v2.0+ Joseph Babb (v1.0 Michael Casolary)
+ *  @date 07/2011
+ */
+
+/* History:
+ * v3.0 - Integration with the cplus2asp.bin v3.0 for enhanced language support.
+ * v2.3 - Fixed several small issues. Added Syntactic checking for BC. Added experimental language BC+ as a proper extension of BC allowing arbitrary formulas in the body and choice rules in the head.
+ * v2.2 - Major revision of command-line arguments. Revised command line calls to provide system portability.
+ * v2.1 - Restructured the interactive interface for more user friendly interactions.
+ * v2.0 - Restructured options parser. Added incremental translation functionality. Added automated detection and handling of additive/abnormal constants.
+ * v1.7 - Implemented "-from[PROG]" and "-to[PROG]" options to give better control over running a partial tool chain.
+ * v1.6.2 - Fixed bugs, "-notrans" wasn't shutting off the translator, "-gropt" and "-grsoopt" were mixed up. Set up system to track when tool chain programs have errors.
+ * v1.6.1 - Fixed bug where program might get wrong values back from system calls (depending on OS).
+ * v1.6 - cplus2asp now supports integrated grounder-solvers (like clingo), using the option -grso / --grounder-solver. Added automatic searching though queries with ranged maxsteps, with an option to switch to manual mode (-mm). Removed support for using piped tool chain commands. Added automated "non-interactive" mode option (-auto).
+ * v1.5.2 - Tweaked status outputs to be compatible with benchmarking scripts, adjusted output messages to make more sense.
+ * v1.5.1 - Renamed to cplus2asp, also renamed translator & standard file dependencies.
+ * v1.5 - Skips translating any files with .f2lp or .lp extensions, not just if all files have those extensions.
+ * v1.4.1 - Made file name output more friendly, ensured all steps of the tool chain work together properly.
+ * v1.4 - Added ccalc2asp.bin (translator) to tool chain, including options to control its usage, and an ability to interactively guess critical constant values based on hints given in comments in the input files.
+ * v1.3.5 - Fixed bug with post-processor not receiving options correctly.
+ * v1.3.4 - Now passes input file to solver via standard in redirection.
+ * v1.3.3 - Added option to use pipes instead of intermediate files to send data between tool chain programs (i.e., pre-v1.3 behavior).
+ * v1.3.2 - Sends input files to the first tool in the tool chain that isn't disabled.
+ * v1.3.1 - Fixed bug with spaces in path causing odd behavior and errors from tool chain.
+ * v1.3 - Changed default post-processor to as2transition, changed default standard files to ccalc2asp_std.f2lp & ccalc2asp_additive.f2lp, changed argument handler to allow generic "const=value" arguments without needing "-c" before them, added intermediate file usage and auto-deletion, added options to pass command-line options directly to any of the tool chain programs.
+ * v1.2 - Added option to un-include the standard translation files from the call to the pre-processor.
+ * v1.1 - Added options to turn off programs in the tool chain.
+ * v1.0 - First working version.
+ */
+
+
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <iterator>
+#include <algorithm>
+#include <utility>
+#include <vector>
+#include <list>
+//#include <climits> // for PATH_MAX, INT_MIN
+#include <cstring>
+//#include <string.h>
+//#include <cstdlib>
+#include <iomanip>
+#include <exception>
+
+// Next 3 includes are for getting the home directory in linux
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
+
+//Next 3 includes are for reading config files using Boost
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/algorithm/string.hpp>
+
+
+#ifndef BOOST_FILESYSTEM_VERSION
+#define BOOST_FILESYSTEM_VERSION 3
+#endif
+#define BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/filesystem.hpp>
+#undef BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/iostreams/device/file_descriptor.hpp>
+#include "boost/process.hpp"
+#include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
+
+#include "babb/utils/memory.h"
+#include "bcplus/symbols/SymbolTable.h"
+#include "bcplus/symbols/Symbol.h"
+#include "bcplus/symbols/QuerySymbol.h"
+#include "bcplus/symbols/ConstantSymbol.h"
+
+
+#include "Config.h"
+#include "utils.h"
+#include "Interpreter.h"
+
+namespace bp = boost::process;
+namespace bfs = boost::filesystem;
+namespace bio = boost::iostreams;
+
+namespace u = babb::utils;
+namespace bcp = bcplus;
+namespace sy = bcplus::symbols;
+
+#define VERSION_MAJOR 3
+#define VERSION_MINOR 0
+#define VERSION_REV 0
+
+#ifndef PATH_MAX
+  #define PATH_MAX 4096
+#endif
+
+
+
+/// An enum of the various command line options available.
+enum Option {
+	OPT_AUTO,
+	OPT_BRIDGE,
+	OPT_BRIDGE_OPTS,
+	OPT_BRIDGE_OUT,
+	OPT_CONST,
+	OPT_FRM_BRIDGE,
+	// OPT_FRM_GRD,
+	OPT_FRM_PRE,
+	OPT_FRM_POST,
+	OPT_FROM_SO,
+	OPT_FROM_TRAN,
+	OPT_GRD,
+	OPT_GRD_OPTS,
+	OPT_GRD_OUT,
+	OPT_GRINGO_NONE_HACK,
+	OPT_JUST_GRD,
+	OPT_JUST_PRE,
+	OPT_JUST_POST,
+	OPT_JUST_SO,
+	OPT_JUST_TRANS,
+	OPT_LANG,
+	OPT_MAXSTEP,
+	OPT_MINSTEP,
+	OPT_MODE_SELECT,
+	OPT_MODE_STATIC_AUTO,
+	OPT_MODE_STATIC_MANUAL,
+	OPT_MODE_INCREMENTAL,
+	OPT_MODE_REACTIVE,
+	OPT_NO_DEL,
+	OPT_NO_DOMAIN_ENFORCE,
+	OPT_NO_ADD_DOMAIN_ENFORCE,
+	OPT_PORT_INTERNAL,
+	OPT_PORT_EXTERNAL,
+	OPT_POSTPROC,
+	OPT_POSTPROC_OPTS,
+	OPT_POSTPROC_OUT,
+	OPT_PREPROC,
+	OPT_PREPROC_OPTS,
+	OPT_PREPROC_OUT,
+	OPT_SHIFT,
+	OPT_SO,
+	OPT_SO_OPTS,
+	OPT_SO_OUT,
+	OPT_STATS,
+	OPT_SYMTAB,
+	OPT_TO_BRIDGE,
+	OPT_TO_GRD,
+	OPT_TO_PRE,
+	OPT_TO_POST,
+	OPT_TO_SO,
+	OPT_TO_TRANS,
+	OPT_TRANS,
+	OPT_TRANS_OPTS,
+	OPT_TRANS_OUT,
+	OPT_VERSION,
+	OPT_HELP,
+	OPT_QUERY,
+	OPT_UNSUPPORTED,
+	OPT_UNSUPPORTED_NO_STD,
+	OPT_UNSUPPORTED_ADDITIVE,
+	OPT_UNSUPPORTED_GRSO,
+	OPT_UNSUPPORTED_MANUAL_MAXSTEP,
+	OPT_UNKNOWN
+};
+
+/// Return codes from known tool chain programs indicating their final status.
+enum StatusFlags
+{
+	TC_STAT_OK = 0,												///< Universal OK.
+	TC_STAT_BG = 130,											///< Exit code indicating that the task is running in the background.
+	TC_STAT_IO_ERR = -8274,										///< Psuedo exit code indicating that we couldn't open the output file.
+	TC_STAT_EXEC_ERR = -8273,									///, Psuedo exit code indicating that the tool failed to execute.
+	TC_STAT_TOOLSKIPPED = INT_MIN,								///< Psuedo return code indicating that the tool execution was skipped for some reason.
+	TC_STAT_SO_CLINGO_FOUND_SOLUTIONS = 10,						///< return code indicating that clingo (or other similar programs) found solutions.
+	TC_STAT_SO_CLINGO_NO_SOLUTIONS = 20,						///< return code indicating that clingo (or other similar programs) failed to find solutions.
+	TC_STAT_SO_CLINGO_SCRIPT_FOUND_SOLUTIONS = 30,						
+	TC_STAT_POSTPROC_AS2TRANSITION_NO_SOLUTIONS = 100,			///< return code indicating that as2transition failed to find solutions.
+	TC_STAT_POSTPROC_AS2TRANSITION_FOUND_SOLUTIONS = 101		///< return code indicating that as2transition found solutions.
+};
+
+/// Status flags that can be returned by the options parser.
+enum OptionStatus
+{
+	OPT_STAT_OK,			///< Everything is ok, continue execution.
+	OPT_STAT_BAD_ARG,		///< One or more bad arguments was found. Stop execution.
+	OPT_STAT_HELP,			///< The user requested the help message be displayed.
+	OPT_STAT_VERSION		///< The user requested the version message be displayed.
+};
+
+/// Mode selection constants (for argument parsing)
+#define ARG_MODE_STATIC_MANUAL  "static-manual"
+#define ARG_MODE_STATIC_AUTO 	"static-auto"
+#define ARG_MODE_INCREMENTAL	"incremental"
+#define ARG_MODE_REACTIVE		"reactive"
+
+/// Flags used to efficiently indicate that we're missing a constant.
+#define CONST_MAXSTEP_MASK 		0x80
+#define CONST_QUERY_MASK 		0x40
+#define CONST_MAXADDITIVE_MASK  0x20
+#define CONST_MINSTEP_MASK		0x10
+#define CONST_EXT_PORT_MASK		0x08
+
+/// The command used to exit the program during interactive prompts.
+#define EXIT_CMD				"exit"
+
+/**
+ * Parses a string and determines what (if any) command line option it contains.
+ * @param opt - The string to parse.
+ * @param val A value for the option, where applicable (NULL otherwise).
+ * @return The command line option contained within the string (or OPT_UNKNOWN).
+ */
+Option parseOption(char const* opt, char const*& val);
+
+/**
+ * Shows the version dialog.
+ * @param execName - The name of the executable we are running.
+ * @param out - The output stream to write the dialog to.
+ * @return out.
+ */
+std::ostream& showVersion(std::string const& execName, std::ostream& out);
+
+/**
+ * Shows the help dialog.
+ * @param execName - The name of the executable we are running.
+ * @param out - The output stream to write the dialog to.
+ * @return out.
+ */
+std::ostream& showHelp(std::string const& execName, std::ostream& out);
+
+/**
+ * Parses the provided command line arguments and sets the configurations appropriately.
+ * @param argc The number of command line arguments provided to the program.
+ * @param argv The command line arguments provided to the program.
+ * @param[out] outConf The configurations object to write to.
+ * @return A status flag indicating the results of the parsing.
+ */
+OptionStatus parseCommandOptions(int argc, char const* const* argv, Config& outConf);
+
+ /**
+  * [interactive] Queries the user to select an appropriate query number (and optional solution count) among the defined queries.
+  * @param config The program's configuration options.
+  * @param runconfig The run's configurations that will be updated.
+  * @param first Whether this is the first run or not.
+  * @param[out] runconfig The run's configurations that will be updated.
+  * @return True if the program should continue execution, false otherwise.
+  */
+
+
+bool queryUserForQuery(Config const& config, Config::RunConfig& runconfig, bool first = false);
+
+OptionStatus parseConfigOptions(Config& outConf);
+
+/**
+ * Displays the queries which have been found.
+ * @param config The program's configuration.
+ * @param[out] output The output stream to write to.
+ */
+void showQueries(Config const& config, std::ostream& output);
+
+/**
+ * Displays the current run-time configuration for the system.
+ * @param config the master configuration.
+ * @param runconfig The overridin run configuration.
+ * @param output The stream to output to.
+ */
+void showConfig(Config const& config, Config::RunConfig const& runconfig, std::ostream& output);
+
+/**
+ * [interactive] Queries the user to select a value for the specified constant.
+ * @param config The program's configuration options.
+ * @param constant The constant's name to ask for.
+ * @param defval The default value of the constant (Config::UNDEFINED for no default).
+ * @return The selected value or Config::UNDEFINED to indicate the user wishes to exit the program.
+ */
+unsigned int queryUserForConstant(Config const& config, std::string const& constant, unsigned int defval = Config::UNDEFINED);
+
+
+/**
+ * Runs the specified tool in the toolchain IF it is not disabled in the toolchain configuration.
+ * @param config The configuration for the program.
+ * @param tool The tool to run.
+ * @param name The human readable name of the tool (for output purposes).
+ * @param subconfig The sub configuration settings which will override the configuration settings.
+ * @return The status code from running the program (TC_STAT_TOOLSKIPPED indicates that it did not run).
+ */
+int runTool(Config const& config, Config::Toolchain tool, std::string const& name, Config::RunConfig const* subconfig = NULL);
+
+
+/**
+ * @brief Processes the provided error file applying any error filters and printing the rest.
+ * @param config The system configuration.
+ * @param tool The tool that generated the error file.
+ * @param file The error file.
+ * @return True if the file exists and was successfully opened, false otherwise.
+ */
+bool processErrors(Config const& config, Config::Toolchain tool, std::string const& file);
+
+
+/**
+ * Cleans up the intermediate files generated during program execution.
+ * @param config The program's configuration.
+ * @param ran An array of booleans of length Config::_TC_LENGTH_ detailing which components have ran.
+ */
+#ifdef DEBUG
+void cleanup(Config config, bool const* ran, bfs::path path);
+#else
+void cleanup(Config const& config, bool const* ran);
+#endif
+
+
+/**
+ * Attempts to echo the specified file to the specified output stream.
+ * @param out The output stream to print to.
+ * @param filename The file to open.
+ * @return True if the file exists, false otherwise.
+ */
+bool echoFile(std::ostream& out, std::string const& filename);
+
+/**
+ * Attempts to echo the solver stats from the specified file.
+ * @param out The output stream to print to.
+ * @param filename The file to read from.
+ * @return True if the file exists and contains stats data that was printed, false otherwise.
+ */
+bool echoStats(std::ostream& out, std::string const& filename);
+
+int main(int argc, char** argv)
+{
+
+	std::string strEXEName = argv[0]; 						// Name of this executable.
+	std::string tmpCmd;				 						// temporary command string.
+
+	std::vector<std::string> vecConstants; 						// List of constants to pass to the grounder.
+	int intSystemResult = 0; 							// Holds what comes back from system().
+	
+
+	Config config(argv[0]);								// The almighty system configuration.
+
+	bool ran[Config::_TC_LENGTH_];						// Variable used to track which toolchain components we have ran so far.
+	memset(ran, 0, Config::_TC_LENGTH_);
+
+
+	bool blnFoundSolutions = false; 					// Set to true if the solver or post-processor indicates solutions were found.
+
+
+	#ifdef DEBUG
+	bfs::path selfpath = argv[0];
+	#endif
+	/***************************************************************************************************/
+	/* Command Line Parsing */
+	/***************************************************************************************************/
+	
+	// Process command-line arguments.
+	utils::debug("Parsing Options...", true);
+
+	//Read config options from config file and give it lower precedence by executing it first
+	OptionStatus optConf = parseConfigOptions(config);
+	// Read config options from command line
+	OptionStatus optCmd = parseCommandOptions(argc, argv, config);
+
+	if(optCmd != OPT_STAT_OK || optConf != OPT_STAT_OK){
+
+		//Switch on config options from command line because errors in config file would most likely be thrown in parseConfigOptions
+		switch (optCmd) {
+		case OPT_STAT_OK:
+			// We're good to go!
+			break;
+		case OPT_STAT_BAD_ARG:
+			utils::error("A problem occurred parsing program arguments. Exiting.", true, 0);
+			showHelp(strEXEName, std::cout);
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::nice_exit(utils::EXT_CODE_BAD_ARGS,NULL);
+			break;
+		case OPT_STAT_HELP:
+			showHelp(strEXEName, std::cout);
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::nice_exit(utils::EXT_CODE_GOOD,NULL);
+			break;
+		case OPT_STAT_VERSION:
+			showVersion(strEXEName, std::cout);
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::nice_exit(utils::EXT_CODE_GOOD,NULL);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	/***************************************************************************************************/
+	/* Command Sanity Checks */
+	/***************************************************************************************************/
+
+	// Sanity checks...
+	// Make sure that we aren't in manual mode with suppressed user interaction...
+	if (config.mode() == Config::MODE_STATIC_MANUAL && config.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION)) {
+		utils::warning("Unable to manually advance the time step in with the '--auto' flag asserted. Switching to '%s' mode.", true, ARG_MODE_STATIC_AUTO);
+		config.mode(Config::MODE_STATIC_AUTO);
+	}
+
+	// Ensure we are doing _something_
+	bool doingSomething = false;
+	for (Config::Toolchain tool = Config::_TC_BEGIN_; tool < Config::_TC_END_ && !doingSomething; tool = (Config::Toolchain)(((int) tool) + 1)) {
+		if (config.run(tool) && config.command(tool) != "")
+			doingSomething = true;
+	}
+	if (!doingSomething) {
+		// Everything is disabled.
+		utils::pragma("The toolchain is empty. Exiting.", true, utils::EXT_CODE_GOOD);
+	}
+
+	utils::debug("The command line options are sane.", true);
+	/***************************************************************************************************/
+	/* Translator */
+	/***************************************************************************************************/
+
+	
+	// Run the translator if it's called for.
+	utils::debug("Beginning translator subroutine.", true);
+	if ((intSystemResult = runTool(config, Config::TC_TRANSLATOR, "translator")) != TC_STAT_TOOLSKIPPED) {
+
+		// It Ran!
+		ran[Config::TC_TRANSLATOR] = true;
+
+		if (!config.run(Config::TC_PREPROC)) {
+			if (!echoFile(std::cout, config.output(Config::TC_TRANSLATOR))) {
+				utils::error("Unable to read from the translator output file '%s'", true, -1, config.output(Config::TC_TRANSLATOR).c_str());
+			}
+		}
+
+
+		// check the status and make sure all is well...
+
+		if(intSystemResult != TC_STAT_OK)
+		{
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::error("An error occurred while executing the translator.",true, utils::EXT_CODE_TOOLCHAIN_TRANS_ERR);
+		}
+
+
+	}
+
+	/**********************************************************************************************************************/
+	/* Pre-processor */
+	/**********************************************************************************************************************/
+	utils::debug("Entering pre-processor subroutine.", true);
+	if ((intSystemResult = runTool(config, Config::TC_PREPROC, "pre-processor")) != TC_STAT_TOOLSKIPPED)  {
+		// It Ran!
+		ran[Config::TC_PREPROC] = true;
+
+		if (!config.run(Config::TC_SOLVER)) {
+			if (!echoFile(std::cout, config.output(Config::TC_PREPROC))) {
+				utils::error("Unable to read from the pre-processor output file '%s'", true, -1, config.output(Config::TC_PREPROC).c_str());
+			}
+		}
+		
+		// check the status and make sure all is well...
+		if(intSystemResult != TC_STAT_OK)
+		{
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::error("An error occurred while executing the pre-processor.",true, utils::EXT_CODE_TOOLCHAIN_PREPROC_ERR);
+		}
+
+	}
+
+	utils::debug("Entering clingo3to4 translator subroutine.", true);
+	if ((intSystemResult = runTool(config, Config::TC_C4_PREPROC, "c4-pre-processor")) != TC_STAT_TOOLSKIPPED)  {
+		// It Ran!
+		ran[Config::TC_C4_PREPROC] = true;
+
+		if (!config.run(Config::TC_SOLVER)) {
+			if (!echoFile(std::cout, config.output(Config::TC_PREPROC))) {
+				utils::error("Unable to read from the c4 pre-processor output file '%s'", true, -1, config.output(Config::TC_PREPROC).c_str());
+			}
+		}
+		
+		// check the status and make sure all is well...
+		if(intSystemResult != TC_STAT_OK)
+		{
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::error("An error occurred while executing the c4 pre-processor.",true, utils::EXT_CODE_TOOLCHAIN_PREPROC_ERR);
+		}
+
+	}
+
+	/**********************************************************************************************************************/
+	/* Intermediate Processing & Final Configuration */
+	/**********************************************************************************************************************/
+
+	utils::debug("Translation done. Performing intermediate processing and final configuration.", true);
+
+
+
+	// Load the input symbol table
+	u::ref_ptr<bcp::Configuration> bcpconf = new bcp::Configuration(NULL, NULL);
+	bcpconf->symtabInput(new ReferencedPath(config.strOpt(Config::STR_SYMTAB_FILE)));
+	u::ref_ptr<sy::SymbolTable> symtab = new sy::SymbolTable(bcpconf);
+
+	// Load queries from the symbol table...
+	for(sy::SymbolTable::const_iterator it = symtab->begin(sy::Symbol::Type::QUERY);it != symtab->end(sy::Symbol::Type::QUERY); it++) {
+	
+		sy::QuerySymbol const* q = (sy::QuerySymbol const*)(it->get());
+
+		if (!config.addQuery(*q->base(), *q->base(), q->maxmax(), q->minmax())) {
+			utils::error("Could not add query \"%s\" as it appears to be a duplicate.",true,0,q->base()->c_str());
+		}
+
+	}
+
+
+	// Load constants from the symbol table...
+
+	if (config.intConfigOpt(Config::OPT_MAXADDITIVE) == Config::UNDEFINED) {
+		// check maxAdditive, then check maxAFValue
+		u::ref_ptr<const ReferencedString> v = symtab->getData("maxAdditive");
+		if (!v) v = symtab->getData("maxAFValue");
+		if (v) {
+			config.intConfigOpt(Config::OPT_MAXADDITIVE, boost::lexical_cast<unsigned int>(*v));
+		}
+	}
+		
+
+	// Check for abnormalities...
+	if (symtab->cmask() & sy::ConstantSymbol::Type::M_EXTERNAL) {
+		// The abnormality mask is set, meaning that there is at least one abnormality...
+
+		if (!config.customMode()) {
+			// They haven't specified a mode. Default to REACTIVE.
+			utils::pragma("One or more external constants have been detected. Defaulting to the '%s' mode.", true, ARG_MODE_REACTIVE);
+			config.mode(Config::MODE_REACTIVE);
+		} else {
+			utils::warning("One or more external constants have been detected while operating in a non-reactive mode.", true);
+		}
+	}
+
+
+	// Ask the user about other constants...
+
+
+	// If any of the "critical" constants aren't defined and one of the
+	// "active" tool chain programs is going to need the constants, try
+	// finding "hint" comments in the input that we can use to fill in details.
+	if (config.run(Config::TC_SOLVER)) {
+
+		// If all else fails, ask the user (unless we're not allowed to).
+		unsigned int tmpVal = Config::UNDEFINED;
+		if (config.intConfigOpt(Config::OPT_MAXADDITIVE) == Config::UNDEFINED
+				&& (symtab->cmask() & sy::ConstantSymbol::Type::M_ADDITIVE)) {
+
+			if (!config.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION)) {
+
+				if ((tmpVal = queryUserForConstant(config, "maxAdditive")) != Config::UNDEFINED) {
+					// They gave us a maxAdditive value.
+					config.intConfigOpt(Config::OPT_MAXADDITIVE, tmpVal);
+				} else {
+					// They elected to exit instead of answer a simple question.
+					// Life moves on but we do not.
+					#ifdef DEBUG
+					cleanup(config, ran, selfpath);
+					#else
+					cleanup(config, ran);
+					#endif
+					utils::nice_exit(0, "Exiting.");
+				}
+			} else {
+				// we can't ask the user
+				utils::error("The maxAdditive constant was never defined and is required for program's containing additive constants. Exiting.", true, 0);
+				#ifdef DEBUG
+				cleanup(config, ran, selfpath);
+				#else
+				cleanup(config, ran);
+				#endif
+				utils::nice_exit(utils::EXT_CODE_UNDEFINED_CONSTANTS, NULL);
+			}
+		}
+
+		if (config.run(Config::TC_SOLVER)) {
+/*
+			if (config.intConfigOpt(Config::OPT_EXT_PORT) == Config::UNDEFINED
+					&& config.mode() == Config::MODE_REACTIVE) {
+
+				if (!config.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION)) {
+
+					if ((tmpVal = queryUserForConstant(config, "external port")) != Config::UNDEFINED) {
+						// They gave us a maxAdditive value.
+						config.intConfigOpt(Config::OPT_EXT_PORT, tmpVal);
+					} else {
+						// They elected to exit instead of answer a simple question.
+						// Life moves on but we do not.
+						cleanup(config, ran);
+						utils::nice_exit(0, "Exiting.");
+					}
+				} else {
+					// We can't ask the user.
+					 utils::error("The port to listen on for client connections is undefined and is required for the given running mode. Exiting.", true, 0);
+					 cleanup(config, ran);
+					 utils::nice_exit(utils::EXT_CODE_UNDEFINED_CONSTANTS, NULL);
+				}
+			}
+*/
+		}
+
+	}
+
+
+	/************************************************************************************************/
+	/* Outer Interactive Loop */
+	/************************************************************************************************/
+
+	Config::RunConfig runConfig;
+	runConfig.numSoln = config.intConfigOpt(Config::OPT_NUM_SOLN);
+	bool first = true;	
+	do {
+		unsigned int maxmaxstep = config.intConfigOpt(Config::OPT_MAXSTEP);
+		Config::Query const* activeQuery = NULL;
+
+		runConfig.maxstep = config.intConfigOpt(Config::OPT_MAXSTEP);
+		runConfig.minstep = config.intConfigOpt(Config::OPT_MINSTEP);
+
+		runConfig.query = config.strOpt(Config::STR_QUERY);
+
+		
+
+		/********************************************************************************************/
+		/*  Run configurations */
+		/********************************************************************************************/
+
+		// Query
+		if (config.run(Config::TC_SOLVER)
+				&& (config.strOpt(Config::STR_QUERY) == ""
+						|| config.intConfigOpt(Config::OPT_MINSTEP) == Config::UNDEFINED
+						|| config.intConfigOpt(Config::OPT_MAXSTEP) == Config::UNDEFINED)){
+
+
+			// Query...
+			if (runConfig.query == "" && !config.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION)) {
+
+				// The query hasn't been specified, try prompting them for it
+				if (!queryUserForQuery(config, runConfig, first)) {
+
+					// They elected to exit instead of answer a simple question.
+					// Life moves on but we do not.
+					#ifdef DEBUG
+					cleanup(config, ran, selfpath);
+					#else
+					cleanup(config, ran);
+					#endif
+					utils::nice_exit(0, "Exiting.");
+				}
+
+			} else if (runConfig.query == "") {
+				// Not specified and we can't prompt the for it.
+				utils::error("The query to execute was never specified. Exiting.", true, 0);
+				#ifdef DEBUG
+				cleanup(config, ran, selfpath);
+				#else
+				cleanup(config, ran);
+				#endif
+				utils::nice_exit(utils::EXT_CODE_UNDEFINED_CONSTANTS, NULL);
+			}
+
+			if ((activeQuery = config.query(runConfig.query)) == NULL) {
+				utils::error("The specified query was not found.", true, 0);
+				#ifdef DEBUG
+				cleanup(config, ran, selfpath);
+				#else
+				cleanup(config, ran);
+				#endif
+				utils::nice_exit(utils::EXT_CODE_INVALID_QUERY, NULL);
+			}
+
+			// Maxstep...
+			// This can be solved if we have a query and it has a maxstep...
+			if (runConfig.maxstep != Config::UNDEFINED) {
+				maxmaxstep = runConfig.maxstep;
+			} else if (activeQuery && activeQuery->maxstep != Config::UNDEFINED) {
+				maxmaxstep = activeQuery->maxstep;
+			} 
+
+			// Minstep...
+			// This can be solved if we have a query and it has a minstep...
+			if (runConfig.minstep == Config::UNDEFINED) {
+
+				if ( activeQuery && activeQuery->minstep != Config::UNDEFINED)
+					runConfig.minstep = activeQuery->minstep;
+				else
+					runConfig.minstep = 0; // default to 0.
+					// runConfig.minstep = 1; //default to 1. In clingo4 minstep=0 is UNKNOWN unlike in clingo3 
+			}
+			
+
+		} else {
+			// Look for the active query anyways.
+			// Chances are we didn't end up parsing the files so we probably haven't seen it.
+			activeQuery = config.query(runConfig.query);
+		}
+
+		/**********************************************************************************************************************/
+		/* Interactive Loop */
+		/**********************************************************************************************************************/
+
+
+		/*********************************************************************************************/
+		/* Initial Maxstep */
+		/*********************************************************************************************/
+
+		runConfig.maxstep = (config.mode() == Config::MODE_STATIC_AUTO || config.mode() == Config::MODE_STATIC_MANUAL)
+				? runConfig.minstep
+				: maxmaxstep;
+		
+
+		// Final sanity check on the min and max steps...
+		if (runConfig.maxstep != Config::UNDEFINED && runConfig.minstep > runConfig.maxstep) {
+			utils::error("The maxstep value must be at least that of the minstep.", true, 0);
+			#ifdef DEBUG
+			cleanup(config, ran, selfpath);
+			#else
+			cleanup(config, ran);
+			#endif
+			utils::nice_exit(utils::EXT_CODE_INVALID_STEP_VALUE, NULL);
+		}
+
+		// run the rest of the tool chain at least once, but we may have to run it multiple times in one of the STATIC modes...
+		utils::debug("Entering primary interactive loop.", true);
+		do
+		{
+
+			/*********************************************************************************************/
+			/* Grounder */
+			/*********************************************************************************************/
+			// utils::debug("Entering grounder subroutine.", true);
+			// if ((intSystemResult = runTool(config, Config::TC_GROUNDER, "grounder", &runConfig)) != TC_STAT_TOOLSKIPPED)  {
+			// 	// It Ran!
+			// 	ran[Config::TC_GROUNDER] = true;
+			// 	if (!config.run(Config::TC_SOLVER)) {
+			// 		if (!echoFile(std::cout, config.output(Config::TC_GROUNDER))) {
+			// 			utils::error("Unable to read from the grounder output file '%s'", true, -1, config.output(Config::TC_GROUNDER).c_str());
+			// 		}
+			// 	}
+
+			// 	// check the status and make sure all is well...
+			// 	if(intSystemResult != TC_STAT_OK)
+			// 	{
+			// 		cleanup(config, ran);
+			// 		utils::error("An error occurred while executing the grounder.",true, utils::EXT_CODE_TOOLCHAIN_GROUNDER_ERR);
+			// 	}
+
+			// }
+
+			/*********************************************************************************************/
+			/* Header Logic */
+			/*********************************************************************************************/
+
+			// Print the solution header!
+			if (config.run(Config::TC_SOLVER))
+			{
+				if (activeQuery)utils::pragma("Running Query '%s'.", true, activeQuery->name.c_str());
+				else utils::pragma("Running Query '%s'.", true, runConfig.query.c_str());
+
+				switch (config.mode()) {
+				case Config::MODE_STATIC_AUTO:
+				case Config::MODE_STATIC_MANUAL:
+					if (runConfig.maxstep != Config::UNDEFINED)
+						utils::pragma("Maximum Step = '%d'.", true, runConfig.maxstep);
+					else
+						utils::pragma("No Maximum Step.", true);
+					break;
+
+				case Config::MODE_INCREMENTAL:
+				case Config::MODE_REACTIVE:
+					// We can guarantee that at this point the minimum step is defined.
+					if (runConfig.maxstep != Config::UNDEFINED)
+						utils::pragma("Minimum Step = '%d', Maximum Step = '%d'.", true, runConfig.minstep, runConfig.maxstep);
+					else
+						utils::pragma("Minimum Step = '%d', No Maximum Step.", true, runConfig.minstep);
+					break;
+
+				default:
+					break;
+				}
+
+				if (runConfig.numSoln == 0)
+					utils::pragma("Searching for all solutions.", true);
+				else
+					utils::pragma("Searching for %d solutions.", true, runConfig.numSoln );
+			}
+
+			/*********************************************************************************************/
+			/* Solver */
+			/*********************************************************************************************/
+			utils::debug("Entering solver subroutine.", true);
+			if ((intSystemResult = runTool(config, Config::TC_SOLVER, "solver", &runConfig)) != TC_STAT_TOOLSKIPPED)  {
+				// It Ran!
+				ran[Config::TC_SOLVER] = true;
+				bool ok = true;
+
+				if (!config.run(Config::TC_POSTPROC) && config.mode() != Config::MODE_REACTIVE) {
+					if (!echoFile(std::cout, config.output(Config::TC_SOLVER))) {
+						utils::error("Unable to read from the solver output file '%s'", true, -1, config.output(Config::TC_SOLVER).c_str());
+					}
+				}
+				
+				// check the status and make sure all is well...
+				if (intSystemResult == TC_STAT_SO_CLINGO_FOUND_SOLUTIONS || intSystemResult == TC_STAT_SO_CLINGO_SCRIPT_FOUND_SOLUTIONS) {
+					// Looks like we have solutions... YAY!
+					blnFoundSolutions = true;
+				} else if (intSystemResult == TC_STAT_SO_CLINGO_NO_SOLUTIONS) {
+					utils::pragma("No solutions found.", true);
+				} else if (intSystemResult == TC_STAT_BG) {
+					// The solver was launched in the background.
+				} else if(intSystemResult != TC_STAT_OK) {
+					ok = false;
+				}
+
+
+				if (!ok) {
+					// something went wrong
+					#ifdef DEBUG
+					cleanup(config, ran, selfpath);
+					#else
+					cleanup(config, ran);
+					#endif
+					utils::error("An error occurred while executing the solver.",true, utils::EXT_CODE_TOOLCHAIN_SOLVER_ERR);
+				}
+
+			}
+
+			/*********************************************************************************************/
+			/* Post-processor */
+			/*********************************************************************************************/
+			// The post-processor is only run outside of reactive mode
+			utils::debug("Entering post-processor subroutine.", true);
+			if (config.mode() != Config::MODE_REACTIVE) {
+				if ((intSystemResult = runTool(config, Config::TC_POSTPROC, "post-processor", &runConfig)) != TC_STAT_TOOLSKIPPED)  {
+					if (!echoFile(std::cout, config.output(Config::TC_POSTPROC))) {
+						utils::error("Unable to read from the post-processor output file '%s'", true, -1, config.output(Config::TC_POSTPROC).c_str());
+					}
+					// It Ran!
+					ran[Config::TC_POSTPROC] = true;
+
+					// check the status and make sure all is well...
+					if (intSystemResult == TC_STAT_POSTPROC_AS2TRANSITION_FOUND_SOLUTIONS) {
+						// Looks like we have solutions... YAY!
+						blnFoundSolutions = true;
+					} else if (intSystemResult == TC_STAT_POSTPROC_AS2TRANSITION_NO_SOLUTIONS) {
+
+					} else if(intSystemResult != TC_STAT_OK) {
+						#ifdef DEBUG
+						cleanup(config, ran, selfpath);
+						#else
+						cleanup(config, ran);
+						#endif
+						utils::error("An error occurred while executing the post-processor.",true, utils::EXT_CODE_TOOLCHAIN_POSTPROC_ERR);
+					}
+				}
+			}
+
+			/*********************************************************************************************/
+			/* Reactive Bridge */
+			/*********************************************************************************************/
+
+			// The reactive bridge is run inside of reactive mode.
+			// NOTE: If we really are in reactive mode then they solver is still running the background!
+			utils::debug("Entering reactive bridge subroutine.", true);
+
+			if (config.mode() == Config::MODE_REACTIVE) { 
+#ifdef NO_REACTIVE_BRIDGE
+			utils::warning("The reactive bridge has not yet been completed. Due to this, the system will run as if the reactive bridge has been disabled and you will need to connect to oClingo directly.", true);
+			utils::warning("Please connect your external agent to oClingo, which is listening on port '%d'.", true, config.intConfigOpt(Config::OPT_EXT_PORT));
+
+#else
+				if ((intSystemResult = runTool(config, Config::TC_REACTIVE_BRIDGE, "reactive bridge", &runConfig)) != TC_STAT_TOOLSKIPPED)  {
+					// It Ran!
+					ran[Config::TC_REACTIVE_BRIDGE] = true;
+
+					// check the status and make sure all is well...
+					if (intSystemResult == TC_STAT_BG) {
+						// The reactive bridge was launched in the background.
+					} else if(intSystemResult != TC_STAT_OK) {
+						#ifdef DEBUG
+						cleanup(config, ran, selfpath);
+						#else
+						cleanup(config, ran);
+						#endif
+						utils::error("An error occurred while executing the reactive bridge.",true, utils::EXT_CODE_TOOLCHAIN_REACTIVE_BRIDGE_ERR);
+					}
+				}
+#endif 
+			}
+
+			/*********************************************************************************************/
+			/* Maxstep Increment */
+			/*********************************************************************************************/
+
+			if (config.mode() == Config::MODE_STATIC_MANUAL) {
+				runConfig.maxstep = queryUserForConstant(config, "maximum step", runConfig.maxstep+1);
+			} else if (config.mode() == Config::MODE_STATIC_AUTO) {
+				runConfig.maxstep++;
+			}
+
+		} while(
+				// The loop should continue as long as we are:
+				// * Running in static-manual mode and the user hasn't told us to stop, or
+				// * Running in static-auto mode, we haven't reached the maximum step , and we haven't found solutions.
+				// AND
+				// * We have something to do
+				((config.mode() == Config::MODE_STATIC_MANUAL && runConfig.maxstep != Config::UNDEFINED)
+				|| (config.mode() == Config::MODE_STATIC_AUTO
+						&& runConfig.maxstep != Config::UNDEFINED
+						&& (maxmaxstep == Config::UNDEFINED || runConfig.maxstep <= maxmaxstep)
+						&& !blnFoundSolutions))
+				&& (
+					// config.run(Config::TC_GROUNDER) ||
+					config.run(Config::TC_SOLVER) 
+					|| config.run(Config::TC_POSTPROC)
+					|| (config.mode() == Config::MODE_REACTIVE && config.run(Config::TC_REACTIVE_BRIDGE))
+				)
+				);
+
+
+		first = false;
+
+	} while
+			// The outer loop should run as long as:
+			// * We're not suppressing user interaction,
+			// * We are running what looks like a grounder/solver,
+			// * The user has not selected a query on the command line, and
+			// * The user has not selected to exit the outer loop.
+			(!config.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION)
+			&& config.run(Config::TC_SOLVER)
+			&& config.strOpt(Config::STR_QUERY) =="");
+
+	utils::debug("Exiting interactive loop.", true);
+	/**********************************************************************************************************************/
+	/* Final Cleanup */
+	/**********************************************************************************************************************/
+	#ifdef DEBUG
+	cleanup(config, ran, argv[0]);
+	#else
+	cleanup(config, ran);
+	#endif
+	return 0;
+}
+
+OptionStatus parseCommandOptions(int argc, char const* const* argv, Config& outConf) {
+	// Process command-line arguments.
+
+	char const* tmpptr;
+	size_t tmpoffset;
+	char tmpPath[PATH_MAX];
+	std::list<char const*> rawInputList;
+	std::pair<unsigned int, unsigned int> steps;
+	unsigned int tmpInt;
+	Config::Mode mode;
+	bool tmpBool;
+
+
+
+	for(int i = 1; i < argc; i++)
+	{
+		utils::debug("Parsing option '%s'.", true, argv[i]);
+		switch (parseOption(argv[i], tmpptr)) {
+
+		case OPT_AUTO:
+			// This is supposed to be an automated run, don't ask the user for anything.
+			if (outConf.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION, true)) {
+				utils::warning("Detected redefinition of option '%s'. Continuing with value '%s'",true,argv[i],"true");
+			}
+			break;
+
+		case OPT_BRIDGE:
+			// They are specifying a specific command for the bridge.
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.command(Config::TC_REACTIVE_BRIDGE, tmpptr)) {
+				utils::warning("Detected redefinition of bridge command. Continuing with value '%s'",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_BRIDGE_OPTS:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected pass-through options following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.opts(Config::TC_REACTIVE_BRIDGE, tmpptr)) {
+				utils::warning("Detected redefinition of bridge command options. Continuing with value '%s'",true,tmpptr);
+			}
+			break;
+		case OPT_BRIDGE_OUT:
+
+			utils::error("Redirecting the reactive bridge's output is currently unsupported.", true, 0);
+			return OPT_STAT_BAD_ARG;
+
+		case OPT_CONST:
+			// Constant Declaration...
+			if(++i < argc && (tmpptr = strchr(argv[i],'=')) != NULL)
+			{
+				tmpoffset = (size_t)(tmpptr - argv[i]);
+
+				// Get the constant name/value
+				std::string name = std::string(argv[i], tmpoffset);
+				std::string value = std::string(&(argv[i][tmpoffset+1]));
+
+				utils::debug("Parsed constant declaration name='%s', value='%s'",true, name.c_str(), value.c_str());
+
+				if (outConf.def(name,value)) {
+					utils::warning("Detected redefinition of constant '%s'. Continuing with value '%s'",true,name.c_str(),value.c_str());
+				}
+
+			} else {   // Set up for a constant without actually giving one, bad command line.
+				utils::error("Expected a constant definition of the form 'constant=value' after option '%s'. Exiting.",true,0,argv[i-1]);
+				return OPT_STAT_BAD_ARG;
+			}
+			break;
+
+		case OPT_FRM_BRIDGE:
+			utils::pragma("Running the toolchain from the reactive bridge is discouraged.",true);
+			if (outConf.setRunFrom(Config::TC_REACTIVE_BRIDGE)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		// case OPT_FRM_GRD:
+		// 	// Don't run anything before the grounder.
+		// 	if (outConf.setRunFrom(Config::TC_GROUNDER)) {
+		// 		utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+		// 	}
+		// 	break;
+
+		case OPT_FRM_PRE:
+			// Don't run anything before the pre-processor.
+			if (outConf.setRunFrom(Config::TC_PREPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_FRM_POST:
+			// Don't call anything before the post-processor (equivalent to "-justpost")
+			if (outConf.setRunFrom(Config::TC_POSTPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_FROM_SO:
+			// Don't run anything before the solver.
+			if (outConf.setRunFrom(Config::TC_SOLVER)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_FROM_TRAN:
+			// Don't call anything before the translator (basically a no-op option).
+			if (outConf.setRunFrom(Config::TC_TRANSLATOR)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		// case OPT_GRD:
+		// 	// They're giving us a specific executable to use as the grounder instead of the default.
+		// 	// Make sure a second argument follows, and save the new grounder.
+		// 	if (!tmpptr) {
+		// 		if (++i < argc) {
+		// 			tmpptr = argv[i];
+		// 		} else {
+		// 			// setup for a command but they didn't deliver.
+		// 			utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+		// 			return OPT_STAT_BAD_ARG;
+		// 		}
+		// 	}
+
+		// 	if (outConf.command(Config::TC_GROUNDER, tmpptr)) {
+		// 		utils::warning("Detected redefinition of grounder command. Continuing with value '%s'",true,tmpptr);
+		// 	}
+
+		// 	break;
+
+		// case OPT_GRD_OPTS:
+		// 	if (!tmpptr) {
+		// 		if (++i < argc) {
+		// 			tmpptr = argv[i];
+		// 		} else {
+		// 			// setup for options but they didn't deliver
+		// 			utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, argv[i-1]);
+		// 			return OPT_STAT_BAD_ARG;
+		// 		}
+		// 	}
+
+		// 	if (outConf.opts(Config::TC_GROUNDER, tmpptr)) {
+		// 		utils::warning("Detected redefinition of grounder command options. Continuing with value '%s'",true, tmpptr);
+		// 	}
+
+		// 	break;
+
+		// case OPT_GRD_OUT:
+
+		// 	if (!tmpptr) {
+		// 		if (++i < argc) {
+		// 			tmpptr = argv[i];
+		// 		} else {
+		// 			// setup for a command but they didn't deliver.
+		// 			utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+		// 			return OPT_STAT_BAD_ARG;
+		// 		}
+		// 	}
+
+		// 	if (outConf.output(Config::TC_GROUNDER, tmpptr)) {
+		// 		utils::warning("Detected redefinition of the grounder output file. Continuing with value '%s'",true, tmpptr);
+		// 	}
+		// 	break;
+
+		case OPT_GRINGO_NONE_HACK:
+			// Specifying a none_hack value.
+
+			if (!tmpptr) {
+				utils::warning("Option '%s' has been deprecated in favor of specifying an explicit none alias value.",true,argv[i]);
+
+				tmpptr = DEF_NONE_HACK_VAL;
+			}
+
+
+			if (outConf.strOpt(Config::STR_NONE_ALIAS, tmpptr)) {
+				utils::warning("Detected redefinition of the none alias option. Continuing with value '%s'",true, tmpptr);
+			}
+
+			break;
+
+
+		// case OPT_JUST_GRD:
+		// 	// Just call the grounder program, no others.
+		// 	if (outConf.setOnlyRun(Config::TC_GROUNDER)) {
+		// 		utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+		// 	}
+		// 	break;
+
+		case OPT_JUST_PRE:
+			// Just call the preprocessor program, no others.
+			if (outConf.setOnlyRun(Config::TC_PREPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_JUST_POST:
+			// Just call the postprocessor program, no others.
+			if (outConf.setOnlyRun(Config::TC_POSTPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_JUST_SO:
+			// Just call the solver program, no others.
+			if (outConf.setOnlyRun(Config::TC_SOLVER)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_JUST_TRANS:
+			// Just call the translator program, no others.
+			if (outConf.setOnlyRun(Config::TC_TRANSLATOR)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+		case OPT_LANG:
+			Config::Language l;
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+						utils::error("Expected a language specification following option '%s'. Exiting.",true,0, argv[i-1]);
+						return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (!outConf.parseLang(tmpptr, l)) {
+				utils::error("'%s' is not a supported language specification.", 0, true, tmpptr);
+				return OPT_STAT_BAD_ARG;
+			}
+
+			if (outConf.lang(l)) {
+				utils::warning("Detected a redefition of the input language.",true,argv[i]);
+			}
+			break;
+
+		case OPT_MAXSTEP:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+						utils::error("Expected a maximum step following option '%s'. Exiting.",true,0, argv[i-1]);
+						return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if ((steps = Config::parseMaxstep(tmpptr)).second == Config::UNDEFINED) {
+				utils::error("'%s' is not a valid step value. Exiting.",true,0, tmpptr);
+				return OPT_STAT_BAD_ARG;
+			} else if (outConf.intConfigOpt(Config::OPT_MAXSTEP, steps.second)
+					|| (steps.first != Config::UNDEFINED && outConf.intConfigOpt(Config::OPT_MINSTEP, steps.first)))
+			{
+				utils::warning("Detected a redefinition of the maximum step. Continuing with the value '%s'.",true,tmpptr);
+			}
+			break;
+
+		case OPT_MINSTEP:
+
+			if (!tmpptr) {
+
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a minimum step following option '%s'. Exiting.",true,0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+
+			}
+
+	
+			if (!utils::from_string(tmpInt, tmpptr)) {
+				utils::error("'%s' is not a valid step value. Exiting.",true,0, tmpptr);
+				return OPT_STAT_BAD_ARG;
+			} else if (outConf.intConfigOpt(Config::OPT_MINSTEP, tmpInt)) {
+				utils::warning("Detected a redefinition of the minimum step. Continuing with value '%s'.",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_NO_DOMAIN_ENFORCE:
+			outConf.boolConfigOpt(Config::OPT_NO_DOMAIN_ENFORCE, true);
+			break;
+		case OPT_NO_ADD_DOMAIN_ENFORCE:
+			outConf.boolConfigOpt(Config::OPT_NO_ADD_DOMAIN_ENFORCE, true);
+			break;
+
+		case OPT_MODE_SELECT:
+			tmpBool = false;
+			if (!tmpptr) {
+				tmpBool = true;
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a mode option (one of '%s', '%s', '%s', or '%s') following option '%s'. Exiting.",true,0,
+							ARG_MODE_STATIC_AUTO, ARG_MODE_STATIC_MANUAL, ARG_MODE_INCREMENTAL, ARG_MODE_REACTIVE, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (!strcmp(tmpptr,ARG_MODE_STATIC_MANUAL)) {
+				mode = Config::MODE_STATIC_MANUAL;
+			} else if (!strcmp(tmpptr,ARG_MODE_STATIC_AUTO)) {
+				mode = Config::MODE_STATIC_AUTO;
+			} else if (!strcmp(tmpptr,ARG_MODE_INCREMENTAL)) {
+				mode = Config::MODE_INCREMENTAL;
+			} else if (!strcmp(tmpptr,ARG_MODE_REACTIVE)) {
+				mode = Config::MODE_INCREMENTAL;
+			} else {
+				utils::error("Unexpected value '%s'. Expected a mode option (one of '%s', '%s', '%s', or '%s'). Exiting.",true,0,
+						tmpptr, ARG_MODE_STATIC_AUTO, ARG_MODE_STATIC_MANUAL, ARG_MODE_INCREMENTAL, OPT_MODE_REACTIVE);
+				return OPT_STAT_BAD_ARG;
+			}
+
+			if (outConf.mode(mode)) {
+				utils::warning("Detected a redefinition of the program's running mode. Continuing with value '%s'.", true, tmpptr);
+			}
+
+			break;
+		case OPT_MODE_STATIC_AUTO:
+			if (outConf.mode(Config::MODE_STATIC_AUTO)) {
+				utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'static-auto'.", true);
+			}
+			break;
+		case OPT_MODE_STATIC_MANUAL:
+			if (outConf.mode(Config::MODE_STATIC_MANUAL)) {
+				utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'static-manual'.", true);
+			}
+			break;
+		case OPT_MODE_INCREMENTAL:
+			if (outConf.mode(Config::MODE_INCREMENTAL)) {
+				utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'incremental'", true);
+			}
+			break;
+		case OPT_MODE_REACTIVE:
+			if (outConf.mode(Config::MODE_REACTIVE)) {
+				utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'reactive'.", true);
+			}
+			break;
+
+		case OPT_NO_DEL:
+			tmpBool = false;
+			utils::warning("The option '%s' has been deprecated in favor of the '--[PROG]-output=[OUTFILE] option.", true, argv[i]);
+
+			tmpBool = outConf.output(Config::TC_TRANSLATOR, DEF_INT_TRANS_FILE) 
+					|/* non-shortcutting bitwise or */ outConf.output(Config::TC_PREPROC, DEF_INT_PREPROC_FILE)
+
+					| outConf.output(Config::TC_SOLVER, DEF_INT_SO_FILE);
+
+			// Shut off deleting intermediate files.
+			if (tmpBool) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_SHIFT:
+			if (!tmpptr) {
+				// default true
+				tmpptr = "true";
+			}
+			
+			bool val;
+			if (!strcmp(tmpptr, "true")) {
+				val = true;
+			} else if (!strcmp(tmpptr, "false")) {
+				val = false;
+			} else {
+				utils::error("Invalid shift value. Expected a Boolean value ('true' or 'false'). Exiting.", true, 0, argv[i]);
+				return OPT_STAT_BAD_ARG;
+			}
+
+			if (outConf.boolConfigOpt(Config::OPT_SHIFT, val)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+
+			break;
+
+		case OPT_STATS:
+			// Don't include standard files in the final product.
+			if (outConf.boolConfigOpt(Config::OPT_STATS, true)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true, argv[i]);
+			}
+
+			break;
+
+		case OPT_PORT_EXTERNAL:
+			// Set the external port to use in reactive mode
+			if (!tmpptr) {
+
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a port number following option '%s'. Exiting.",true,0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (!utils::from_string(tmpInt, tmpptr) || tmpInt < 1) {
+				utils::error("'%s' is not a valid port. Exiting.",true,0, tmpptr);
+				return OPT_STAT_BAD_ARG;
+			} else if (outConf.intConfigOpt(Config::OPT_EXT_PORT, tmpInt)) {
+				utils::warning("Detected a redefinition of the external port. Continuing with value '%s'.",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_PORT_INTERNAL:
+			// Set the internal port to use in reactive mode
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a port number following option '%s'. Exiting.",true,0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (!utils::from_string(tmpInt, tmpptr) || tmpInt < 1) {
+				utils::error("'%s' is not a valid port. Exiting.",true,0, tmpptr);
+				return OPT_STAT_BAD_ARG;
+			} else if (outConf.intConfigOpt(Config::OPT_INT_PORT, tmpInt)) {
+				utils::warning("Detected a redefinition of the internal port. Continuing with value '%s'.",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_POSTPROC:
+			// They're giving us a specific executable to use as the post-processor instead of the default.
+			// Make sure a second argument follows, and save the new post-processor.
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.command(Config::TC_POSTPROC, tmpptr)) {
+				utils::warning("Detected redefinition of post-processor command. Continuing with value '%s'.",true,argv[i]);
+			}
+	
+			break;
+
+		case OPT_POSTPROC_OPTS:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for options but they didn't deliver
+					utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (outConf.opts(Config::TC_POSTPROC, tmpptr)) {
+				utils::warning("Detected redefinition of post-processor command options. Continuing with value '%s'",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_POSTPROC_OUT:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.output(Config::TC_POSTPROC, tmpptr)) {
+				utils::warning("Detected redefinition of the post-processor output file. Continuing with value '%s'",true, tmpptr);
+			}
+			break;
+
+		case OPT_PREPROC:
+			// They're giving us a specific executable to use as the pre-processor instead of the default.
+			// Make sure a second argument follows, and save the new pre-processor.
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.command(Config::TC_PREPROC, tmpptr)) {
+				utils::warning("Detected redefinition of pre-processor command. Continuing with value '%s'",true,tmpptr);
+			}
+			break;
+
+		case OPT_PREPROC_OPTS:
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for options but they didn't deliver
+					utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+
+			}
+
+
+			if (outConf.opts(Config::TC_PREPROC, tmpptr)) {
+				utils::warning("Detected redefinition of pre-processor command options. Continuing with value '%s'",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_PREPROC_OUT:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.output(Config::TC_PREPROC, tmpptr)) {
+				utils::warning("Detected redefinition of the pre-processor output file. Continuing with value '%s'",true, tmpptr);
+			}
+			break;
+
+		case OPT_SO:
+			// They're giving us a specific executable to use as the solver instead of the default.
+			// Make sure a second argument follows, and save the new solver.
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.command(Config::TC_SOLVER, tmpptr)) {
+				utils::warning("Detected redefinition of solver command. Continuing with value '%s'",true,tmpptr);
+			}
+			break;
+
+		case OPT_SO_OPTS:
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for options but they didn't deliver
+					utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (outConf.opts(Config::TC_SOLVER, tmpptr)) {
+				utils::warning("Detected redefinition of solver command options. Continuing with value '%s'",true, tmpptr);
+			}
+
+			break;
+
+		case OPT_SO_OUT:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.output(Config::TC_SOLVER, tmpptr)) {
+				utils::warning("Detected redefinition of the solver output file. Continuing with value '%s'",true, tmpptr);
+			}
+			break;
+		
+		case OPT_SYMTAB:
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+
+			}
+
+			if (outConf.strOpt(Config::STR_SYMTAB_FILE, tmpptr)) {
+				utils::warning("Detected redefinition of the symbol table file. Continuing with value '%s'",true, tmpptr);
+			}
+			break;
+
+
+		case OPT_TO_BRIDGE:
+			if (outConf.setRunTo(Config::TC_REACTIVE_BRIDGE)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		// case OPT_TO_GRD:
+		// 	// Shut off deleting intermediate files.
+		// 	if (outConf.setRunTo(Config::TC_GROUNDER)) {
+		// 		utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+		// 	}
+		// 	break;
+
+		case OPT_TO_PRE:
+			// Run everything up to the pre-processor.
+			if (outConf.setRunTo(Config::TC_PREPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_TO_POST:
+			// Run everything up to the post-processor...
+			if (outConf.setRunTo(Config::TC_POSTPROC)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_TO_SO:
+			// Run everything up to the solver...
+			if (outConf.setRunTo(Config::TC_SOLVER)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_TO_TRANS:
+			// Run everything up to the translator...
+			if (outConf.setRunTo(Config::TC_TRANSLATOR)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,argv[i]);
+			}
+			break;
+
+		case OPT_TRANS:
+			// They're giving us a specific executable to use as the translator instead of the default.
+			// Make sure a second argument follows, and save the new grounder.
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a command following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (outConf.command(Config::TC_TRANSLATOR, tmpptr)) {
+				utils::warning("Detected redefinition of translator command. Continuing with value '%s'.",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_TRANS_OPTS:
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for options but they didn't deliver
+					utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+
+			if (outConf.opts(Config::TC_TRANSLATOR, tmpptr)) {
+				utils::warning("Detected redefinition of translator command options. Continuing with value '%s'.",true,tmpptr);
+			}
+
+			break;
+
+		case OPT_TRANS_OUT:
+
+			if (!tmpptr) {
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					// setup for a command but they didn't deliver.
+					utils::error("Expected a file name following option '%s'. Exiting.",true,0,argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+
+			if (outConf.output(Config::TC_TRANSLATOR, tmpptr)) {
+				utils::warning("Detected redefinition of the translator output file. Continuing with value '%s'",true, tmpptr);
+			}
+			break;
+
+		case OPT_VERSION:
+			return OPT_STAT_VERSION;
+
+		case OPT_HELP:
+			return OPT_STAT_HELP;
+
+		case OPT_QUERY:
+			tmpBool = false;
+			if (!tmpptr) {
+				tmpBool = true;
+				if (++i < argc) {
+					tmpptr = argv[i];
+				} else {
+					utils::error("Expected a query identifier following option '%s'. Exiting.",true,0, argv[i-1]);
+					return OPT_STAT_BAD_ARG;
+				}
+			}
+			if (outConf.strOpt(Config::STR_QUERY, tmpptr)) {
+				utils::warning("The option '%s' has overridden one or more previous choices.",true,(tmpBool) ? argv[i-1] : argv[i]);
+			}
+			break;
+
+		case OPT_UNSUPPORTED:
+			// Whatever this is, it's unsupported.
+			utils::warning("The '%s' option is no longer supported. It will be ignored.",true,argv[i]);
+			break;
+		case OPT_UNSUPPORTED_NO_STD:
+			// they want us to not include the standard file...
+			// we don't use a standard file anymore.
+			utils::warning("The '%s' option is no longer supported as standard files are no longer used.", true, argv[i]);
+			break;
+
+		case OPT_UNSUPPORTED_ADDITIVE:
+			// They want us to include the additive standard file...
+			utils::warning("The '%s' option is no longer supported as standard files are no longer used.",true,argv[i]);
+			break;
+
+		case OPT_UNSUPPORTED_GRSO:
+			// They did something involving the explicit grounder/solver
+			// We no longer support the explicit grounder/solver calls
+			utils::error("The '%s' option is no longer supported. We no longer use a dedicated grounder/solver in the toolchain. Please make use of the solver component instead.",true,0,argv[i]);
+
+			// We probably aren't going to do what they want, go ahead and signal that something went wrong
+			return OPT_STAT_BAD_ARG;
+
+		case OPT_UNSUPPORTED_MANUAL_MAXSTEP:
+			// Manually advance the maximum step of the program query
+			utils::error("The '%s' option is no longer supported. Please use that '--mode=static-manual' option instead.",true,0,argv[i]);
+			break;
+
+		case OPT_UNKNOWN:
+			utils::debug("The option isn't a recognized flag. Checking other possibilities.", true);
+			if (argv[i][0] == '-')
+			{
+				// It appears to be a bad argument...
+				utils::error("Found an unrecognized argument '%s'. Exiting.",true,0,argv[i]);
+				return OPT_STAT_BAD_ARG;
+			}
+
+			// If there's no "header" on the argument, it's either a constant declaration, an input file, or the number of solutions.
+			else if(!strcmp(argv[i], "all") || !strcmp(argv[i], "ALL")) {
+				if (outConf.intConfigOpt(Config::OPT_NUM_SOLN, 0)) {
+					utils::warning("Detected the redefinition of the number of solutions. Continuing with '%s'.",true,argv[i]);
+				}
+			}
+			else if(utils::isInteger(argv[i]))
+			{	// It looks like a number, atoi it and save that as the desired number of solutions.
+				int numSolutions = atoi(argv[i]);
+				if(numSolutions < 0) {
+					utils::warning("The number of solutions cannot be negative. Ignoring the argument.",true);
+				} else {
+					if (outConf.intConfigOpt(Config::OPT_NUM_SOLN, (unsigned int)numSolutions)) {
+						utils::warning("Detected the redefinition of the number of solutions. Continuing with '%s'.",true,argv[i]);
+					}
+				}
+			}
+			else if((tmpptr = strchr(argv[i],'=')) != NULL)
+			{   // Found an equals sign in the argument, it's probably a "const=value" declaration.
+				tmpoffset = (size_t)(tmpptr - argv[i]);
+
+				// Get the constant name/value
+				std::string name = std::string(argv[i], tmpoffset);
+				std::string value = std::string(&(argv[i][tmpoffset+1]));
+
+				utils::debug("Parsed constant declaration name='%s', value='%s'",true, name.c_str(), value.c_str());
+
+				if (outConf.def(name,value)) {
+					utils::warning("Detected redefinition of constant '%s'. Continuing with value '%s'",true,name.c_str(),value.c_str());
+				}
+			}
+			else
+			{	// If it's not a number, it's probably an input file. Make sure it exists, and then save it to the list.
+
+				if(realpath(argv[i], tmpPath) == NULL)
+				{
+					// Couldn't find the input file...
+					utils::error("Unable to locate input file '%s'. Exiting.",true,0,argv[i]);
+					return OPT_STAT_BAD_ARG;
+				}
+				else
+				{
+					// Save all of the input files until we are done and can handle them...
+					rawInputList.push_back(argv[i]);
+				}
+			}
+			break;
+		}
+	}
+
+	// We've finished parsing all of the arguments... Let's handle those pesky input files.
+	utils::debug("Handling input files...", true);
+	if (!rawInputList.size()) {
+		//uh-oh. They didn't specify any input files. This simply won't do.
+		utils::error("One or more input files must be specified.",true,0);
+		return OPT_STAT_BAD_ARG;
+	}
+
+	// They've insisted on sticking with a given mode. Make sure they're aware if they're using an incompatible
+	for (std::list<char const*>::iterator it = rawInputList.begin(); it != rawInputList.end(); it++) {
+		Config::FileType type = outConf.addInput(*it);
+		if (outConf.customMode() && type.known && !(type.runningMode & outConf.mode())) {
+			utils::warning("The file '%s' doesn't appear to be compatible with the current running mode.",true,*it);
+		}
+	}
+
+	return OPT_STAT_OK;
+}
+
+/**
+ * Parses a string and determines what (if any) command line option it contains.
+ * @param opt - The string to parse.
+ * @param[out] val A string with the value for the option (where applicable) or NULL. 
+ * @return The command line option contained within the string (or OPT_UNKNOWN).
+ */
+Option parseOption(char const* opt, char const*& val) {
+	char const* marker;
+
+	val = NULL;
+
+	/*!re2c
+			re2c:define:YYCTYPE = "char";
+			re2c:define:YYCURSOR = opt;
+			re2c:yyfill:enable = 0;
+			re2c:define:YYMARKER = marker;
+			re2c:indent:top = 1;
+
+			"-auto"|"--automated"					{ return OPT_AUTO; }
+			"-c"|"--const"							{ return OPT_CONST; }
+			"-br="|"--bridge="						{ val = opt; return OPT_BRIDGE; }
+			"-br"|"--bridge"						{ return OPT_BRIDGE; }
+			"-bropt="|"--bridge-opts="				{ val = opt; return OPT_BRIDGE_OPTS; }
+			"-bropt"|"--bridge-opts"				{ return OPT_BRIDGE_OPTS; }
+			"-brout="|"--bridge-output="			{ val = opt; return OPT_BRIDGE_OUT; }
+			"-brout"|"--bridge-output"				{ return OPT_BRIDGE_OUT; }
+			"-frombr"|"--from-bridge"				{ return OPT_FRM_BRIDGE; }
+
+			"-frompre"|"--from-pre-processor"		{ return OPT_FRM_PRE; }
+			"-frompost"|"--from-post-processor"		{ return OPT_FRM_POST; }
+			"-fromso"|"--from-solver"				{ return OPT_FROM_SO; }
+			"-fromtrans"|"--from-translator"		{ return OPT_FROM_TRAN; }
+			"-gr="|"--grounder="					{ val = opt; return OPT_GRD; }
+			"-gr"|"--grounder"						{ return OPT_GRD; }
+			"-gropt="|"--grounder-opts="			{ val = opt; return OPT_GRD_OPTS; }
+			"-gropt"|"--grounder-opts"				{ return OPT_GRD_OPTS; }
+			"-grout="|"--grounder-output="			{ val = opt; return OPT_GRD_OUT; }
+			"-grout"|"--grounder-output"			{ return OPT_GRD_OUT; }
+			"-nh="|"--none-hack="					{ val = opt; return OPT_GRINGO_NONE_HACK; }
+			"-na="|"--none-alias="					{ val = opt; return OPT_GRINGO_NONE_HACK; }
+			"-i"|"--internal-port"					{ return OPT_PORT_INTERNAL; }
+			"-justgr"|"--just-grounder"				{ return OPT_JUST_GRD; }
+			"-justpre"|"--just-pre-processor"		{ return OPT_JUST_PRE; }
+			"-justpost"|"--just-post-processor"		{ return OPT_JUST_POST; }
+			"-justso"|"--just-solver"				{ return OPT_JUST_SO; }
+			"-justtrans"|"--just-translator"		{ return OPT_JUST_TRANS; }
+			"-l"|"--language"|"language"			{ return OPT_LANG; }
+			"-m="|"--mode="							{ val = opt; return OPT_MODE_SELECT; }
+			"-l="|"--language="						{ val = opt; return OPT_LANG; }
+			"-m"|"--mode"|"mode"					{ return OPT_MODE_SELECT; }
+			"-max="|"--maxstep="					{ val = opt;return OPT_MAXSTEP; }
+			"-max"|"--maxstep"						{ return OPT_MAXSTEP; }
+			"-min="|"--minstep="					{ val = opt; return OPT_MINSTEP; }
+			"-min"|"--minstep"						{ return OPT_MINSTEP; }
+			"-nd"|"--no-domain"						{ return OPT_NO_DOMAIN_ENFORCE; }
+			"-nad"|"--no-additive-domain"			{ return OPT_NO_ADD_DOMAIN_ENFORCE; }
+			"-s"|"--shift"							{ return OPT_SHIFT; }
+			"--stats"								{ return OPT_STATS; }
+			"-p="|"--port="							{ val = opt; return OPT_PORT_EXTERNAL; }
+			"-p"|"--port"							{ return OPT_PORT_EXTERNAL; }
+			"-post="|"--post-processor="			{ val = opt; return OPT_POSTPROC; }
+			"-post"|"--post-processor"				{ return OPT_POSTPROC; }
+			"-postopt="|"--post-processor-opts="	{ val = opt; return OPT_POSTPROC_OPTS; }
+			"-postopt"|"--post-processor-opts"		{ return OPT_POSTPROC_OPTS; }
+			"-postout="|"--post-processor-output="	{ val = opt; return OPT_POSTPROC_OUT; }
+			"-postout"|"--post-processor-output"	{ return OPT_POSTPROC_OUT; }
+			"-pre="|"--pre-processor="				{ val = opt; return OPT_PREPROC; }
+			"-pre"|"--pre-processor"				{ return OPT_PREPROC; }
+			"-preopt="|"--pre-processor-opts="		{ val = opt; return OPT_PREPROC_OPTS; }
+			"-preopt"|"--pre-processor-opts"		{ return OPT_PREPROC_OPTS; }
+			"-preout="|"--pre-processor-output="	{ val = opt; return OPT_PREPROC_OUT; }
+			"-preout"|"--pre-processor-output"		{ return OPT_PREPROC_OUT; }
+			"-so="|"--solver="						{ val = opt; return OPT_SO; }
+			"-so"|"--solver"						{ return OPT_SO; }
+			"-soopt="|"--solver-opts="				{ val = opt; return OPT_SO_OPTS; }
+			"-soopt"|"--solver-opts"				{ return OPT_SO_OPTS; }
+			"-soout="|"--solver-output="			{ val = opt; return OPT_SO_OUT; }
+			"-soout"|"--solver-output"				{ return OPT_SO_OUT; }
+			"-symtab"|"--symbol-table"				{ return OPT_SYMTAB; }
+			"-symtab="|"--symbol-table="			{ val = opt; return OPT_SYMTAB; }
+			"-togr"|"--to-grounder"					{ return OPT_TO_GRD; }
+			"-topre"|"--to-pre-processor"			{ return OPT_TO_PRE; }
+			"-topost"|"--to-post-processor"			{ return OPT_TO_POST; }
+			"-toso"|"--to-solver"					{ return OPT_TO_SO; }
+			"-totrans"|"--to-translator"			{ return OPT_TO_TRANS; }
+			"-tobr"|"--to-bridge"					{ return OPT_TO_BRIDGE;	}
+			"-trans="|"--translator="				{ val = opt; return OPT_TRANS; }
+			"-trans"|"--translator"					{ return OPT_TRANS; }
+			"-transopt="|"--translator-opts="		{ val = opt; return OPT_TRANS_OPTS; }
+			"-transopt"|"--translator-opts"			{ return OPT_TRANS_OPTS; }
+			"-transout="|"--translator-output="		{ val = opt; return OPT_TRANS_OUT; }
+			"-transout"|"--translator-output"		{ return OPT_TRANS_OUT; }
+			"-v"|"--version"						{ return OPT_VERSION; }
+			"-q="|"--query="						{ val = opt; return OPT_QUERY; }
+			"-q"|"--query"							{ return OPT_QUERY; }
+			"-?"|"--help"							{ return OPT_HELP; }
+
+			"-nodel"|"--no-delete"					{ return OPT_NO_DEL; }
+			"-nh"|"--none-hack"						{ return OPT_GRINGO_NONE_HACK; }
+			"-na"|"--none-alias"					{ return OPT_GRINGO_NONE_HACK; }
+
+			"-nostd"|"--no-standard"				{ return OPT_UNSUPPORTED_NO_STD; }
+			"-add"|"--additive"						{ return OPT_UNSUPPORTED_ADDITIVE; }
+			"-fromgrso"|"--from-grounder-solver"	{ return OPT_UNSUPPORTED_GRSO; }
+			"-grso"|"--grounder-solver"				{ return OPT_UNSUPPORTED_GRSO; }
+			"-grsoopt"|"--grounder-solver-opts"		{ return OPT_UNSUPPORTED_GRSO; }
+			"-justgrso"|"--just-grounder-solver"	{ return OPT_UNSUPPORTED_GRSO; }
+			"-mm"|"--manual-maxstep"				{ return OPT_UNSUPPORTED_MANUAL_MAXSTEP; }
+			"-nogr"|"--no-grounder"					{ return OPT_UNSUPPORTED; }
+			"-nogrso"|"--no-grounder-solver"		{ return OPT_UNSUPPORTED; }
+			"-nopre"|"--no-pre-processor"			{ return OPT_UNSUPPORTED; }
+			"-nopost"|"--no-post-processor"			{ return OPT_UNSUPPORTED; }
+			"-noso"|"--no-solver"					{ return OPT_UNSUPPORTED; }
+			"-notrans"|"--no-translator"			{ return OPT_UNSUPPORTED; }
+			"-pipe"|"--use-pipes"					{ return OPT_UNSUPPORTED; }
+			"-togrso"|"--to-grounder-solver"		{ return OPT_UNSUPPORTED; }
+			.										{ return OPT_UNKNOWN; }
+		*/
+}
+
+OptionStatus parseConfigOptions(Config& outConf){
+
+
+	namespace btree = boost::property_tree;
+
+	try{
+		const char *homedir;
+		if ((homedir = getenv("HOME")) == NULL) {
+		    homedir = getpwuid(getuid())->pw_dir;
+		}
+
+		std::string dir (homedir);
+		btree::ptree pt;
+		char const* tmpptr;
+		size_t tmpoffset;
+		char tmpPath[PATH_MAX];
+		std::list<char const*> rawInputList;
+		std::pair<unsigned int, unsigned int> steps;
+		unsigned int tmpInt;
+		Config::Mode mode;
+		bool tmpBool;
+
+		read_ini(dir.append("/.cplus2asp.config"),pt);	
+		
+		for (auto& section:pt){
+			//Check for cplus2asp section
+			if(boost::iequals(section.first, "cplus2asp")){
+				for (auto& key : section.second){
+					char const* tmpptr = key.second.get_value<std::string>().c_str();	
+
+					switch(parseOption(key.first.c_str(), tmpptr)){
+						case OPT_AUTO:
+							// This is supposed to be an automated run, don't ask the user for anything.
+							if (outConf.boolConfigOpt(Config::OPT_SUPPRESS_INTERACTION, true)) {
+								utils::warning("Detected redefinition of option '%s'. Continuing with value '%s'",true,key.second.get_value<std::string>().c_str(),"true");
+							}
+							break;
+						case OPT_BRIDGE:
+							// They are specifying a specific command for the bridge.
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+								}
+							
+
+							if (outConf.command(Config::TC_REACTIVE_BRIDGE, tmpptr)) {
+								utils::warning("Detected redefinition of bridge command. Continuing with value '%s'",true,tmpptr);
+							}
+
+							break;
+						case OPT_BRIDGE_OPTS:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected pass-through options following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+								
+							}
+
+							if (outConf.opts(Config::TC_REACTIVE_BRIDGE, tmpptr)) {
+								utils::warning("Detected redefinition of bridge command options. Continuing with value '%s'",true,tmpptr);
+							}
+							break;
+						case OPT_BRIDGE_OUT:
+
+							utils::error("Redirecting the reactive bridge's output is currently unsupported.", true, 0);
+							return OPT_STAT_BAD_ARG;
+
+						case OPT_CONST:
+									tmpptr = key.second.get_value<std::string>().c_str();
+									const char* temp;	
+									// Constant Declaration...
+									if((temp = strchr(tmpptr,'=')) != NULL)
+									{
+										tmpoffset = (size_t)(temp - tmpptr);
+
+										// Get the constant name/value
+										std::string name = std::string(key.second.get_value<std::string>().c_str(), tmpoffset);
+										std::string value = std::string(&(key.second.get_value<std::string>().c_str()[tmpoffset+1]));
+
+										utils::debug("Parsed constant declaration name='%s', value='%s'",true, name.c_str(), value.c_str());
+
+										if (outConf.def(name,value)) {
+											utils::warning("Detected redefinition of constant '%s'. Continuing with value '%s'",true,name.c_str(),value.c_str());
+										}
+
+									} else {   // Set up for a constant without actually giving one, bad command line.
+										utils::error("Expected a constant definition of the form 'constant=value' after option '%s'. Exiting.",true,0,key.first.c_str());
+										return OPT_STAT_BAD_ARG;
+									}
+									break;
+
+						case OPT_FRM_BRIDGE:
+							utils::pragma("Running the toolchain from the reactive bridge is discouraged.",true);
+							if (outConf.setRunFrom(Config::TC_REACTIVE_BRIDGE)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						// case OPT_FRM_GRD:
+						// 	// Don't run anything before the grounder.
+						// 	if (outConf.setRunFrom(Config::TC_GROUNDER)) {
+						// 		utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+						// 	}
+						// 	break;					
+
+						case OPT_FRM_PRE:
+									// Don't run anything before the pre-processor.
+									if (outConf.setRunFrom(Config::TC_PREPROC)) {
+										utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+									}
+									break;	
+
+						case OPT_FRM_POST:
+							// Don't call anything before the post-processor (equivalent to "-justpost")
+							if (outConf.setRunFrom(Config::TC_POSTPROC)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_FROM_SO:
+							// Don't run anything before the solver.
+							if (outConf.setRunFrom(Config::TC_SOLVER)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_FROM_TRAN:
+							// Don't call anything before the translator (basically a no-op option).
+							if (outConf.setRunFrom(Config::TC_TRANSLATOR)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						// case OPT_GRD:
+						// 	// They're giving us a specific executable to use as the grounder instead of the default.
+						// 	// Make sure a second argument follows, and save the new grounder.
+						// 	tmpptr = key.second.get_value<std::string>().c_str();
+						// 	if (!tmpptr) {
+
+						// 		// setup for a command but they didn't deliver.
+						// 		utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+						// 		return OPT_STAT_BAD_ARG;
+								
+						// 	}
+
+						// 	if (outConf.command(Config::TC_GROUNDER, tmpptr)) {
+						// 		utils::warning("Detected redefinition of grounder command. Continuing with value '%s'",true,tmpptr);
+						// 	}
+
+						// 	break;
+
+						// case OPT_GRD_OPTS:
+						// 	tmpptr = key.second.get_value<std::string>().c_str();
+						// 	if (!tmpptr) {
+						// 		// setup for options but they didn't deliver
+						// 		utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, key.first.c_str());
+						// 		return OPT_STAT_BAD_ARG;
+								
+						// 	}
+
+						// 	if (outConf.opts(Config::TC_GROUNDER, tmpptr)) {
+						// 		utils::warning("Detected redefinition of grounder command options. Continuing with value '%s'",true, tmpptr);
+						// 	}
+
+						// 	break;
+
+						// case OPT_GRD_OUT:
+						// 	tmpptr = key.second.get_value<std::string>().c_str();
+						// 	if (!tmpptr) {
+								
+						// 		// setup for a command but they didn't deliver.
+						// 		utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+						// 		return OPT_STAT_BAD_ARG;
+							
+						// 	}
+
+						// 	if (outConf.output(Config::TC_GROUNDER, tmpptr)) {
+						// 		utils::warning("Detected redefinition of the grounder output file. Continuing with value '%s'",true, tmpptr);
+						// 	}
+						// 	break;
+
+						case OPT_GRINGO_NONE_HACK:
+							// Specifying a none_hack value.
+							tmpptr = key.second.get_value<std::string>().c_str();
+							if (!tmpptr) {
+								utils::warning("Option '%s' has been deprecated in favor of specifying an explicit none alias value.",true,key.first.c_str());
+
+								tmpptr = DEF_NONE_HACK_VAL;
+							}
+
+
+							if (outConf.strOpt(Config::STR_NONE_ALIAS, tmpptr)) {
+								utils::warning("Detected redefinition of the none alias option. Continuing with value '%s'",true, tmpptr);
+							}
+
+							break;
+
+						// case OPT_JUST_GRD:
+						// 		// Just call the grounder program, no others.
+						// 		if (outConf.setOnlyRun(Config::TC_GROUNDER)) {
+						// 			utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+						// 		}
+						// 		break;
+
+						case OPT_JUST_PRE:
+							// Just call the preprocessor program, no others.
+							if (outConf.setOnlyRun(Config::TC_PREPROC)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_JUST_POST:
+							// Just call the postprocessor program, no others.
+							if (outConf.setOnlyRun(Config::TC_POSTPROC)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_JUST_SO:
+							// Just call the solver program, no others.
+							if (outConf.setOnlyRun(Config::TC_SOLVER)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_JUST_TRANS:
+							// Just call the translator program, no others.
+							if (outConf.setOnlyRun(Config::TC_TRANSLATOR)) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+
+						case OPT_LANG:
+							Config::Language l;
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (!outConf.parseLang(tmpptr, l)) {
+								utils::error("'%s' is not a supported language specification.", 0, true, tmpptr);
+								return OPT_STAT_BAD_ARG;
+							}
+							if (outConf.lang(l)) {
+								utils::warning("Detected a redefition of the input language.",true,tmpptr);
+							}
+							break;
+
+						case OPT_MAXSTEP:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (!tmpptr) {
+							
+									utils::error("Expected a maximum step following option '%s'. Exiting.",true,0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+							}
+							
+
+							if ((steps = Config::parseMaxstep(tmpptr)).second == Config::UNDEFINED) {
+								utils::error("'%s' is not a valid step value. Exiting.",true,0, tmpptr);
+								return OPT_STAT_BAD_ARG;
+							} else if (outConf.intConfigOpt(Config::OPT_MAXSTEP, steps.second)
+									|| (steps.first != Config::UNDEFINED && outConf.intConfigOpt(Config::OPT_MINSTEP, steps.first)))
+							{
+								utils::warning("Detected a redefinition of the maximum step. Continuing with the value '%s'.",true,tmpptr);
+							}
+							break;
+
+
+						case OPT_MINSTEP:
+
+							tmpptr = key.second.get_value<std::string>().c_str();
+							if (!tmpptr) {
+
+								utils::error("Expected a minimum step following option '%s'. Exiting.",true,0,key.first.c_str());
+								return OPT_STAT_BAD_ARG;
+							}
+
+					
+							if (!utils::from_string(tmpInt, tmpptr)) {
+								utils::error("'%s' is not a valid step value. Exiting.",true,0, tmpptr);
+								return OPT_STAT_BAD_ARG;
+							} else if (outConf.intConfigOpt(Config::OPT_MINSTEP, tmpInt)) {
+								utils::warning("Detected a redefinition of the minimum step. Continuing with value '%s'.",true,tmpptr);
+							}
+
+							break;
+						case OPT_NO_DOMAIN_ENFORCE:
+							outConf.boolConfigOpt(Config::OPT_NO_DOMAIN_ENFORCE, true);
+							break;
+						case OPT_NO_ADD_DOMAIN_ENFORCE:
+							outConf.boolConfigOpt(Config::OPT_NO_ADD_DOMAIN_ENFORCE, true);
+							break;
+
+						case OPT_MODE_SELECT:
+							tmpBool = false;
+
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (!strcmp(tmpptr,ARG_MODE_STATIC_MANUAL)) {
+								mode = Config::MODE_STATIC_MANUAL;
+							} else if (!strcmp(tmpptr,ARG_MODE_STATIC_AUTO)) {
+								mode = Config::MODE_STATIC_AUTO;
+							} else if (!strcmp(tmpptr,ARG_MODE_INCREMENTAL)) {
+								mode = Config::MODE_INCREMENTAL;
+							} else if (!strcmp(tmpptr,ARG_MODE_REACTIVE)) {
+								mode = Config::MODE_INCREMENTAL;
+							} else {
+								utils::error("Unexpected value '%s'. Expected a mode option (one of '%s', '%s', '%s', or '%s'). Exiting.",true,0,
+										tmpptr, ARG_MODE_STATIC_AUTO, ARG_MODE_STATIC_MANUAL, ARG_MODE_INCREMENTAL, OPT_MODE_REACTIVE);
+								return OPT_STAT_BAD_ARG;
+							}
+
+							if (outConf.mode(mode)) {
+								utils::warning("Detected a redefinition of the program's running mode. Continuing with value '%s'.", true, tmpptr);
+							}
+
+							break;
+						
+						case OPT_MODE_STATIC_AUTO:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (outConf.mode(Config::MODE_STATIC_AUTO)) {
+								utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'static-auto'.", true);
+							}
+							break;
+						
+						case OPT_MODE_STATIC_MANUAL:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (outConf.mode(Config::MODE_STATIC_MANUAL)) {
+								utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'static-manual'.", true);
+							}
+							break;
+						
+						case OPT_MODE_INCREMENTAL:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (outConf.mode(Config::MODE_INCREMENTAL)) {
+								utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'incremental'", true);
+							}
+							break;
+						
+						case OPT_MODE_REACTIVE:
+							tmpptr = key.second.get_value<std::string>().c_str();	
+							if (outConf.mode(Config::MODE_REACTIVE)) {
+								utils::warning("Detected a redefinition of the program's running mode. Continuing with value 'reactive'.", true);
+							}
+							break;
+
+						case OPT_NO_DEL:
+							tmpBool = false;
+							utils::warning("The option '%s' has been deprecated in favor of the '--[PROG]-output=[OUTFILE] option.", true,key.second.get_value<std::string>().c_str());
+
+							tmpBool = outConf.output(Config::TC_TRANSLATOR, DEF_INT_TRANS_FILE) 
+									|/* non-shortcutting bitwise or */ outConf.output(Config::TC_PREPROC, DEF_INT_PREPROC_FILE)
+
+									| outConf.output(Config::TC_SOLVER, DEF_INT_SO_FILE);
+
+							// Shut off deleting intermediate files.
+							if (tmpBool) {
+								utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							}
+							break;
+
+						case OPT_SHIFT:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// default true
+									tmpptr = "true";
+								}
+								
+								bool val;
+								if (!strcmp(tmpptr, "true")) {
+									val = true;
+								} else if (!strcmp(tmpptr, "false")) {
+									val = false;
+								} else {
+									utils::error("Invalid shift value. Expected a Boolean value ('true' or 'false'). Exiting.", true, 0, key.second.get_value<std::string>().c_str());
+									return OPT_STAT_BAD_ARG;
+								}
+
+								if (outConf.boolConfigOpt(Config::OPT_SHIFT, val)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+
+								break;
+
+							case OPT_STATS:
+								// Don't include standard files in the final product.
+								if (outConf.boolConfigOpt(Config::OPT_STATS, true)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+
+								break;
+
+							case OPT_PORT_EXTERNAL:
+								// Set the external port to use in reactive mode
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									utils::error("Expected a port number following option '%s'. Exiting.",true,0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+
+								if (!utils::from_string(tmpInt, tmpptr) || tmpInt < 1) {
+									utils::error("'%s' is not a valid port. Exiting.",true,0, tmpptr);
+									return OPT_STAT_BAD_ARG;
+								} else if (outConf.intConfigOpt(Config::OPT_EXT_PORT, tmpInt)) {
+									utils::warning("Detected a redefinition of the external port. Continuing with value '%s'.",true,tmpptr);
+								}
+
+								break;
+							case OPT_PORT_INTERNAL:
+								// Set the internal port to use in reactive mode
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+					
+										utils::error("Expected a port number following option '%s'. Exiting.",true,0, key.first.c_str());
+										return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (!utils::from_string(tmpInt, tmpptr) || tmpInt < 1) {
+									utils::error("'%s' is not a valid port. Exiting.",true,0, tmpptr);
+									return OPT_STAT_BAD_ARG;
+								} else if (outConf.intConfigOpt(Config::OPT_INT_PORT, tmpInt)) {
+									utils::warning("Detected a redefinition of the internal port. Continuing with value '%s'.",true,tmpptr);
+								}
+
+								break;
+
+							case OPT_POSTPROC:
+								// They're giving us a specific executable to use as the post-processor instead of the default.
+								// Make sure a second argument follows, and save the new post-processor.
+								tmpptr = key.second.get_value<std::string>().c_str();
+
+								if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (outConf.command(Config::TC_POSTPROC, tmpptr)) {
+									utils::warning("Detected redefinition of post-processor command. Continuing with value '%s'.",true,tmpptr);
+								}
+						
+								break;
+							case OPT_POSTPROC_OPTS:
+
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+
+									// setup for options but they didn't deliver
+									utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+
+								if (outConf.opts(Config::TC_POSTPROC, tmpptr)) {
+									utils::warning("Detected redefinition of post-processor command options. Continuing with value '%s'",true,tmpptr);
+								}
+
+								break;
+
+							case OPT_POSTPROC_OUT:
+
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (outConf.output(Config::TC_POSTPROC, tmpptr)) {
+									utils::warning("Detected redefinition of the post-processor output file. Continuing with value '%s'",true, tmpptr);
+								}
+								break;
+
+							case OPT_PREPROC:
+								// They're giving us a specific executable to use as the pre-processor instead of the default.
+								// Make sure a second argument follows, and save the new pre-processor.
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+								
+								}
+
+								if (outConf.command(Config::TC_PREPROC, tmpptr)) {
+									utils::warning("Detected redefinition of pre-processor command. Continuing with value '%s'",true,tmpptr);
+								}
+								break;
+
+							case OPT_PREPROC_OPTS:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									
+									// setup for options but they didn't deliver
+									utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0,key.first.c_str() );
+									return OPT_STAT_BAD_ARG;
+								}
+
+
+								if (outConf.opts(Config::TC_PREPROC, tmpptr)) {
+									utils::warning("Detected redefinition of pre-processor command options. Continuing with value '%s'",true,tmpptr);
+								}
+
+								break;
+							case OPT_PREPROC_OUT:
+
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (outConf.output(Config::TC_PREPROC, tmpptr)) {
+									utils::warning("Detected redefinition of the pre-processor output file. Continuing with value '%s'",true, tmpptr);
+								}
+								break;
+
+							case OPT_SO:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								// They're giving us a specific executable to use as the solver instead of the default.
+								// Make sure a second argument follows, and save the new solver.
+								if (!tmpptr) {
+										// setup for a command but they didn't deliver.
+										utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+										return OPT_STAT_BAD_ARG;
+								}
+
+								if (outConf.command(Config::TC_SOLVER, tmpptr)) {
+									utils::warning("Detected redefinition of solver command. Continuing with value '%s'",true,tmpptr);
+								}
+								break;
+
+							case OPT_SO_OPTS:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// setup for options but they didn't deliver
+									utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+								}
+
+
+								if (outConf.opts(Config::TC_SOLVER, tmpptr)) {
+									utils::warning("Detected redefinition of solver command options. Continuing with value '%s'",true, tmpptr);
+								}
+
+								break;
+
+							case OPT_SO_OUT:
+								tmpptr = key.second.get_value<std::string>().c_str();
+
+								if (!tmpptr) {
+									
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (outConf.output(Config::TC_SOLVER, tmpptr)) {
+									utils::warning("Detected redefinition of the solver output file. Continuing with value '%s'",true, tmpptr);
+								}
+								break;
+
+							case OPT_SYMTAB:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									
+									utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+								}
+
+								if (outConf.strOpt(Config::STR_SYMTAB_FILE, tmpptr)) {
+									utils::warning("Detected redefinition of the symbol table file. Continuing with value '%s'",true, tmpptr);
+								}
+								break;
+
+
+							case OPT_TO_BRIDGE:
+								if (outConf.setRunTo(Config::TC_REACTIVE_BRIDGE)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+								break;
+
+							// case OPT_TO_GRD:
+							// 	// Shut off deleting intermediate files.
+							// 	if (outConf.setRunTo(Config::TC_GROUNDER)) {
+							// 		utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+							// 	}
+							// 	break;
+
+							case OPT_TO_PRE:
+								// Run everything up to the pre-processor.
+								if (outConf.setRunTo(Config::TC_PREPROC)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+								break;
+
+							case OPT_TO_POST:
+								// Run everything up to the post-processor...
+								if (outConf.setRunTo(Config::TC_POSTPROC)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+								break;
+
+							case OPT_TO_SO:
+								// Run everything up to the solver...
+								if (outConf.setRunTo(Config::TC_SOLVER)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+								break;
+
+							case OPT_TO_TRANS:
+								// Run everything up to the translator...
+								if (outConf.setRunTo(Config::TC_TRANSLATOR)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,key.second.get_value<std::string>().c_str());
+								}
+								break;
+							case OPT_TRANS:
+								// They're giving us a specific executable to use as the translator instead of the default.
+								// Make sure a second argument follows, and save the new grounder.
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a command following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+
+								if (outConf.command(Config::TC_TRANSLATOR, tmpptr)) {
+									utils::warning("Detected redefinition of translator command. Continuing with value '%s'.",true,tmpptr);
+								}
+
+								break;
+
+							case OPT_TRANS_OPTS:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// setup for options but they didn't deliver
+									utils::error("Expected pass-through options following the option '%s'. Exiting.", true, 0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+
+								if (outConf.opts(Config::TC_TRANSLATOR, tmpptr)) {
+									utils::warning("Detected redefinition of translator command options. Continuing with value '%s'.",true,tmpptr);
+								}
+
+								break;
+							case OPT_TRANS_OUT:
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									// setup for a command but they didn't deliver.
+									utils::error("Expected a file name following option '%s'. Exiting.",true,0,key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+
+								if (outConf.output(Config::TC_TRANSLATOR, tmpptr)) {
+									utils::warning("Detected redefinition of the translator output file. Continuing with value '%s'",true, tmpptr);
+								}
+								break;
+
+							case OPT_VERSION:
+								return OPT_STAT_VERSION;
+
+							case OPT_HELP:
+								return OPT_STAT_HELP;
+
+							case OPT_QUERY:
+								tmpBool = false;
+								tmpptr = key.second.get_value<std::string>().c_str();
+								if (!tmpptr) {
+									tmpBool = true;
+									utils::error("Expected a query identifier following option '%s'. Exiting.",true,0, key.first.c_str());
+									return OPT_STAT_BAD_ARG;
+									
+								}
+								if (outConf.strOpt(Config::STR_QUERY, tmpptr)) {
+									utils::warning("The option '%s' has overridden one or more previous choices.",true,(tmpBool) ? key.first.c_str() : key.second.get_value<std::string>().c_str());
+								}
+								break;
+
+							case OPT_UNSUPPORTED:
+								// Whatever this is, it's unsupported.
+								utils::warning("The '%s' option is no longer supported. It will be ignored.",true,key.second.get_value<std::string>().c_str());
+								break;
+							case OPT_UNSUPPORTED_NO_STD:
+								// they want us to not include the standard file...
+								// we don't use a standard file anymore.
+								utils::warning("The '%s' option is no longer supported as standard files are no longer used.", true, key.second.get_value<std::string>().c_str());
+								break;
+
+							case OPT_UNSUPPORTED_ADDITIVE:
+								// They want us to include the additive standard file...
+								utils::warning("The '%s' option is no longer supported as standard files are no longer used.",true,key.second.get_value<std::string>().c_str());
+								break;
+
+							case OPT_UNSUPPORTED_GRSO:
+								// They did something involving the explicit grounder/solver
+								// We no longer support the explicit grounder/solver calls
+								utils::error("The '%s' option is no longer supported. We no longer use a dedicated grounder/solver in the toolchain. Please make use of the solver component instead.",true,0,key.second.get_value<std::string>().c_str());
+
+								// We probably aren't going to do what they want, go ahead and signal that something went wrong
+								return OPT_STAT_BAD_ARG;
+
+							case OPT_UNSUPPORTED_MANUAL_MAXSTEP:
+								// Manually advance the maximum step of the program query
+								utils::error("The '%s' option is no longer supported. Please use that '--mode=static-manual' option instead.",true,0,key.second.get_value<std::string>().c_str());
+								break;
+
+							case OPT_UNKNOWN:
+								utils::debug("The option isn't a recognized flag. Checking other possibilities.", true);
+								if (key.second.get_value<std::string>().c_str()[0] == '-')
+								{
+									// It appears to be a bad argument...
+									utils::error("Found an unrecognized argument '%s'. Exiting.",true,0,key.second.get_value<std::string>().c_str());
+									return OPT_STAT_BAD_ARG;
+								}
+
+								// If there's no "header" on the argument, it's either a constant declaration, an input file, or the number of solutions.
+								else if(!strcmp(key.second.get_value<std::string>().c_str(), "all") || !strcmp(key.second.get_value<std::string>().c_str(), "ALL")) {
+									if (outConf.intConfigOpt(Config::OPT_NUM_SOLN, 0)) {
+										utils::warning("Detected the redefinition of the number of solutions. Continuing with '%s'.",true,key.second.get_value<std::string>().c_str());
+									}
+								}
+								else if(utils::isInteger(key.second.get_value<std::string>().c_str()))
+								{	// It looks like a number, atoi it and save that as the desired number of solutions.
+									int numSolutions = atoi(key.second.get_value<std::string>().c_str());
+									if(numSolutions < 0) {
+										utils::warning("The number of solutions cannot be negative. Ignoring the argument.",true);
+									} else {
+										if (outConf.intConfigOpt(Config::OPT_NUM_SOLN, (unsigned int)numSolutions)) {
+											utils::warning("Detected the redefinition of the number of solutions. Continuing with '%s'.",true,key.second.get_value<std::string>().c_str());
+										}
+									}
+								}
+								else if((tmpptr = strchr(key.second.get_value<std::string>().c_str(),'=')) != NULL)
+								{   // Found an equals sign in the argument, it's probably a "const=value" declaration.
+									tmpoffset = (size_t)(tmpptr - key.second.get_value<std::string>().c_str());
+
+									// Get the constant name/value
+									std::string name = std::string(key.second.get_value<std::string>().c_str(), tmpoffset);
+									std::string value = std::string(&(key.second.get_value<std::string>().c_str()[tmpoffset+1]));
+
+									utils::debug("Parsed constant declaration name='%s', value='%s'",true, name.c_str(), value.c_str());
+
+									if (outConf.def(name,value)) {
+										utils::warning("Detected redefinition of constant '%s'. Continuing with value '%s'",true,name.c_str(),value.c_str());
+									}
+								}
+								else
+								{	// If it's not a number, it's probably an input file. Make sure it exists, and then save it to the list.
+
+									if(realpath(key.second.get_value<std::string>().c_str(), tmpPath) == NULL)
+									{
+										// Couldn't find the input file...
+										utils::error("Unable to locate input file '%s'. Exiting.",true,0,key.second.get_value<std::string>().c_str());
+										return OPT_STAT_BAD_ARG;
+									}
+									else
+									{
+										// Save all of the input files until we are done and can handle them...
+										rawInputList.push_back(key.second.get_value<std::string>().c_str());
+									}
+								}
+								break;
+
+
+
+					}
+				}
+			}
+		}
+
+
+		utils::debug("Handling input files...", true);
+		if (!rawInputList.size()) {
+			//uh-oh. They didn't specify any input files. This simply won't do.
+			utils::error("One or more input files must be specified.",true,0);
+			return OPT_STAT_BAD_ARG;
+		}
+
+		// They've insisted on sticking with a given mode. Make sure they're aware if they're using an incompatible
+		for (std::list<char const*>::iterator it = rawInputList.begin(); it != rawInputList.end(); it++) {
+			Config::FileType type = outConf.addInput(*it);
+			if (outConf.customMode() && type.known && !(type.runningMode & outConf.mode())) {
+				utils::warning("The file '%s' doesn't appear to be compatible with the current running mode.",true,*it);
+			}
+		}
+	}
+
+	catch(const btree::ptree_error &e){
+        std::cout << e.what() << std::endl;
+        return OPT_STAT_BAD_ARG;
+    }
+
+    return OPT_STAT_OK;
+
+    
+
+}
+
+/**
+ * Shows the help dialog.
+ * @param execName - The name of the executable we are running.
+ * @param out - The output stream to send the help message to.
+ * @return out.
+ */
+std::ostream& showHelp(std::string const& execName, std::ostream& out) {
+	out   << "Usage: " << execName << " <INPUT_FILES> [<OPTIONS>] [<CONSTANTS>] [<NUM_SOLUTIONS>]" << std::endl
+		  << std::endl
+		  << "Calls cplus2asp.bin (translator), f2lp (pre-processor), gringo (grounder)," << std::endl
+		  << "clasp (solver), and as2transition (post-processor) on the input files" << std::endl
+		  << "(CCalc-style files that have been translated to ASP/f2lp syntax), adding " << std::endl
+		  << "\"standard\" CCalc to ASP translation support files and outputting the results " << std::endl
+		  << "from as2transition." << std::endl
+		  << std::endl
+		  << "  <INPUT_FILES> --------- A series of files in CCalc, ASP, or f2lp syntax." << std::endl
+		  << "                          At least one input file is required." << std::endl
+		  << "                          Any input files that have extensions \".f2lp\" or \".lp\"" << std::endl
+		  << "                          will automatically not be passed to the translator." << std::endl
+		  << std::endl
+		  << "  <OPTIONS> ------------- Optional arguments that change the program's behavior." << std::endl
+		  << std::endl
+		  << "  <CONSTANTS> ----------- Constant definitions that are passed to the grounder." << std::endl
+		  << "                          There are three special constants that are often seen in" << std::endl
+		  << "                          CCalc programs, and so can be useful to manually set." << std::endl
+		  << "                          These are not required to be defined if special \"hint\"" << std::endl
+		  << "                          comments are placed in the output from the translator." << std::endl
+		  << "                          * maxAdditive - The maximum additive integer (only needed if" << std::endl
+		  << "                                          using additive fluents/actions)." << std::endl
+		  << "                          * maxstep ----- The maximum time step to consider." << std::endl
+		  << "                          * minstep ----- The minimum time step to consider." << std::endl
+		  << "                          * query   ----- The query number (i.e., label) to select." << std::endl
+		  << std::endl
+		  << "  <NUM_SOLUTIONS> ------- The desired number of solutions for the solver to find, or 'all'." << std::endl
+		  << "                          This should be a non-negative integer (0 or greater)." << std::endl
+		  << "                          If not specified, defaults to 1." << std::endl
+		  << std::endl
+		  << "Normal Program Options:" << std::endl
+		  << "  -auto" << std::endl
+		  << "  --automated ----------- Makes the program run in automated mode, so it won't prompt" << std::endl
+		  << "                          or ask for any information from the user." << std::endl
+		  << std::endl
+		  << "  <CONST>=<VALUE>, -c <CONST>=<VALUE>" << std::endl
+		  << "  --const <CONST>=<VALUE> Declares a constant & value pair to pass to gringo." << std::endl
+		  << "                          You will probably need to at least declare values for" << std::endl
+		  << "                          the constants maxstep, query, and possibly maxAdditive." << std::endl
+		  << std::endl
+		  << "  --help ---------------- Shows this usage message." << std::endl
+		  << "  -v" << std::endl
+		  << "  --version ------------- Outputs version information." << std::endl
+		  << std::endl
+		  << "  -m <MODE, -m=<MODE>, --mode <MODE>" << std::endl
+		  << "  --mode=<MODE> --------- Sets the program to run in the specified running mode." << std::endl
+		  << "                          <MODE> can be one of the following: " << std::endl
+		  << "                          * static-auto --- uses a static translation and automatically " << std::endl
+		  << "                                            advances the queries maximum time step." << std::endl
+		  << "                          * static-manual - uses a static translation and queries the " << std::endl
+		  << "                                            user each time a solution isn't found for a " << std::endl
+		  << "                                            new time step." << std::endl
+		  << "                          * incremental --- [default] uses an incremental translation " << std::endl
+		  << "                                            and solver for better efficiency while " << std::endl
+		  << "                                            ranging over maxsteps in a query." << std::endl
+		  << "                          * reactive ------ uses a incremental translation and reactive " << std::endl
+		  << "                                            solver in order to dynamically adding abnormality " << std::endl
+		  << "                                            constants during execution."  << std::endl
+		  << std::endl
+		  << " -q <QUERY>, -q=<QUERY>, --query <QUERY>, query=<QUERY>"  << std::endl
+		  << " --query=<QUERY> -------- Sets the query to use from those available in the C+ domain. " << std::endl
+		  << "                          <QUERY> should be a positive integer and should be defined in " << std::endl
+		  << "                          the domain file." << std::endl
+		  << std::endl
+		  << " -max <STEP>, -max=<STEP>, --maxstep <STEP>, maxstep=<STEP>" << std::endl
+		  << " --maxstep=<STEP> ------- Sets the maximum step to solve for to <STEP>. <STEP> must be a " << std::endl
+		  << "                          positive integer or a finite positive range (i.e. '1..5')." << std::endl
+		  << "                          A range is seen as shorthand for a combined minimum and maximum " << std::endl
+		  << "                          step definition." << std::endl
+		  << std::endl
+		  << " -min <STEP>, -min=<STEP>, --minstep <STEP>, minstep=<STEP>" << std::endl
+		  << " --minstep=<STEP> ------- Sets the minimum step to solve for to <STEP>. <STEP> must be a " << std::endl
+		  << "                          positive integer." << std::endl
+		  << std::endl
+		  << " -nd, --no-domain ------- Suppresses the generation of domain-enforcing rules for each " << std::endl
+		  << "                          non-additive constant." << std::endl
+		  << std::endl
+		  << " -nad, " << std::endl
+		  << " --no-additive-domain --- Suppresses the generation of domain-enforcing rules for each " << std::endl
+		  << "                          additive constants." << std::endl
+		  << std::endl
+
+// TODO: Uncomment this when we have the reactive bridge complete w/ remote program support.
+#ifndef NO_REACTIVE_BRIDGE
+#if 0
+		  << " -p <PORT]" << std::endl
+		  << " --port [PORT] ---------- Sets the port used to connect with external client programs instead " << std::endl
+		  << "                          of using the console to gather online input. This option is only " << std::endl
+		  << "                          valid in reactive mode." << std::endl
+#endif
+		  << " -i <PORT>, -i=<PORT>, --internal-port <PORT>" << std::endl
+		  << " --internal-port=<PORT> - Sets the port used for internal communication between the " << std::endl
+		  << "                          reactive solver and bridge. This option is only valid in " << std::endl
+		  << "                          reactive mode." << std::endl
+#else
+		  << " -p <PORT>, -p=<PORT>, --port <PORT>" << std::endl
+		  << " --port=<PORT> ---------- Sets the port used to connect with external client programs." << std::endl
+#endif
+		  << std::endl
+		  << " -na[=<VALUE>]" << std::endl
+		  << " --none-alias[=<VALUE>]   Indicates that we should simulate 'none' with <VALUE> [default: '" << DEF_NONE_HACK_VAL << "']" << std::endl
+		  << "                          This is helpful for circumventing a bug in Gringo 3.0.4 that " << std::endl
+		  << "                          sometimes prevents domains from properly grounding due to " << std::endl
+		  << "                          unification issues." << std::endl
+		  << std::endl
+		  << " -s[=<BOOLEAN>]" << std::endl
+		  << " --shift[=<BOOLEAN>] ---- Sets whether to allow the solver to shift disjunction in the head of a rule " << std::endl
+		  << "                          generated by the pre-processor into the body. This is useful when " << std::endl
+		  << "                          the preprocessor generate disjunctive rules and a disjunctive " << std::endl
+		  << "                          solver isn't available. May not be guaranteed to preserve stable " << std::endl
+		  << "                          models." << std::endl
+		  << std::endl
+		  << " --stats ---------------- Indicates additional solving statistics should be requested from" << std::endl
+		  << "                          the solver and displayed after each solver run." << std::endl
+		  << std::endl
+		  << " --language=<LANG> ------ Sets the input language that will be accepted for translation/running." << std::endl
+		  << "                          <LANG> can be one of the following:" << std::endl
+		  << "                          * c+, C+ ---------- [default] The action language C+." << std::endl
+ 		  << "                          * bc, BC ---------- The action language BC." << std::endl
+		  << "                          * bc+, BC+ -------- An experimental extension to language BC." << std::endl
+		  << "                          * mvpf, MVPF ------ Multi-valued propositional formulas." << std::endl
+		  << std::endl
+		  << "Extra Program Options:" << std::endl
+		  << "  Options with <PROG> or <PROGRAM> in their name affect individual" << std::endl
+		  << "  programs in the tool chain, depending on <PROG> or <PROGRAM>'s value." << std::endl
+		  << "  Any option with <PROG> in its name should have <PROG> replaced with one of:" << std::endl
+		  << "    gr (grounder), pre (pre-processor), post (post-processor), so (solver)," << std::endl
+		  << "    trans (translator), or br (reactive bridge)." << std::endl
+		  << "  Replace <PROGRAM> in the applicable options with one of the following:" << std::endl
+		  << "    grounder, pre-processor, post-processor, solver, translator, or bridge." << std::endl
+		  << std::endl
+		  << "  -<PROG> <PATH>, -<PROG>=<PATH>, --<PROGRAM> <PATH> " << std::endl
+		  << "  --<PROGRAM>=<PATH> ------ Gives a new path to the desired tool chain program." << std::endl
+		  << std::endl
+		  << "  -<PROG>opt <OPTS>, -<PROG>opt=<OPTS>, --<PROGRAM>-opts <OPTS>" << std::endl
+		  << "  --<PROGRAM>-opts=<OPTS> -- Passes <OPTS> to the given tool chain program." << std::endl
+		  << std::endl
+		  << "  -<PROG>out <FILE>, -<PROG>out=<FILE>, --<PROGRAM>-output <FILE>" << std::endl
+		  << "  --[PROGRAM]-output=<FILE> Write the output of the specified tool to <FILE>." << std::endl
+		  << std::endl
+		  << "  -from<PROG> " << std::endl
+		  << "  --from-<PROGRAM> -------- Starts running the tool chain from the given program." << std::endl
+		  << std::endl
+		  << "  -just<PROG>" << std::endl
+		  << "  --just-<PROGRAM> -------- Removes all but the given program from the tool chain." << std::endl
+		  << std::endl
+		  << "  -to<PROG>" << std::endl
+		  << "  --to-<PROGRAM> ---------- Stops running the tool chain after the given program." << std::endl
+		  << std::endl
+		  << " -symtab <FILE>, -symtab=<FILE>, --symbol-table=<FILE> " << std::endl
+		  << " --symbol-table=<FILE> -- Writes the program's symbol table to <FILE> for use in other programs." << std::endl
+		  << std::endl
+		  << "  Example: " << execName << " myProgram.cp" << std::endl
+		  << "           would translate and process the file \"myProgram.cp\"," << std::endl
+		  << "           interactively asking which query from the file to run, returning" << std::endl
+		  << "           the first solution found (if any)." << std::endl
+		  << "  Example: " << execName << " myProgram.cp query=1 2" << std::endl
+		  << "           does the same as above, except it automatically runs Query 1" << std::endl
+		  << "           (assuming it can find or derive maxstep), and tries to find two" << std::endl
+		  << "           solutions to the query." << std::endl
+		  << "  Example: " << execName << " myProgram.cp query=1 maxstep=3 -so cmodels 2" << std::endl
+		  << "           would do the same as above, but it changes the solver to cmodels" << std::endl
+		  << "           and forces maxstep to be 3." << std::endl
+		  << "  Example: " << execName << " myProgram.f2lp --just-pre-processor" << std::endl
+		  << "           skips running the translator because the input file has" << std::endl
+		  << "           the .f2lp extension, just running f2lp (the pre-processor)" << std::endl
+		  << "           on the contents of \"myProgram.f2lp\", outputting the results." << std::endl;
+	return out;
+}
+
+/**
+ * Shows the version dialog.
+ * @param execName - The name of the executable we are running.
+ * @param out - The output stream to send the help message to.
+ * @return out.
+ */
+std::ostream& showVersion(std::string const& execName, std::ostream& out) {
+	// Show version information and quit.
+	out << execName << " version " << VERSION_MAJOR;
+	out << "." << VERSION_MINOR;
+	if(VERSION_REV > 0) { out << "." << VERSION_REV; }
+	out << std::endl;
+	return out;
+}
+
+
+
+
+// [interactive] Queries the user to select an appropriate query number (and optional solution count) among the defined queries.
+bool queryUserForQuery(Config const& config, Config::RunConfig& runconfig, bool first)
+{
+	std::string line, value;
+	Config::Query const* query;
+	Interpreter::Action action;
+	bool goodInput = false;
+	std::pair<unsigned int, unsigned int> steps;
+
+
+	if (first) {
+		showQueries(config, std::cout);
+		std::cout << std::endl;
+		Interpreter::showHelp(std::cout);
+	}
+
+	while (!goodInput) {
+
+		// Get user input
+		goodInput = true;
+		query = NULL;
+
+		do {
+			std::cout << "$- ";
+			std::getline(std::cin,line);
+
+			if (std::cin.eof()) {
+				// gracefully handle ctrl-d
+				return false;
+			}
+
+
+			// Interpret the command.
+			action = Interpreter::interpret(line, value);
+			switch (action) {
+			case Interpreter::SHOW_QUERIES:
+				showQueries(config, std::cout);
+				break;
+			case Interpreter::SHOW_CONFIG:
+				showConfig(config, runconfig, std::cout);
+				break;
+			case Interpreter::SET_QUERY:
+
+				// Scan through the queries and try to find the one they (hopefully) selected.
+				for (Config::QueryMap::const_iterator it = config.beginQueries(); it != config.endQueries() && !query; it++) {
+					if (it->second.cmd == value) {
+						query = &(it->second);
+					}
+				}
+
+				// make sure we got a query...
+				if (!query) {
+					goodInput = false;
+					std::cout << "Invalid query selection.";
+				}
+
+				break;
+
+			case Interpreter::SET_NUMSOLN:
+				if (value == CONST_DEFAULT) runconfig.numSoln = Config::UNDEFINED;
+				else goodInput = utils::from_string(runconfig.numSoln, value);
+				break;
+
+			case Interpreter::SET_MAXSTEP:
+				if (value == CONST_DEFAULT) runconfig.maxstep = Config::UNDEFINED;
+				else {
+					steps = Config::parseMaxstep(value);
+					if (steps.second == Config::UNDEFINED) goodInput = false;
+					else {
+						if (steps.first != Config::UNDEFINED) runconfig.minstep = steps.first;
+						runconfig.maxstep = steps.second;
+	
+						if (runconfig.minstep == Config::UNDEFINED) {
+							std::cout << "Autosetting minstep to 0." << std::endl;
+							runconfig.minstep = 0;
+						}
+					}
+				}
+
+				break;
+
+			case Interpreter::SET_MINSTEP:
+				if (value == CONST_DEFAULT) runconfig.minstep = Config::UNDEFINED;
+				else goodInput = utils::from_string(runconfig.minstep, value);
+				break;
+		
+	
+			case Interpreter::SHOW_HELP:
+				Interpreter::showHelp(std::cout);
+				break;
+
+			case Interpreter::EXIT:
+				// signal the exit.
+				return false;
+			default:
+				// bad input
+				goodInput = false;
+				break;
+			}
+
+		} while ( goodInput && !query );
+
+		if (!goodInput) {
+			std::cout << "Error: Invalid choice.\n";
+			std::cout << "Type 'help' to list the available commands.\n";
+		}
+	} while (!goodInput && !query);
+
+	runconfig.query = query->cmd;
+	return true;
+}
+
+// Displays the queries which have been found.
+void showQueries(Config const& config, std::ostream& output) {
+
+	output << "The following queries are available to run:" << std::endl << std::endl;
+
+
+	for (Config::QueryMap::const_iterator it = config.beginQueries(); it != config.endQueries(); it++) {
+		output << '\t' << std::setw(15) << std::right << it->second.cmd << ": " << std::setw(20) << std::left << it->second.name;
+
+		if ((!config.customConfigOpt(Config::OPT_MINSTEP) && it->second.minstep != Config::UNDEFINED)
+				|| (!config.customConfigOpt(Config::OPT_MAXSTEP) && it->second.maxstep != Config::UNDEFINED) ) {
+			output << " [ ";
+	
+			if ((!config.customConfigOpt(Config::OPT_MINSTEP) && it->second.minstep != Config::UNDEFINED)) {
+				output << it->second.minstep;
+			} else {
+				output << "0";
+			}
+
+
+			if (it->second.maxstep == Config::UNDEFINED)
+				output << "...";
+			else if ((it->second.minstep == Config::UNDEFINED && it->second.maxstep != 0)
+					|| it->second.minstep != it->second.maxstep)
+				output << ".." << it->second.maxstep;
+
+			output << " ]";
+		}
+		output << std::endl;
+	}
+
+}
+
+// Displays the current run-time configuration for the system.
+void showConfig(Config const& config, Config::RunConfig const& runconfig, std::ostream& output) {
+	unsigned int tmp, tmp2;
+
+	// TODO: This REALLY needs to be cleaned up.
+
+	output << "Current configuration:\n\n";
+
+	// translation mode
+	output << "\t\t" << std::setw(30) << std::left << "Translation Mode:";
+
+	output << std::setw(20) << std::left;
+	switch (config.mode()) {
+	case Config::MODE_INCREMENTAL:
+		output << "Incremental";
+		break;
+
+	case Config::MODE_REACTIVE:
+		output << "Reactive";
+		break;
+
+	case Config::MODE_STATIC_AUTO:
+		output << "Static (auto)";
+		break;
+
+	case Config::MODE_STATIC_MANUAL:
+		output << "Static (manual)";
+		break;
+	default:
+		output << "Unknown";
+		break;
+	}
+ 	output << std::endl;
+
+	// number of solutions
+	tmp2 = (config.intConfigOpt(Config::OPT_NUM_SOLN) != Config::UNDEFINED) ? config.intConfigOpt(Config::OPT_NUM_SOLN) : 1;
+	tmp = (runconfig.numSoln != Config::UNDEFINED) ? runconfig.numSoln : tmp2;
+
+	output << "\t\t" << std::setw(30) << std::left << "Number of solutions:";
+
+	output << std::setw(20) << std::left;
+	if (tmp) output << tmp;
+	else output << "all";
+
+	output << "[default: ";
+ 	if (tmp2) output << tmp2;
+	else output << "all";
+	output << " ]\n";
+
+	// maximum soln step
+	tmp2 = config.intConfigOpt(Config::OPT_MAXSTEP);
+	tmp = (runconfig.maxstep != Config::UNDEFINED) ? runconfig.maxstep : tmp2;
+
+	output << "\t\t" << std::setw(30) << std::left << "Maximum solution step:";
+	
+	output << std::setw(20) << std::left;
+	if (tmp == Config::INF) output << CONST_MAXSTEP_INFINITE;
+	else if (tmp != Config::UNDEFINED) output << tmp;
+	else output << "query selected";
+	
+	output << "[default: ";
+	if (tmp2 == Config::INF) output << CONST_MAXSTEP_INFINITE;
+	else if (tmp2 != Config::UNDEFINED) output << tmp2;
+	else output << "query selected";
+	output << " ]\n";
+
+
+	// minimum soln step	
+	tmp2 = config.intConfigOpt(Config::OPT_MINSTEP);
+	tmp = (runconfig.minstep != Config::UNDEFINED) ? runconfig.minstep : tmp2;
+	
+	output << "\t\t" << std::setw(30) << std::left << "Minimum solution step:";
+	
+	output << std::setw(20) << std::left;
+	if (tmp != Config::UNDEFINED) output << tmp;
+	else output << "query selected";
+	
+	output << "[default: ";
+	if (tmp2 != Config::UNDEFINED) output << tmp2;
+	else output << "query selected";
+	output << " ]\n";
+	 
+}
+
+// Asks the user to select a max step.
+unsigned int queryUserForConstant(Config const& config, std::string const& constant, unsigned int defVal) {
+	unsigned int ret = Config::UNDEFINED;
+	std::string line;
+	bool goodInput = false;
+
+	while (!goodInput) {
+
+		// Prompt user input
+		std::cout << "Please select a (non-negative) value for the " << constant << ". You may input 'exit' to exit the program." << std::endl;
+		std::cout << "Selected value";
+		if (defVal != Config::UNDEFINED) std::cout << " [" << defVal << "]";
+		std::cout << ": ";
+
+
+
+		std::getline(std::cin,line);
+		line = utils::trimWhitespace(line);
+
+		// Make sure they don't want to exit.
+		if (line == EXIT_CMD) {
+			// crap, they do. returning UNDEFINED will indicate this.
+			goodInput = true;
+			ret = Config::UNDEFINED;
+		}
+		// Check if they want to go for a default value
+		else if (defVal != Config::UNDEFINED && line == "") {
+			ret = defVal;
+			goodInput = true;
+		}
+		// Check if they have provided any other valid input...
+		else if (utils::from_string(ret, line)) {
+			goodInput = true;
+		}
+
+		if (!goodInput) {
+			std::cout << "Error: Invalid selection." << std::endl;
+		}
+
+	}
+
+	return ret;
+}
+
+int runTool(Config const& config, Config::Toolchain tool, std::string const& name, Config::RunConfig const* subconfig) {
+	
+	int ret = TC_STAT_TOOLSKIPPED;
+	
+	if (!config.run(tool)) {
+		utils::debug("Skipping %s execution.", true, name.c_str());
+	} 
+	else if (!config.cumulativeInputCount(tool) && tool != Config::TC_REACTIVE_BRIDGE) {
+		utils::pragma("No input files for the %s have been specified. Skipping it.", true, name.c_str());
+	} 
+	else {
+	// Run the translator...
+	//		std::string tmpCmd = config.compileCommandLine(tool, subconfig);
+		std::list<std::string> arglist;
+		config.compileArgs(tool, arglist, subconfig);
+
+		std::vector<std::string> tempVec (arglist.size());
+		int i = 0;
+		for (std::list<std::string>::iterator it=arglist.begin(); it != arglist.end(); ++it)
+    		tempVec.at(i++) = *it;
+
+		utils::debug("Running the '%s' (program: '%s') with command: '%s'",true,name.c_str(), config.command(tool).c_str(), config.compileCommandLine(tool, subconfig).c_str());
+
+
+		bp::context ctx;
+		ctx.environment = bp::self::get_environment();
+		if (tool == Config::TC_REACTIVE_BRIDGE) {
+			ctx.stdin_behavior  = bp::inherit_stream();
+			ctx.stdout_behavior = bp::inherit_stream();
+			ctx.stderr_behavior = bp::inherit_stream();
+		} 
+		else if (config.mode() != Config::MODE_REACTIVE || tool != Config::TC_SOLVER) {
+			ctx.stdin_behavior  = bp::close_stream();
+			ctx.stdout_behavior = bp::capture_stream();
+			ctx.stderr_behavior = bp::capture_stream();
+		}
+		else {
+			ctx.stdin_behavior  = bp::inherit_stream();
+			ctx.stdout_behavior = bp::silence_stream();
+			ctx.stderr_behavior = bp::inherit_stream();
+
+		}
+		
+		
+		bp::child c = bp::launch(bp::find_executable_in_path(config.command(tool)), arglist, ctx);
+
+		if (tool == Config::TC_REACTIVE_BRIDGE) {
+			bp::status s = c.wait();
+			if (s.exited()) ret = s.exit_status();
+			else ret = TC_STAT_EXEC_ERR;
+		} 
+		else if (config.mode() != Config::MODE_REACTIVE || tool != Config::TC_SOLVER) {
+			
+			std::ofstream outstream(config.output(tool));
+			std::ofstream errstream(config.errFile());
+
+
+
+			if (!outstream.good()) {
+				if (config.customOut(tool))
+					utils::error("Unable to open '%s' for writing.", true, 0, config.output(tool).c_str());
+				else
+					utils::error("Unable to open temporary file '%s' for writing.", true, 0, config.output(tool).c_str());
+				return TC_STAT_IO_ERR;
+			}
+
+
+			if (!errstream.good()) {
+				utils::error("Unable to open temporary file '%s' for writing.", true, 0, config.errFile().c_str());
+				return TC_STAT_IO_ERR;
+			}
+
+
+			// write out data
+			copy(std::istreambuf_iterator<char>(c.get_stdout()), std::istreambuf_iterator<char>(),
+				std::ostreambuf_iterator<char>(outstream));
+			copy(std::istreambuf_iterator<char>(c.get_stderr()), std::istreambuf_iterator<char>(),
+				std::ostreambuf_iterator<char>(errstream));
+
+			bp::status s = c.wait();
+			if (s.exited()) ret = s.exit_status();
+			else ret = TC_STAT_EXEC_ERR;
+
+
+	/*					try {
+					int tmp = bp::wait_for_exit(c);
+					ret = BOOST_PROCESS_EXITSTATUS(tmp);
+				} catch (boost::system::system_error& e) {
+					utils::debug("Caught exception '%s'.", true, e.what());
+					ret = TC_STAT_EXEC_ERR;
+				} */
+
+			outstream.close();
+			errstream.close();
+
+
+		} 
+		else 
+			ret = TC_STAT_BG;
+}
+
+
+// TODO: Do I need to close the sink?
+
+
+
+utils::debug("Command exited with status '%d'.", true, ret);
+
+if (!processErrors(config, tool, config.errFile())) {
+	utils::warning("Could not read from the error stream file.", true);
+}
+
+//		int stat = system(tmpCmd.c_str());
+//		ret = WEXITSTATUS(stat);
+
+	return ret;
+}
+
+/**
+ * @brief Processes the provided error file applying any error filters and printing the rest.
+ * @param config The system configuration.
+ * @param tool The tool that generated the error file.
+ * @param file The error file.
+ * @return True if the file exists and was successfully opened, false otherwise.
+ */
+bool processErrors(Config const& config, Config::Toolchain tool, std::string const& file) {
+	std::ifstream in(file.c_str());
+	std::string line;
+	bool show, unificationError = false;
+
+	if (in.fail()) {
+		return false;
+	}
+
+	while (std::getline(in, line)) {
+		show = true;
+
+		switch (tool) {
+		case Config::TC_TRANSLATOR:
+			
+			break;
+		case Config::TC_PREPROC:
+
+			break;
+		// case Config::TC_GROUNDER:
+
+		// 	break;
+		case Config::TC_SOLVER:
+
+			// Filter the usual warnings.
+			if (line.find("never defined") != std::string::npos) {
+				if (
+					line.find("constant_sort/2") != std::string::npos
+					|| line.find("rigid/1") != std::string::npos
+					|| line.find("inertialFluent/1") != std::string::npos
+					|| line.find("abFluent/1") != std::string::npos
+					|| line.find("exogenousAction/1") != std::string::npos
+					|| line.find("abAction/1") != std::string::npos
+					|| line.find("attribute/1") != std::string::npos
+					|| line.find("additiveAction/1") != std::string::npos
+					|| line.find("staticAbnormality/1") != std::string::npos
+					|| line.find("dynamicAbnormality/1") != std::string::npos
+					|| line.find("action_attribute/2") != std::string::npos
+					|| line.find("staticAbnormality/1") != std::string::npos
+					|| line.find("noconcurrency/0") != std::string::npos
+					|| line.find("strong_noconcurrency/0") != std::string::npos
+					|| line.find("false/0") != std::string::npos
+					|| line.find("computed/1") != std::string::npos
+					)
+					show = false;
+			}
+			else if (line.find("convert") != std::string::npos
+					&& line.find("none") != std::string::npos) {
+				unificationError = true;
+
+			}
+
+			break;
+		case Config::TC_POSTPROC:
+
+			break;
+		case Config::TC_REACTIVE_BRIDGE:
+
+			break;
+		default:
+			break;
+		}
+
+		if (show) std::cerr << line << std::endl;
+	}
+
+	if (unificationError) {
+		utils::error("Detected an error that appears to be caused by a bug in Gringo 3.0.5 which prevents", true, 0);
+		utils::error("  certain programs from being grounded properly. Adding '--none-alias[=VALUE]' to", true, 0);
+		utils::error("  the command-line arguments may fix this problem.", true, 0); 
+	}
+
+	in.close();
+
+	return true;
+}
+
+
+#ifdef DEBUG
+
+void cleanup(Config config, bool const* ran, bfs::path selfpath){
+	utils::debug("Deleting appropriate temporary files.", true);
+	
+	if (config.boolConfigOpt(Config::OPT_DISCARD_F2LP)) {
+		// Discard F2LP intermediates...
+		if (ran[Config::TC_PREPROC]) {
+			bfs::copy_file(F2LP_INPUT_FILE,selfpath.remove_filename().string() + "F2LP_INPUT_FILE",bfs::copy_option::overwrite_if_exists);
+			bfs::copy_file(F2LP_OUTPUT_FILE,selfpath.remove_filename().string() + "F2LP_OUTPUT_FILE",bfs::copy_option::overwrite_if_exists);
+			bfs::remove(F2LP_INPUT_FILE);
+			bfs::remove(F2LP_OUTPUT_FILE);
+		}
+	}
+
+	bfs::remove(config.errFile());
+
+	for (int i = 0; i < (int)Config::_TC_LENGTH_; i++) {
+		if (!config.customOut((Config::Toolchain)i)) {
+			utils::debug("Deleting '%s'.", true, config.output((Config::Toolchain)i).c_str());
+			try{
+				bfs::copy_file(config.output((Config::Toolchain)i),selfpath.remove_filename().string() + config.getTextForEnum(i) + std::to_string(i),bfs::copy_option::overwrite_if_exists);
+			}
+			catch(const bfs::filesystem_error& ex){
+				std::cout<<ex.what()<<'\n';
+			}
+			bfs::remove(config.output((Config::Toolchain)i));	
+		}
+	}
+}
+
+
+#else
+
+void cleanup(Config const& config, bool const* ran) {
+	utils::debug("Deleting appropriate temporary files.", true);
+
+	if (config.boolConfigOpt(Config::OPT_DISCARD_F2LP)) {
+		// Discard F2LP intermediates...
+		if (ran[Config::TC_PREPROC]) {
+			// bfs::remove(F2LP_INPUT_FILE);
+			// bfs::remove(F2LP_OUTPUT_FILE);
+		}
+	}
+
+	bfs::remove(config.errFile());
+
+	for (int i = 0; i < (int)Config::_TC_LENGTH_; i++) {
+		if (!config.customOut((Config::Toolchain)i)) {
+			utils::debug("Deleting '%s'.", true, config.output((Config::Toolchain)i).c_str());
+			// bfs::remove(config.output((Config::Toolchain)i));	
+		}
+	}
+}
+
+#endif
+
+
+
+// Attempts to echo the specified file to the specified output stream.
+bool echoFile(std::ostream& out, std::string const& filename) {
+	std::ifstream file(filename.c_str());
+	char buf[4096];
+
+	if (file.fail()) {
+		return false;
+	}
+
+	while (!file.eof()) {
+		file.read(buf, 4096);
+		out.write(buf, file.gcount());
+	}
+
+	return true;
+}
+
+// Attempts to echo the solver stats from the specified file.
+bool echoStats(std::ostream& out, std::string const& filename) {
+	std::string tmp;
+	bool found = false;
+	
+
+	std::ifstream file(filename.c_str());
+
+	if (file.fail()) {
+		return false;
+	}
+
+	while (std::getline(file, tmp)) {
+		if (!strncmp("Models", tmp.c_str(), strlen("Models"))) {
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) return false;
+	do {
+		out << tmp << std::endl;
+	} while (std::getline(file, tmp));
+
+	return true;
+}
+

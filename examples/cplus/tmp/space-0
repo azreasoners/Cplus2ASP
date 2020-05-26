@@ -1,0 +1,73 @@
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '7'.
+% Pragma: Running Query 'Query '0''.
+% Pragma: Minimum Step = '1', Maximum Step = '1'.
+% Pragma: Searching for all solutions.
+Solution: 1
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=0 force(jet1,y)=2 force(jet1,z)=-2 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=0
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 2
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=2 force(jet1,z)=-2 force(jet2,x)=1 force(jet2,y)=2 force(jet2,z)=0
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 3
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=2 force(jet1,y)=2 force(jet1,z)=-2 force(jet2,x)=0 force(jet2,y)=2 force(jet2,z)=0
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 4
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=0 force(jet1,y)=2 force(jet1,z)=-1 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=-1
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 5
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=2 force(jet1,z)=-1 force(jet2,x)=1 force(jet2,y)=2 force(jet2,z)=-1
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 6
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=2 force(jet1,y)=2 force(jet1,z)=-1 force(jet2,x)=0 force(jet2,y)=2 force(jet2,z)=-1
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 7
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=0 force(jet1,y)=2 force(jet1,z)=0 force(jet2,x)=2 force(jet2,y)=2 force(jet2,z)=-2
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 8
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=1 force(jet1,y)=2 force(jet1,z)=0 force(jet2,x)=1 force(jet2,y)=2 force(jet2,z)=-2
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+Solution: 9
+	0:  pos(x)=-1 pos(y)=0 pos(z)=1 vel(x)=0 vel(y)=1 vel(z)=1
+
+	ACTIONS:  fire(jet1) fire(jet2) force(jet1,x)=2 force(jet1,y)=2 force(jet1,z)=0 force(jet2,x)=0 force(jet2,y)=2 force(jet2,z)=-2
+
+	1:  pos(x)=0 pos(y)=3 pos(z)=1 vel(x)=2 vel(y)=5 vel(z)=-1
+
+SATISFIABLE
+Models      : 9     
+Time        : 0.070
+Prepare   : 0.040
+Prepro.   : 0.030

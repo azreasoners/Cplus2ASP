@@ -1,0 +1,302 @@
+State 0:
+          start ::= * macro_lst EOF
+      (1) macro_lst ::= *
+          macro_lst ::= * macro_lst error
+          macro_lst ::= * macro_lst base_elem_pkgd
+          macro_lst ::= * macro_lst other
+          macro_lst ::= * macro_lst incl_stmt
+
+                         start accept
+                     macro_lst shift  1
+                     {default} reduce 1
+
+State 1:
+          start ::= macro_lst * EOF
+          macro_lst ::= macro_lst * error
+          macro_lst ::= macro_lst * base_elem_pkgd
+          macro_lst ::= macro_lst * other
+          macro_lst ::= macro_lst * incl_stmt
+          incl_stmt ::= * COLON_DASH INCLUDE incl_lst PERIOD
+          base_elem_pkgd ::= * IDENTIFIER
+          base_elem_pkgd ::= * IDENTIFIER PAREN_L arg_lst PAREN_R
+          other ::= * INTEGER
+          other ::= * PAREN_L
+          other ::= * PAREN_R
+          other ::= * COMMA
+          other ::= * COLON_DASH
+          other ::= * SEMICOLON
+          other ::= * STRING_LITERAL
+          other ::= * OTHER
+          other ::= * PERIOD
+
+                    IDENTIFIER shift  9
+                       INTEGER shift  23
+                       PAREN_L shift  22
+                       PAREN_R shift  21
+                         COMMA shift  20
+                    COLON_DASH shift  14
+                        PERIOD shift  16
+                     SEMICOLON shift  19
+                STRING_LITERAL shift  18
+                         OTHER shift  17
+                           EOF shift  15
+                         error shift  37
+                     incl_stmt shift  34
+                base_elem_pkgd shift  36
+                         other shift  35
+
+State 2:
+          incl_stmt ::= COLON_DASH INCLUDE * incl_lst PERIOD
+          incl_lst ::= * incl_lst_sc
+          incl_lst ::= * incl_lst_c
+          incl_lst_sc ::= * incl_item
+          incl_lst_sc ::= * incl_lst_sc SEMICOLON incl_item
+          incl_lst_c ::= * incl_item COMMA incl_item
+          incl_lst_c ::= * incl_lst_c COMMA incl_item
+          incl_item ::= * STRING_LITERAL
+          incl_item ::= * IDENTIFIER
+          incl_item ::= * INTEGER
+
+                    IDENTIFIER shift  30
+                       INTEGER shift  29
+                STRING_LITERAL shift  31
+                      incl_lst shift  13
+                   incl_lst_sc shift  12
+                    incl_lst_c shift  11
+                     incl_item shift  10
+
+State 3:
+          incl_lst_c ::= incl_item COMMA * incl_item
+          incl_item ::= * STRING_LITERAL
+          incl_item ::= * IDENTIFIER
+          incl_item ::= * INTEGER
+
+                    IDENTIFIER shift  30
+                       INTEGER shift  29
+                STRING_LITERAL shift  31
+                     incl_item shift  27
+
+State 4:
+          incl_lst_c ::= incl_lst_c COMMA * incl_item
+          incl_item ::= * STRING_LITERAL
+          incl_item ::= * IDENTIFIER
+          incl_item ::= * INTEGER
+
+                    IDENTIFIER shift  30
+                       INTEGER shift  29
+                STRING_LITERAL shift  31
+                     incl_item shift  28
+
+State 5:
+          incl_lst_sc ::= incl_lst_sc SEMICOLON * incl_item
+          incl_item ::= * STRING_LITERAL
+          incl_item ::= * IDENTIFIER
+          incl_item ::= * INTEGER
+
+                    IDENTIFIER shift  30
+                       INTEGER shift  29
+                STRING_LITERAL shift  31
+                     incl_item shift  32
+
+State 6:
+          base_elem_pkgd ::= IDENTIFIER PAREN_L * arg_lst PAREN_R
+          arg_lst ::= * ARG
+          arg_lst ::= * arg_lst COMMA ARG
+
+                           ARG shift  24
+                       arg_lst shift  7
+
+State 7:
+          base_elem_pkgd ::= IDENTIFIER PAREN_L arg_lst * PAREN_R
+          arg_lst ::= arg_lst * COMMA ARG
+
+                       PAREN_R shift  26
+                         COMMA shift  8
+
+State 8:
+          arg_lst ::= arg_lst COMMA * ARG
+
+                           ARG shift  25
+
+State 9:
+     (16) base_elem_pkgd ::= IDENTIFIER *
+          base_elem_pkgd ::= IDENTIFIER * PAREN_L arg_lst PAREN_R
+
+                       PAREN_L shift  6
+                     {default} reduce 16
+
+State 10:
+      (9) incl_lst_sc ::= incl_item *
+          incl_lst_c ::= incl_item * COMMA incl_item
+
+                         COMMA shift  3
+                     {default} reduce 9
+
+State 11:
+      (8) incl_lst ::= incl_lst_c *
+          incl_lst_c ::= incl_lst_c * COMMA incl_item
+
+                         COMMA shift  4
+                     {default} reduce 8
+
+State 12:
+      (7) incl_lst ::= incl_lst_sc *
+          incl_lst_sc ::= incl_lst_sc * SEMICOLON incl_item
+
+                     SEMICOLON shift  5
+                     {default} reduce 7
+
+State 13:
+          incl_stmt ::= COLON_DASH INCLUDE incl_lst * PERIOD
+
+                        PERIOD shift  33
+
+State 14:
+          incl_stmt ::= COLON_DASH * INCLUDE incl_lst PERIOD
+     (24) other ::= COLON_DASH *
+
+                       INCLUDE shift  2
+                     {default} reduce 24
+
+State 15:
+      (0) start ::= macro_lst EOF *
+
+                             $ reduce 0
+
+State 16:
+     (28) other ::= PERIOD *
+
+                     {default} reduce 28
+
+State 17:
+     (27) other ::= OTHER *
+
+                     {default} reduce 27
+
+State 18:
+     (26) other ::= STRING_LITERAL *
+
+                     {default} reduce 26
+
+State 19:
+     (25) other ::= SEMICOLON *
+
+                     {default} reduce 25
+
+State 20:
+     (23) other ::= COMMA *
+
+                     {default} reduce 23
+
+State 21:
+     (22) other ::= PAREN_R *
+
+                     {default} reduce 22
+
+State 22:
+     (21) other ::= PAREN_L *
+
+                     {default} reduce 21
+
+State 23:
+     (20) other ::= INTEGER *
+
+                     {default} reduce 20
+
+State 24:
+     (18) arg_lst ::= ARG *
+
+                     {default} reduce 18
+
+State 25:
+     (19) arg_lst ::= arg_lst COMMA ARG *
+
+                     {default} reduce 19
+
+State 26:
+     (17) base_elem_pkgd ::= IDENTIFIER PAREN_L arg_lst PAREN_R *
+
+                     {default} reduce 17
+
+State 27:
+     (11) incl_lst_c ::= incl_item COMMA incl_item *
+
+                     {default} reduce 11
+
+State 28:
+     (12) incl_lst_c ::= incl_lst_c COMMA incl_item *
+
+                     {default} reduce 12
+
+State 29:
+     (15) incl_item ::= INTEGER *
+
+                     {default} reduce 15
+
+State 30:
+     (14) incl_item ::= IDENTIFIER *
+
+                     {default} reduce 14
+
+State 31:
+     (13) incl_item ::= STRING_LITERAL *
+
+                     {default} reduce 13
+
+State 32:
+     (10) incl_lst_sc ::= incl_lst_sc SEMICOLON incl_item *
+
+                     {default} reduce 10
+
+State 33:
+      (6) incl_stmt ::= COLON_DASH INCLUDE incl_lst PERIOD *
+
+                     {default} reduce 6
+
+State 34:
+      (5) macro_lst ::= macro_lst incl_stmt *
+
+                     {default} reduce 5
+
+State 35:
+      (4) macro_lst ::= macro_lst other *
+
+                     {default} reduce 4
+
+State 36:
+      (3) macro_lst ::= macro_lst base_elem_pkgd *
+
+                     {default} reduce 3
+
+State 37:
+      (2) macro_lst ::= macro_lst error *
+
+                     {default} reduce 2
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: IDENTIFIER
+    2: INTEGER
+    3: PAREN_L
+    4: PAREN_R
+    5: COMMA
+    6: INCLUDE
+    7: COLON_DASH
+    8: PERIOD
+    9: SEMICOLON
+   10: STRING_LITERAL
+   11: ARG
+   12: OTHER
+   13: EOF
+   14: error:
+   15: start: IDENTIFIER INTEGER PAREN_L PAREN_R COMMA COLON_DASH PERIOD SEMICOLON STRING_LITERAL OTHER EOF
+   16: macro_lst: <lambda> IDENTIFIER INTEGER PAREN_L PAREN_R COMMA COLON_DASH PERIOD SEMICOLON STRING_LITERAL OTHER
+   17: incl_stmt: COLON_DASH
+   18: base_elem_pkgd: IDENTIFIER
+   19: other: INTEGER PAREN_L PAREN_R COMMA COLON_DASH PERIOD SEMICOLON STRING_LITERAL OTHER
+   20: incl_lst: IDENTIFIER INTEGER STRING_LITERAL
+   21: incl_lst_sc: IDENTIFIER INTEGER STRING_LITERAL
+   22: incl_lst_c: IDENTIFIER INTEGER STRING_LITERAL
+   23: incl_item: IDENTIFIER INTEGER STRING_LITERAL
+   24: arg_lst: ARG

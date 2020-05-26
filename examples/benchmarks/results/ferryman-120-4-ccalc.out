@@ -1,0 +1,457 @@
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 12697 atoms (including new atoms), 90149 clauses
+% Writing input clauses... done.  (0.24 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 2 seconds, search 0 seconds)
+
+No solution with maxstep 1.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 24911 atoms (including new atoms), 165056 clauses
+% Writing input clauses... done.  (0.57 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 8 seconds (prep 8 seconds, search 0 seconds)
+
+No solution with maxstep 2.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 37125 atoms (including new atoms), 239963 clauses
+% Writing input clauses... done.  (0.94 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 15 seconds (prep 15 seconds, search 0 seconds)
+
+No solution with maxstep 3.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 49339 atoms (including new atoms), 314870 clauses
+% Writing input clauses... done.  (1.31 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 22 seconds (prep 22 seconds, search 0 seconds)
+
+No solution with maxstep 4.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 61553 atoms (including new atoms), 389777 clauses
+% Writing input clauses... done.  (1.66 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 29 seconds (prep 29 seconds, search 0 seconds)
+
+No solution with maxstep 5.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 73767 atoms (including new atoms), 464684 clauses
+% Writing input clauses... done.  (1.99 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 36 seconds (prep 36 seconds, search 0 seconds)
+
+No solution with maxstep 6.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 85981 atoms (including new atoms), 539591 clauses
+% Writing input clauses... done.  (2.38 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 43 seconds (prep 43 seconds, search 0 seconds)
+
+No solution with maxstep 7.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 98195 atoms (including new atoms), 614498 clauses
+% Writing input clauses... done.  (2.73 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 49 seconds (prep 49 seconds, search 0 seconds)
+
+No solution with maxstep 8.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 110409 atoms (including new atoms), 689405 clauses
+% Writing input clauses... done.  (3.10 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 55 seconds (prep 55 seconds, search 0 seconds)
+
+No solution with maxstep 9.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 122623 atoms (including new atoms), 764312 clauses
+% Writing input clauses... done.  (3.43 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 62 seconds (prep 62 seconds, search 0 seconds)
+
+No solution with maxstep 10.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 134837 atoms (including new atoms), 839219 clauses
+% Writing input clauses... done.  (3.79 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 72 seconds (prep 72 seconds, search 0 seconds)
+
+No solution with maxstep 11.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 147051 atoms (including new atoms), 914126 clauses
+% Writing input clauses... done.  (4.17 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 76 seconds (prep 76 seconds, search 0 seconds)
+
+No solution with maxstep 12.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 159265 atoms (including new atoms), 989033 clauses
+% Writing input clauses... done.  (4.50 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 86 seconds (prep 86 seconds, search 0 seconds)
+
+No solution with maxstep 13.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 171479 atoms (including new atoms), 1063940 clauses
+% Writing input clauses... done.  (4.88 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 90 seconds (prep 90 seconds, search 0 seconds)
+
+No solution with maxstep 14.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 183693 atoms (including new atoms), 1138847 clauses
+% Writing input clauses... done.  (5.24 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 96 seconds (prep 96 seconds, search 0 seconds)
+
+No solution with maxstep 15.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 195907 atoms (including new atoms), 1213754 clauses
+% Writing input clauses... done.  (5.60 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 102 seconds (prep 102 seconds, search 0 seconds)
+
+No solution with maxstep 16.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 208121 atoms (including new atoms), 1288661 clauses
+% Writing input clauses... done.  (5.97 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 109 seconds (prep 109 seconds, search 0 seconds)
+
+No solution with maxstep 17.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 220335 atoms (including new atoms), 1363568 clauses
+% Writing input clauses... done.  (6.34 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 117 seconds (prep 117 seconds, search 0 seconds)
+
+No solution with maxstep 18.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 232549 atoms (including new atoms), 1438475 clauses
+% Writing input clauses... done.  (6.70 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 124 seconds (prep 124 seconds, search 0 seconds)
+
+No solution with maxstep 19.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 244763 atoms (including new atoms), 1513382 clauses
+% Writing input clauses... done.  (7.02 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 130 seconds (prep 130 seconds, search 0 seconds)
+
+No solution with maxstep 20.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 256977 atoms (including new atoms), 1588289 clauses
+% Writing input clauses... done.  (7.42 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 139 seconds (prep 139 seconds, search 0 seconds)
+
+No solution with maxstep 21.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 269191 atoms (including new atoms), 1663196 clauses
+% Writing input clauses... done.  (7.79 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 146 seconds (prep 146 seconds, search 0 seconds)
+
+No solution with maxstep 22.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 281405 atoms (including new atoms), 1738103 clauses
+% Writing input clauses... done.  (8.11 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 160 seconds (prep 160 seconds, search 0 seconds)
+
+No solution with maxstep 23.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 293619 atoms (including new atoms), 1813010 clauses
+% Writing input clauses... done.  (8.46 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 158 seconds (prep 158 seconds, search 0 seconds)
+
+No solution with maxstep 24.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 305833 atoms (including new atoms), 1887917 clauses
+% Writing input clauses... done.  (8.83 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 170 seconds (prep 170 seconds, search 0 seconds)
+
+No solution with maxstep 25.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 318047 atoms (including new atoms), 1962824 clauses
+% Writing input clauses... done.  (9.25 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 172 seconds (prep 172 seconds, search 0 seconds)
+
+No solution with maxstep 26.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 330261 atoms (including new atoms), 2037731 clauses
+% Writing input clauses... done.  (9.56 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 179 seconds (prep 179 seconds, search 0 seconds)
+
+No solution with maxstep 27.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 342475 atoms (including new atoms), 2112638 clauses
+% Writing input clauses... done.  (10.02 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 192 seconds (prep 192 seconds, search 0 seconds)
+
+No solution with maxstep 28.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 354689 atoms (including new atoms), 2187545 clauses
+% Writing input clauses... done.  (10.23 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 189 seconds (prep 189 seconds, search 0 seconds)
+
+No solution with maxstep 29.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 366903 atoms (including new atoms), 2262452 clauses
+% Writing input clauses... done.  (10.63 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 201 seconds (prep 201 seconds, search 0 seconds)
+
+No solution with maxstep 30.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 379117 atoms (including new atoms), 2337359 clauses
+% Writing input clauses... done.  (10.94 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 206 seconds (prep 206 seconds, search 0 seconds)
+
+No solution with maxstep 31.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 391331 atoms (including new atoms), 2412266 clauses
+% Writing input clauses... done.  (11.34 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 216 seconds (prep 216 seconds, search 0 seconds)
+
+No solution with maxstep 32.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 403545 atoms (including new atoms), 2487173 clauses
+% Writing input clauses... done.  (11.69 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 228 seconds (prep 228 seconds, search 0 seconds)
+
+No solution with maxstep 33.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 415759 atoms (including new atoms), 2562080 clauses
+% Writing input clauses... done.  (12.05 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 230 seconds (prep 230 seconds, search 0 seconds)
+
+No solution with maxstep 34.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 427973 atoms (including new atoms), 2636987 clauses
+% Writing input clauses... done.  (12.50 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 242 seconds (prep 242 seconds, search 0 seconds)
+
+No solution with maxstep 35.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 440187 atoms (including new atoms), 2711894 clauses
+% Writing input clauses... done.  (12.79 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 251 seconds (prep 251 seconds, search 0 seconds)
+
+No solution with maxstep 36.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 452401 atoms (including new atoms), 2786801 clauses
+% Writing input clauses... done.  (13.21 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 264 seconds (prep 264 seconds, search 0 seconds)
+
+No solution with maxstep 37.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 464615 atoms (including new atoms), 2861708 clauses
+% Writing input clauses... done.  (13.51 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 283 seconds (prep 283 seconds, search 0 seconds)
+
+No solution with maxstep 38.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 476829 atoms (including new atoms), 2936615 clauses
+% Writing input clauses... done.  (13.89 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 292 seconds (prep 292 seconds, search 0 seconds)
+
+No solution with maxstep 39.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 489043 atoms (including new atoms), 3011522 clauses
+% Writing input clauses... done.  (14.27 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 303 seconds (prep 303 seconds, search 0 seconds)
+
+No solution with maxstep 40.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 501257 atoms (including new atoms), 3086429 clauses
+% Writing input clauses... done.  (14.61 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 325 seconds (prep 325 seconds, search 0 seconds)
+
+No solution with maxstep 41.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 513471 atoms (including new atoms), 3161336 clauses
+% Writing input clauses... done.  (14.95 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 339 seconds (prep 339 seconds, search 0 seconds)
+
+No solution with maxstep 42.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 525685 atoms (including new atoms), 3236243 clauses
+% Writing input clauses... done.  (15.37 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 362 seconds (prep 362 seconds, search 0 seconds)
+
+No solution with maxstep 43.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 537899 atoms (including new atoms), 3311150 clauses
+% Writing input clauses... done.  (15.70 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 380 seconds (prep 380 seconds, search 0 seconds)
+
+No solution with maxstep 44.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 550113 atoms (including new atoms), 3386057 clauses
+% Writing input clauses... done.  (16.00 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 411 seconds (prep 411 seconds, search 0 seconds)
+
+No solution with maxstep 45.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 562327 atoms (including new atoms), 3460964 clauses
+% Writing input clauses... done.  (16.46 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 432 seconds (prep 432 seconds, search 0 seconds)
+
+No solution with maxstep 46.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 574541 atoms (including new atoms), 3535871 clauses
+% Writing input clauses... done.  (16.75 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 461 seconds (prep 461 seconds, search 0 seconds)
+
+No solution with maxstep 47.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 586755 atoms (including new atoms), 3610778 clauses
+% Writing input clauses... done.  (17.16 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 495 seconds (prep 495 seconds, search 0 seconds)
+
+No solution with maxstep 48.
+
+% Shifting atoms and clauses... done. (0.03 seconds)
+% After shifting: 598969 atoms (including new atoms), 3685685 clauses
+% Writing input clauses... done.  (17.51 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 530 seconds (prep 530 seconds, search 0 seconds)
+
+No solution with maxstep 49.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 611183 atoms (including new atoms), 3760592 clauses
+% Writing input clauses... done.  (17.98 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 564 seconds (prep 564 seconds, search 0 seconds)
+
+No solution with maxstep 50.
+
+% Shifting atoms and clauses... done. (0.04 seconds)
+% After shifting: 623397 atoms (including new atoms), 3835499 clauses
+% Writing input clauses... done.  (18.38 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 600 seconds (prep 600 seconds, search 0 seconds)
+

@@ -1,0 +1,76 @@
+% File 'clique'
+% Find a clique of size 3 in the given graph
+
+:- include 'graph-description'.
+
+:- sorts
+  index.
+
+:- objects
+  1..3                  :: index.
+
+:- constants
+  member(index)         :: node.
+
+:- variables
+  I,J                   :: index.
+
+% members of the clique are arbitrary
+exogenous member(I).
+
+% except that they should be pairwise distinct neighbors.
+
+constraint member(I)=member(J) ->> I=J.
+constraint edge(member(I),member(J)) ++ edge(member(J),member(I)) ++ I=J.
+
+%constraint [\/X \/Y | member(I)=X & member(I)=Y 
+%                        & edge(X,Y) ++ edge(Y,X) ++ I=J].
+
+ constraint [\/X \/Y | member(I)=X & member(I)=Y ->>
+                        edge(X,Y) ++ edge(Y,X) ++ I=J].
+
+
+% symmetry breaking
+constraint member(I)=X & member(J)=Y & I < J ->> X<Y.
+
+:- hide all.
+:- show member(I)=X.
+
+/*
+| ?- loadf 'clique'.
+% loading file /stage/projects3/tag/ccalc/macros.std
+% loading file /stage/projects3/tag/ccalc/examples/clique
+% loading file /stage/projects3/tag/ccalc/examples/graph
+% in basic mode...
+% 40 atoms, 226 rules, 238 clauses
+% Grounding time: 0.28 seconds
+% Completion time: 0.04 seconds
+yes
+| ?- set(num,all).
+
+yes
+| ?- sat.
+
+% Calling mChaff... 
+% Solution time: 0 seconds (prep 0.0 seconds, search 0 seconds)  
+
+Satisfying Interpretation 1:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=1  member(2)=2  member(3)=0  
+
+Satisfying Interpretation 2:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=0  member(2)=1  member(3)=2  
+
+Satisfying Interpretation 3:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=2  member(2)=1  member(3)=0  
+
+Satisfying Interpretation 4:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=1  member(2)=0  member(3)=2  
+
+Satisfying Interpretation 5:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=2  member(2)=0  member(3)=1  
+
+Satisfying Interpretation 6:
+edge(0,1)  edge(0,2)  edge(1,2)  edge(2,3)  edge(3,4)  edge(4,0)  member(1)=0  member(2)=2  member(3)=1  
+yes
+| ?- 
+*/

@@ -1,0 +1,13 @@
+:- sorts
+ num.
+
+:- objects
+ 1..3 :: num.
+
+:- constants
+  b :: boolean;
+  c  :: num.
+
+{c=1}.
+{~b}.
+c=2 <- ~b.

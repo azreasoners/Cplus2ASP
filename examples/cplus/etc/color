@@ -1,0 +1,105 @@
+% File 'color'
+% Find a 3-coloring of the given graph
+
+:- include 'graph-description'.
+
+:- sorts
+  color.
+
+:- objects
+  1..3                  :: color.
+
+:- constants
+  col(node)             :: color.
+
+:- variables
+  X,Y		:: node;
+  C			:: color.
+
+% colors are arbitrary
+exogenous col(X).
+
+% except that neighbors should have different colors
+%never edge(X,Y) & col(X)=col(Y).
+constraint -(edge(X,Y) & col(X)=col(Y)).
+
+
+:- hide all.
+:- show col(X)=C.
+
+
+/*
+| ?- loadf 'color'.
+% loading file /stage/projects3/tag/ccalc/macros.std
+% loading file /stage/projects3/tag/ccalc/examples/color
+% loading file /stage/projects3/tag/ccalc/examples/graph
+% in basic mode...
+% 40 atoms, 121 rules, 120 clauses
+% Grounding time: 0.15 seconds
+% Completion time: 0.03 seconds
+yes
+| ?- set(num,all).
+
+yes
+| ?- sat.
+
+% Calling mChaff... 
+% Solution time: 0 seconds (prep 0.0 seconds, search 0 seconds)  
+
+Satisfying Interpretation 1:
+col(0)=3  col(1)=2  col(2)=1  col(3)=2  col(4)=1  
+
+Satisfying Interpretation 2:
+col(0)=1  col(1)=2  col(2)=3  col(3)=2  col(4)=3  
+
+Satisfying Interpretation 3:
+col(0)=1  col(1)=2  col(2)=3  col(3)=1  col(4)=2  
+
+Satisfying Interpretation 4:
+col(0)=1  col(1)=2  col(2)=3  col(3)=1  col(4)=3  
+
+Satisfying Interpretation 5:
+col(0)=1  col(1)=3  col(2)=2  col(3)=1  col(4)=3  
+
+Satisfying Interpretation 6:
+col(0)=1  col(1)=3  col(2)=2  col(3)=1  col(4)=2  
+
+Satisfying Interpretation 7:
+col(0)=2  col(1)=3  col(2)=1  col(3)=2  col(4)=1  
+
+Satisfying Interpretation 8:
+col(0)=2  col(1)=3  col(2)=1  col(3)=2  col(4)=3  
+
+Satisfying Interpretation 9:
+col(0)=2  col(1)=1  col(2)=3  col(3)=1  col(4)=3  
+
+Satisfying Interpretation 10:
+col(0)=2  col(1)=1  col(2)=3  col(3)=2  col(4)=1  
+
+Satisfying Interpretation 11:
+col(0)=2  col(1)=1  col(2)=3  col(3)=2  col(4)=3  
+
+Satisfying Interpretation 12:
+col(0)=3  col(1)=1  col(2)=2  col(3)=1  col(4)=2  
+
+Satisfying Interpretation 13:
+col(0)=3  col(1)=1  col(2)=2  col(3)=3  col(4)=2  
+
+Satisfying Interpretation 14:
+col(0)=3  col(1)=1  col(2)=2  col(3)=3  col(4)=1  
+
+Satisfying Interpretation 15:
+col(0)=3  col(1)=2  col(2)=1  col(3)=3  col(4)=2  
+
+Satisfying Interpretation 16:
+col(0)=3  col(1)=2  col(2)=1  col(3)=3  col(4)=1  
+
+Satisfying Interpretation 17:
+col(0)=1  col(1)=3  col(2)=2  col(3)=3  col(4)=2  
+
+Satisfying Interpretation 18:
+col(0)=2  col(1)=3  col(2)=1  col(3)=3  col(4)=1  
+yes
+| ?- 
+*/
+

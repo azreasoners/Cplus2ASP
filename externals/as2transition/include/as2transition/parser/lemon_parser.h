@@ -1,0 +1,10 @@
+#define T_IDENTIFIER                       1
+#define T_INTEGER                          2
+#define T_PAREN_L                          3
+#define T_PAREN_R                          4
+#define T_COMMA                            5
+#define T_TILDE                            6
+#define T_STRING_LITERAL                   7
+#define T_EOF                              8
+#define T_ERR_UNKNOWN_SYMBOL               9
+#define T_ERR_UNTERMINATED_STRING         10

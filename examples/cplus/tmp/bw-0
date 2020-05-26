@@ -1,0 +1,46 @@
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '19'.
+% Pragma: Running Query 'Query '0''.
+% Pragma: Minimum Step = '7', Maximum Step = '8'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+	0:  cost=0
+
+	ACTIONS:  destination(c)=table destination(i)=table destination(k)=table move(c) move(i) move(k)
+
+	1:  cost=3
+
+	ACTIONS:  destination(b)=table destination(h)=table destination(j)=table move(b) move(h) move(j)
+
+	2:  cost=6
+
+	ACTIONS:  destination(e)=j destination(k)=g move(e) move(k)
+
+	3:  cost=8
+
+	ACTIONS:  destination(c)=k destination(d)=table move(c) move(d)
+
+	4:  cost=10
+
+	ACTIONS:  destination(a)=e destination(b)=c destination(i)=d move(a) move(b) move(i)
+
+	5:  cost=13
+
+	ACTIONS:  destination(h)=i destination(l)=b move(h) move(l)
+
+	6:  cost=15
+
+	ACTIONS:  destination(m)=h destination(n)=a move(m) move(n)
+
+	7:  cost=17
+
+	ACTIONS:  destination(o)=m move(o)
+
+	8:  cost=18
+
+SATISFIABLE
+Models      : 1+    
+Total Steps : 8
+Time        : 3.520
+Prepare   : 2.250
+Prepro.   : 1.060

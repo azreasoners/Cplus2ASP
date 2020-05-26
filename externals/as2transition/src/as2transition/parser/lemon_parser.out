@@ -1,0 +1,218 @@
+State 0:
+          solution ::= * pred_list EOF
+      (1) pred_list ::= *
+          pred_list ::= * pred_list predicate
+          pred_list ::= * pred_list COMMA predicate
+          pred_list ::= * pred_list error
+
+                      solution accept
+                     pred_list shift  1
+                     {default} reduce 1
+
+State 1:
+          solution ::= pred_list * EOF
+          pred_list ::= pred_list * predicate
+          pred_list ::= pred_list * COMMA predicate
+          pred_list ::= pred_list * error
+          predicate ::= * IDENTIFIER
+          predicate ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          predicate ::= * TILDE IDENTIFIER
+          predicate ::= * TILDE IDENTIFIER PAREN_L obj_list PAREN_R
+
+                    IDENTIFIER shift  13
+                         COMMA shift  6
+                         TILDE shift  11
+                           EOF shift  14
+                         error shift  15
+                     predicate shift  24
+
+State 2:
+          predicate ::= TILDE IDENTIFIER PAREN_L * obj_list PAREN_R
+          obj_list ::= * object
+          obj_list ::= * obj_list COMMA object
+          object ::= * IDENTIFIER
+          object ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          object ::= * INTEGER
+          object ::= * STRING_LITERAL
+
+                    IDENTIFIER shift  12
+                       INTEGER shift  18
+                STRING_LITERAL shift  17
+                      obj_list shift  7
+                        object shift  20
+
+State 3:
+          obj_list ::= * object
+          obj_list ::= * obj_list COMMA object
+          object ::= * IDENTIFIER
+          object ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          object ::= IDENTIFIER PAREN_L * obj_list PAREN_R
+          object ::= * INTEGER
+          object ::= * STRING_LITERAL
+
+                    IDENTIFIER shift  12
+                       INTEGER shift  18
+                STRING_LITERAL shift  17
+                      obj_list shift  8
+                        object shift  20
+
+State 4:
+          predicate ::= IDENTIFIER PAREN_L * obj_list PAREN_R
+          obj_list ::= * object
+          obj_list ::= * obj_list COMMA object
+          object ::= * IDENTIFIER
+          object ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          object ::= * INTEGER
+          object ::= * STRING_LITERAL
+
+                    IDENTIFIER shift  12
+                       INTEGER shift  18
+                STRING_LITERAL shift  17
+                      obj_list shift  9
+                        object shift  20
+
+State 5:
+          obj_list ::= obj_list COMMA * object
+          object ::= * IDENTIFIER
+          object ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          object ::= * INTEGER
+          object ::= * STRING_LITERAL
+
+                    IDENTIFIER shift  12
+                       INTEGER shift  18
+                STRING_LITERAL shift  17
+                        object shift  21
+
+State 6:
+          pred_list ::= pred_list COMMA * predicate
+          predicate ::= * IDENTIFIER
+          predicate ::= * IDENTIFIER PAREN_L obj_list PAREN_R
+          predicate ::= * TILDE IDENTIFIER
+          predicate ::= * TILDE IDENTIFIER PAREN_L obj_list PAREN_R
+
+                    IDENTIFIER shift  13
+                         TILDE shift  11
+                     predicate shift  23
+
+State 7:
+          predicate ::= TILDE IDENTIFIER PAREN_L obj_list * PAREN_R
+          obj_list ::= obj_list * COMMA object
+
+                       PAREN_R shift  16
+                         COMMA shift  5
+
+State 8:
+          obj_list ::= obj_list * COMMA object
+          object ::= IDENTIFIER PAREN_L obj_list * PAREN_R
+
+                       PAREN_R shift  19
+                         COMMA shift  5
+
+State 9:
+          predicate ::= IDENTIFIER PAREN_L obj_list * PAREN_R
+          obj_list ::= obj_list * COMMA object
+
+                       PAREN_R shift  22
+                         COMMA shift  5
+
+State 10:
+      (7) predicate ::= TILDE IDENTIFIER *
+          predicate ::= TILDE IDENTIFIER * PAREN_L obj_list PAREN_R
+
+                       PAREN_L shift  2
+                     {default} reduce 7
+
+State 11:
+          predicate ::= TILDE * IDENTIFIER
+          predicate ::= TILDE * IDENTIFIER PAREN_L obj_list PAREN_R
+
+                    IDENTIFIER shift  10
+
+State 12:
+     (11) object ::= IDENTIFIER *
+          object ::= IDENTIFIER * PAREN_L obj_list PAREN_R
+
+                       PAREN_L shift  3
+                     {default} reduce 11
+
+State 13:
+      (5) predicate ::= IDENTIFIER *
+          predicate ::= IDENTIFIER * PAREN_L obj_list PAREN_R
+
+                       PAREN_L shift  4
+                     {default} reduce 5
+
+State 14:
+      (0) solution ::= pred_list EOF *
+
+                             $ reduce 0
+
+State 15:
+      (4) pred_list ::= pred_list error *
+
+                     {default} reduce 4
+
+State 16:
+      (8) predicate ::= TILDE IDENTIFIER PAREN_L obj_list PAREN_R *
+
+                     {default} reduce 8
+
+State 17:
+     (14) object ::= STRING_LITERAL *
+
+                     {default} reduce 14
+
+State 18:
+     (13) object ::= INTEGER *
+
+                     {default} reduce 13
+
+State 19:
+     (12) object ::= IDENTIFIER PAREN_L obj_list PAREN_R *
+
+                     {default} reduce 12
+
+State 20:
+      (9) obj_list ::= object *
+
+                     {default} reduce 9
+
+State 21:
+     (10) obj_list ::= obj_list COMMA object *
+
+                     {default} reduce 10
+
+State 22:
+      (6) predicate ::= IDENTIFIER PAREN_L obj_list PAREN_R *
+
+                     {default} reduce 6
+
+State 23:
+      (3) pred_list ::= pred_list COMMA predicate *
+
+                     {default} reduce 3
+
+State 24:
+      (2) pred_list ::= pred_list predicate *
+
+                     {default} reduce 2
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: IDENTIFIER
+    2: INTEGER
+    3: PAREN_L
+    4: PAREN_R
+    5: COMMA
+    6: TILDE
+    7: STRING_LITERAL
+    8: EOF
+    9: ERR_UNKNOWN_SYMBOL
+   10: ERR_UNTERMINATED_STRING
+   11: error:
+   12: solution: IDENTIFIER COMMA TILDE EOF
+   13: pred_list: <lambda> IDENTIFIER COMMA TILDE
+   14: predicate: IDENTIFIER TILDE
+   15: obj_list: IDENTIFIER INTEGER STRING_LITERAL
+   16: object: IDENTIFIER INTEGER STRING_LITERAL

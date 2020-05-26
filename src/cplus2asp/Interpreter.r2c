@@ -1,0 +1,106 @@
+/*
+ * Copyright (c) 2010-2013 <Joseph Babb, Michael Cassollary, Joohyung Lee>
+ *
+ * For information on how to contact the authors, please visit
+ *      http://reasoning.eas.asu.edu/cplus2asp
+ *
+ * This file is part of the cplus2asp system.
+ *
+ * cplus2asp is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * cplus2asp is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+#include "Interpreter.h"
+#include "utils.h"
+#include "Config.h"
+
+// Shows the help dialog.
+void Interpreter::showHelp(std::ostream& output) {
+	std::cout 
+		<< "You may specify one or more of the following options, each followed by a return.\n"
+		<< std::endl
+		<< '\t' << std::setw(15) << std::left << "queries" << "- Displays the list of queries that are available to run.\n"
+		<< '\t' << std::setw(15) << std::left << "config" << "- Displays the current run configuration.\n"
+		<< '\t' << std::setw(15) << std::left << "query=ID " << "- Selects and runs an available query.\n"
+
+		<< '\t' << std::setw(15) << std::left << "sol=#" << "- Sets the number of solutions to find to #.\n"
+		<< '\t' << std::setw(15) << "" << "- Specifying '" << CONST_DEFAULT << "' for # resets the option to the default value.\n"
+
+		<< '\t' << std::setw(15) << std::left << "maxstep=#" << "- Overrides the maximum step on the next query.\n"
+		<< '\t' << std::setw(15) << "" << "- Specifying '" << CONST_MAXSTEP_INFINITE << "' indicates that there should be no maximum step.\n"
+		<< '\t' << std::setw(15) << "" << "- Specifying '" << CONST_DEFAULT << "' for # resets the option to the default value.\n"
+
+		<< '\t' << std::setw(15) << std::left << "minstep=#" << "- Overrides the minimum step on the next query, setting it to #.\n"
+		<< '\t' << std::setw(15) << "" << "- Specifying '" << CONST_DEFAULT << "' for # resets the option to the default value.\n"
+
+		<< '\t' << std::setw(15) << std::left << "help" << "- Displays this dialog.\n"
+		<< '\t' << std::setw(15) << std::left << "exit" << "- Exits the program.\n";	
+}
+
+
+
+// Interprets an action and provides the action requested an any additional value provided.
+Interpreter::Action Interpreter::interpret(std::string const& command, std::string& outVal) {
+	size_t pos;
+	Action action;
+
+
+	// Figure out the action.
+	if ((pos = command.find("=")) != std::string::npos) {
+		action = lex(utils::trimWhitespace(command.substr(0,pos)));
+	} else {
+		action = lex(utils::trimWhitespace(command));
+	}
+
+	// get the associated value if applicable.
+	if (action != INVALID && pos != std::string::npos && pos + 1 <= command.size()) {
+		outVal = utils::trimWhitespace(command.substr(pos+1));
+	} else {
+		outVal = "";
+	}
+
+
+	return action;
+}
+
+
+// Determines the action requested based on its name
+Interpreter::Action Interpreter::lex(std::string const& commandName) {
+	char const* cstr = commandName.c_str();
+	char const* marker;
+
+	/*!re2c
+        	re2c:define:YYCTYPE = "char";
+        	re2c:define:YYCURSOR = cstr;
+        	re2c:yyfill:enable = 0;
+         	re2c:define:YYMARKER = marker;
+         	re2c:indent:top = 1;
+
+		'queries'		{ return SHOW_QUERIES; }
+		'config'		{ return SHOW_CONFIG; }
+		'query'			{ return SET_QUERY; }
+		'sol'			{ return SET_NUMSOLN; }
+		'maxstep'		{ return SET_MAXSTEP; }
+		'minstep'		{ return SET_MINSTEP; }
+		'help'			{ return SHOW_HELP; }
+		'exit'			{ return EXIT; }
+		.			{ return INVALID; }
+	*/
+}
+

@@ -1,0 +1,9 @@
+#const n=10.
+#const m=4.
+
+animal(sheep).
+animal(wolf). 
+
+int(0..n).
+
+

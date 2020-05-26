@@ -1,0 +1,88 @@
+:- sorts
+  step;
+  astep;
+  thing;
+  location.
+
+:- objects
+  0..mstep    	     :: step;
+  0..(mstep-1)    	 :: astep;
+  monkey,bananas,box     :: thing;
+  l1,l2,l3               :: location.
+
+:- variables
+  ST                     :: step;
+  T                      :: astep;
+  B                      :: boolean;
+  Th                     :: thing;
+  L                      :: location.
+
+:- constants
+  loc(thing,step)                 :: location;
+  hasBananas(step),onBox(step)    :: boolean;
+
+  walk(location,astep),
+  pushBox(location,astep),
+  climbOn(astep),
+  climbOff(astep),
+  graspBananas(astep)             :: boolean.
+
+% Any Initial State
+{loc(Th,0)=L}.
+{hasBananas(0)=B}.
+{onBox(0)=B}.
+
+% Inertia
+{loc(Th,T+1)=L} <- loc(Th,T)=L.
+{hasBananas(T+1)=B} <- hasBananas(T)=B.
+{onBox(T+1)=B} <- onBox(T)=B.
+
+% Exogenous Actions
+{walk(L,T)=B}.
+{pushBox(L,T)=B}.
+{climbOn(T)=B}.
+{climbOff(T)=B}.
+{graspBananas(T)=B}.
+
+loc(bananas,ST)=L <- hasBananas(ST) & loc(monkey,ST)=L.
+loc(monkey,ST)=L <- onBox(ST) & loc(box,ST)=L.
+
+loc(monkey,T+1)=L <- walk(L,T).
+false <- walk(L,T) & loc(monkey,T)=L.
+false <- walk(L,T) & onBox(T).
+
+loc(box,T+1)=L <- pushBox(L,T).
+loc(monkey,T+1)=L <- pushBox(L,T).
+false <- pushBox(L,T) & loc(monkey,T)=L.
+false <- pushBox(L,T) & onBox(T).
+false <- pushBox(L,T) & loc(monkey,T)\=loc(box,T).
+
+onBox(T+1) <- climbOn(T).
+false <- climbOn(T) & onBox(T).
+false <- climbOn(T) & loc(monkey,T)\=loc(box,T).
+
+~onBox(T+1) <- climbOff(T).
+false <- climbOff(T) & ~onBox(T).
+
+hasBananas(T+1) <- graspBananas(T).
+false <- graspBananas(T) & hasBananas(T).
+false <- graspBananas(T) & ~onBox(T).
+false <- graspBananas(T) & loc(monkey,T)\=loc(bananas,T).
+
+false <- walk(L,T) & pushBox(L,T).
+false <- walk(L,T) & climbOn(T).
+false <- pushBox(L,T) & climbOn(T).
+false <- climbOff(T) & graspBananas(T).
+
+
+% Query:
+false <- not (loc(monkey, 0)=l1 & loc(box, 0)=l3 & loc(bananas, 0)=l2).
+false <- not hasBananas(mstep).
+
+
+%:- query
+%	label :: planning;
+%	0: loc(monkey)=l1,
+%	   loc(bananas)=l2,
+%	   loc(box)=l3;
+%	mstep: hasBananas.

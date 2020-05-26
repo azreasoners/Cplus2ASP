@@ -1,0 +1,213 @@
+% File: 'multiple-monkey-test'.
+
+:- include 'multiple-monkey'.
+
+:- objects
+  alice,david,goliath        :: monkey.
+
+caused ab1(david,M).
+caused ab1(M,david).
+
+caused ab2(M) if onBox(goliath).
+caused ab2(M) if climbOn(goliath).
+
+
+% Can alice and david be on top of the box at the same time? - yes
+:- query 
+maxstep :: 0;
+0: onBox(alice) &
+   onBox(david).
+
+% Can alice and goliath be on top of the box at the same time? - no
+:- query 
+label :: 1;
+maxstep :: 1;
+0: onBox(alice) &
+   onBox(goliath).
+
+% Can alice move box while goliath is on top of the box? - no, but action is possible 
+:- query
+label :: 2;
+maxstep :: 1;
+0: onBox(goliath); 
+1: onBox(goliath);
+0: pushBox(alice,l3).
+
+% Can the box be moved when david is climing the box? -yes, david moves along
+%  with the box
+:- query
+label :: 3;
+maxstep :: 1;
+%0: climbOn(david);
+[\/L\/L1| (0:loc(box)=L) & (1:loc(box)=L1) & L \= L1].
+%0:loc(box)=l1;
+%1:loc(box)=l2.
+
+% Can the box be moved when goliath is climing the box? - no
+:- query
+label :: 4;
+maxstep :: 1;
+0: climbOn(goliath);
+[\/L\/L1| (0:loc(box)=L) & (1:loc(box)=L1) & L \= L1].
+
+% Can the box be moved when david is climing off the box? - yes
+:- query
+label :: 5;
+maxstep :: 1;
+0: climbOff(david);
+[\/L\/L1| (0:loc(box)=L) & (1:loc(box)=L1) & L \= L1].
+
+% Can the box be moved when goliath is climing off the box? - no
+:- query
+label :: 6;
+maxstep :: 1;
+0: climbOff(goliath);
+[\/L\/L1| (0:loc(box)=L) & (1:loc(box)=L1) & L \= L1].
+(0:loc(box)=L) & (1:loc(box)=L1) & L \= L1.
+
+% Can david walk and climon together while the box is moved if the concurrency
+% is not disallowed explicitly? - yes
+:- query
+label :: 7;
+maxstep :: 1;
+0: walk(david,l2);
+0: climbOn(david).
+
+/*
+| ?- loadf 'multiple-monkey-test'.
+% loading file /stage/projects1/vl/tag/ccalc/macros.std
+% loading file /v/filer1a/v0q031/appsmurf/examples-0804/multiple-monkey-test
+% loading file /v/filer1a/v0q031/appsmurf/examples-0804/multiple-monkey
+% in transition mode...
+% 90 atoms, 420 rules, 456 clauses (24 new atoms)
+% Grounding time: 0.51 seconds
+% Completion time: 0.19 seconds
+% Total time: 0.70 seconds
+
+yes
+| ?- query 0.
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 33 atoms (including new atoms), 69 clauses
+% Writing input clauses... done.  (0.00 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.01 seconds (prep 0.01 seconds, search 0.00 seconds)
+
+0:  onBox(alice)  onBox(david)  loc(bananas)=l1  loc(box)=l3  loc(alice)=l3  loc(david)=l3  loc(goliath)=l2  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+
+
+yes
+| ?- query 1.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.02 seconds (prep 0.02 seconds, search 0.00 seconds)
+
+No solution with maxstep 1.
+
+
+yes
+| ?- query 2.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.02 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.02 seconds (prep 0.02 seconds, search 0.00 seconds)
+
+0:  onBox(goliath)  loc(bananas)=l2  loc(box)=l1  loc(alice)=l1  loc(david)=l1  loc(goliath)=l1  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+ACTIONS:  pushBox(alice,l3)  
+
+1:  onBox(goliath)  loc(bananas)=l2  loc(box)=l1  loc(alice)=l1  loc(david)=l1  loc(goliath)=l1  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+
+
+yes
+| ?- query 3.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.01 seconds (prep 0.01 seconds, search 0.00 seconds)
+
+0:  loc(bananas)=l3  loc(box)=l1  loc(alice)=l3  loc(david)=l1  loc(goliath)=l1  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+ACTIONS:  pushBox(goliath,l3)  climbOn(david)  
+
+1:  onBox(david)  loc(bananas)=l3  loc(box)=l3  loc(alice)=l3  loc(david)=l3  loc(goliath)=l3  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+
+
+yes
+| ?- query 4.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.01 seconds (prep 0.01 seconds, search 0.00 seconds)
+
+No solution with maxstep 1.
+
+
+yes
+| ?- query 5.
+     | ?- query 5.
+{SYNTAX ERROR: in line 267 (within 266-268)}
+** operator expected after expression **
+?- query 5 | ?- 
+** here **
+query 5 . 
+| ?- query 5.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.01 seconds (prep 0.01 seconds, search 0.00 seconds)
+
+0:  onBox(david)  loc(bananas)=l3  loc(box)=l1  loc(alice)=l3  loc(david)=l1  loc(goliath)=l1  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+ACTIONS:  walk(alice,l2)  pushBox(goliath,l3)  climbOff(david)  
+
+1:  loc(bananas)=l3  loc(box)=l3  loc(alice)=l2  loc(david)=l1  loc(goliath)=l3  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+
+
+yes
+| ?- query 6.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.02 seconds (prep 0.02 seconds, search 0.00 seconds)
+
+No solution with maxstep 1.
+
+
+yes
+| ?- query 7.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 114 atoms (including new atoms), 456 clauses
+% Writing input clauses... done.  (0.02 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0.02 seconds (prep 0.02 seconds, search 0.00 seconds)
+
+0:  loc(bananas)=l3  loc(box)=l1  loc(alice)=l2  loc(david)=l1  loc(goliath)=l1  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+ACTIONS:  walk(alice,l3)  walk(david,l2)  pushBox(goliath,l2)  climbOn(david)  
+
+1:  onBox(david)  loc(bananas)=l3  loc(box)=l2  loc(alice)=l3  loc(david)=l2  loc(goliath)=l2  ab1(alice,david)  ab1(david,alice)  ab1(david,david)  ab1(david,goliath)  ab1(goliath,david)  
+
+
+
+yes
+| ?- 
+*/

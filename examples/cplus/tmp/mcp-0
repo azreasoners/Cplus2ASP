@@ -1,0 +1,42 @@
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '3'.
+% Pragma: Running Query 'Query '0''.
+% Pragma: Minimum Step = '6', Maximum Step = '7'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+	0:  loc(boat1)=bank1 loc(boat2)=bank1 num(ca,bank1)=3 num(ca,bank2)=0 num(mi,bank1)=3 num(mi,bank2)=0
+
+	ACTIONS:  cross(boat2) departing(ca,bank1)=2 departing(ca,bank2)=0 departing(mi,bank1)=0 departing(mi,bank2)=0 howmany(boat2,ca)=2 howmany(boat2,mi)=0 to(boat2)=bank2
+
+	1:  loc(boat1)=bank1 loc(boat2)=bank2 num(ca,bank1)=1 num(ca,bank2)=2 num(mi,bank1)=3 num(mi,bank2)=0
+
+	ACTIONS:  cross(boat2) departing(ca,bank1)=0 departing(ca,bank2)=1 departing(mi,bank1)=0 departing(mi,bank2)=0 howmany(boat2,ca)=1 howmany(boat2,mi)=0 to(boat2)=bank1
+
+	2:  loc(boat1)=bank1 loc(boat2)=bank1 num(ca,bank1)=2 num(ca,bank2)=1 num(mi,bank1)=3 num(mi,bank2)=0
+
+	ACTIONS:  cross(boat1) cross(boat2) departing(ca,bank1)=0 departing(ca,bank2)=0 departing(mi,bank1)=3 departing(mi,bank2)=0 howmany(boat1,ca)=0 howmany(boat1,mi)=1 howmany(boat2,ca)=0 howmany(boat2,mi)=2 to(boat1)=bank2 to(boat2)=bank2
+
+	3:  loc(boat1)=bank2 loc(boat2)=bank2 num(ca,bank1)=2 num(ca,bank2)=1 num(mi,bank1)=0 num(mi,bank2)=3
+
+	ACTIONS:  cross(boat1) cross(boat2) departing(ca,bank1)=0 departing(ca,bank2)=0 departing(mi,bank1)=0 departing(mi,bank2)=2 howmany(boat1,ca)=0 howmany(boat1,mi)=1 howmany(boat2,ca)=0 howmany(boat2,mi)=1 to(boat1)=bank1 to(boat2)=bank1
+
+	4:  loc(boat1)=bank1 loc(boat2)=bank1 num(ca,bank1)=2 num(ca,bank2)=1 num(mi,bank1)=2 num(mi,bank2)=1
+
+	ACTIONS:  cross(boat1) cross(boat2) departing(ca,bank1)=1 departing(ca,bank2)=0 departing(mi,bank1)=2 departing(mi,bank2)=0 howmany(boat1,ca)=1 howmany(boat1,mi)=0 howmany(boat2,ca)=0 howmany(boat2,mi)=2 to(boat1)=bank2 to(boat2)=bank2
+
+	5:  loc(boat1)=bank2 loc(boat2)=bank2 num(ca,bank1)=1 num(ca,bank2)=2 num(mi,bank1)=0 num(mi,bank2)=3
+
+	ACTIONS:  cross(boat1) cross(boat2) departing(ca,bank1)=0 departing(ca,bank2)=2 departing(mi,bank1)=0 departing(mi,bank2)=0 howmany(boat1,ca)=1 howmany(boat1,mi)=0 howmany(boat2,ca)=1 howmany(boat2,mi)=0 to(boat1)=bank1 to(boat2)=bank1
+
+	6:  loc(boat1)=bank1 loc(boat2)=bank1 num(ca,bank1)=3 num(ca,bank2)=0 num(mi,bank1)=0 num(mi,bank2)=3
+
+	ACTIONS:  cross(boat1) cross(boat2) departing(ca,bank1)=3 departing(ca,bank2)=0 departing(mi,bank1)=0 departing(mi,bank2)=0 howmany(boat1,ca)=1 howmany(boat1,mi)=0 howmany(boat2,ca)=2 howmany(boat2,mi)=0 to(boat1)=bank2 to(boat2)=bank2
+
+	7:  loc(boat1)=bank2 loc(boat2)=bank2 num(ca,bank1)=0 num(ca,bank2)=3 num(mi,bank1)=0 num(mi,bank2)=3
+
+SATISFIABLE
+Models      : 1+    
+Total Steps : 7
+Time        : 0.370
+Prepare   : 0.140
+Prepro.   : 0.020

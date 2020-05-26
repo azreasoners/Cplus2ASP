@@ -1,0 +1,1074 @@
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.020
+Prepare   : 0.020
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 2460
+Rules       : 7096   (1: 6831 2: 33 3: 232)
+Bodies      : 4253
+Equivalences: 4170   (Atom=Atom: 1989 Body=Body: 0 Other: 2181)
+Tight       : Yes
+Variables   : 4437   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '2'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.050
+Prepare   : 0.040
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 4344
+Rules       : 13286  (1: 12869 2: 52 3: 365)
+Bodies      : 8152
+Equivalences: 7394   (Atom=Atom: 3524 Body=Body: 0 Other: 3870)
+Tight       : Yes
+Variables   : 8439   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '3'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.080
+Prepare   : 0.060
+Prepro.   : 0.020
+Choices     : 1
+Conflicts   : 1
+Restarts    : 0
+Atoms       : 6228
+Rules       : 19476  (1: 18907 2: 71 3: 498)
+Bodies      : 12051
+Equivalences: 10618  (Atom=Atom: 5059 Body=Body: 0 Other: 5559)
+Tight       : Yes
+Variables   : 12441  (Eliminated:    0)
+Constraints : 19212  (Binary: 74.8% Ternary:  8.7% Other: 16.5%)
+Lemmas      : 1      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 1      (Average Length: 1.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '4'.
+% Pragma: Searching for 1 solutions.
+
+jbabb1@reasoning-server:~/workspace/cplus2asp/examples/benchmarks$ % Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.130
+Prepare   : 0.080
+Prepro.   : 0.040
+Choices     : 1
+Conflicts   : 1
+Restarts    : 0
+Atoms       : 8112
+Rules       : 25666  (1: 24945 2: 90 3: 631)
+Bodies      : 15950
+Equivalences: 13842  (Atom=Atom: 6594 Body=Body: 0 Other: 7248)
+Tight       : Yes
+Variables   : 16443  (Eliminated:    0)
+Constraints : 32584  (Binary: 74.7% Ternary:  7.7% Other: 17.5%)
+Lemmas      : 1      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 1      (Average Length: 1.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '5'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.160
+Prepare   : 0.100
+Prepro.   : 0.050
+Choices     : 87
+Conflicts   : 38
+Restarts    : 0
+Atoms       : 9996
+Rules       : 31856  (1: 30983 2: 109 3: 764)
+Bodies      : 19849
+Equivalences: 17066  (Atom=Atom: 8129 Body=Body: 0 Other: 8937)
+Tight       : Yes
+Variables   : 20445  (Eliminated:    0)
+Constraints : 45956  (Binary: 74.7% Ternary:  7.3% Other: 18.0%)
+Lemmas      : 38     (Binary:  0.0% Ternary:  2.6% Other: 97.4%)
+Conflicts : 38     (Average Length: 1.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '6'.
+% Pragma: Searching for 1 solutions.
+cplus2asp ferryman-15-4-long.cp --stats query=0 --none-alias -transout=trans.out -preout=f2lp.out -soout=so.out --mode=static-auto &% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.260
+Prepare   : 0.120
+Prepro.   : 0.070
+Choices     : 222
+Conflicts   : 72
+Restarts    : 0
+Atoms       : 11880
+Rules       : 38046  (1: 37021 2: 128 3: 897)
+Bodies      : 23748
+Equivalences: 20290  (Atom=Atom: 9664 Body=Body: 0 Other: 10626)
+Tight       : Yes
+Variables   : 24447  (Eliminated:    0)
+Constraints : 59328  (Binary: 74.7% Ternary:  7.1% Other: 18.2%)
+Lemmas      : 72     (Binary:  1.4% Ternary:  4.2% Other: 94.4%)
+Conflicts : 72     (Average Length: 2.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '7'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.240
+Prepare   : 0.140
+Prepro.   : 0.080
+Choices     : 27
+Conflicts   : 11
+Restarts    : 0
+Atoms       : 13764
+Rules       : 44236  (1: 43059 2: 147 3: 1030)
+Bodies      : 27647
+Equivalences: 23514  (Atom=Atom: 11199 Body=Body: 0 Other: 12315)
+Tight       : Yes
+Variables   : 28449  (Eliminated:    0)
+Constraints : 72700  (Binary: 74.6% Ternary:  7.0% Other: 18.4%)
+Lemmas      : 11     (Binary:  9.1% Ternary: 45.5% Other: 45.5%)
+Conflicts : 11     (Average Length: 3.5)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '8'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.340
+Prepare   : 0.160
+Prepro.   : 0.100
+Choices     : 247
+Conflicts   : 97
+Restarts    : 0
+Atoms       : 15648
+Rules       : 50426  (1: 49097 2: 166 3: 1163)
+Bodies      : 31546
+Equivalences: 26738  (Atom=Atom: 12734 Body=Body: 0 Other: 14004)
+Tight       : Yes
+Variables   : 32451  (Eliminated:    0)
+Constraints : 86072  (Binary: 74.6% Ternary:  6.9% Other: 18.5%)
+Lemmas      : 97     (Binary: 10.3% Ternary:  7.2% Other: 82.5%)
+Conflicts : 97     (Average Length: 28.2)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '9'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.320
+Prepare   : 0.180
+Prepro.   : 0.120
+Choices     : 32
+Conflicts   : 14
+Restarts    : 0
+Atoms       : 17532
+Rules       : 56616  (1: 55135 2: 185 3: 1296)
+Bodies      : 35445
+Equivalences: 29962  (Atom=Atom: 14269 Body=Body: 0 Other: 15693)
+Tight       : Yes
+Variables   : 36453  (Eliminated:    0)
+Constraints : 99444  (Binary: 74.6% Ternary:  6.8% Other: 18.6%)
+Lemmas      : 14     (Binary: 14.3% Ternary: 50.0% Other: 35.7%)
+Conflicts : 14     (Average Length: 3.3)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '10'.
+% Pragma: Searching for 1 solutions.
+                                                                   ./mem_tracker.sh iclingo > mem.out% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.620
+Prepare   : 0.210
+Prepro.   : 0.130
+Choices     : 1738
+Conflicts   : 263
+Restarts    : 2
+Atoms       : 19416
+Rules       : 62806  (1: 61173 2: 204 3: 1429)
+Bodies      : 39344
+Equivalences: 33186  (Atom=Atom: 15804 Body=Body: 0 Other: 17382)
+Tight       : Yes
+Variables   : 40455  (Eliminated:    0)
+Constraints : 112816 (Binary: 74.6% Ternary:  6.8% Other: 18.6%)
+Lemmas      : 263    (Binary:  5.7% Ternary:  9.5% Other: 84.8%)
+Conflicts : 263    (Average Length: 10.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '11'.
+% Pragma: Searching for 1 solutions.
+
+jbabb1@reasoning-server:~/workspace/cplus2asp/examples/benchmarks$ % Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.400
+Prepare   : 0.240
+Prepro.   : 0.130
+Choices     : 38
+Conflicts   : 17
+Restarts    : 0
+Atoms       : 21300
+Rules       : 68996  (1: 67211 2: 223 3: 1562)
+Bodies      : 43243
+Equivalences: 36410  (Atom=Atom: 17339 Body=Body: 0 Other: 19071)
+Tight       : Yes
+Variables   : 44457  (Eliminated:    0)
+Constraints : 126188 (Binary: 74.6% Ternary:  6.7% Other: 18.7%)
+Lemmas      : 17     (Binary: 17.6% Ternary: 52.9% Other: 29.4%)
+Conflicts : 17     (Average Length: 3.2)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '12'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.040
+Prepare   : 0.290
+Prepro.   : 0.170
+Choices     : 3148
+Conflicts   : 1087
+Restarts    : 4
+Atoms       : 23184
+Rules       : 75186  (1: 73249 2: 242 3: 1695)
+Bodies      : 47142
+Equivalences: 39634  (Atom=Atom: 18874 Body=Body: 0 Other: 20760)
+Tight       : Yes
+Variables   : 48459  (Eliminated:    0)
+Constraints : 139560 (Binary: 74.6% Ternary:  6.7% Other: 18.7%)
+Lemmas      : 1087   (Binary:  7.1% Ternary:  6.0% Other: 86.9%)
+Conflicts : 1087   (Average Length: 16.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '13'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.540
+Prepare   : 0.320
+Prepro.   : 0.180
+Choices     : 46
+Conflicts   : 21
+Restarts    : 0
+Atoms       : 25068
+Rules       : 81376  (1: 79287 2: 261 3: 1828)
+Bodies      : 51041
+Equivalences: 42858  (Atom=Atom: 20409 Body=Body: 0 Other: 22449)
+Tight       : Yes
+Variables   : 52461  (Eliminated:    0)
+Constraints : 152932 (Binary: 74.6% Ternary:  6.7% Other: 18.7%)
+Lemmas      : 21     (Binary: 19.0% Ternary: 52.4% Other: 28.6%)
+Conflicts : 21     (Average Length: 3.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '14'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.530
+Prepare   : 0.350
+Prepro.   : 0.190
+Choices     : 2748
+Conflicts   : 388
+Restarts    : 2
+Atoms       : 26952
+Rules       : 87566  (1: 85325 2: 280 3: 1961)
+Bodies      : 54940
+Equivalences: 46082  (Atom=Atom: 21944 Body=Body: 0 Other: 24138)
+Tight       : Yes
+Variables   : 56463  (Eliminated:    0)
+Constraints : 166304 (Binary: 74.6% Ternary:  6.6% Other: 18.7%)
+Lemmas      : 388    (Binary:  6.4% Ternary:  4.9% Other: 88.7%)
+Conflicts : 388    (Average Length: 7.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '15'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.630
+Prepare   : 0.390
+Prepro.   : 0.200
+Choices     : 51
+Conflicts   : 26
+Restarts    : 0
+Atoms       : 28836
+Rules       : 93756  (1: 91363 2: 299 3: 2094)
+Bodies      : 58839
+Equivalences: 49306  (Atom=Atom: 23479 Body=Body: 0 Other: 25827)
+Tight       : Yes
+Variables   : 60465  (Eliminated:    0)
+Constraints : 179676 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 26     (Binary: 26.9% Ternary: 53.8% Other: 19.2%)
+Conflicts : 26     (Average Length: 3.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '16'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.570
+Prepare   : 0.550
+Prepro.   : 0.210
+Choices     : 5807
+Conflicts   : 1457
+Restarts    : 5
+Atoms       : 30720
+Rules       : 99946  (1: 97401 2: 318 3: 2227)
+Bodies      : 62738
+Equivalences: 52530  (Atom=Atom: 25014 Body=Body: 0 Other: 27516)
+Tight       : Yes
+Variables   : 64467  (Eliminated:    0)
+Constraints : 193048 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 1457   (Binary:  6.5% Ternary:  3.8% Other: 89.7%)
+Conflicts : 1457   (Average Length: 20.3)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '17'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.960
+Prepare   : 0.680
+Prepro.   : 0.220
+Choices     : 66
+Conflicts   : 29
+Restarts    : 0
+Atoms       : 32604
+Rules       : 106136 (1: 103439 2: 337 3: 2360)
+Bodies      : 66637
+Equivalences: 55754  (Atom=Atom: 26549 Body=Body: 0 Other: 29205)
+Tight       : Yes
+Variables   : 68469  (Eliminated:    0)
+Constraints : 206420 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 29     (Binary: 24.1% Ternary: 58.6% Other: 17.2%)
+Conflicts : 29     (Average Length: 3.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '18'.
+% Pragma: Searching for 1 solutions.
+
+jbabb1@reasoning-server:~/workspace/cplus2asp/examples/benchmarks$ % Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 2.370
+Prepare   : 0.740
+Prepro.   : 0.230
+Choices     : 10020
+Conflicts   : 3027
+Restarts    : 6
+Atoms       : 34488
+Rules       : 112326 (1: 109477 2: 356 3: 2493)
+Bodies      : 70536
+Equivalences: 58978  (Atom=Atom: 28084 Body=Body: 0 Other: 30894)
+Tight       : Yes
+Variables   : 72471  (Eliminated:    0)
+Constraints : 219792 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 3027   (Binary:  3.6% Ternary:  3.7% Other: 92.7%)
+Conflicts : 3027   (Average Length: 26.5)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '19'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.120
+Prepare   : 0.800
+Prepro.   : 0.250
+Choices     : 78
+Conflicts   : 33
+Restarts    : 0
+Atoms       : 36372
+Rules       : 118516 (1: 115515 2: 375 3: 2626)
+Bodies      : 74435
+Equivalences: 62202  (Atom=Atom: 29619 Body=Body: 0 Other: 32583)
+Tight       : Yes
+Variables   : 76473  (Eliminated:    0)
+Constraints : 233164 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 33     (Binary: 24.2% Ternary: 60.6% Other: 15.2%)
+Conflicts : 33     (Average Length: 2.9)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '20'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 2.850
+Prepare   : 0.860
+Prepro.   : 0.270
+Choices     : 9218
+Conflicts   : 1207
+Restarts    : 4
+Atoms       : 38256
+Rules       : 124706 (1: 121553 2: 394 3: 2759)
+Bodies      : 78334
+Equivalences: 65426  (Atom=Atom: 31154 Body=Body: 0 Other: 34272)
+Tight       : Yes
+Variables   : 80475  (Eliminated:    0)
+Constraints : 246536 (Binary: 74.6% Ternary:  6.6% Other: 18.8%)
+Lemmas      : 1207   (Binary:  5.9% Ternary:  4.6% Other: 89.5%)
+Conflicts : 1207   (Average Length: 13.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '21'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.300
+Prepare   : 0.940
+Prepro.   : 0.280
+Choices     : 93
+Conflicts   : 37
+Restarts    : 0
+Atoms       : 40140
+Rules       : 130896 (1: 127591 2: 413 3: 2892)
+Bodies      : 82233
+Equivalences: 68650  (Atom=Atom: 32689 Body=Body: 0 Other: 35961)
+Tight       : Yes
+Variables   : 84477  (Eliminated:    0)
+Constraints : 259908 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 37     (Binary: 24.3% Ternary: 62.2% Other: 13.5%)
+Conflicts : 37     (Average Length: 2.9)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '22'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 3.780
+Prepare   : 1.000
+Prepro.   : 0.310
+Choices     : 11613
+Conflicts   : 1306
+Restarts    : 4
+Atoms       : 42024
+Rules       : 137086 (1: 133629 2: 432 3: 3025)
+Bodies      : 86132
+Equivalences: 71874  (Atom=Atom: 34224 Body=Body: 0 Other: 37650)
+Tight       : Yes
+Variables   : 88479  (Eliminated:    0)
+Constraints : 273280 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 1306   (Binary:  4.6% Ternary:  4.4% Other: 91.0%)
+Conflicts : 1306   (Average Length: 15.9)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '23'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.480
+Prepare   : 1.080
+Prepro.   : 0.310
+Choices     : 111
+Conflicts   : 41
+Restarts    : 0
+Atoms       : 43908
+Rules       : 143276 (1: 139667 2: 451 3: 3158)
+Bodies      : 90031
+Equivalences: 75098  (Atom=Atom: 35759 Body=Body: 0 Other: 39339)
+Tight       : Yes
+Variables   : 92481  (Eliminated:    0)
+Constraints : 286652 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 41     (Binary: 24.4% Ternary: 63.4% Other: 12.2%)
+Conflicts : 41     (Average Length: 2.9)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '24'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 4.640
+Prepare   : 1.200
+Prepro.   : 0.330
+Choices     : 14263
+Conflicts   : 1950
+Restarts    : 5
+Atoms       : 45792
+Rules       : 149466 (1: 145705 2: 470 3: 3291)
+Bodies      : 93930
+Equivalences: 78322  (Atom=Atom: 37294 Body=Body: 0 Other: 41028)
+Tight       : Yes
+Variables   : 96483  (Eliminated:    0)
+Constraints : 300024 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 1950   (Binary:  5.7% Ternary:  5.1% Other: 89.2%)
+Conflicts : 1950   (Average Length: 17.2)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '25'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.740
+Prepare   : 1.240
+Prepro.   : 0.340
+Choices     : 247
+Conflicts   : 83
+Restarts    : 0
+Atoms       : 47676
+Rules       : 155656 (1: 151743 2: 489 3: 3424)
+Bodies      : 97829
+Equivalences: 81546  (Atom=Atom: 38829 Body=Body: 0 Other: 42717)
+Tight       : Yes
+Variables   : 100485 (Eliminated:    0)
+Constraints : 313396 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 83     (Binary: 34.9% Ternary: 37.3% Other: 27.7%)
+Conflicts : 83     (Average Length: 6.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '26'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 5.770
+Prepare   : 1.310
+Prepro.   : 0.360
+Choices     : 14105
+Conflicts   : 3313
+Restarts    : 7
+Atoms       : 49560
+Rules       : 161846 (1: 157781 2: 508 3: 3557)
+Bodies      : 101728
+Equivalences: 84770  (Atom=Atom: 40364 Body=Body: 0 Other: 44406)
+Tight       : Yes
+Variables   : 104487 (Eliminated:    0)
+Constraints : 326768 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 3313   (Binary:  6.1% Ternary:  4.4% Other: 89.5%)
+Conflicts : 3313   (Average Length: 20.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '27'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.980
+Prepare   : 1.430
+Prepro.   : 0.370
+Choices     : 267
+Conflicts   : 87
+Restarts    : 0
+Atoms       : 51444
+Rules       : 168036 (1: 163819 2: 527 3: 3690)
+Bodies      : 105627
+Equivalences: 87994  (Atom=Atom: 41899 Body=Body: 0 Other: 46095)
+Tight       : Yes
+Variables   : 108489 (Eliminated:    0)
+Constraints : 340140 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 87     (Binary: 34.5% Ternary: 39.1% Other: 26.4%)
+Conflicts : 87     (Average Length: 6.3)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '28'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 8.400
+Prepare   : 3.000
+Prepro.   : 0.390
+Choices     : 27396
+Conflicts   : 7479
+Restarts    : 8
+Atoms       : 53328
+Rules       : 174226 (1: 169857 2: 546 3: 3823)
+Bodies      : 109526
+Equivalences: 91218  (Atom=Atom: 43434 Body=Body: 0 Other: 47784)
+Tight       : Yes
+Variables   : 112491 (Eliminated:    0)
+Constraints : 353512 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 7479   (Binary:  4.0% Ternary:  3.1% Other: 93.0%)
+Conflicts : 7479   (Average Length: 30.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '29'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 4.080
+Prepare   : 3.440
+Prepro.   : 0.440
+Choices     : 290
+Conflicts   : 91
+Restarts    : 0
+Atoms       : 55212
+Rules       : 180416 (1: 175895 2: 565 3: 3956)
+Bodies      : 113425
+Equivalences: 94442  (Atom=Atom: 44969 Body=Body: 0 Other: 49473)
+Tight       : Yes
+Variables   : 116493 (Eliminated:    0)
+Constraints : 366884 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 91     (Binary: 34.1% Ternary: 40.7% Other: 25.3%)
+Conflicts : 91     (Average Length: 6.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '30'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 9.890
+Prepare   : 3.580
+Prepro.   : 0.450
+Choices     : 23422
+Conflicts   : 6011
+Restarts    : 8
+Atoms       : 57096
+Rules       : 186606 (1: 181933 2: 584 3: 4089)
+Bodies      : 117324
+Equivalences: 97666  (Atom=Atom: 46504 Body=Body: 0 Other: 51162)
+Tight       : Yes
+Variables   : 120495 (Eliminated:    0)
+Constraints : 380256 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 6011   (Binary:  3.7% Ternary:  3.2% Other: 93.1%)
+Conflicts : 6011   (Average Length: 33.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '31'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 4.700
+Prepare   : 4.020
+Prepro.   : 0.470
+Choices     : 316
+Conflicts   : 95
+Restarts    : 0
+Atoms       : 58980
+Rules       : 192796 (1: 187971 2: 603 3: 4222)
+Bodies      : 121223
+Equivalences: 100890 (Atom=Atom: 48039 Body=Body: 0 Other: 52851)
+Tight       : Yes
+Variables   : 124497 (Eliminated:    0)
+Constraints : 393628 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 95     (Binary: 33.7% Ternary: 42.1% Other: 24.2%)
+Conflicts : 95     (Average Length: 6.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '32'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 42.530
+Prepare   : 4.110
+Prepro.   : 0.490
+Choices     : 152753
+Conflicts   : 103207
+Restarts    : 15
+Atoms       : 60864
+Rules       : 198986 (1: 194009 2: 622 3: 4355)
+Bodies      : 125122
+Equivalences: 104114 (Atom=Atom: 49574 Body=Body: 0 Other: 54540)
+Tight       : Yes
+Variables   : 128499 (Eliminated:    0)
+Constraints : 407000 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 103207 (Binary:  0.5% Ternary:  0.6% Other: 98.9%)
+Conflicts : 103207 (Average Length: 112.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 35337
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '33'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 5.190
+Prepare   : 4.460
+Prepro.   : 0.490
+Choices     : 345
+Conflicts   : 99
+Restarts    : 0
+Atoms       : 62748
+Rules       : 205176 (1: 200047 2: 641 3: 4488)
+Bodies      : 129021
+Equivalences: 107338 (Atom=Atom: 51109 Body=Body: 0 Other: 56229)
+Tight       : Yes
+Variables   : 132501 (Eliminated:    0)
+Constraints : 420372 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 99     (Binary: 33.3% Ternary: 43.4% Other: 23.2%)
+Conflicts : 99     (Average Length: 5.8)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '34'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 56.950
+Prepare   : 5.110
+Prepro.   : 0.510
+Choices     : 159419
+Conflicts   : 112286
+Restarts    : 15
+Atoms       : 64632
+Rules       : 211366 (1: 206085 2: 660 3: 4621)
+Bodies      : 132920
+Equivalences: 110562 (Atom=Atom: 52644 Body=Body: 0 Other: 57918)
+Tight       : Yes
+Variables   : 136503 (Eliminated:    0)
+Constraints : 433744 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 112286 (Binary:  0.4% Ternary:  0.5% Other: 99.1%)
+Conflicts : 112286 (Average Length: 131.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 37539
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '35'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 5.940
+Prepare   : 5.140
+Prepro.   : 0.530
+Choices     : 389
+Conflicts   : 103
+Restarts    : 1
+Atoms       : 66516
+Rules       : 217556 (1: 212123 2: 679 3: 4754)
+Bodies      : 136819
+Equivalences: 113786 (Atom=Atom: 54179 Body=Body: 0 Other: 59607)
+Tight       : Yes
+Variables   : 140505 (Eliminated:    0)
+Constraints : 447116 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 103    (Binary: 33.0% Ternary: 44.7% Other: 22.3%)
+Conflicts : 103    (Average Length: 5.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '36'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 32.850
+Prepare   : 5.640
+Prepro.   : 0.540
+Choices     : 104553
+Conflicts   : 57526
+Restarts    : 13
+Atoms       : 68400
+Rules       : 223746 (1: 218161 2: 698 3: 4887)
+Bodies      : 140718
+Equivalences: 117010 (Atom=Atom: 55714 Body=Body: 0 Other: 61296)
+Tight       : Yes
+Variables   : 144507 (Eliminated:    0)
+Constraints : 460488 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 57526  (Binary:  0.8% Ternary:  1.0% Other: 98.2%)
+Conflicts : 57526  (Average Length: 99.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '37'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 7.100
+Prepare   : 6.240
+Prepro.   : 0.570
+Choices     : 420
+Conflicts   : 107
+Restarts    : 1
+Atoms       : 70284
+Rules       : 229936 (1: 224199 2: 717 3: 5020)
+Bodies      : 144617
+Equivalences: 120234 (Atom=Atom: 57249 Body=Body: 0 Other: 62985)
+Tight       : Yes
+Variables   : 148509 (Eliminated:    0)
+Constraints : 473860 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 107    (Binary: 32.7% Ternary: 45.8% Other: 21.5%)
+Conflicts : 107    (Average Length: 5.6)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '38'.
+% Pragma: Searching for 1 solutions.
+jbabb1@reasoning-server:~/workspace/cplus2asp/examples/benchmarks$ % Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 3075.230
+Prepare   : 6.570
+Prepro.   : 0.580
+Choices     : 2864485
+Conflicts   : 2625679
+Restarts    : 23
+Atoms       : 72168
+Rules       : 236126 (1: 230237 2: 736 3: 5153)
+Bodies      : 148516
+Equivalences: 123458 (Atom=Atom: 58784 Body=Body: 0 Other: 64674)
+Tight       : Yes
+Variables   : 152511 (Eliminated:    0)
+Constraints : 487232 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 2625679 (Binary:  0.0% Ternary:  0.1% Other: 99.9%)
+Conflicts : 2625679 (Average Length: 266.8)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 2258361
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '39'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 8.020
+Prepare   : 7.110
+Prepro.   : 0.600
+Choices     : 454
+Conflicts   : 111
+Restarts    : 1
+Atoms       : 74052
+Rules       : 242316 (1: 236275 2: 755 3: 5286)
+Bodies      : 152415
+Equivalences: 126682 (Atom=Atom: 60319 Body=Body: 0 Other: 66363)
+Tight       : Yes
+Variables   : 156513 (Eliminated:    0)
+Constraints : 500604 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 111    (Binary: 32.4% Ternary: 46.8% Other: 20.7%)
+Conflicts : 111    (Average Length: 5.5)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '40'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 461.360
+Prepare   : 7.230
+Prepro.   : 0.620
+Choices     : 823742
+Conflicts   : 648060
+Restarts    : 19
+Atoms       : 75936
+Rules       : 248506 (1: 242313 2: 774 3: 5419)
+Bodies      : 156314
+Equivalences: 129906 (Atom=Atom: 61854 Body=Body: 0 Other: 68052)
+Tight       : Yes
+Variables   : 160515 (Eliminated:    0)
+Constraints : 513976 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 648060 (Binary:  0.2% Ternary:  0.2% Other: 99.6%)
+Conflicts : 648060 (Average Length: 238.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 464056
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '41'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 8.830
+Prepare   : 7.850
+Prepro.   : 0.640
+Choices     : 506
+Conflicts   : 115
+Restarts    : 1
+Atoms       : 77820
+Rules       : 254696 (1: 248351 2: 793 3: 5552)
+Bodies      : 160213
+Equivalences: 133130 (Atom=Atom: 63389 Body=Body: 0 Other: 69741)
+Tight       : Yes
+Variables   : 164517 (Eliminated:    0)
+Constraints : 527348 (Binary: 74.6% Ternary:  6.5% Other: 18.9%)
+Lemmas      : 115    (Binary: 32.2% Ternary: 47.8% Other: 20.0%)
+Conflicts : 115    (Average Length: 5.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query '0''.
+% Pragma: Maximum Step = '42'.
+% Pragma: Searching for 1 solutions.
+Write failed: Connection reset by peer
+Time		: 6420+

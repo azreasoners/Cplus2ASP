@@ -1,0 +1,11 @@
+% file 'simple-lua.cp'
+:- begin_lua.
+	function a()
+		return 7
+	end
+:- end_lua.
+
+:- constants
+	p(computed) :: sdFluent.
+
+caused p(@a()).

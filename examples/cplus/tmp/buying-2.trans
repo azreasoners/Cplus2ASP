@@ -1,0 +1,143 @@
+% File "/home/jbabb1/workspace/cplus2asp/tests/domains/buying-test".
+% File 'buying-test'
+
+% [MaxAdditive:7]
+% File "buying".
+% File 'buying'
+
+#base.
+sort(agent).
+#domain agent(V_agent).
+sort_object(agent,V_agent).
+#hide agent(V_agent).
+
+sort(item).
+#domain item(V_item).
+sort_object(item,V_item).
+#hide item(V_item).
+
+resource(V_item).
+sort(resource).
+#domain resource(V_resource).
+sort_object(resource,V_resource).
+#hide resource(V_resource).
+
+
+#domain agent(Ag).
+#domain resource(Res).
+#domain item(It).
+sort(numRange_0_maxAdditive).
+#domain numRange_0_maxAdditive(V_numRange_0_maxAdditive).
+sort_object(numRange_0_maxAdditive,V_numRange_0_maxAdditive).
+#hide numRange_0_maxAdditive(V_numRange_0_maxAdditive).
+
+numRange_0_maxAdditive(0..maxAdditive).
+#domain numRange_0_maxAdditive(M).
+#domain numRange_0_maxAdditive(N).
+
+agent(buyer).
+agent(seller).
+resource(money).
+
+rigid(price(V_item)).
+constant_sort(price(V_item),numRange_0_maxAdditive).
+additiveFluent(has(V_agent, V_resource)).
+constant_sort(has(V_agent, V_resource),numRange_0_maxAdditive).
+exogenousAction(buy(V_item)).
+constant_sort(buy(V_item),boolean).
+numRange_0_maxAdditive_star(none).
+numRange_0_maxAdditive_star(V_numRange_0_maxAdditive).
+sort(numRange_0_maxAdditive_star).
+#domain numRange_0_maxAdditive_star(V_numRange_0_maxAdditive_star).
+sort_object(numRange_0_maxAdditive_star,V_numRange_0_maxAdditive_star).
+#hide numRange_0_maxAdditive_star(V_numRange_0_maxAdditive_star).
+
+attribute(howmany(V_item)).
+constant_sort(howmany(V_item),numRange_0_maxAdditive_star).
+action_attribute(buy(V_item), howmany(V_item)).
+
+
+#cumulative maxstep.
+(occ(eql(contribution(buy(It),has(buyer,It)), N), maxstep-1)) <- ((occ(eql(buy(It), true), maxstep-1))) & (occ(eql(howmany(It), N), maxstep-1)).
+
+(occ(eql(contribution(buy(It),has(seller,It)), -1 * (N)), maxstep-1)) <- ((occ(eql(buy(It), true), maxstep-1))) & (occ(eql(howmany(It), N), maxstep-1)).
+
+(occ(eql(contribution(buy(It),has(seller,money)), M * N), maxstep-1)) <- ((occ(eql(buy(It), true), maxstep-1))) & (occ(eql(howmany(It), N), maxstep-1) & h(eql(price(It), M))) & (M * N <= maxAdditive).
+
+(occ(eql(contribution(buy(It),has(buyer,money)), -1 * (M * N)), maxstep-1)) <- ((occ(eql(buy(It), true), maxstep-1))) & (occ(eql(howmany(It), N), maxstep-1) & h(eql(price(It), M))) & (M * N <= maxAdditive).
+
+
+#base.
+item(newspaper).
+item(magazine).
+
+(h(eql(price(newspaper), 1))).
+(h(eql(price(magazine), 3))).
+
+% I have $6 in my pocket. A newspaper costs $1, and a magazine
+% costs $3. Do I have enough money to buy 2 newspapers and a magazine?
+% A newspaper and 2 magazines?
+
+% [Query: Label:1, Maxstep:1]
+false <- query_label(1) & not (((h(eql(has(buyer,money), 6), 0) & occ(eql(buy(newspaper), true), 0) & occ(eql(howmany(newspaper), 2), 0) & occ(eql(buy(magazine), true), 0) & occ(eql(howmany(magazine), 1), 0)))).
+
+% [Query: Label:2, Maxstep:1]
+false <- query_label(2) & not (((h(eql(has(buyer,money), 6), 0) & occ(eql(buy(newspaper), true), 0) & occ(eql(howmany(newspaper), 1), 0) & occ(eql(buy(magazine), true), 0) & occ(eql(howmany(magazine), 2), 0)))).
+
+
+%% 
+%  | ?- loadf 'buying-test'.
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/macros.std
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/buying-test
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/buying
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/additive
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/arithmetic
+% % in transition mode...
+% % 492 atoms, 1736 rules, 8132 clauses (1664 new atoms)
+% % Grounding time: 5.70 seconds
+% % Completion time: 2.15 seconds
+% % Total time: 7.85 seconds
+% 
+% yes
+% | ?- query 0.
+% 
+% Error: Invalid query label (0).
+% {Execution aborted}
+% | ?- query 1.
+% % Shifting atoms and clauses... done. (0.00 seconds)
+% % After shifting: 2156 atoms (including new atoms), 8132 clauses
+% % Writing input clauses... done.  (0.13 seconds)
+% % Calling mChaff spelt3... done.
+% % Reading output file(s) from SAT solver... done.
+% % Solution time: 0.12 seconds (prep 0.10 seconds, search 0.02 seconds)
+% 
+% 0:  has(buyer,money)=6  
+% 
+% ACTIONS:  buy(newspaper,howmany=2)  buy(magazine,howmany=1)  
+% 
+% 1:  has(buyer,money)=1  
+% 
+% 
+% 
+% yes
+% | ?- query 2.
+% % Shifting atoms and clauses... done. (0.00 seconds)
+% % After shifting: 2156 atoms (including new atoms), 8132 clauses
+% % Writing input clauses... done.  (0.14 seconds)
+% % Calling mChaff spelt3... done.
+% % Reading output file(s) from SAT solver... done.
+% % Solution time: 0.1 seconds (prep 0.09 seconds, search 0.01 seconds)
+% 
+% No solution with maxstep 1.
+% 
+% 
+% no
+% | ?- 
+% 
+#hide h/2.
+#hide h/1.
+#show h(eql(has(buyer,money), N), 0).
+#cumulative maxstep.
+#show h(eql(has(buyer,money), N), maxstep).
+#show occ(eql(buy(It), V_boolean), maxstep-1).
+#show occ(eql(howmany(It), V_numRange_0_maxAdditive_star), maxstep-1).

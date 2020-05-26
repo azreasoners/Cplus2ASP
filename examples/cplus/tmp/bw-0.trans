@@ -1,0 +1,176 @@
+% File "/home/jbabb1/workspace/cplus2asp/tests/domains/bw-cost-test".
+% [MaxAdditive:19]
+% File "bw-serializable".
+% File: 'bw'
+
+#base.
+sort(block).
+#domain block(V_block).
+sort_object(block,V_block).
+#hide block(V_block).
+
+location(V_block).
+sort(location).
+#domain location(V_location).
+sort_object(location,V_location).
+#hide location(V_location).
+
+
+location(table).
+
+inertialFluent(loc(V_block)).
+constant_sort(loc(V_block),location).
+exogenousAction(move(V_block)).
+constant_sort(move(V_block),boolean).
+location_star(none).
+location_star(V_location).
+sort(location_star).
+#domain location_star(V_location_star).
+sort_object(location_star,V_location_star).
+#hide location_star(V_location_star).
+
+attribute(destination(V_block)).
+constant_sort(destination(V_block),location_star).
+action_attribute(move(V_block), destination(V_block)).
+
+#domain block(B).
+#domain block(B1).
+#domain location(L).
+
+% effect of moving a block
+#cumulative maxstep.
+(h(eql(loc(B), L), maxstep)) <- (occ(eql(destination(B), L), maxstep-1)) & (occ(eql(move(B), true), maxstep-1)).
+
+% a block can be moved only when it is clear
+(false) <- (occ(eql(move(B), true), maxstep-1)) & (h(eql(loc(B1), B), maxstep-1)).
+
+% a block can be moved only to a position that is clear
+#base.
+#domain location_star(X_Value_0).
+#domain location_star(X_Value_1).
+#cumulative maxstep.
+(false) <- (occ(eql(move(B), true), maxstep-1)) & (occ(eql(destination(B), X_Value_0), maxstep-1) & h(eql(loc(B1), X_Value_0), maxstep-1) & ?[X_Value_1]:(X_Value_1 != table & occ(eql(destination(B), X_Value_1), maxstep-1))).
+
+% a block can't be moved onto a block that is being moved also
+(false) <- (occ(eql(move(B), true), maxstep-1) & occ(eql(move(B1), true), maxstep-1)) & (occ(eql(destination(B), B1), maxstep-1)).
+
+% two blocks can't be on the same block at the same time
+#base.
+#domain location(X_Value_2).
+(false) <- not ((?[X_Value_2]:(h(eql(loc(B), X_Value_2), 0) & h(eql(loc(B1), X_Value_2), 0)) -> (h(eql(loc(B), table), 0)))) & (B < B1).
+#domain location(X_Value_3).
+#cumulative maxstep.
+(false) <- not ((?[X_Value_3]:(h(eql(loc(B), X_Value_3), maxstep) & h(eql(loc(B1), X_Value_3), maxstep)) -> (h(eql(loc(B), table), maxstep)))) & (B < B1).
+% File "bw-cost".
+
+#base.
+sort(numRange_0_maxAdditive).
+#domain numRange_0_maxAdditive(V_numRange_0_maxAdditive).
+sort_object(numRange_0_maxAdditive,V_numRange_0_maxAdditive).
+#hide numRange_0_maxAdditive(V_numRange_0_maxAdditive).
+
+numRange_0_maxAdditive(0..maxAdditive).
+additiveFluent(cost).
+constant_sort(cost,numRange_0_maxAdditive).
+
+#cumulative maxstep.
+(occ(eql(contribution(move(B),cost), 1), maxstep-1)) <- (occ(eql(move(B), true), maxstep-1)).
+
+
+
+#base.
+#domain numRange_0_maxAdditive(N).
+
+block(a).
+block(b).
+block(c).
+block(d).
+block(e).
+block(f).
+block(g).
+block(h).
+block(i).
+block(j).
+block(k).
+block(l).
+block(m).
+block(n).
+block(o).
+
+
+% [Query: Label:0, Maxstep:7::8]
+false <- query_label(0) & not ((((h(eql(cost, 0), 0) & h(eql(loc(m), table), 0) & h(eql(loc(l), m), 0) & h(eql(loc(a), l), 0) & h(eql(loc(b), a), 0) & h(eql(loc(c), b), 0) & h(eql(loc(o), table), 0) & h(eql(loc(n), o), 0) & h(eql(loc(d), n), 0) & h(eql(loc(e), d), 0) & h(eql(loc(j), e), 0) & h(eql(loc(k), j), 0) & h(eql(loc(f), table), 0) & h(eql(loc(g), f), 0) & h(eql(loc(h), g), 0) & h(eql(loc(i), h), 0))))).
+#volatile maxstep.
+false <- query_label(0) & not ((((?[N]:((h(eql(cost, N), maxstep) & (N <= 18))) & h(eql(loc(e), j), maxstep) & h(eql(loc(a), e), maxstep) & h(eql(loc(n), a), maxstep) & h(eql(loc(i), d), maxstep) & h(eql(loc(h), i), maxstep) & h(eql(loc(m), h), maxstep) & h(eql(loc(o), m), maxstep) & h(eql(loc(k), g), maxstep) & h(eql(loc(c), k), maxstep) & h(eql(loc(b), c), maxstep) & h(eql(loc(l), b), maxstep))))).
+
+
+%% 
+% | ?- loadf 'bw-cost-test'.
+% % loading file macros.std
+% % loading file /stage/projects3/tag/ccalc/examples/bw-cost-test
+% % loading file /stage/projects3/tag/ccalc/examples/bw-cost
+% % loading file /projects/tag/ccalc/additive
+% % loading file /projects/tag/ccalc/arithmetic
+% % loading file /stage/projects3/tag/ccalc/examples/bw-serializable
+% % in transition mode...
+% % 1390 atoms, 11695 rules, 32657 clauses (3060 new atoms)
+% % Grounding time: 152.21 seconds
+% % Completion time: 65.85 seconds
+% yes
+% | ?- query 0.
+% % After shifting: 29590 atoms (including new atoms), 207113 clauses
+% % Shifting time: 4.55 seconds
+% % Calling mChaff... 
+% % Solution time: 2.61 seconds (prep 2.3 seconds, search 0.31 seconds)  
+% 
+% No solution with maxstep 7.
+% 
+% % After shifting: 33780 atoms (including new atoms), 236189 clauses
+% % Shifting time: 5.23 seconds
+% % Calling mChaff... 
+% % Solution time: 9.23 seconds (prep 2.51 seconds, search 6.72 seconds)  
+% 
+% 0:  cost=0 
+% 
+% ACTIONS:  move(c,destination:table)  move(i,destination:table)  move(k,destination:table)  
+% 
+% 1:  cost=3 
+% 
+% ACTIONS:  move(b,destination:table)  move(h,destination:table)  move(j,destination:table)  
+% 
+% 2:  cost=6 
+% 
+% ACTIONS:  move(e,destination:j)  move(k,destination:g)  
+% 
+% 3:  cost=8 
+% 
+% ACTIONS:  move(a,destination:e)  move(c,destination:k)  move(d,destination:table)  
+% 
+% 4:  cost=11 
+% 
+% ACTIONS:  move(b,destination:c)  move(i,destination:d)  
+% 
+% 5:  cost=13 
+% 
+% ACTIONS:  move(h,destination:i)  move(l,destination:b)  move(n,destination:a)  
+% 
+% 6:  cost=16 
+% 
+% ACTIONS:  move(m,destination:h)  
+% 
+% 7:  cost=17 
+% 
+% ACTIONS:  move(o,destination:m)  
+% 
+% 8:  cost=18 
+% yes
+% | ?- 
+% 
+#base.
+#hide h/2.
+#hide h/1.
+#show h(eql(cost, V_numRange_0_maxAdditive), 0).
+#cumulative maxstep.
+#show h(eql(cost, V_numRange_0_maxAdditive), maxstep).
+#show occ(eql(move(B), V_boolean), maxstep-1).
+#show occ(eql(destination(L), V_location_star), maxstep-1).

@@ -1,0 +1,174 @@
+#base.
+% --------- begin ASP Block --------- %
+#begin_asp
+
+test.
+%:- end asp.
+
+#end_asp.
+% --------- end ASP Block --------- %
+
+% --------- begin LUA Block --------- %
+#begin_lua
+
+lua_test.
+--:- end lua.
+--{
+
+:- end lua.
+
+}
+
+
+#end_lua.
+% --------- end LUA Block --------- %
+
+% --------- begin F2LP Block --------- %
+
+
+f2lp_test.
+%:- end f2lp.
+
+% --------- end F2LP Block --------- %
+
+sort(s_loc).
+sort_element(s_loc, VAR) <- s_loc(VAR).
+s_block(VAR) <- s_loc(VAR).
+sort(s_block).
+sort_element(s_block, VAR) <- s_block(VAR).
+s_block(VAR) <- s_loc2(VAR).
+sort(s_loc2).
+sort_element(s_loc2, VAR) <- s_loc2(VAR).
+sort(s_boolean).
+sort_element(s_boolean, VAR) <- s_boolean(VAR).
+
+
+s_loc(o_table).
+s_block(1).
+s_block(2).
+s_block(3).
+s_block(4).
+s_block(5).
+
+%CONSTANTS
+
+#domain s_block(VAR_1_block)
+sdFluent(c_in_tower(VAR_1_block)).
+constant_sort(c_in_tower(VAR_1_block), s_boolean).
+sort(s_loc__plus_1).
+sort_element(s_loc__plus_1, VAR) <- s_loc__plus_1(VAR).
+s_loc(VAR) <- s_loc__plus_1(VAR).
+#domain s_block(VAR_2_block)
+inertialFluent(c_loc(VAR_2_block)).
+constant_sort(c_loc(VAR_2_block), s_loc__plus_1).
+#domain s_block(VAR_3_block)
+#domain s_loc(VAR_4_loc)
+exogenousAction(c_move(VAR_3_block, VAR_4_loc)).
+constant_sort(c_move(VAR_3_block, VAR_4_loc), s_boolean).
+#domain s_block(VAR_5_block)
+#domain s_block(VAR_6_block)
+attribute(c_a(VAR_5_block, VAR_6_block)).
+constant_sort(c_a(VAR_5_block, VAR_6_block), s_boolean).
+action_attribute(c_move(VAR_7_block, VAR_8_loc), c_a(VAR_5_block, VAR_6_block))c_a(VAR_7_block, VAR_8_loc)) <- s_block(VAR_7_block) & s_loc(VAR_8_loc).
+#domain s_block(VAR_9_block)
+additiveAction(c_abc(VAR_9_block)).
+constant_sort(c_abc(VAR_9_block), s_boolean).
+
+%  comment 
+%END CONSTANTS
+
+#domain s_loc(V_L1).
+#domain s_loc(V_L2).
+#domain s_block(V_B1).
+#domain s_block(V_B2).
+
+% Definition of in_tower
+
+#spatom{h(eql(c_in_tower(V_B1), true), 0)} <- #spatom{h(eql(c_loc(V_B1), o_table), 0)}.
+#cumulative t.
+#spatom{h(eql(c_in_tower(V_B1), true), t)} <- #spatom{h(eql(c_loc(V_B1), o_table), t)}.
+
+%  test ).
+% new test
+
+#base.
+#spatom{h(eql(c_in_tower(V_B1), true), 0)} <- #spatom{h(eql(c_loc(V_B1), V_B2), 0)} & #spatom{h(eql(c_in_tower(V_B2), true), 0)}.
+#cumulative t.
+#spatom{h(eql(c_in_tower(V_B1), true), t)} <- #spatom{h(eql(c_loc(V_B1), V_B2), t)} & #spatom{h(eql(c_in_tower(V_B2), true), t)}.
+
+% test...
+
+#base.
+#spatom{h(eql(c_in_tower(V_B1), false), 0)} <- not not( #spatom{h(eql(c_in_tower(V_B1), false), 0)} ).
+#cumulative t.
+#spatom{h(eql(c_in_tower(V_B1), false), t)} <- not not( #spatom{h(eql(c_in_tower(V_B1), false), t)} ).
+
+% blocks don't float in the air
+
+#base.
+false <- not ((#spatom{@lua(V_B1)}=true) -> (#spatom{h(eql(c_in_tower(V_B1), true), 0)})).
+#cumulative t.
+false <- not ((#spatom{@lua(V_B1)}=true) -> (#spatom{h(eql(c_in_tower(V_B1), true), t)})).
+
+% no two blocks are on the same block
+
+#base.
+abAction(c_tmp).
+constant_sort(c_tmp, s_boolean).
+#domain s_block(VAR_10_block)
+#cumulative t.
+false <- not ({ h(eql(c_loc(VAR_10_block), V_B1), t) : s_block(VAR_10_block) }1) & #spatom{occ(eql(c_tmp, true), t-1)}.
+
+% only k towers are allowed on the table
+
+%test 4545
+
+#base.
+#domain s_block(VAR_11_block)
+const_1_AGGR(V_B1) <- ((#spatom{h(eql(c_loc(V_B1), o_table), 0)}) | (#spatom{h(eql(c_loc(V_B1), 1), 0)}))
+false <- not ({ const_1_AGGR(VAR_11_block) : s_block(VAR_11_block) }2).
+#cumulative t.
+#domain s_block(VAR_12_block)
+const_2_AGGR(V_B1, t) <- ((#spatom{h(eql(c_loc(V_B1), o_table), t)}) | (#spatom{h(eql(c_loc(V_B1), 1), t)}))
+false <- not ({ const_2_AGGR(VAR_12_block, t) : s_block(VAR_12_block) }2).
+
+% moving a block
+
+#spatom{h(eql(c_loc(V_B1), V_L1), t)} <- #spatom{occ(eql(c_move(V_B1, V_L1), true), t-1)}.
+
+% a block cannot be moved unless it's clear
+% nonexecutable move(B1,L1) if loc(B2 /* something, */)=B1.
+% concurrent actions are limited by the number g of grippers
+
+%  test 
+
+#spatom{contrib(c_move(V_B1, V_L1), c_abc(V_B1), V_B1+V_B2, t-1)} <- #spatom{occ(eql(c_move(V_B1, V_L1), true), t-1)}.
+
+% show/hide
+
+#base.
+#show h(eql(C, V))        : rigid(C)  : constant_object(C, V).
+#show h(eql(C, V), 0)     : fluent(C) : constant_object(C, V).
+#cumulative t.
+#show h(eql(C, V), t)     : fluent(C) : constant_object(C, V).
+#show occ(eql(C, V), t-1) : action(C) : constant_object(C, V).
+
+#show #spatom{occ(eql(c_a(V_B1, V_B2), true), t-1)}.
+#base.
+#show #spatom{h(eql(c_loc(V_B1), o_table), 0)}.
+#cumulative t.
+#show #spatom{h(eql(c_loc(V_B1), o_table), t)}.
+#show #spatom{occ(eql(c_move(V_B1, V_L1), true), t-1)}.
+
+% Query: q1
+% Maxstep: 1..10
+#base.
+<- not (#spatom{h(eql(c_loc(V_B1), o_table), 0)}) & query(q_q1).
+#volatile t.
+<- not (#spatom{h(eql(c_loc(V_B1), o_table), t)}) & query(q_q1).
+
+% Query: q2
+% Maxstep: 1..10
+<- not (#spatom{h(eql(c_loc(V_B1), o_table), t)}) & query(q_q2).
+<- not (#spatom{h(eql(c_loc(V_B1), o_table), t)}) & query(q_q2).
+

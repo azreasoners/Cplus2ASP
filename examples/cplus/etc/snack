@@ -1,0 +1,117 @@
+% fight for a snack
+
+:- sorts
+  snack; 
+  person >> neighbor.
+
+:- objects
+  apple, banana, carrot    :: snack;
+  i                        :: person;
+  left, right              :: neighbor.
+
+:- variables
+  S                        :: snack;
+  N                        :: neighbor.
+
+:- constants
+  owner(snack)             :: inertialFluent(person);
+  fightFor(neighbor,snack) :: exogenousAction.
+
+fightFor(N,S) may cause owner(S)=N.
+nonexecutable fightFor(N,S) if owner(S)\=i.
+
+/*
+:- nmquery
+maxstep :: 2;
+anyFluentValues;
+cwaActions;
+constraint 0: owner(S)=i;
+0: fightFor(left,apple);
+1: fightFor(right,banana).
+*/
+
+:- query
+maxstep :: 2;
+0: owner(S)=i;
+0: fightFor(left,apple) & -fightFor(right,apple) & -fightFor(left,banana) & -fightFor(right,banana) & -fightFor(left,carrot) & -fightFor(right,carrot);
+1: -fightFor(left,apple) & -fightFor(right,apple) & -fightFor(left,banana) & fightFor(right,banana) & -fightFor(left,carrot) & -fightFor(right,carrot).
+
+
+/*
+| ?- loadf snack.
+% loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/macros.std
+% loading file /v/filer1a/v0q031/appsmurf/examples-0804/snack
+% in transition mode...
+% 24 atoms, 42 rules, 39 clauses
+% Grounding time: 0.05 seconds
+% Completion time: 0.01 seconds
+% Total time: 0.06 seconds
+
+yes
+| ?- set(num,all).
+
+yes
+| ?- nmquery 0.
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 39 atoms, 66 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling mChaff spelt3... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0.00 seconds, search 0.00 seconds)
+
+Solution 1:
+
+0:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(left,apple)  
+
+1:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(right,banana)  
+
+2:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+
+Solution 2:
+
+0:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(left,apple)  
+
+1:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(right,banana)  
+
+2:  owner(apple)=i  owner(banana)=right  owner(carrot)=i  
+
+
+Solution 3:
+
+0:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(left,apple)  
+
+1:  owner(apple)=left  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(right,banana)  
+
+2:  owner(apple)=left  owner(banana)=right  owner(carrot)=i  
+
+
+Solution 4:
+
+0:  owner(apple)=i  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(left,apple)  
+
+1:  owner(apple)=left  owner(banana)=i  owner(carrot)=i  
+
+ACTIONS:  fightFor(right,banana)  
+
+2:  owner(apple)=left  owner(banana)=i  owner(carrot)=i  
+
+
+
+yes
+| ?- 
+*/

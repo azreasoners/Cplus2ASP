@@ -1,0 +1,268 @@
+
+#include <string>
+#include <iostream>
+
+#ifndef BOOST_FILESYSTEM_VERSION
+#define BOOST_FILESYSTEM_VERSION 3
+#endif
+#include <boost/filesystem.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/iostreams/device/null.hpp>
+
+#include "babb/utils/memory.h"
+#include "babb/utils/utils.h"
+
+#include "bcplus/Location.h"
+#include "bcplus/Configuration.h"
+
+namespace ios = boost::iostreams;
+namespace fs = boost::filesystem;
+
+namespace bcplus {
+
+const size_t Configuration::DEFAULT_VERB_LEVEL = Verb::STD;
+
+Configuration::Configuration(char const* bin, char const* version)
+{ 
+	_verb = DEFAULT_VERB_LEVEL;
+	if (version) _version = new ReferencedString(version);
+	if (bin) _bin_name = new ReferencedString(fs::path(bin).filename().native());
+	_parse_trace = false;
+}
+
+
+Configuration::~Configuration()
+{ /* Intentionally left blank */ }
+
+
+int Configuration::load(int argc, char const** argv) {
+	int ret = Status::STAT_OK;
+
+	// Figure out who we are
+	fs::path bin = argv[0];
+	_bin_name = new ReferencedString(bin.filename().native());
+
+	// parse arguments
+
+	for (int i = 1; i < argc; i++) {
+		ret = parseOption(argv[i], NULL);
+
+		if (ret == Status::STAT_NEXT_ARG) {
+			if (i < argc-1 && argv[i+1][0] != '-') {
+				ret = parseOption(argv[i], argv[i+1]);
+				i++;
+			} else {
+				std::cerr << "ERROR: Expected an option following \"" << argv[i] << "\"." << std::endl;
+				return Status::STAT_BAD_ARG;
+			}
+		}
+
+		switch (ret) {
+		case Status::STAT_BAD_ARG:
+			std::cerr << "ERROR: Unrecognized option: \"" << argv[i] << "\"." << std::endl;
+			/* no break */
+		case Status::STAT_HELP:
+		case Status::STAT_VERSION:
+			return ret;
+		default:
+			continue;
+		};
+
+	}
+	return ret;
+}
+
+bool Configuration::good() {
+	return true;
+}
+
+std::ostream& Configuration::ostream(Verb::type v) const {
+	static ios::stream<ios::null_sink> NULLSTREAM( (ios::null_sink()) );
+
+	if (v > _verb) return NULLSTREAM;
+	else if (v == Verb::ERROR || v == Verb::WARN) return std::cerr;
+#ifdef NDEBUG
+	else if (v > Verb::STD) return NULLSTREAM;
+#endif
+	else return std::cout;
+}
+void Configuration::error(std::string const& err, Location const* loc) const {
+	std::ostream& out = ostream(Verb::ERROR);
+
+	out << "ERROR: ";
+	if (loc) out << *loc << ": ";
+	out << err << std::endl;
+}
+
+#define EXTRACT_NAME val.assign(token, (size_t)(opt - token - 1));
+#define EXTRACT_NAME_VAL                                        \
+    {                                                           \
+        size_t n;                                               \
+        if (*(opt-1) == '=') { val2 = opt; n = 2; }             \
+        else if (opt2) { val2 = opt2; n = 1; }                  \
+        else return Status::STAT_NEXT_ARG;                      \
+        val.assign(token, (size_t)(opt - token - n));           \
+    }
+
+int Configuration::parseOption(char const* opt, char const* opt2) {
+	int ret = Status::STAT_OK;
+	std::string val, val2;
+    char const* marker;
+	char const* token = opt;
+	int option, int_v;
+	bool good;
+
+
+
+    /*!re2c
+     	re2c:define:YYCTYPE = "char";
+     	re2c:define:YYCURSOR = opt;
+     	re2c:yyfill:enable = 0;
+    	re2c:define:YYMARKER = marker;
+    	re2c:indent:top = 1;
+	
+		IDENTIFIER								= [a-zA-Z_][a-zA-Z0-9_]*;
+
+		("-s"|"--symtab-in")"="?				{ 
+												  EXTRACT_NAME_VAL;
+												  option = Option::SYMTAB_INPUT; 
+												  goto re2c_finish; }
+		("--symtab-out")"="?					{ 
+												  EXTRACT_NAME_VAL;
+												  option = Option::SYMTAB_OUTPUT;
+												  goto re2c_finish; }
+		"--verb""="?							{ 
+												  EXTRACT_NAME_VAL;
+												  option = Option::VERBOSITY;
+												  goto re2c_finish; }
+		"--parse-trace"							{
+												  EXTRACT_NAME; 
+												  option = Option::PARSE_TRACE;
+												  goto re2c_finish; }
+		"-h"|"-?"|"--help"						{ 
+												  EXTRACT_NAME; 
+												  option =  Option::HELP;
+												  goto re2c_finish; }
+		"-v"|"--version"						{ 
+												  EXTRACT_NAME; 
+												  option = Option::VERSION;
+												  goto re2c_finish; }
+		IDENTIFIER "=" [^\x00]*					{ 
+												  char const* c = strchr(token, '=');
+												  val.assign(token, (size_t)(c - token));
+												  val2.assign(c+1,opt-c-1);
+												  option = Option::MACRO_DEF;
+												  goto re2c_finish; }
+		.										{ 
+												  val = token;
+												  option = Option::BAD;
+												  goto re2c_finish; }
+	*/
+
+re2c_finish:
+
+	switch (option) {
+	case Option::SYMTAB_INPUT:
+//		if (fs::native(val2)) {
+			_symtab_in = new ReferencedPath(val2);
+//		} else {
+//			ret = Status::STAT_BAD_ARG;
+//			std::cerr << "ERROR: \"" << val2 << "\" is not a valid file path." << std::endl;
+//		}
+		break;
+	case Option::SYMTAB_OUTPUT:
+//		if (fs::native(val2)) {
+			_symtab_out = new ReferencedPath(val2);
+//		} else {
+//			ret = Status::STAT_BAD_ARG;
+//			std::cerr << "ERROR: \"" << val2 << "\" is not a valid file path." << std::endl;
+//
+//		}
+		break;
+
+	case Option::VERBOSITY:
+		good = babb::utils::fromString(val2.c_str(), int_v);
+		if (!good || int_v < 0) {
+			ret = Status::STAT_BAD_ARG;
+			std::cerr << "ERROR: Bad value provided for command line option. Expected a non-negative integer for argument \"" << val << "\"." << std::endl;
+		} else {
+			verbosity(int_v);	
+		}
+		break;
+	case Option::PARSE_TRACE:
+		_parse_trace = true;
+		break;
+	case Option::MACRO_DEF:
+		addMacro(new ReferencedString(val), new ReferencedString(val2));
+		break;
+
+	case Option::HELP:
+		ret = Status::STAT_HELP;
+		break;
+	case Option::VERSION:
+		ret = Status::STAT_VERSION;
+		break;
+	case Option::BAD:			
+	default:
+		ret = Status::STAT_BAD_ARG;
+		break;
+	}
+	return ret;
+
+}
+
+std::ostream& Configuration::outputVersion(std::ostream& out) const {
+	if (binaryName()) out << *binaryName() << " ";
+	if (version()) out << "version " << *version() << std::endl;
+	return out;
+}
+
+std::ostream& Configuration::outputHelp(std::ostream& out) const {
+	out << "---------------------------------------------------------------------------------------"<< std::endl;
+	outputVersion(out) 
+		<< "---------------------------------------------------------------------------------------"<< std::endl
+		<< "Usage: " ;
+		if (binaryName()) out << *binaryName();
+		else out << "<binary>";
+		out << " [<OPTIONS>] [<CONSTANTS>] <INPUT_FILES>" 											<< std::endl
+		<< "---------------------------------------------------------------------------------------"<< std::endl
+		<< "OPTIONS:"																				<< std::endl;
+	outputOptions(out);
+	out 																							<< std::endl
+		<< "CONSTANTS:"																				<< std::endl
+		<< "     <identifier>=<value>"																<< std::endl
+		<< "          - Defines <identifier> to be a macro which expands to <value>"				<< std::endl;
+	return out;
+}
+
+std::ostream& Configuration::outputOptions(std::ostream& out) const {
+	out << "     Parser Options:"																	<< std::endl
+		<< "          -s=<FILE>"																	<< std::endl
+		<< "          --symtab-in=<FILE>"															<< std::endl
+		<< "               - An XML file to read the initial symbol table in from. [none]"			<< std::endl
+		<< "          --symtab-out=<FILE>"															<< std::endl
+		<< "               - A file to write the final symbol table to. [none]"						<< std::endl
+		<< "          --verb=<LEVEL>"																<< std::endl
+		<< "               - The level of output to show:"											<< std::endl
+		<< "                    " << Verb::ERROR 		<< "  - Error output only"					<< std::endl
+		<< "                    " << Verb::WARN 		<< "  - Warnings"							<< std::endl
+		<< "                    " << Verb::STD	 		<< "  - Standard messages [default]"		<< std::endl
+		<< "                 Only available when compiled in debug mode:"							<< std::endl
+		<< "                    " << Verb::OP 			<< "  - Operation level trace output" 		<< std::endl
+		<< "                    " << Verb::DETAIL	 	<< "  - Detailed debugging messages"		<< std::endl
+		<< "                    " << Verb::TRACE_PARSER	<< "+ - Parser debugging messages"			<< std::endl
+		<< "          --parse-trace"																<< std::endl
+		<< "               - Enable lemon parser trace output."										<< std::endl
+																									<< std::endl
+		<< "     Other Options:"																	<< std::endl
+		<< "          -v"																			<< std::endl
+		<< "          --version"																	<< std::endl
+		<< "               - Displays the version dialog."											<< std::endl
+		<< "          -h"																			<< std::endl
+		<< "          --help"																		<< std::endl
+		<< "               - Shows this dialog."													<< std::endl;
+	return out;
+
+}
+
+}

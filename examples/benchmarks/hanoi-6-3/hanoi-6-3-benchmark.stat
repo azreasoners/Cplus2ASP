@@ -1,0 +1,5 @@
+int(1..6).
+peg(p1;p2;p3).
+
+location(disc(D)) :- int(D).
+location(L) :- peg(L).

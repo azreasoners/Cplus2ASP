@@ -1,0 +1,37 @@
+% File 'queens'
+%
+% To solve the 8 queens problem, type
+%
+% | ?- loadf 'queens'.
+%
+% and then
+%
+% | ?- sat.
+%
+% See Section C.1 of the tutorial for discussion.
+
+:- macros
+  n -> 8.
+
+:- sorts
+  row; column.
+
+:- objects
+  1..n		:: row;
+  1..n		:: column.
+
+:- constants
+  queen(row)	:: column.
+
+:- variables
+  I, J		:: row.
+
+% generate
+exogenous queen(I).
+
+% test: no two queens in the same column or diagonal
+
+constraint queen(I) \= queen(J) where I<J.
+
+constraint abs(queen(I)-queen(J)) \= abs(I-J)
+                              where I<J.

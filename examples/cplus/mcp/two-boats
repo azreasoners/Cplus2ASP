@@ -1,0 +1,11 @@
+% File 'two-boats' 
+
+:- macros
+  maxInt -> 3.
+
+:- include basic; departing.
+
+:- objects
+  boat1     :: vessel.
+
+caused capacity(boat1)=1 unless ab14.

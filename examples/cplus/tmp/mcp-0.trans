@@ -1,0 +1,209 @@
+% File "/home/jbabb1/workspace/cplus2asp/tests/domains/mcp-test".
+% File 'mcp-test'
+
+% [MaxAdditive:3]
+% File "mcp".
+% File 'mcp'
+
+#base.
+sort(vessel).
+#domain vessel(V_vessel).
+sort_object(vessel,V_vessel).
+#hide vessel(V_vessel).
+
+sort(location).
+#domain location(V_location).
+sort_object(location,V_location).
+#hide location(V_location).
+
+sort(group).
+#domain group(V_group).
+sort_object(group,V_group).
+#hide group(V_group).
+
+
+#domain vessel(V).
+#domain location(L).
+#domain group(G).
+sort(numRange_0_3).
+#domain numRange_0_3(V_numRange_0_3).
+sort_object(numRange_0_3,V_numRange_0_3).
+#hide numRange_0_3(V_numRange_0_3).
+
+numRange_0_3(0).
+numRange_0_3(1).
+numRange_0_3(2).
+numRange_0_3(3).
+#domain numRange_0_3(N).
+
+vessel(boat1).
+vessel(boat2).
+location(bank1).
+location(bank2).
+group(mi).
+group(ca).
+
+inertialFluent(loc(V_vessel)).
+constant_sort(loc(V_vessel),location).
+additiveFluent(num(V_group, V_location)).
+constant_sort(num(V_group, V_location),numRange_0_3).
+additiveAction(departing(V_group, V_location)).
+constant_sort(departing(V_group, V_location),numRange_0_3).
+exogenousAction(cross(V_vessel)).
+constant_sort(cross(V_vessel),boolean).
+location_star(none).
+location_star(V_location).
+sort(location_star).
+#domain location_star(V_location_star).
+sort_object(location_star,V_location_star).
+#hide location_star(V_location_star).
+
+attribute(to(V_vessel)).
+constant_sort(to(V_vessel),location_star).
+action_attribute(cross(V_vessel), to(V_vessel)).
+numRange_0_3_star(none).
+numRange_0_3_star(V_numRange_0_3).
+sort(numRange_0_3_star).
+#domain numRange_0_3_star(V_numRange_0_3_star).
+sort_object(numRange_0_3_star,V_numRange_0_3_star).
+#hide numRange_0_3_star(V_numRange_0_3_star).
+
+attribute(howmany(V_vessel, V_group)).
+constant_sort(howmany(V_vessel, V_group),numRange_0_3_star).
+action_attribute(cross(V_vessel), howmany(V_vessel, V_group)).
+sort(numRange_1_2).
+#domain numRange_1_2(V_numRange_1_2).
+sort_object(numRange_1_2,V_numRange_1_2).
+#hide numRange_1_2(V_numRange_1_2).
+
+numRange_1_2(1).
+numRange_1_2(2).
+rigid(capacity(V_vessel)).
+constant_sort(capacity(V_vessel),numRange_1_2).
+
+
+(h(eql(capacity(boat1), 1))).
+(h(eql(capacity(boat2), 2))).
+
+#domain numRange_0_3(X_Value_0).
+#domain numRange_0_3(X_Value_1).
+#domain numRange_0_3(X_Value_2).
+(false) <- not (((?[X_Value_0]:(X_Value_0 != 0 & h(eql(num(mi,L), X_Value_0), 0))) -> (?[X_Value_1, X_Value_2]:(X_Value_1 >= X_Value_2 & h(eql(num(mi,L), X_Value_1), 0) & h(eql(num(ca,L), X_Value_2), 0))))).
+#domain numRange_0_3(X_Value_3).
+#domain numRange_0_3(X_Value_4).
+#domain numRange_0_3(X_Value_5).
+#cumulative maxstep.
+(false) <- not (((?[X_Value_3]:(X_Value_3 != 0 & h(eql(num(mi,L), X_Value_3), maxstep))) -> (?[X_Value_4, X_Value_5]:(X_Value_4 >= X_Value_5 & h(eql(num(mi,L), X_Value_4), maxstep) & h(eql(num(ca,L), X_Value_5), maxstep))))).
+#base.
+#domain numRange_0_3(X_Value_6).
+#domain numRange_0_3(X_Value_7).
+#domain numRange_0_3(X_Value_8).
+#domain numRange_0_3(X_Value_9).
+#domain numRange_0_3(X_Value_10).
+#cumulative maxstep.
+(false) <- not (((?[X_Value_6, X_Value_7]:(X_Value_6 - X_Value_7 != 0 & h(eql(num(mi,L), X_Value_6), maxstep-1) & occ(eql(departing(mi,L), X_Value_7), maxstep-1))) -> (?[X_Value_8, X_Value_9, X_Value_10]:(X_Value_8 - X_Value_9 >= X_Value_10 & h(eql(num(mi,L), X_Value_8), maxstep-1) & occ(eql(departing(mi,L), X_Value_9), maxstep-1) & h(eql(num(ca,L), X_Value_10), maxstep-1))))).
+#base.
+#domain numRange_0_3(X_Value_11).
+#domain numRange_0_3(X_Value_12).
+#cumulative maxstep.
+(false) <- not ((?[X_Value_11, X_Value_12]:(X_Value_11 >= X_Value_12 & h(eql(num(G,L), X_Value_11), maxstep-1) & occ(eql(departing(G,L), X_Value_12), maxstep-1)))).
+
+(h(eql(loc(V), L), maxstep)) <- (occ(eql(to(V), L), maxstep-1)) & (occ(eql(cross(V), true), maxstep-1)).
+(occ(eql(contribution(cross(V),num(G,L)), -1 * (N)), maxstep-1)) <- ((occ(eql(cross(V), true), maxstep-1))) & (occ(eql(howmany(V,G), N), maxstep-1) & h(eql(loc(V), L), maxstep-1)).
+(occ(eql(contribution(cross(V),num(G,L)), N), maxstep-1)) <- ((occ(eql(cross(V), true), maxstep-1))) & (occ(eql(howmany(V,G), N), maxstep-1) & occ(eql(to(V), L), maxstep-1)).
+(occ(eql(contribution(cross(V),departing(G,L)), N), maxstep-1)) <- ((occ(eql(cross(V), true), maxstep-1))) & (occ(eql(howmany(V,G), N), maxstep-1) & h(eql(loc(V), L), maxstep-1)).
+
+#base.
+#domain location(X_Value_13).
+#cumulative maxstep.
+(false) <- (occ(eql(cross(V), true), maxstep-1)) & (h(eql(loc(V), X_Value_13), maxstep-1) & occ(eql(to(V), X_Value_13), maxstep-1)).
+(false) <- (occ(eql(cross(V), true), maxstep-1)) & (![G]:((occ(eql(howmany(V,G), 0), maxstep-1)))).
+#base.
+#domain numRange_0_3_star(X_Value_14).
+#domain numRange_0_3_star(X_Value_15).
+#domain numRange_1_2(X_Value_16).
+#cumulative maxstep.
+(false) <- (occ(eql(cross(V), true), maxstep-1)) & (?[X_Value_14, X_Value_15, X_Value_16]:((X_Value_14 + X_Value_15 > X_Value_16) & occ(eql(howmany(V,mi), X_Value_14), maxstep-1) & occ(eql(howmany(V,ca), X_Value_15), maxstep-1) & h(eql(capacity(V), X_Value_16)))).
+
+
+% [Query: Label:0, Maxstep:6::7]
+#base.
+false <- query_label(0) & not ((((h(eql(num(mi,bank1), 3), 0) & h(eql(num(ca,bank1), 3), 0))))).
+false <- query_label(0) & not ((((h(eql(num(mi,bank2), 0), 0) & h(eql(num(ca,bank2), 0), 0))))).
+false <- query_label(0) & not (((![V]:((h(eql(loc(V), bank1), 0)))))).
+#volatile maxstep.
+false <- query_label(0) & not ((((h(eql(num(mi,bank1), 0), maxstep) & h(eql(num(ca,bank1), 0), maxstep))))).
+
+
+
+%% 
+% | ?- loadf 'mcp-test'.
+% % loading file macros.std
+% % loading file /stage/projects3/tag/ccalc/examples/mcp-test
+% % loading file /stage/projects3/tag/ccalc/examples/mcp
+% % loading file /projects/tag/ccalc/additive
+% % loading file /projects/tag/ccalc/arithmetic
+% % in transition mode...
+% % 316 atoms, 790 rules, 3008 clauses (360 new atoms)
+% % Grounding time: 2.23 seconds
+% % Completion time: 1.82 seconds
+% yes
+% | ?- query 0.
+% % After shifting: 3916 atoms (including new atoms), 17818 clauses
+% % Shifting time: 0.35 seconds
+% % Calling mChaff... 
+% % Solution time: 0.6 seconds (prep 0.2 seconds, search 0.4 seconds)  
+% 
+% No solution with maxstep 6.
+% 
+% % After shifting: 4564 atoms (including new atoms), 20780 clauses
+% % Shifting time: 0.41 seconds
+% % Calling mChaff... 
+% % Solution time: 1.03 seconds (prep 0.22 seconds, search 0.81 seconds)  
+% 
+% 0:  num(mi,bank1)=3  num(mi,bank2)=0  num(ca,bank1)=3  num(ca,bank2)=0  loc(boat1)=bank1  loc(boat2)=bank1 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):0,howmany(ca):1,to:bank2)  cross(boat2,howmany(mi):0,howmany(ca):2,to:bank2)  departed(mi,bank1)eq 0  departed(mi,bank2)eq 0  departed(ca,bank1)eq 3  departed(ca,bank2)eq 0  
+% 
+% 1:  num(mi,bank1)=3  num(mi,bank2)=0  num(ca,bank1)=0  num(ca,bank2)=3  loc(boat1)=bank2  loc(boat2)=bank2 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):0,howmany(ca):1,to:bank1)  cross(boat2,howmany(mi):0,howmany(ca):1,to:bank1)  departed(mi,bank1)eq 0  departed(mi,bank2)eq 0  departed(ca,bank1)eq 0  departed(ca,bank2)eq 2  
+% 
+% 2:  num(mi,bank1)=3  num(mi,bank2)=0  num(ca,bank1)=2  num(ca,bank2)=1  loc(boat1)=bank1  loc(boat2)=bank1 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):1,howmany(ca):0,to:bank2)  cross(boat2,howmany(mi):1,howmany(ca):1,to:bank2)  departed(mi,bank1)eq 2  departed(mi,bank2)eq 0  departed(ca,bank1)eq 1  departed(ca,bank2)eq 0  
+% 
+% 3:  num(mi,bank1)=1  num(mi,bank2)=2  num(ca,bank1)=1  num(ca,bank2)=2  loc(boat1)=bank2  loc(boat2)=bank2 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):1,howmany(ca):0,to:bank1)  cross(boat2,howmany(mi):0,howmany(ca):1,to:bank1)  departed(mi,bank1)eq 0  departed(mi,bank2)eq 1  departed(ca,bank1)eq 0  departed(ca,bank2)eq 1  
+% 
+% 4:  num(mi,bank1)=2  num(mi,bank2)=1  num(ca,bank1)=2  num(ca,bank2)=1  loc(boat1)=bank1  loc(boat2)=bank1 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):0,howmany(ca):1,to:bank2)  cross(boat2,howmany(mi):2,howmany(ca):0,to:bank2)  departed(mi,bank1)eq 2  departed(mi,bank2)eq 0  departed(ca,bank1)eq 1  departed(ca,bank2)eq 0  
+% 
+% 5:  num(mi,bank1)=0  num(mi,bank2)=3  num(ca,bank1)=1  num(ca,bank2)=2  loc(boat1)=bank2  loc(boat2)=bank2 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):0,howmany(ca):1,to:bank1)  cross(boat2,howmany(mi):0,howmany(ca):1,to:bank1)  departed(mi,bank1)eq 0  departed(mi,bank2)eq 0  departed(ca,bank1)eq 0  departed(ca,bank2)eq 2  
+% 
+% 6:  num(mi,bank1)=0  num(mi,bank2)=3  num(ca,bank1)=3  num(ca,bank2)=0  loc(boat1)=bank1  loc(boat2)=bank1 
+% 
+% ACTIONS:  cross(boat1,howmany(mi):0,howmany(ca):1,to:bank2)  cross(boat2,howmany(mi):0,howmany(ca):2,to:bank2)  departed(mi,bank1)eq 0  departed(mi,bank2)eq 0  departed(ca,bank1)eq 3  departed(ca,bank2)eq 0  
+% 
+% 7:  num(mi,bank1)=0  num(mi,bank2)=3  num(ca,bank1)=0  num(ca,bank2)=3  loc(boat1)=bank2  loc(boat2)=bank2 
+% yes
+% | ?- 
+% 
+#base.
+#hide h/2.
+#hide h/1.
+#show h(eql(loc(V), V_location), 0).
+#cumulative maxstep.
+#show h(eql(loc(V), V_location), maxstep).
+#base.
+#show h(eql(num(G,L), V_numRange_0_3), 0).
+#cumulative maxstep.
+#show h(eql(num(G,L), V_numRange_0_3), maxstep).
+#show occ(eql(cross(V), V_boolean), maxstep-1).
+#show occ(eql(to(V), V_location_star), maxstep-1).
+#show occ(eql(howmany(V,G), V_numRange_0_3_star), maxstep-1).
+#show occ(eql(departing(G,L), V_numRange_0_3), maxstep-1).

@@ -1,0 +1,79 @@
+AS2Transition README
+--------------------
+
+AS2Transition is a program designed to take specially-formed answer set outputs from popular answer set solvers (clasp, cmodels, and smodels) and transform them into output similar to how the program CCalc outputs its models. It works best on translations of causal logic or action descriptions (i.e., CCalc programs) to ASP, but can help clean up output of other kinds of ASP programs.
+
+With default options enabled, AS2Transition will perform the following transformations:
+- Only predicates of the form h(something(args),int) or h(something_else,int) ("h-style predicates") will be shown, where h() stands for "holds" and int is understood to be a positive integer time stamp.
+- h-style predicates will be automatically sorted and grouped by time stamp.
+- h-style predicates where the inner predicate (the "something"s above) is of the form eq(constant,value) or eql(constant,value) ("eq-style predicates") will be displayed as "constant=value".
+- If a predicate "constant_sort" is defined that takes a constant and a domain as its arguments (e.g., "constant_sort(run,boolean).", "constant_sort(has(fruit),number).", etc.), AS2Transition will watch those values. Any eq-style predicate whose domain is boolean will get transformed further such that "constant=true" will just become "constant" and "constant=false" won't be displayed at all.
+- If a predicate "action" or "actionConstant" is defined that has a constant as its argument (e.g., "action(run).", "actionConstant(take(fruit)).", etc.), AS2Transition will compare this against any h-style predicates it sees and will put any that qualify as actions into a separate group from the ones that don't. (This makes it easier to distinguish between the state of a system at a given time and the actions executed in that time.)
+- Any h-style predicates whose inner predicate starts with "x_" (e.g., "h(x_something(args),time)" or "h(eql(x_something(args),value),time)") won't be displayed. This allows for the creation of intermediate predicates that are hidden by default.
+- Any h-style predicates whose inner predicate is "contribution" or "x_contrib" (e.g., h(eql(contribution(thing,other_thing),value),time)) will be hidden by default, assumed to be intermediate predicates used for additive computations.
+
+Compiling AS2Transition:
+------------------------
+AS2Transition expects that gcc (specifically the soft link to gcc's C++ compiler, g++) is installed and that the target system is Unix-like. You can probably compile it with any remotely modern C++ compiler, you'll just have to compile it yourself or modify the makefile.
+Assuming you have a standard setup, just type the following lines into your favorite terminal emulator to compile AS2Transition:
+
+make
+sudo make install
+
+(assuming you're not root, as the install command copies the executable into /usr/local/bin by default). If you would like to install AS2Transition in a different location (such as "~/bin"), replace the last make command with:
+
+make INSTALLPATH="~/bin" install 
+
+which will install AS2Transition to the desired location (in this case, "~/bin"). In this example, one wouldn't need to run sudo to install AS2Transition.
+As an alternative to the last step, you can simply take the executable created by make and put it wherever you wish.
+
+Command Line:
+-------------
+as2transition [OPTIONS] [-f IN_FILE] [-o OUT_FILE]
+
+If given a value for IN_FILE, will parse that file, otherwise will parse standard in (to support piping input).
+If given a value for OUT_FILE, will output results to OUT_FILE, otherwise will output to standard out.
+
+Options:
+-a  (or --all) causes as2transition to display all positive predicates returned by the solver (vs. just the h-style ones).
+-A  (or --ALL) is a shortcut for "-a -neg", forcing as2transition to display every single predicate, positive and negative.
+-e  (or --eq) stops as2transition from transforming h-style, eq-style predicates (e.g., h(eq(p(x),v),t) or h(eql(p(x),v),t) into CCalc-style representations (e.g., p(x)=v).
+-contrib (or --contrib-pred) will show h-style "contribution" and "x_contrib" predicates (usually these intermediate additive predicates are hidden).
+-l  (or --line) prints out each predicate on a separate line, with solution and time step headers also getting their own lines.
+-na (or --no-actions) stops as2transition from displaying action predicates separately.
+-neg (or --negated) shows negated predicates (e.g., "-x(y,z)") alongside their normal counterparts (e.g., "x(y,z)"), instead of hiding them by default.
+-s  (or --strip) will extract the inner predicate from h-style predicates, displaying h(x(y,z),0) as x(y,z).
+-x  (or --x-pred) will show h-style predicates whose inner predicate begins with "x_", like "h(x_intermediate(5),0)" (this allows for additional intermediate predicates to be created during translation, but then be hidden by default).
+--help shows a brief overview of as2transition's command line options and exits.
+-v  (or --version) outputs version information and exits.
+
+AS2Transition will return 100 if it doesn't find any solutions, 101 if it does, 1 if an error occurs, or 0 if there's nothing to do (e.g., if the "--version" option was passed to it).
+
+Examples of Use:
+----------------
+gringo some_asp_file.lp | clasp | as2transition
+  would pass the answer sets generated by clasp directly
+  to as2transition, which would output the models to standard out.
+
+as2transition -f answer_sets.txt -o models.txt
+  would process the answer_sets.txt file and output the
+  results to the file models.txt.
+
+Revisions and History:
+----------------------
+v1.8 - Now exits with code 100 if no solutions are found, 101 if solutions are found, 1 if an error occurs, or 0 if there's nothing to do.
+v1.7.3 - Fixed a bug where an unknown solver's output would be (erroneously) flagged as not having solutions due to bad text processing.
+v1.7.2 - Optimized solution display routine, fixed extra space in solutions with no "timeless" predicates output, fixed bug where a solution with only actions wouldn't display properly.
+v1.7.1 - Fixed a bug where bad time stamps could appear with "timeless" predicates.
+v1.7 - Overhauled predicate detection, enabled support for new rigid and h-style predicate constructs, added option to show negated predicates.
+v1.6.1 - Fixed bug where a time step with all false predicates would not be displayed.
+v1.6 - Changed name to as2transition, added auto-hiding of "contribution" predicates (and option to show them anyway).
+v1.5 - Added capability to read output from cmodels and smodels in addition to clasp (& family), along with rudimentary ability to try to read an unknown/unidentified solver's output. Reduced memory usage and optimized handling of multiple solutions.
+v1.4.1 - Fixed a bug with the program failing to recognize predicates beginning with "x_" inside of eq-style predicates.
+v1.4 - Handling of eq-style predicates implemented, boolean predicates simplified, actions separated from fluents, option to print out solutions one predicate per line added.
+v1.3.1 - Program now outputs solutions as soon as they are ready to output instead of waiting until all solutions have been processed.
+v1.3 - Added check for "x_" h-style predicates, and hide them by default. Added option to show these predicates anyway.
+v1.2 - Added option controlling whether h-style predicates are added to solutions as a whole element or if their inner predicate is extracted and added alone.
+v1.1 - Added support for newer clasp versions outputting "[UN]SATISFIABLE" at the end of the answer section.
+v1.01 - Added version info.
+v1.00 - First working version.

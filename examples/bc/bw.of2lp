@@ -1,0 +1,69 @@
+% File "/home/jbabb1/workspace/cplus2asp/examples/bc/bw.bc".
+
+#base.
+sort(block).
+#domain block(V_block).
+sort_object(block,V_block).
+#hide block(V_block).
+
+loc(V_block).
+sort(loc).
+#domain loc(V_loc).
+sort_object(loc,V_loc).
+#hide loc(V_loc).
+
+
+block(b1).
+block(b2).
+block(b3).
+block(b4).
+loc(table).
+
+inertialFluent(loc(V_block)).
+constant_sort(loc(V_block),loc).
+sdFluent(in_tower(V_block)).
+constant_sort(in_tower(V_block),boolean).
+exogenousAction(move(V_block, V_loc)).
+constant_sort(move(V_block, V_loc),boolean).
+
+#domain block(B).
+#domain block(B1).
+#domain block(B2).
+#domain loc(L).
+#domain loc(L1).
+
+% location
+(false) <- h(eql(loc(B1), B), 0) & h(eql(loc(B2), B), 0) & (B1 != B2).
+#cumulative maxstep.
+(false) <- h(eql(loc(B1), B), maxstep) & h(eql(loc(B2), B), maxstep) & (B1 != B2).
+
+% Definition of a tower
+#base.
+((h(eql(in_tower(B), false), 0))) <- not not (((h(eql(in_tower(B), false), 0)))).
+#cumulative maxstep.
+((h(eql(in_tower(B), false), maxstep))) <- not not (((h(eql(in_tower(B), false), maxstep)))).
+#base.
+(h(eql(in_tower(B), true), 0)) <- h(eql(loc(B), table), 0).
+#cumulative maxstep.
+(h(eql(in_tower(B), true), maxstep)) <- h(eql(loc(B), table), maxstep).
+#base.
+(h(eql(in_tower(B), true), 0)) <- h(eql(loc(B), B1), 0) & h(eql(in_tower(B1), true), 0).
+#cumulative maxstep.
+(h(eql(in_tower(B), true), maxstep)) <- h(eql(loc(B), B1), maxstep) & h(eql(in_tower(B1), true), maxstep).
+
+% Blocks don't float in the air
+#base.
+(false) <- h(eql(in_tower(B), false), 0).
+#cumulative maxstep.
+(false) <- h(eql(in_tower(B), false), maxstep).
+
+% Moving a block
+(h(eql(loc(B), L), maxstep)) <- (occ(eql(move(B,L), true), maxstep-1)).
+
+(false) <- (occ(eql(move(B,L), true), maxstep-1)) & (h(eql(loc(B1), B), maxstep-1)).
+
+% [Query: Label:stack]
+#base.
+false <- query_label(stack) & not (((h(eql(loc(B), table), 0)))).
+#volatile maxstep.
+false <- query_label(stack) & not (((h(eql(loc(b4), b3), maxstep) & h(eql(loc(b3), b2), maxstep) & h(eql(loc(b2), b1), maxstep)))).

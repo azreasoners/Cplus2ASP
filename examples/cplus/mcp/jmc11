@@ -1,0 +1,13 @@
+% File 'jmc11': McCarthy's elaboration No. 11
+
+:- include basic; departing.
+
+:- constants
+  convert(location)     :: exogenousAction.
+
+convert(L) increments num(mi,L) by 1 unless ab14(L).
+convert(L) decrements num(ca,L) by 1 unless ab15(L).
+
+% converting is possible only if there are three missionaries and only one
+% cannibal in the bank
+always convert(L) ->> (staying(mi,L)>=3 & staying(ca,L)=1) unless ab16(L).

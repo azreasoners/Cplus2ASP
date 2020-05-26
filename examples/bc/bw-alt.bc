@@ -1,0 +1,41 @@
+:- macros
+	N -> 4; M -> 5.
+
+:- sorts
+	loc >> block; 
+	loc >> table;
+	gripper.
+
+:- objects
+	blk(1..N) 				:: block; 
+	tbl(1..M) 				:: table;
+	left, right				:: gripper.
+
+:- constants
+	on(block) 				:: inertialFluent(loc);
+	pos(loc) 				:: sdFluent(table*);
+	move(gripper,block,loc) :: action.
+
+:- variables
+	I 						:: 1..N;
+	B, B1, B2 				:: block;
+	T 						:: table;
+	L, L1, L2 				:: loc;
+	G						:: gripper.
+
+false if on(B1)=L & on(B2)=L where B1\=B2.
+
+default pos(B)=none.
+pos(T)=T.
+pos(B)=T if on(B)=L & pos(L)=T.
+false if pos(B)=none.
+
+move(G,B,L) causes on(B)=L.
+false after move(G,B,L) & move(G,B1,L1) 
+	where B\=B1.
+
+
+:- query
+	label :: stack;
+	0: on(blk(I))=tbl(I);
+	maxstep: pos(B)=tbl(1).

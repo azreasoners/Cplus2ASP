@@ -1,0 +1,53 @@
+# Shared configuration for all makefiles to include.
+
+AUTOMAKE_OPTIONS = subdir-objects
+
+#libtool
+ACLOCAL_AMFLAGS = -I build-scripts 
+
+AM_CXXFLAGS = -I$(PROJECT_ROOT)/externals -I$(PROJECT_ROOT)/externals/bcplusparser/include -L$(PROJECT_ROOT)/externals/bcplusparser \
+	-I$(PROJECT_ROOT)/externals/as2transition/include -L$(PROJECT_ROOT)/externals/as2transition --std=c++0x
+AM_CFLAGS = -I$(PROJECT_ROOT)/externals -I$(PROJECT_ROOT)/externals/bcplusparser/include -L$(PROJECT_ROOT)/externals/bcplusparser \
+	-I$(PROJECT_ROOT)/externals/as2transition/include -L$(PROJECT_ROOT)/externals/as2transition
+AM_CPPFLAGS = -I$(PROJECT_ROOT)/externals -I$(PROJECT_ROOT)/externals/bcplus/parser/include -L$(PROJECT_ROOT)/externals/bcplusparser \
+	-I$(PROJECT_ROOT)/externals/as2transition/include -L$(PROJECT_ROOT)/externals/as2transition --std=c++0x
+
+# Debugging Flags
+if DEBUG
+AM_CPPFLAGS += -DDEBUG -g3 -O0 -Wall -fno-inline
+AM_CFLAGS += -DDDEBUG -g3 -O0 -Wall -fno-inline
+AM_CXXFLAGS += -DDEBUG -g3 -O0 -Wall -fno-inline
+else
+AM_CPPFLAGS += -DNDEBUG -O3
+AM_CFLAGS += -DNDEBUG -O3 
+AM_CXXFLAGS += -DNDEBUG -O3
+endif
+
+# RE2C rules
+if MAINTAINER_MODE
+if HAVE_RE2C
+.re2c.cpp:
+	$(RE2C) -c $< > $@
+.r2c.cpp:
+	$(RE2C) $< > $@
+else
+.re2c.cpp:
+	@- echo "ERROR: Configured to build in maintainer mode but re2c is not installed on the computer."
+	@- echo "ERROR: Modified re2c files cannot be compiled into the corresponding .cpp file."
+	@- echo "ERROR: Please install re2c or add the '--disable-maintainer-mode' option during configuration."
+	@- exit 1
+.r2c.cpp:
+	@- echo "ERROR: Configured to build in maintainer mode but re2c is not installed on the computer."
+	@- echo "ERROR: Modified re2c files cannot be compiled into the corresponding .cpp file."
+	@- echo "ERROR: Please install re2c or add the '--disable-maintainer-mode' option during configuration."
+	@- exit 1
+endif
+else
+.re2c.cpp:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild re2c files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.r2c.cpp:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild re2c files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+endif
+

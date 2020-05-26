@@ -1,0 +1,363 @@
+\mathtt{start} &\leftarrow \mathtt{statement\_lst}\\
+\mathtt{statement\_lst} &\leftarrow\\
+\mathtt{statement\_lst} &\leftarrow \mathtt{statement\_lst} \mathtt{error}\\
+\mathtt{statement\_lst} &\leftarrow \mathtt{statement\_lst} \mathtt{statement}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_macro\_def}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_constant\_def}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_object\_def}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_variable\_def}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_sort\_def}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_code\_blk}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_law}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_show}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_hide}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_noconcurrency}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_strong\_noconcurrency}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_maxafvalue}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_maxadditive}\\
+\mathtt{statement} &\leftarrow \mathtt{stmt\_query}\\
+\mathtt{base\_elem} &\leftarrow \mathtt{constant}\\
+\mathtt{base\_elem} &\leftarrow \mathtt{base\_elem\_no\_const}\\
+\mathtt{base\_elem\_no\_const} &\leftarrow \mathtt{object}\\
+\mathtt{base\_elem\_no\_const} &\leftarrow \mathtt{variable}\\
+\mathtt{base\_elem\_no\_const} &\leftarrow \mathtt{lua}\\
+\mathtt{constant} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{term\_lst} )\\
+\mathtt{constant} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{object} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{term\_lst} )\\
+\mathtt{object} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{variable} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{lua} &\leftarrow @ \mathtt{IDENTIFIER} ( \mathtt{term\_lst} )\\
+\mathtt{lua} &\leftarrow @ \mathtt{IDENTIFIER}\\
+\mathtt{term\_lst} &\leftarrow \mathtt{term}\\
+\mathtt{term\_lst} &\leftarrow \mathtt{term\_lst} , \mathtt{term}\\
+\mathtt{constant\_one\_const} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{term\_no\_const\_lst} )\\
+\mathtt{constant\_one\_const} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{term\_no\_const\_lst} &\leftarrow \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_lst} &\leftarrow \mathtt{term\_no\_const\_lst} , \mathtt{term\_no\_const}\\
+\mathtt{base\_elem\_local} &\leftarrow \mathtt{constant\_local}\\
+\mathtt{base\_elem\_local} &\leftarrow \mathtt{base\_elem\_local\_no\_const}\\
+\mathtt{base\_elem\_local\_no\_const} &\leftarrow \mathtt{object\_local}\\
+\mathtt{base\_elem\_local\_no\_const} &\leftarrow \mathtt{variable}\\
+\mathtt{base\_elem\_local\_no\_const} &\leftarrow \mathtt{variable\_local}\\
+\mathtt{base\_elem\_local\_no\_const} &\leftarrow \mathtt{lua\_local}\\
+\mathtt{constant\_local} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{term\_local\_lst} )\\
+\mathtt{constant\_local} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{object\_local} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{term\_local\_lst} )\\
+\mathtt{object\_local} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{variable\_local} &\leftarrow # \mathtt{IDENTIFIER}\\
+\mathtt{variable\_local} &\leftarrow # \mathtt{INTEGER}\\
+\mathtt{lua\_local} &\leftarrow @ \mathtt{IDENTIFIER} ( \mathtt{term\_local\_lst} )\\
+\mathtt{lua\_local} &\leftarrow @ \mathtt{IDENTIFIER}\\
+\mathtt{term\_local\_lst} &\leftarrow \mathtt{term\_local}\\
+\mathtt{term\_local\_lst} &\leftarrow \mathtt{term\_local\_lst} , \mathtt{term\_local}\\
+\mathtt{term} &\leftarrow \mathtt{base\_elem}\\
+\mathtt{term} &\leftarrow \mathtt{INTEGER}\\
+\mathtt{term} &\leftarrow \mathtt{STRING\_LITERAL}\\
+\mathtt{term} &\leftarrow ( \mathtt{term} )\\
+\mathtt{term} &\leftarrow \mathit{true}\\
+\mathtt{term} &\leftarrow \mathit{false}\\
+\mathtt{term} &\leftarrow \mathit{maxstep}\\
+\mathtt{term} &\leftarrow \mathit{maxAdditive}\\
+\mathtt{term} &\leftarrow \mathit{maxAFValue}\\
+\mathtt{term} &\leftarrow - \mathtt{term}\\ 
+\mathtt{term} &\leftarrow 	\mathit{abs\ } \mathtt{term}\\
+\mathtt{term} &\leftarrow \mathtt{term} - \mathtt{term}\\
+\mathtt{term} &\leftarrow \mathtt{term} + \mathtt{term}\\
+\mathtt{term} &\leftarrow \mathtt{term} * \mathtt{term}\\
+\mathtt{term} &\leftarrow \mathtt{term} / \mathtt{term}\\
+\mathtt{term} &\leftarrow \mathtt{term} \mathit{\ mod\ } \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{base\_elem\_no\_const}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{INTEGER}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{STRING\_LITERAL}\\
+\mathtt{term\_strong} &\leftarrow ( \mathtt{term\_strong} )\\
+\mathtt{term\_strong} &\leftarrow \mathit{maxstep}\\
+\mathtt{term\_strong} &\leftarrow \mathit{maxAdditive}\\
+\mathtt{term\_strong} &\leftarrow \mathit{maxAFValue}\\
+\mathtt{term\_strong} &\leftarrow - \mathtt{term\_strong}\\ 
+\mathtt{term\_strong} &\leftarrow 	\mathit{abs\ } \mathtt{term}\\
+\mathtt{term\_strong\_candidate} &\leftarrow - \mathtt{constant}\\ 
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong\_candidate} - \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong\_candidate} + \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong\_candidate} * \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong\_candidate} / \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong\_candidate} \mathit{\ mod\ } \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{constant} - \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{constant} + \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{constant} * \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{constant} / \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{constant} \mathit{\ mod\ } \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong} - \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong} + \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong} * \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong} / \mathtt{term}\\
+\mathtt{term\_strong} &\leftarrow \mathtt{term\_strong} \mathit{\ mod\ } \mathtt{term}\\
+\mathtt{term\_local} &\leftarrow \mathtt{base\_elem\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{INTEGER}\\
+\mathtt{term\_local} &\leftarrow \mathtt{STRING\_LITERAL}\\
+\mathtt{term\_local} &\leftarrow ( \mathtt{term\_local} )\\
+\mathtt{term\_local} &\leftarrow \mathit{true}\\
+\mathtt{term\_local} &\leftarrow \mathit{false}\\
+\mathtt{term\_local} &\leftarrow \mathit{maxstep}\\
+\mathtt{term\_local} &\leftarrow \mathit{maxAdditive}\\
+\mathtt{term\_local} &\leftarrow \mathit{maxAFValue}\\
+\mathtt{term\_local} &\leftarrow - \mathtt{term\_local}\\ 
+\mathtt{term\_local} &\leftarrow 	\mathit{abs\ } \mathtt{term\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{term\_local} - \mathtt{term\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{term\_local} + \mathtt{term\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{term\_local} * \mathtt{term\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{term\_local} / \mathtt{term\_local}\\
+\mathtt{term\_local} &\leftarrow \mathtt{term\_local} \mathit{\ mod\ } \mathtt{term\_local}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{base\_elem\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{INTEGER}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{STRING\_LITERAL}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow ( \mathtt{term\_no\_const\_strong} )\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathit{maxstep}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathit{maxAdditive}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathit{maxAFValue}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{constant}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow - \mathtt{term\_no\_const\_strong}\\ 
+\mathtt{term\_no\_const\_strong} &\leftarrow 	\mathit{abs\ } \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{term\_no\_const\_strong} - \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{term\_no\_const\_strong} + \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{term\_no\_const\_strong} * \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{term\_no\_const\_strong} / \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const\_strong} &\leftarrow \mathtt{term\_no\_const\_strong} \mathit{\ mod\ } \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{base\_elem\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{INTEGER}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{STRING\_LITERAL}\\
+\mathtt{term\_no\_const} &\leftarrow ( \mathtt{term\_no\_const} )\\
+\mathtt{term\_no\_const} &\leftarrow \mathit{true}\\
+\mathtt{term\_no\_const} &\leftarrow \mathit{false}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{constant}\\
+\mathtt{term\_no\_const} &\leftarrow - \mathtt{term\_no\_const}\\ 
+\mathtt{term\_no\_const} &\leftarrow 	\mathit{abs\ } \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{term\_no\_const} - \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{term\_no\_const} + \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{term\_no\_const} * \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{term\_no\_const} / \mathtt{term\_no\_const}\\
+\mathtt{term\_no\_const} &\leftarrow \mathtt{term\_no\_const} \mathit{\ mod\ } \mathtt{term\_no\_const}\\
+\mathtt{formula} &\leftarrow \mathtt{formula\_base}\\
+\mathtt{formula} &\leftarrow ( \mathtt{formula} )\\
+\mathtt{formula} &\leftarrow \mathit{not } \mathtt{formula}\\
+\mathtt{formula} &\leftarrow - \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} & \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} \ +\!+\  \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} | \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} \ <\!-\!>\  \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} \ -\!>\!>\  \mathtt{formula}\\
+\mathtt{formula} &\leftarrow \mathtt{formula} \ -\!>\  \mathtt{formula}\\
+\mathtt{formula\_base} &\leftarrow \mathtt{comparison}\\
+\mathtt{formula\_base} &\leftarrow \mathtt{atomic\_formula}\\
+\mathtt{formula\_base} &\leftarrow \mathtt{formula\_quant}\\
+\mathtt{formula\_base} &\leftarrow \mathtt{formula\_card}\\
+\mathtt{formula\_base} &\leftarrow \mathit{true}\\
+\mathtt{formula\_base} &\leftarrow \mathit{false}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} = \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} \ =\!=\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} \textbackslash= \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} < \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} > \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} \ =\!<\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong} \ >\!=\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} = \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} \ =\!=\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} \textbackslash= \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} < \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} > \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} \ =\!<\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{term\_strong\_candidate} \ >\!=\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} \ =\!=\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} \textbackslash= \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} < \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} > \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} \ =\!<\  \mathtt{term}\\
+\mathtt{comparison} &\leftarrow \mathtt{constant} \ >\!=\  \mathtt{term}\\
+\mathtt{atomic\_formula} &\leftarrow \mathtt{constant}\\
+\mathtt{atomic\_formula} &\leftarrow \texttilde \mathtt{constant}\\
+\mathtt{atomic\_formula} &\leftarrow \mathtt{constant} = \mathtt{term}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const\_base}\\
+\mathtt{formula\_no\_const} &\leftarrow ( \mathtt{formula\_no\_const} )\\
+\mathtt{formula\_no\_const} &\leftarrow \mathit{not } \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow - \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const} & \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const} \ +\!+\  \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_constd &\leftarrow \mathtt{formula\_no\_const} | \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const} \ <\!-\!>\  \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const} \ -\!>\!>\  \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const} &\leftarrow \mathtt{formula\_no\_const} \ -\!>\  \mathtt{formula\_no\_const}\\
+\mathtt{formula\_no\_const\_base} &\leftarrow \mathtt{comparison\_no\_const}\\
+\mathtt{formula\_no\_const\_base} &\leftarrow \mathit{true}\\
+\mathtt{formula\_no\_const\_base} &\leftarrow \mathit{false}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} = \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} \ =\!=\  \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} \textbackslash= \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} < \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} > \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} \ =\!<\  \mathtt{term\_no\_const}\\
+\mathtt{comparison\_no\_const} &\leftarrow \mathtt{term\_no\_const\_strong} \ >\!=\  \mathtt{term\_no\_const}\\
+\mathtt{atomic\_formula\_one\_const} &\leftarrow \mathtt{constant\_one\_const}\\
+\mathtt{atomic\_formula\_one\_const} &\leftarrow \texttilde \mathtt{constant\_one\_const}\\
+\mathtt{atomic\_formula\_one\_const} &\leftarrow \mathtt{constant\_one\_const} = \mathtt{term\_no\_const}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_base}\\
+\mathtt{formula\_temporal} &\leftarrow ( \mathtt{formula\_temporal} )\\
+\mathtt{formula\_temporal} &\leftarrow \mathit{not } \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow - \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} & \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} \ +\!+\  \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} | \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} \ <\!-\!>\  \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} \ -\!>\!>\  \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{formula\_temporal} \ -\!>\  \mathtt{formula\_temporal}\\
+\mathtt{formula\_temporal} &\leftarrow \mathtt{term\_strong} : \mathtt{formula\_temporal}\\
+\mathtt{formula\_quant} &\leftarrow \mathit{bracket\_l} \mathtt{quant\_lst} | \mathtt{formula} \mathit{bracket\_r}\\
+\mathtt{quant\_lst} &\leftarrow \mathtt{quant\_op} \mathtt{variable}\\
+\mathtt{quant\_lst} &\leftarrow \mathtt{quant\_lst} \mathtt{quant\_op} \mathtt{variable}\\
+\mathtt{quant\_op} &\leftarrow /\\\\
+\mathtt{quant\_op} &\leftarrow \\/\\
+\mathtt{formula\_card} &\leftarrow \mathit{cbracket\_l} \mathtt{card\_af} \mathtt{card\_sort\_bnd\_lst} \mathit{cbracket\_r}\\
+\mathtt{formula\_card} &\leftarrow \mathtt{term\_strong} \mathit{cbracket\_l} \mathtt{card\_af} \mathtt{card\_sort\_bnd\_lst} \mathit{cbracket\_r}\\
+\mathtt{formula\_card} &\leftarrow \mathit{cbracket\_l} \mathtt{card\_af} \mathtt{card\_sort\_bnd\_lst} \mathit{cbracket\_r} \mathtt{term\_strong}\\
+\mathtt{formula\_card} &\leftarrow \mathtt{term\_strong} \mathit{cbracket\_l} \mathtt{card\_af} \mathtt{card\_sort\_bnd\_lst} \mathit{cbracket\_r} \mathtt{term\_strong}\\
+\mathtt{card\_af} &\leftarrow \mathtt{constant\_local}\\
+\mathtt{card\_af} &\leftarrow \texttilde \mathtt{constant\_local}\\
+\mathtt{card\_af} &\leftarrow \mathtt{constant\_local} = \mathtt{term\_local}\\
+\mathtt{card\_sort\_bnd\_lst} &\leftarrow\\
+\mathtt{card\_sort\_bnd\_lst} &\leftarrow \mathtt{card\_sort\_bnd\_lst} : \mathtt{sort} ( \mathtt{variable\_local} )\\
+\mathtt{head\_formula} &\leftarrow \mathtt{comparison}\\
+\mathtt{head\_formula} &\leftarrow \mathtt{atomic\_formula}\\
+\mathtt{head\_formula} &\leftarrow \mathtt{formula\_card}\\
+\mathtt{head\_formula} &\leftarrow \mathit{true}\\
+\mathtt{head\_formula} &\leftarrow \mathit{false}\\
+\mathtt{head\_formula} &\leftarrow - \mathtt{constant}\\
+\mathtt{stmt\_macro\_def} &\leftarrow \ :\!-\  \mathit{macros} \mathtt{macro\_def\_lst} .\\
+\mathtt{macro\_def\_lst} &\leftarrow \mathtt{macro\_bnd}\\
+\mathtt{macro\_def\_lst} &\leftarrow \mathtt{macro\_def\_lst} ; \mathtt{macro\_bnd}\\
+\mathtt{macro\_bnd} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{macro\_args} ) \ -\!>\  \mathtt{MACRO\_STRING}\\
+\mathtt{macro\_bnd} &\leftarrow \mathtt{IDENTIFIER} \ -\!>\  \mathtt{MACRO\_STRING}\\
+\mathtt{macro\_args} &\leftarrow \mathtt{macro\_arg}\\
+\mathtt{macro\_args} &\leftarrow \mathtt{macro\_args} , \mathtt{macro\_arg}\\
+\mathtt{macro\_arg} &\leftarrow # \mathtt{INTEGER}\\
+\mathtt{macro\_arg} &\leftarrow # \mathtt{IDENTIFIER}\\
+\mathtt{sort\_lst} &\leftarrow \mathtt{sort}\\
+\mathtt{sort\_lst} &\leftarrow \mathtt{sort\_lst} , \mathtt{sort}\\
+\mathtt{sort} &\leftarrow \mathtt{sort\_id\_nr} *\\
+\mathtt{sort} &\leftarrow \mathtt{sort\_id\_nr} ^\\
+\mathtt{sort} &\leftarrow \mathtt{sort\_id\_nr}\\
+\mathtt{sort\_id\_nr} &\leftarrow \mathtt{sort\_id}\\
+\mathtt{sort\_id\_nr} &\leftarrow \mathtt{NUMBER\_RANGE}\\
+\mathtt{sort\_id} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{stmt\_constant\_def} &\leftarrow \ :\!-\  \mathit{constants} \mathtt{constant\_bnd\_lst} .\\
+\mathtt{constant\_bnd\_lst} &\leftarrow \mathtt{constant\_bnd}\\
+\mathtt{constant\_bnd\_lst} &\leftarrow \mathtt{constant\_bnd\_lst} ; \mathtt{constant\_bnd}\\
+\mathtt{constant\_bnd} &\leftarrow \mathtt{constant\_dcl\_lst} \ :\!:\  \mathtt{constant\_dcl\_type} ( \mathtt{sort} )\\
+\mathtt{constant\_bnd} &\leftarrow \mathtt{constant\_dcl\_lst} \ :\!:\  \mathtt{sort}\\
+\mathtt{constant\_bnd} &\leftarrow \mathtt{constant\_dcl\_lst} \ :\!:\  \mathtt{constant\_dcl\_type}\\
+\mathtt{constant\_bnd} &\leftarrow \mathtt{constant\_dcl\_lst} \ :\!:\  \mathtt{attrib\_spec} \mathit{of} \mathtt{IDENTIFIER}\\
+\mathtt{constant\_bnd} &\leftarrow \mathtt{constant\_dcl\_lst} \ :\!:\  \mathtt{attrib\_spec} \mathit{of} \mathtt{IDENTIFIER} ( \mathtt{sort\_lst} )\\
+\mathtt{constant\_dcl\_lst} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{constant\_dcl\_lst} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{sort\_lst} )\\
+\mathtt{constant\_dcl\_lst} &\leftarrow \mathtt{constant\_dcl\_lst} , \mathtt{IDENTIFIER}\\
+\mathtt{constant\_dcl\_lst} &\leftarrow \mathtt{constant\_dcl\_lst} , \mathtt{IDENTIFIER} ( \mathtt{sort\_lst} )\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{abaction}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{action}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{additiveaction}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{additivefluent}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{externalaction}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{externalfluent}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{exogenousaction}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{inertialfluent}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{rigid}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{simplefluent}\\
+\mathtt{constant\_dcl\_type} &\leftarrow \mathit{sdfluent}\\
+\mathtt{attrib\_spec} &\leftarrow \mathit{attribute}\\
+\mathtt{attrib\_spec} &\leftarrow \mathit{attribute} ( \mathtt{sort} )\\
+\mathtt{stmt\_object\_def} &\leftarrow \ :\!-\  \mathit{objects} \mathtt{object\_bnd\_lst} .\\
+\mathtt{object\_bnd\_lst} &\leftarrow \mathtt{object\_bnd}\\
+\mathtt{object\_bnd\_lst} &\leftarrow \mathtt{object\_bnd\_lst} ; \mathtt{object\_bnd}\\
+\mathtt{object\_bnd} &\leftarrow \mathtt{object\_lst} \ :\!:\  \mathtt{sort\_id}\\
+\mathtt{object\_lst} &\leftarrow \mathtt{object\_spec}\\
+\mathtt{object\_lst} &\leftarrow \mathtt{object\_lst} , \mathtt{object\_spec}\\
+\mathtt{object\_spec} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{object\_spec} &\leftarrow \mathtt{IDENTIFIER} ( \mathtt{sort\_lst} )\\
+\mathtt{object\_spec} &\leftarrow \mathtt{NUMBER\_RANGE}\\
+\mathtt{stmt\_variable\_def} &\leftarrow \ :\!-\  \mathit{variables} \mathtt{variable\_bnd\_lst} .\\
+\mathtt{variable\_bnd\_lst} &\leftarrow \mathtt{variable\_bnd}\\
+\mathtt{variable\_bnd\_lst} &\leftarrow \mathtt{variable\_bnd\_lst} ; \mathtt{variable\_bnd}\\
+\mathtt{variable\_bnd} &\leftarrow \mathtt{variable\_lst} \ :\!:\  \mathtt{sort\_id}\\
+\mathtt{variable\_lst} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{variable\_lst} &\leftarrow \mathtt{variable\_lst} , \mathtt{IDENTIFIER}\\
+\mathtt{stmt\_sort\_def} &\leftarrow \ :\!-\  \mathit{sorts} \mathtt{sort\_bnd\_lst} .\\
+\mathtt{sort\_bnd\_lst} &\leftarrow \mathtt{sort\_bnd}\\
+\mathtt{sort\_bnd\_lst} &\leftarrow \mathtt{sort\_bnd\_lst} ; \mathtt{sort\_bnd}\\
+\mathtt{sort\_bnd} &\leftarrow \mathtt{sort\_dcl\_lst}\\
+\mathtt{sort\_bnd} &\leftarrow \mathtt{sort\_bnd} << \mathtt{sort\_bnd}\\
+\mathtt{sort\_bnd} &\leftarrow \mathtt{sort\_bnd} >> \mathtt{sort\_bnd}\\
+\mathtt{sort\_bnd} &\leftarrow ( \mathtt{sort\_bnd} )\\
+\mathtt{sort\_dcl\_lst} &\leftarrow \mathtt{IDENTIFIER}\\
+\mathtt{sort\_dcl\_lst} &\leftarrow \mathtt{sort\_dcl\_lst} , \mathtt{IDENTIFIER}\\
+\mathtt{stmt\_show} &\leftarrow \ :\!-\  \mathit{show} \mathtt{show\_lst} .\\
+\mathtt{stmt\_show} &\leftarrow \ :\!-\  \mathit{show} \mathit{all} .\\
+\mathtt{stmt\_hide} &\leftarrow \ :\!-\  \mathit{hide} \mathtt{show\_lst} .\\
+\mathtt{stmt\_hide} &\leftarrow \ :\!-\  \mathit{hide} \mathit{all} .\\
+\mathtt{show\_lst} &\leftarrow \mathtt{show\_elem}\\
+\mathtt{show\_lst} &\leftarrow \mathtt{show\_lst} , \mathtt{show\_elem}\\
+\mathtt{show\_elem} &\leftarrow \mathtt{atomic\_formula\_one\_const}\\
+\mathtt{stmt\_noconcurrency} &\leftarrow \mathit{noconcurrency}\\
+\mathtt{stmt\_strong\_noconcurrency} &\leftarrow \mathit{strong noconcurrency}\\
+\mathtt{stmt\_maxafvalue} &\leftarrow \ :\!-\  \mathit{maxAFValue} = \mathtt{INTEGER} .\\
+\mathtt{stmt\_maxadditive} &\leftarrow \ :\!-\  \mathit{maxAdditive} = \mathtt{INTEGER} .\\
+\mathtt{stmt\_query} &\leftarrow \ :\!-\  \mathit{query} \mathtt{query\_lst} .\\
+\mathtt{query\_lst} &\leftarrow \mathtt{formula\_temporal}\\
+\mathtt{query\_lst} &\leftarrow \mathtt{query\_maxstep\_decl}\\
+\mathtt{query\_lst} &\leftarrow \mathtt{query\_label\_decl}\\
+\mathtt{query\_lst} &\leftarrow \mathtt{query\_lst} ; \mathtt{formula\_temporal}\\
+\mathtt{query\_lst} &\leftarrow \mathtt{query\_lst} ; \mathtt{query\_maxstep\_decl}\\
+\mathtt{query\_lst} &\leftarrow \mathtt{query\_lst} ; \mathtt{query\_label\_decl}\\
+\mathtt{query\_maxstep\_decl} &\leftarrow \mathit{maxstep} \ :\!:\  \mathtt{INTEGER}\\
+\mathtt{query\_maxstep\_decl} &\leftarrow \mathit{maxstep} \ :\!:\  \mathtt{NUMBER\_RANGE}\\
+\mathtt{query\_label\_decl} &\leftarrow \mathit{label} \ :\!:\  \mathtt{INTEGER}\\
+\mathtt{query\_label\_decl} &\leftarrow \mathit{label} \ :\!:\  \mathtt{IDENTIFIER}\\
+\mathtt{clause\_if} &\leftarrow \mathit{if} \mathtt{formula}\\
+\mathtt{clause\_if} &\leftarrow\\
+\mathtt{clause\_after} &\leftarrow \mathit{after} \mathtt{formula}\\
+\mathtt{clause\_after} &\leftarrow\\
+\mathtt{clause\_ifcons} &\leftarrow \mathit{ifcons} \mathtt{formula}\\
+\mathtt{clause\_ifcons} &\leftarrow\\
+\mathtt{clause\_unless} &\leftarrow \mathit{unless} \mathtt{atomic\_formula}\\
+\mathtt{clause\_unless} &\leftarrow\\
+\mathtt{clause\_where} &\leftarrow \mathit{where} \mathtt{formula\_no\_const}\\
+\mathtt{clause\_where} &\leftarrow\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_basic}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_caused}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_pcaused}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_impl}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_causes}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_increments}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_mcause}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_always}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_constraint}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_impossible}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_never}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_default}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_exogenous}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_inertial}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_nonexecutable}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_rigid}\\
+\mathtt{stmt\_law} &\leftarrow \mathtt{law\_observed}\\
+\mathtt{law\_basic} &\leftarrow \mathtt{head\_formula} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_caused} &\leftarrow \mathit{caused} \mathtt{head\_formula} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_pcaused} &\leftarrow \mathit{possibly\_caused} \mathtt{head\_formula} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_impl} &\leftarrow \mathtt{head\_formula} \mathit{arrow\_l}- \mathtt{formula} \mathtt{clause\_where} .\\
+\mathtt{law\_causes} &\leftarrow \mathtt{formula} \mathit{causes} \mathtt{head\_formula} \mathtt{clause\_if} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_increments} &\leftarrow \mathtt{formula} \mathit{increments} \mathtt{constant} \mathit{by} \mathtt{term} \mathtt{clause\_if} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_mcause} &\leftarrow \mathtt{formula} \mathit{may\_cause} \mathtt{head\_formula} \mathtt{clause\_if} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_always} &\leftarrow \mathit{always} \mathtt{formula} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_constraint} &\leftarrow \mathit{constraint} \mathtt{formula} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_impossible} &\leftarrow \mathit{impossible} \mathtt{formula} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_never} &\leftarrow \mathit{never} \mathtt{formula} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_default} &\leftarrow \mathit{default} \mathtt{atomic\_formula} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_exogenous} &\leftarrow \mathit{exogenous} \mathtt{constant} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_inertial} &\leftarrow \mathit{inertial} \mathtt{constant} \mathtt{clause\_if} \mathtt{clause\_ifcons} \mathtt{clause\_after} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_nonexecutable} &\leftarrow \mathit{nonexecutable} \mathtt{formula} \mathtt{clause\_if} \mathtt{clause\_unless} \mathtt{clause\_where} .\\
+\mathtt{law\_rigid} &\leftarrow \mathit{rigid} \mathtt{constant} \mathtt{clause\_where} .\\
+\mathtt{law\_observed} &\leftarrow \mathit{observed} \mathtt{atomic\_formula} \mathit{at} \mathtt{term\_no\_const} .

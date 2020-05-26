@@ -1,0 +1,38 @@
+// Reprint of input file "lemon_macro.y".
+// Symbols:
+//   0 $                7 COLON_DASH      14 error           21 incl_lst_sc   
+//   1 IDENTIFIER       8 PERIOD          15 start           22 incl_lst_c    
+//   2 INTEGER          9 SEMICOLON       16 macro_lst       23 incl_item     
+//   3 PAREN_L         10 STRING_LITERAL  17 incl_stmt       24 arg_lst       
+//   4 PAREN_R         11 ARG             18 base_elem_pkgd
+//   5 COMMA           12 OTHER           19 other         
+//   6 INCLUDE         13 EOF             20 incl_lst      
+start ::= macro_lst EOF.
+macro_lst ::=.
+macro_lst ::= macro_lst error.
+macro_lst ::= macro_lst base_elem_pkgd.
+macro_lst ::= macro_lst other.
+macro_lst ::= macro_lst incl_stmt.
+incl_stmt ::= COLON_DASH INCLUDE incl_lst PERIOD.
+incl_lst ::= incl_lst_sc.
+incl_lst ::= incl_lst_c.
+incl_lst_sc ::= incl_item.
+incl_lst_sc ::= incl_lst_sc SEMICOLON incl_item.
+incl_lst_c ::= incl_item COMMA incl_item.
+incl_lst_c ::= incl_lst_c COMMA incl_item.
+incl_item ::= STRING_LITERAL.
+incl_item ::= IDENTIFIER.
+incl_item ::= INTEGER.
+base_elem_pkgd ::= IDENTIFIER.
+base_elem_pkgd ::= IDENTIFIER PAREN_L arg_lst PAREN_R.
+arg_lst ::= ARG.
+arg_lst ::= arg_lst COMMA ARG.
+other ::= INTEGER.
+other ::= PAREN_L.
+other ::= PAREN_R.
+other ::= COMMA.
+other ::= COLON_DASH.
+other ::= SEMICOLON.
+other ::= STRING_LITERAL.
+other ::= OTHER.
+other ::= PERIOD.

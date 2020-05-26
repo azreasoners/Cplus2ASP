@@ -1,0 +1,14 @@
+% File 'jmc10-test'
+
+:- maxAdditive :: 3.
+
+:- macros
+  maxCapacity -> 2.
+
+:- include 'jmc10'.
+
+:- query 
+ maxstep :: 0..11;
+ 0: num(mi,bank1)=3, num(ca,bank1)=3, num(mi,bank2)=0, num(ca,bank2)=0,
+    loc(boat)=bank1;
+ maxstep: num(mi,bank2)=3, num(ca,bank2)=3.

@@ -1,0 +1,847 @@
+# Blocks World Benchmarking Results
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (incremental)
+# ----------------------------------------------------------------------------------------------------------------------
+ cplus2asp bw-benchmark.cp query=0 --stats
+
+
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '19'.
+% Pragma: Running Query 'Query 0'.
+% Pragma: Minimum Step = '0', Maximum Step = '100'.
+% Pragma: Searching for 1 solutions.
+=============== step 1 ===============
+Models   : 0
+Time     : 0.400 (g: 0.280, p: 0.120, s: 0.000)
+Rules    : 73340
+Choices  : 0
+Conflicts: 0
+=============== step 2 ===============
+Models   : 0
+Time     : 0.350 (g: 0.280, p: 0.070, s: 0.000)
+Rules    : 64795
+Choices  : 0
+Conflicts: 0
+=============== step 3 ===============
+Models   : 0
+Time     : 0.370 (g: 0.280, p: 0.090, s: 0.000)
+Rules    : 64795
+Choices  : 0
+Conflicts: 0
+=============== step 4 ===============
+Models   : 0
+Time     : 0.400 (g: 0.290, p: 0.110, s: 0.000)
+Rules    : 64795
+Choices  : 0
+Conflicts: 0
+=============== step 5 ===============
+Models   : 0
+Time     : 0.440 (g: 0.300, p: 0.140, s: 0.000)
+Rules    : 64795
+Choices  : 0
+Conflicts: 0
+=============== step 6 ===============
+Models   : 0
+Time     : 0.490 (g: 0.310, p: 0.180, s: 0.000)
+Rules    : 64795
+Choices  : 12
+Conflicts: 6
+=============== step 7 ===============
+Models   : 0
+Time     : 0.540 (g: 0.310, p: 0.170, s: 0.040)
+Rules    : 64795
+Choices  : 197
+Conflicts: 40
+=============== step 8 ===============
+Solution: 1
+        0:  cost=0
+
+        ACTIONS:  destination(i)=table destination(k)=table move(i) move(k)
+
+        1:  cost=2
+
+        ACTIONS:  destination(h)=table destination(j)=table move(h) move(j)
+
+        2:  cost=4
+
+        ACTIONS:  destination(c)=table destination(e)=j destination(k)=g move(c) move(e) move(k)
+
+        3:  cost=7
+
+        ACTIONS:  destination(b)=h destination(c)=k destination(d)=table move(b) move(c) move(d)
+
+        4:  cost=10
+
+        ACTIONS:  destination(a)=e destination(b)=c destination(i)=d move(a) move(b) move(i)
+
+        5:  cost=13
+
+        ACTIONS:  destination(h)=i destination(l)=b move(h) move(l)
+
+        6:  cost=15
+
+        ACTIONS:  destination(m)=h destination(n)=a move(m) move(n)
+
+        7:  cost=17
+
+        ACTIONS:  destination(o)=m move(o)
+
+        8:  cost=18
+
+Models   : 1
+Time     : 0.680 (g: 0.310, p: 0.230, s: 0.120)
+Rules    : 64795
+Choices  : 1307
+Conflicts: 511
+=============== Summary ===============
+SATISFIABLE
+Models      : 1+
+Total Steps : 8
+Time        : 3.700
+Prepare   : 2.360
+Prepro.   : 1.110
+Choices     : 1516
+Conflicts   : 557
+Restarts    : 3
+Atoms       : 43034
+Rules       : 526905 (1: 518645 2: 3680 3: 4580)
+Bodies      : 489994
+Equivalences: 83588  (Atom=Atom: 34154 Body=Body: 42 Other: 49392)
+Tight       : Yes
+Variables   : 358223 (Eliminated:    0)
+Constraints : 262360 (Binary:  3.7% Ternary: 11.0% Other: 85.2%)
+Lemmas      : 555    (Binary:  9.9% Ternary:  2.5% Other: 87.6%)
+Conflicts : 555    (Average Length: 75.8)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (static)
+# ----------------------------------------------------------------------------------------------------------------------
+
+cplus2asp bw-benchmark.cp query=0 --stats --mode=static-auto
+
+
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '19'.
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '0'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.020
+Prepare   : 0.010
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 6836
+Rules       : 8577   (1: 8285 2: 32 3: 260)
+Bodies      : 2007
+Equivalences: 12434  (Atom=Atom: 5947 Body=Body: 0 Other: 6487)
+Tight       : Yes
+Variables   : 1895   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.400
+Prepare   : 0.280
+Prepro.   : 0.120
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 11361
+Rules       : 73343  (1: 72055 2: 488 3: 800)
+Bodies      : 62976
+Equivalences: 20483  (Atom=Atom: 9444 Body=Body: 1 Other: 11038)
+Tight       : Yes
+Variables   : 62732  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '2'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 0.830
+Prepare   : 0.580
+Prepro.   : 0.250
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 15886
+Rules       : 138109 (1: 135825 2: 944 3: 1340)
+Bodies      : 123945
+Equivalences: 28532  (Atom=Atom: 12941 Body=Body: 1 Other: 15590)
+Tight       : Yes
+Variables   : 123569 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '3'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.320
+Prepare   : 0.900
+Prepro.   : 0.420
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 20411
+Rules       : 202875 (1: 199595 2: 1400 3: 1880)
+Bodies      : 184914
+Equivalences: 36581  (Atom=Atom: 16438 Body=Body: 1 Other: 20142)
+Tight       : Yes
+Variables   : 184406 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '4'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 1.720
+Prepare   : 1.180
+Prepro.   : 0.540
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 24936
+Rules       : 267641 (1: 263365 2: 1856 3: 2420)
+Bodies      : 245883
+Equivalences: 44630  (Atom=Atom: 19935 Body=Body: 1 Other: 24694)
+Tight       : Yes
+Variables   : 245243 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '5'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 2.210
+Prepare   : 1.540
+Prepro.   : 0.670
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 29461
+Rules       : 332407 (1: 327135 2: 2312 3: 2960)
+Bodies      : 306852
+Equivalences: 52679  (Atom=Atom: 23432 Body=Body: 1 Other: 29246)
+Tight       : Yes
+Variables   : 306080 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '6'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 3.110
+Prepare   : 1.860
+Prepro.   : 1.030
+Choices     : 102
+Conflicts   : 17
+Restarts    : 0
+Atoms       : 33986
+Rules       : 397173 (1: 390905 2: 2768 3: 3500)
+Bodies      : 367821
+Equivalences: 60728  (Atom=Atom: 26929 Body=Body: 1 Other: 33798)
+Tight       : Yes
+Variables   : 366917 (Eliminated:    0)
+Constraints : 93850  (Binary:  5.6% Ternary: 13.9% Other: 80.4%)
+Lemmas      : 17     (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 17     (Average Length: 1.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '7'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0
+Time        : 4.230
+Prepare   : 2.450
+Prepro.   : 1.230
+Choices     : 142
+Conflicts   : 20
+Restarts    : 0
+Atoms       : 38511
+Rules       : 461939 (1: 454675 2: 3224 3: 4040)
+Bodies      : 428790
+Equivalences: 68777  (Atom=Atom: 30426 Body=Body: 1 Other: 38350)
+Tight       : Yes
+Variables   : 427754 (Eliminated:    0)
+Constraints : 203773 (Binary:  3.9% Ternary: 10.9% Other: 85.1%)
+Lemmas      : 20     (Binary:  5.0% Ternary:  0.0% Other: 95.0%)
+Conflicts : 20     (Average Length: 1.1)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '8'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+        0:  cost=0
+
+        ACTIONS:  destination(c)=table destination(i)=table destination(k)=table move(c) move(i) move(k)
+
+        1:  cost=3
+
+        ACTIONS:  destination(b)=table destination(h)=table destination(j)=table move(b) move(h) move(j)
+
+        2:  cost=6
+
+        ACTIONS:  destination(e)=j destination(k)=g move(e) move(k)
+
+        3:  cost=8
+
+        ACTIONS:  destination(c)=k destination(d)=table move(c) move(d)
+
+        4:  cost=10
+
+        ACTIONS:  destination(a)=e destination(b)=c destination(i)=d move(a) move(b) move(i)
+
+        5:  cost=13
+
+        ACTIONS:  destination(h)=i destination(l)=b move(h) move(l)
+
+        6:  cost=15
+
+        ACTIONS:  destination(m)=h destination(n)=a move(m) move(n)
+
+        7:  cost=17
+
+        ACTIONS:  destination(o)=m move(o)
+
+        8:  cost=18
+
+SATISFIABLE
+Models      : 1+
+Time        : 6.430
+Prepare   : 2.630
+Prepro.   : 1.410
+Choices     : 1958
+Conflicts   : 530
+Restarts    : 3
+Atoms       : 43036
+Rules       : 526705 (1: 518445 2: 3680 3: 4580)
+Bodies      : 489759
+Equivalences: 76826  (Atom=Atom: 33923 Body=Body: 1 Other: 42902)
+Tight       : Yes
+Variables   : 488591 (Eliminated:    0)
+Constraints : 261873 (Binary:  3.7% Ternary: 10.5% Other: 85.8%)
+Lemmas      : 530    (Binary: 12.8% Ternary:  5.5% Other: 81.7%)
+Conflicts : 530    (Average Length: 22.9)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v1 
+# ----------------------------------------------------------------------------------------------------------------------
+
+jbabb1@reasoning-server:~/workspace/cplus2asp/tests/benchmarks$ cplus2asp.old --translator "cplus2asp.bin.old" bw-benchmark-altered.cp query=0 -grso clingo -grsoopt --stats
+% Syntax Error, File "/home/jbabb1/workspace/cplus2asp/tests/benchmarks/bw-benchmark-altered.cp", Line #54.9: Unexpected token "cost".
+% Encountered 1 error parsing input.
+maxAdditive hint found, auto-setting maxAddtive to 19.
+
+% Running Query 0 with maxstep=0.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 0.070
+Prepare   : 0.040
+Prepro.   : 0.030
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 13685
+Rules       : 21330  (1: 20810 2: 260 3: 260)
+Bodies      : 4645
+Equivalences: 26586  (Atom=Atom: 12661 Body=Body: 0 Other: 13925)
+Tight       : Yes
+Variables   : 4192   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=1.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 1.990
+Prepare   : 1.270
+Prepro.   : 0.720
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 27414
+Rules       : 51199  (1: 48779 2: 820 3: 800 5: 800)
+Bodies      : 16830
+Equivalences: 53408  (Atom=Atom: 21845 Body=Body: 71 Other: 31492)
+Tight       : Yes
+Variables   : 14931  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=2.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 4.140
+Prepare   : 2.640
+Prepro.   : 1.500
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 41143
+Rules       : 81068  (1: 76748 2: 1380 3: 1340 5: 1600)
+Bodies      : 29015
+Equivalences: 78967  (Atom=Atom: 31029 Body=Body: 142 Other: 47796)
+Tight       : Yes
+Variables   : 25670  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=3.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 6.200
+Prepare   : 3.920
+Prepro.   : 2.280
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 54872
+Rules       : 110937 (1: 104717 2: 1940 3: 1880 5: 2400)
+Bodies      : 41200
+Equivalences: 104526 (Atom=Atom: 40213 Body=Body: 213 Other: 64100)
+Tight       : Yes
+Variables   : 36409  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=4.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 8.290
+Prepare   : 5.240
+Prepro.   : 3.050
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 68601
+Rules       : 140806 (1: 132686 2: 2500 3: 2420 5: 3200)
+Bodies      : 53385
+Equivalences: 130085 (Atom=Atom: 49397 Body=Body: 284 Other: 80404)
+Tight       : Yes
+Variables   : 47148  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=5.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 10.560
+Prepare   : 6.690
+Prepro.   : 3.870
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 82330
+Rules       : 170675 (1: 160655 2: 3060 3: 2960 5: 4000)
+Bodies      : 65570
+Equivalences: 155644 (Atom=Atom: 58581 Body=Body: 355 Other: 96708)
+Tight       : Yes
+Variables   : 57887  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=6.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 12.860
+Prepare   : 8.110
+Prepro.   : 4.710
+Choices     : 36
+Conflicts   : 12
+Restarts    : 0
+Atoms       : 96059
+Rules       : 200544 (1: 188624 2: 3620 3: 3500 5: 4800)
+Bodies      : 77755
+Equivalences: 181203 (Atom=Atom: 67765 Body=Body: 426 Other: 113012)
+Tight       : Yes
+Variables   : 68626  (Eliminated:    0)
+Constraints : 39994  (Binary: 66.6% Ternary: 10.4% Other: 22.9%)
+Lemmas      : 12     (Binary:  8.3% Ternary:  0.0% Other: 91.7%)
+Conflicts : 12     (Average Length: 8.4)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=7.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+UNSATISFIABLE
+Models      : 0
+Time        : 14.910
+Prepare   : 9.240
+Prepro.   : 5.600
+Choices     : 46
+Conflicts   : 15
+Restarts    : 0
+Atoms       : 109788
+Rules       : 230413 (1: 216593 2: 4180 3: 4040 5: 5600)
+Bodies      : 89940
+Equivalences: 206762 (Atom=Atom: 76949 Body=Body: 497 Other: 129316)
+Tight       : Yes
+Variables   : 79365  (Eliminated:    0)
+Constraints : 73385  (Binary: 60.8% Ternary: 14.1% Other: 25.1%)
+Lemmas      : 15     (Binary: 33.3% Ternary:  0.0% Other: 66.7%)
+Conflicts : 15     (Average Length: 1.7)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+No solution.
+
+
+% Running Query 0 with maxstep=8.
+% Searching for 1 solution.
+% warning: rigid/1 is never defined
+% warning: sdFluent/1 is never defined
+% warning: abAction/1 is never defined
+% warning: exogenous/1 is never defined
+% warning: inertial/1 is never defined
+% warning: noconcurrency/0 is never defined
+% warning: additiveAction/1 is never defined
+Solution: 1
+
+        0:  cost=0 destination(i)=table destination(k)=table loc(a)=l loc(b)=a loc(c)=b loc(d)=n loc(e)=d loc(f)=table loc(g)=f loc(h)=g loc(i)=h loc(j)=e loc(k)=j loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(i) move(k)
+
+        1:  cost=2 destination(c)=table destination(h)=table destination(j)=table loc(a)=l loc(b)=a loc(c)=b loc(d)=n loc(e)=d loc(f)=table loc(g)=f loc(h)=g loc(i)=table loc(j)=e loc(k)=table loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(c) move(h) move(j)
+
+        2:  cost=5 destination(b)=table destination(e)=j destination(k)=g loc(a)=l loc(b)=a loc(c)=table loc(d)=n loc(e)=d loc(f)=table loc(g)=f loc(h)=table loc(i)=table loc(j)=table loc(k)=table loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(b) move(e) move(k)
+
+        3:  cost=8 destination(a)=e destination(c)=k destination(d)=table loc(a)=l loc(b)=table loc(c)=table loc(d)=n loc(e)=j loc(f)=table loc(g)=f loc(h)=table loc(i)=table loc(j)=table loc(k)=g loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(a) move(c) move(d)
+
+        4:  cost=11 destination(b)=c destination(i)=d loc(a)=e loc(b)=table loc(c)=k loc(d)=table loc(e)=j loc(f)=table loc(g)=f loc(h)=table loc(i)=table loc(j)=table loc(k)=g loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(b) move(i)
+
+        5:  cost=13 destination(h)=i destination(l)=b loc(a)=e loc(b)=c loc(c)=k loc(d)=table loc(e)=j loc(f)=table loc(g)=f loc(h)=table loc(i)=d loc(j)=table loc(k)=g loc(l)=m loc(m)=table loc(n)=o loc(o)=table move(h) move(l)
+
+        6:  cost=15 destination(m)=h destination(n)=a loc(a)=e loc(b)=c loc(c)=k loc(d)=table loc(e)=j loc(f)=table loc(g)=f loc(h)=i loc(i)=d loc(j)=table loc(k)=g loc(l)=b loc(m)=table loc(n)=o loc(o)=table move(m) move(n)
+
+        7:  cost=17 destination(o)=m loc(a)=e loc(b)=c loc(c)=k loc(d)=table loc(e)=j loc(f)=table loc(g)=f loc(h)=i loc(i)=d loc(j)=table loc(k)=g loc(l)=b loc(m)=h loc(n)=a loc(o)=table move(o)
+
+        8:  cost=18 loc(a)=e loc(b)=c loc(c)=k loc(d)=table loc(e)=j loc(f)=table loc(g)=f loc(h)=i loc(i)=d loc(j)=table loc(k)=g loc(l)=b loc(m)=h loc(n)=a loc(o)=m
+
+SATISFIABLE
+Models      : 1+
+Time        : 17.540
+Prepare   : 10.830
+Prepro.   : 6.420
+Choices     : 788
+Conflicts   : 263
+Restarts    : 2
+Atoms       : 123517
+Rules       : 260282 (1: 244562 2: 4740 3: 4580 5: 6400)
+Bodies      : 102125
+Equivalences: 232321 (Atom=Atom: 86133 Body=Body: 568 Other: 145620)
+Tight       : Yes
+Variables   : 90104  (Eliminated:    0)
+Constraints : 92193  (Binary: 59.7% Ternary: 15.0% Other: 25.3%)
+Lemmas      : 263    (Binary: 14.4% Ternary:  3.4% Other: 82.1%)
+Conflicts : 263    (Average Length: 26.8)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CCALC 
+# ----------------------------------------------------------------------------------------------------------------------
+?- loadf 'bw-benchmark.cp'.
+% loading file /usr/local/lib/ccalc/macros.std
+% loading file /home/jbabb1/workspace/cplus2asp/tests/benchmarks/bw-benchmark.cp
+% loading file /usr/local/lib/ccalc/additive
+% loading file /usr/local/lib/ccalc/arithmetic
+% in transition mode...
+% 1960 atoms, 24938 rules, 80301 clauses (17110 new atoms)
+% Grounding time: 117.14 seconds
+% Completion time: 2.87 seconds
+% Total time: 120.01 seconds
+true .
+
+?- time(query 0).
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 504 atoms (including new atoms), 2567 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 0.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 19070 atoms (including new atoms), 80301 clauses
+% Writing input clauses... done.  (0.23 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 1.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 37636 atoms (including new atoms), 158035 clauses
+% Writing input clauses... done.  (0.61 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 2.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 56202 atoms (including new atoms), 235769 clauses
+% Writing input clauses... done.  (1.00 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 3.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 74768 atoms (including new atoms), 313503 clauses
+% Writing input clauses... done.  (1.36 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 4.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 93334 atoms (including new atoms), 391237 clauses
+% Writing input clauses... done.  (1.74 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 5.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 111900 atoms (including new atoms), 468971 clauses
+% Writing input clauses... done.  (2.15 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 6.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 130466 atoms (including new atoms), 546705 clauses
+% Writing input clauses... done.  (2.52 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 2 seconds, search 0 seconds)
+
+No solution with maxstep 7.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 149032 atoms (including new atoms), 624439 clauses
+% Writing input clauses... done.  (2.90 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 10 seconds (prep 5 seconds, search 5 seconds)
+
+0:  cost=0
+
+ACTIONS:  move(c,destination=table)  move(i,destination=table)  move(k,destination=table)
+
+1:  cost=3
+
+ACTIONS:  move(h,destination=table)  move(j,destination=table)
+
+2:  cost=5
+
+ACTIONS:  move(b,destination=table)  move(e,destination=j)  move(k,destination=g)
+
+3:  cost=8
+
+ACTIONS:  move(a,destination=e)  move(c,destination=k)  move(d,destination=table)
+
+4:  cost=11
+
+ACTIONS:  move(b,destination=c)  move(i,destination=d)
+
+5:  cost=13
+
+ACTIONS:  move(h,destination=i)  move(l,destination=b)
+
+6:  cost=15
+
+ACTIONS:  move(m,destination=h)  move(n,destination=a)
+
+7:  cost=17
+
+ACTIONS:  move(o,destination=m)
+
+8:  cost=18
+
+
+% 76,163,065 inferences, 86.430 CPU in 102.809 seconds (84% CPU, 881211 Lips)
+true.
+

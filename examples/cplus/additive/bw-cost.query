@@ -1,0 +1,32 @@
+:- maxAdditive :: 19.
+
+:- macros
+  length  -> 8;
+  length_small -> 7;
+  maxCost -> 18.
+
+:- include 'bw-cost.cp'.
+
+:- variables
+  N                              :: 0..maxAdditive.
+
+:- objects
+  a,b,c,d,e,f,g,h,i,j,k,l,m,n,o  :: block.
+
+:- hide loc(B)=L.
+
+:- query
+maxstep :: length_small..length;
+0:      (cost = 0  &  loc(m) = table  &  loc(l) = m
+        &  loc(a) = l  &  loc(b) = a  &  loc(c) = b
+        &  loc(o) = table  &  loc(n) = o  &  loc(d) = n
+        &  loc(e) = d  &  loc(j) = e  &  loc(k) = j
+        &  loc(f) = table  &  loc(g) = f  &  loc(h) = g
+        &  loc(i) = h);
+maxstep: ([\/N| cost = N & N=<maxCost]
+        &  loc(e) = j  &  loc(a) = e  &  loc(n) = a
+        &  loc(i) = d  &  loc(h) = i  &  loc(m) = h
+        &  loc(o) = m  &  loc(k) = g  &  loc(c) = k
+        &  loc(b) = c  &  loc(l) = b).
+
+

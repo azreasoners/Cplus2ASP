@@ -1,0 +1,59 @@
+% 3 sheep an three wolves shall cross a river in a boat
+% which carries at most 2 animals at once. 
+% On either side, the wolves may never outnumber the sheep
+% or the sheep will be eaten.
+
+<action> cross(S,W) <where> small_int(S), small_int(W).
+
+<fluent> here(A,N) <where> animal(A), int(N).
+<fluent> boat_here.
+
+<inertial> here(A,N), -here(A,N) <where> animal(A), int(N). 
+<inertial> boat_here, -boat_here.
+
+% don't cross with more sheep than still here
+<nonexecutable> cross(S, W) <if> boat_here, here(sheep, HS) <where> HS < S, small_int(HS), small_int(S), small_int(W).
+% don't cross with more wolves than still here
+<nonexecutable> cross(S, W) <if> boat_here, here(wolf, HW) <where> HW < W, small_int(HW), small_int(S), small_int(W).
+
+% don't cross when boat not here and more than n sheep
+<nonexecutable> cross(S, W) <if> -boat_here, here(sheep, HS) <where> S + HS > 120, small_int(S), big_int(HS), small_int(W). 
+% don't cross when boat not here and more than n wolves
+<nonexecutable> cross(S, W) <if> -boat_here, here(wolf, HW) <where>  W + HW > 120, small_int(W), big_int(HW), small_int(S).  
+
+% don't cross with an empty boat
+<nonexecutable> cross(S, W) <where> S == 0, W == 0, small_int(S), small_int(W).
+
+% don't cross with more than m animals
+<nonexecutable> cross(S, W) <where> S + W > 4, small_int(S), small_int(W).
+
+
+% update animal count
+<caused> -here(A, N) <if> here(A, N2) <where> animal(A), N != N2, int(N), int(N2).
+
+<caused> -boat_here <after> cross(S,W), boat_here <where> small_int(S), small_int(W). 
+<caused> boat_here <after> cross(S,W), -boat_here <where> small_int(S), small_int(W).
+
+cross(S, W) <causes> here(sheep, S_new) <if> boat_here, here(sheep,S_old) <where> S_new + S == S_old, small_int(S), small_int(W), int(S_new), int(S_old).
+cross(S, W) <causes> here(wolf, W_new) <if> boat_here, here(wolf,W_old) <where> W_new + W == W_old, small_int(S), small_int(W), int(W_new), int(W_old).
+
+cross(S, W) <causes> here(sheep,S_new) <if> -boat_here, here(sheep,S_old) <where> S_old + S == S_new, small_int(S), small_int(W), int(S_new), int(S_old). 
+cross(S, W) <causes> here(wolf,W_new) <if> -boat_here, here(wolf,W_old) <where> W_old + W == W_new, small_int(S), small_int(W), int(W_new), int(W_old). 
+
+% don't allow less sheep than wolves when still sheeps here
+<caused> <false> <if> here(wolf,N1), here(sheep,N2) <where> 0 < N2, N2 < N1, int(N1), int(N2). 
+% don't allow less wolves than sheeps when less then n sheeps here
+<caused> <false> <if> here(wolf,N1), here(sheep,N2) <where> N2 < 120, N1 < N2, int(N1), int(N2).
+
+%noConcurrency
+<nonexecutable> cross(S, W) <if> cross(S, W2) <where> W != W2, small_int(S), small_int(W), small_int(W2).
+<nonexecutable> cross(S, W) <if> cross(S2, W) <where> S != S2, small_int(S), small_int(S2), small_int(W).
+<nonexecutable> cross(S, W) <if> cross(S2, W2) <where> S != S2, W != W2, small_int(S), small_int(S2), small_int(W), small_int(W2).
+
+here(wolf, X) <holds at> 0 <where> int(X), X == 120.
+here(sheep, X) <holds at> 0 <where> int(X), X == 120.
+boat_here <holds at> 0.
+
+here(sheep,0) <holds at> t.
+here(wolf,0) <holds at> t.
+

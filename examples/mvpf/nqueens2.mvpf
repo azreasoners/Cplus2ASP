@@ -1,0 +1,18 @@
+:- sorts
+  num.
+
+:- objects
+  1..7   :: num.
+
+
+:- variables
+  I, I1, J, J1, N      :: num.
+
+:- constants
+  q(num,num) :: num.
+
+
+{q(I,J)=N}.
+<- q(I,J)=N & q(I1,J)=N & I\=I1.
+<- q(I,J)=N & q(I,J1)=N & J\=J1.
+<- q(I,J)=N & q(I1,J1)=N & I\=I1 & abs(I1-I)=J1-J.

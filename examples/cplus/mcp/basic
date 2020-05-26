@@ -1,0 +1,32 @@
+% File 'basic'
+
+:- include 'common2'.
+
+:- objects
+  boat                    :: vessel;
+  bank1, bank2            :: location;
+  mi,ca                   :: group.
+
+:- constants
+  capacity(vessel)        :: 1..maxCapacity.
+
+exogenous capacity(V). % unless ab5(V).
+
+% missionaries should not be outnumbered in any location
+constraint -((num(ca,L) > num(mi,L)) & (num(mi,L) > 0)) unless ab6(L). 
+
+% additional preconditions for crossing:
+%   someone should be in the boat
+nonexecutable cross(V) if howmany(V,mi)+howmany(V,ca)=0 unless ab7(V).
+
+%   but not too many
+nonexecutable cross(V) 
+   if howmany(V,mi)+howmany(V,ca) > capacity(V) unless ab8(V).
+
+% missionaries should not be outnumbered on the way
+%nonexecutable cross(V) if outnumbered(howmany(V,mi),howmany(V,ca)) 
+nonexecutable cross(V) if (howmany(V,ca) > howmany(V,mi)) & (howmany(V,mi) > 0)
+   unless ab9(V).
+
+% boat capacity
+constraint capacity(boat)=2 unless ab10.

@@ -1,0 +1,81 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File: 'hanoi.obc': Towers of Hanoi
+% Author: Joseph Babb
+% Date: 10/07/2012
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The agent is tasked with solving the Towers
+% of Hanoi problem, where a series of graduated
+% disks must be placed in the appropriate order
+% on one of three pegs given some initial
+% configuration. Meanwhile, an antagonistic
+% entity is able to move pegs in order to
+% attempt to thwart the agent's efforts.
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Based on the example provided in:
+%      Nonmontonic Causal Theories (2004)
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- sorts
+  location >> (disk, peg).
+
+:- objects
+  1..4             :: disk;
+  p1,p2,p3         :: peg.
+
+:- variables
+  D,D1             :: disk;
+  P,P1,P2,P3       :: peg;
+  L                :: location.
+
+:- constants
+  loc(disk)         :: simpleFluent(location);
+  base(location)    :: sdFluent(peg);
+  clear(location)   :: sdFluent;
+  move(peg,peg)     :: exogenousAction;
+  ext_move(peg,peg) :: externalAction;
+  ab_ext(peg)	    :: sdFluent.
+
+
+% Inertia / Defaults
+inertial loc(D).
+default ~ab_ext(P).
+default clear(L).
+
+% different disks can't be in the same location
+impossible loc(D)=L & loc(D1)=L where D<D1.
+
+% a disk is smaller than the disk under it
+impossible loc(D)=D1 where D1<D.
+
+% Definition of a disk being clear
+~clear(L) if loc(D)=L.
+
+% definition of base
+base(P)=P.
+base(D)=P if loc(D)=L & base(L)=P.
+
+% abnormality
+ab_ext(P) after ext_move(P,P1)=true.
+ab_ext(P1) after ext_move(P,P1)=true.
+
+% Don't move something that's not there
+nonexecutable move(P,P1) if clear(P).
+
+% effect and precondition of move
+loc(D)=L ifcons ~ab_ext(P) & ~ab_ext(P1) after move(P,P1) & base(D)=P & clear(D) & base(L)=P1 & clear(L).
+ext_move(P,P1)=true causes loc(D)=L if base(D)=P & clear(D) & base(L)=P1 & clear(L).
+
+% Move only a single disk at a time
+nonexecutable move(P,P1) & move(P2,P3) where  P < P2.
+nonexecutable move(P,P1) & move(P2,P3) where P1 < P3.
+
+:- hide all.
+:- show move(P,P1)=true.
+:- show ext_move(P,P1)=true.
+:- show loc(D)=L.
+
+
+:- query
+  0: clear(p2) & clear(p3);
+  maxstep: clear(p1) & clear(p2).

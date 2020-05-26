@@ -1,0 +1,708 @@
+=============== step 1 ===============
+
+Models   : 0
+Time     : 0.190 (g: 0.130, p: 0.060, s: 0.000)
+Rules    : 42754
+Choices  : 0
+Conflicts: 0
+=============== step 2 ===============
+
+Models   : 0
+Time     : 0.110 (g: 0.100, p: 0.010, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 3 ===============
+
+Models   : 0
+Time     : 0.140 (g: 0.100, p: 0.040, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 4 ===============
+
+Models   : 0
+Time     : 0.110 (g: 0.100, p: 0.010, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 5 ===============
+
+Models   : 0
+Time     : 0.140 (g: 0.090, p: 0.050, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 6 ===============
+
+Models   : 0
+Time     : 0.110 (g: 0.100, p: 0.010, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 7 ===============
+
+Models   : 0
+Time     : 0.160 (g: 0.100, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 8 ===============
+
+Models   : 0
+Time     : 0.120 (g: 0.100, p: 0.020, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 9 ===============
+
+Models   : 0
+Time     : 0.160 (g: 0.100, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 10 ===============
+
+Models   : 0
+Time     : 0.130 (g: 0.100, p: 0.030, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 11 ===============
+
+Models   : 0
+Time     : 0.160 (g: 0.100, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 12 ===============
+
+Models   : 0
+Time     : 0.130 (g: 0.100, p: 0.030, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 13 ===============
+
+Models   : 0
+Time     : 0.180 (g: 0.100, p: 0.080, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 14 ===============
+
+Models   : 0
+Time     : 0.150 (g: 0.110, p: 0.040, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 15 ===============
+
+Models   : 0
+Time     : 0.160 (g: 0.100, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 16 ===============
+
+Models   : 0
+Time     : 0.150 (g: 0.110, p: 0.040, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 17 ===============
+
+Models   : 0
+Time     : 0.180 (g: 0.110, p: 0.070, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 18 ===============
+
+Models   : 0
+Time     : 0.150 (g: 0.110, p: 0.040, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 19 ===============
+
+Models   : 0
+Time     : 0.210 (g: 0.110, p: 0.100, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 20 ===============
+
+Models   : 0
+Time     : 0.170 (g: 0.110, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 21 ===============
+
+Models   : 0
+Time     : 0.190 (g: 0.110, p: 0.080, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 22 ===============
+
+Models   : 0
+Time     : 0.170 (g: 0.110, p: 0.060, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 23 ===============
+
+Models   : 0
+Time     : 0.180 (g: 0.110, p: 0.070, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 24 ===============
+
+Models   : 0
+Time     : 0.180 (g: 0.110, p: 0.070, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 25 ===============
+
+Models   : 0
+Time     : 0.190 (g: 0.110, p: 0.080, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 26 ===============
+
+Models   : 0
+Time     : 0.250 (g: 0.120, p: 0.130, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 27 ===============
+
+Models   : 0
+Time     : 0.190 (g: 0.110, p: 0.080, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 28 ===============
+
+Models   : 0
+Time     : 0.200 (g: 0.110, p: 0.090, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 29 ===============
+
+Models   : 0
+Time     : 0.200 (g: 0.110, p: 0.090, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 30 ===============
+
+Models   : 0
+Time     : 0.210 (g: 0.110, p: 0.100, s: 0.000)
+Rules    : 27051
+Choices  : 0
+Conflicts: 0
+=============== step 31 ===============
+
+Models   : 0
+Time     : 0.250 (g: 0.120, p: 0.100, s: 0.030)
+Rules    : 27051
+Choices  : 27
+Conflicts: 20
+=============== step 32 ===============
+
+Models   : 0
+Time     : 0.260 (g: 0.110, p: 0.100, s: 0.040)
+Rules    : 27051
+Choices  : 77
+Conflicts: 33
+=============== step 33 ===============
+
+Models   : 0
+Time     : 0.480 (g: 0.110, p: 0.090, s: 0.260)
+Rules    : 27051
+Choices  : 536
+Conflicts: 135
+=============== step 34 ===============
+
+Models   : 0
+Time     : 0.500 (g: 0.110, p: 0.100, s: 0.260)
+Rules    : 27051
+Choices  : 536
+Conflicts: 153
+=============== step 35 ===============
+
+Models   : 0
+Time     : 0.650 (g: 0.110, p: 0.160, s: 0.360)
+Rules    : 27051
+Choices  : 994
+Conflicts: 562
+=============== step 36 ===============
+
+Models   : 0
+Time     : 0.940 (g: 0.110, p: 0.110, s: 0.700)
+Rules    : 27051
+Choices  : 2571
+Conflicts: 889
+=============== step 37 ===============
+
+Models   : 0
+Time     : 1.310 (g: 0.110, p: 0.100, s: 1.080)
+Rules    : 27051
+Choices  : 3388
+Conflicts: 1470
+=============== step 38 ===============
+
+Models   : 0
+Time     : 1.380 (g: 0.110, p: 0.120, s: 1.120)
+Rules    : 27051
+Choices  : 2007
+Conflicts: 1080
+=============== step 39 ===============
+
+Models   : 0
+Time     : 1.720 (g: 0.110, p: 0.110, s: 1.470)
+Rules    : 27051
+Choices  : 3586
+Conflicts: 1960
+=============== step 40 ===============
+
+Models   : 0
+Time     : 2.450 (g: 0.110, p: 0.110, s: 2.210)
+Rules    : 27051
+Choices  : 3480
+Conflicts: 2261
+=============== step 41 ===============
+
+Models   : 0
+Time     : 2.740 (g: 0.110, p: 0.120, s: 2.480)
+Rules    : 27051
+Choices  : 5998
+Conflicts: 3261
+=============== step 42 ===============
+
+Models   : 0
+Time     : 1.930 (g: 0.110, p: 0.120, s: 1.670)
+Rules    : 27051
+Choices  : 3322
+Conflicts: 2337
+=============== step 43 ===============
+
+Models   : 0
+Time     : 3.080 (g: 0.110, p: 0.110, s: 2.830)
+Rules    : 27051
+Choices  : 6270
+Conflicts: 3537
+=============== step 44 ===============
+
+Models   : 0
+Time     : 1.960 (g: 0.120, p: 0.120, s: 1.690)
+Rules    : 27051
+Choices  : 5291
+Conflicts: 3166
+=============== step 45 ===============
+
+Models   : 0
+Time     : 5.220 (g: 0.110, p: 0.120, s: 4.990)
+Rules    : 27051
+Choices  : 8619
+Conflicts: 5748
+=============== step 46 ===============
+
+Models   : 0
+Time     : 5.640 (g: 0.110, p: 0.130, s: 5.350)
+Rules    : 27051
+Choices  : 8631
+Conflicts: 5349
+=============== step 47 ===============
+
+Models   : 0
+Time     : 4.570 (g: 0.120, p: 0.140, s: 4.250)
+Rules    : 27051
+Choices  : 7613
+Conflicts: 4982
+=============== step 48 ===============
+
+Models   : 0
+Time     : 3.700 (g: 0.120, p: 0.240, s: 3.280)
+Rules    : 27051
+Choices  : 8171
+Conflicts: 5376
+=============== step 49 ===============
+
+Models   : 0
+Time     : 4.900 (g: 0.110, p: 0.150, s: 4.580)
+Rules    : 27051
+Choices  : 7409
+Conflicts: 4964
+=============== step 50 ===============
+
+Models   : 0
+Time     : 6.770 (g: 0.110, p: 0.160, s: 6.430)
+Rules    : 27051
+Choices  : 10368
+Conflicts: 6702
+=============== step 51 ===============
+
+Models   : 0
+Time     : 7.560 (g: 0.110, p: 0.160, s: 7.210)
+Rules    : 27051
+Choices  : 8120
+Conflicts: 5803
+=============== step 52 ===============
+
+Models   : 0
+Time     : 6.620 (g: 0.110, p: 0.170, s: 6.260)
+Rules    : 27051
+Choices  : 7520
+Conflicts: 4984
+=============== step 53 ===============
+
+Models   : 0
+Time     : 17.120 (g: 0.110, p: 0.180, s: 16.830)
+Rules    : 27051
+Choices  : 19731
+Conflicts: 13184
+=============== step 54 ===============
+
+Models   : 0
+Time     : 4.920 (g: 0.110, p: 0.200, s: 4.500)
+Rules    : 27051
+Choices  : 8106
+Conflicts: 5053
+=============== step 55 ===============
+
+Models   : 0
+Time     : 8.000 (g: 0.120, p: 0.200, s: 7.560)
+Rules    : 27051
+Choices  : 9207
+Conflicts: 6436
+=============== step 56 ===============
+
+Models   : 0
+Time     : 37.120 (g: 0.110, p: 0.220, s: 36.780)
+Rules    : 27051
+Choices  : 43554
+Conflicts: 26506
+=============== step 57 ===============
+
+Models   : 0
+Time     : 17.590 (g: 0.120, p: 0.270, s: 16.990)
+Rules    : 27051
+Choices  : 18255
+Conflicts: 10224
+=============== step 58 ===============
+
+Models   : 0
+Time     : 21.530 (g: 0.120, p: 0.290, s: 20.910)
+Rules    : 27051
+Choices  : 19950
+Conflicts: 12155
+=============== step 59 ===============
+
+Models   : 0
+Time     : 14.370 (g: 0.120, p: 0.310, s: 13.710)
+Rules    : 27051
+Choices  : 9473
+Conflicts: 6840
+=============== step 60 ===============
+
+Models   : 0
+Time     : 12.210 (g: 0.120, p: 0.310, s: 11.560)
+Rules    : 27051
+Choices  : 10378
+Conflicts: 6714
+=============== step 61 ===============
+
+Models   : 0
+Time     : 34.110 (g: 0.110, p: 0.330, s: 33.440)
+Rules    : 27051
+Choices  : 25170
+Conflicts: 16824
+=============== step 62 ===============
+
+Models   : 0
+Time     : 63.390 (g: 0.120, p: 0.380, s: 62.880)
+Rules    : 27051
+Choices  : 56728
+Conflicts: 32174
+=============== step 63 ===============
+
+Models   : 0
+Time     : 25.240 (g: 0.130, p: 0.480, s: 24.230)
+Rules    : 27051
+Choices  : 21773
+Conflicts: 11420
+=============== step 64 ===============
+
+Models   : 0
+Time     : 20.170 (g: 0.120, p: 0.490, s: 19.170)
+Rules    : 27051
+Choices  : 14994
+Conflicts: 9255
+=============== step 65 ===============
+
+Models   : 0
+Time     : 29.930 (g: 0.120, p: 0.500, s: 28.880)
+Rules    : 27051
+Choices  : 20373
+Conflicts: 13873
+=============== step 66 ===============
+
+Models   : 0
+Time     : 26.400 (g: 0.110, p: 0.550, s: 25.270)
+Rules    : 27051
+Choices  : 18529
+Conflicts: 11625
+=============== step 67 ===============
+
+Models   : 0
+Time     : 19.490 (g: 0.120, p: 0.560, s: 18.330)
+Rules    : 27051
+Choices  : 12778
+Conflicts: 8069
+=============== step 68 ===============
+
+Models   : 0
+Time     : 40.760 (g: 0.120, p: 0.740, s: 39.390)
+Rules    : 27051
+Choices  : 21755
+Conflicts: 14950
+=============== step 69 ===============
+
+Models   : 0
+Time     : 44.420 (g: 0.120, p: 0.650, s: 43.070)
+Rules    : 27051
+Choices  : 21354
+Conflicts: 15435
+=============== step 70 ===============
+
+Models   : 0
+Time     : 41.320 (g: 0.120, p: 0.690, s: 39.920)
+Rules    : 27051
+Choices  : 22593
+Conflicts: 13884
+=============== step 71 ===============
+
+Models   : 0
+Time     : 30.130 (g: 0.120, p: 0.720, s: 28.690)
+Rules    : 27051
+Choices  : 17536
+Conflicts: 13211
+=============== step 72 ===============
+
+Models   : 0
+Time     : 28.650 (g: 0.120, p: 0.730, s: 27.180)
+Rules    : 27051
+Choices  : 15330
+Conflicts: 11330
+=============== step 73 ===============
+
+Models   : 0
+Time     : 80.420 (g: 0.120, p: 0.740, s: 78.920)
+Rules    : 27051
+Choices  : 39335
+Conflicts: 25096
+=============== step 74 ===============
+
+Models   : 0
+Time     : 89.480 (g: 0.110, p: 0.830, s: 87.820)
+Rules    : 27051
+Choices  : 37286
+Conflicts: 25022
+=============== step 75 ===============
+
+Models   : 0
+Time     : 43.390 (g: 0.120, p: 0.910, s: 41.570)
+Rules    : 27051
+Choices  : 17063
+Conflicts: 12831
+=============== step 76 ===============
+
+Models   : 0
+Time     : 36.110 (g: 0.110, p: 0.920, s: 34.270)
+Rules    : 27051
+Choices  : 17659
+Conflicts: 12116
+=============== step 77 ===============
+
+Models   : 0
+Time     : 153.990 (g: 0.110, p: 0.960, s: 152.070)
+Rules    : 27051
+Choices  : 62729
+Conflicts: 39325
+=============== step 78 ===============
+
+Models   : 0
+Time     : 80.090 (g: 0.120, p: 1.110, s: 77.830)
+Rules    : 27051
+Choices  : 24808
+Conflicts: 17181
+=============== step 79 ===============
+
+Models   : 0
+Time     : 91.230 (g: 0.120, p: 1.170, s: 88.890)
+Rules    : 27051
+Choices  : 26703
+Conflicts: 19568
+=============== step 80 ===============
+
+Models   : 0
+Time     : 432.870 (g: 0.120, p: 1.220, s: 430.420)
+Rules    : 27051
+Choices  : 179971
+Conflicts: 95013
+=============== step 81 ===============
+
+Models   : 0
+Time     : 113.100 (g: 0.120, p: 1.650, s: 109.650)
+Rules    : 27051
+Choices  : 25845
+Conflicts: 16512
+=============== step 82 ===============
+
+Models   : 0
+Time     : 151.620 (g: 0.130, p: 1.710, s: 148.190)
+Rules    : 27051
+Choices  : 50175
+Conflicts: 30833
+=============== step 83 ===============
+
+Models   : 0
+Time     : 130.310 (g: 0.130, p: 1.820, s: 126.580)
+Rules    : 27051
+Choices  : 33636
+Conflicts: 24445
+=============== step 84 ===============
+
+Models   : 0
+Time     : 94.200 (g: 0.120, p: 1.890, s: 90.410)
+Rules    : 27051
+Choices  : 24564
+Conflicts: 17439
+=============== step 85 ===============
+
+Models   : 0
+Time     : 209.320 (g: 0.120, p: 1.950, s: 205.420)
+Rules    : 27051
+Choices  : 59576
+Conflicts: 33529
+=============== step 86 ===============
+
+Models   : 0
+Time     : 116.330 (g: 0.120, p: 2.150, s: 111.930)
+Rules    : 27051
+Choices  : 23298
+Conflicts: 14921
+=============== step 87 ===============
+
+Models   : 0
+Time     : 104.920 (g: 0.120, p: 2.200, s: 100.250)
+Rules    : 27051
+Choices  : 23374
+Conflicts: 16337
+=============== step 88 ===============
+
+Models   : 0
+Time     : 205.220 (g: 0.120, p: 2.280, s: 200.590)
+Rules    : 27051
+Choices  : 45929
+Conflicts: 31487
+=============== step 89 ===============
+
+Models   : 0
+Time     : 366.430 (g: 0.120, p: 2.400, s: 361.630)
+Rules    : 27051
+Choices  : 92359
+Conflicts: 48567
+=============== step 90 ===============
+
+Models   : 0
+Time     : 524.600 (g: 0.120, p: 2.740, s: 518.910)
+Rules    : 27051
+Choices  : 119903
+Conflicts: 64842
+=============== step 91 ===============
+
+Models   : 0
+Time     : 156.600 (g: 0.130, p: 3.080, s: 150.070)
+Rules    : 27051
+Choices  : 33697
+Conflicts: 22962
+=============== step 92 ===============
+
+Models   : 0
+Time     : 117.800 (g: 0.130, p: 3.180, s: 111.180)
+Rules    : 27051
+Choices  : 23929
+Conflicts: 15980
+=============== step 93 ===============
+
+Models   : 0
+Time     : 94.710 (g: 0.130, p: 3.240, s: 88.000)
+Rules    : 27051
+Choices  : 23223
+Conflicts: 17560
+=============== step 94 ===============
+
+Models   : 0
+Time     : 184.610 (g: 0.130, p: 3.260, s: 178.080)
+Rules    : 27051
+Choices  : 34050
+Conflicts: 23819
+=============== step 95 ===============
+
+Models   : 0
+Time     : 712.080 (g: 0.130, p: 3.360, s: 705.010)
+Rules    : 27051
+Choices  : 144119
+Conflicts: 84913
+=============== step 96 ===============
+
+Models   : 0
+Time     : 1258.470 (g: 0.140, p: 4.000, s: 1249.200)
+Rules    : 27051
+Choices  : 262793
+Conflicts: 126805
+=============== step 97 ===============
+
+Models   : 0
+Time     : 210.930 (g: 0.610, p: 22.010, s: 169.700)
+Rules    : 27051
+Choices  : 26155
+Conflicts: 18729
+=============== step 98 ===============
+=============== Summary ===============
+UNKNOWN
+
+INTERRUPTED : 1
+
+Models      : 0+    
+Total Steps : 98
+Time        : 6438.040
+  Prepare   : 60.970
+  Prepro.   : 154.330
+  Solving   : 6220.360
+Choices     : 1966267
+Conflicts   : 1181123
+Restarts    : 606
+
+Atoms       : 40324 
+Rules       : 2666701 (1: 2634700 2: 2945 3: 29056)
+Bodies      : 2640793
+Equivalences: 36872  (Atom=Atom: 1359 Body=Body: 0 Other: 35513)
+Tight       : Yes
+
+Variables   : 2415399 (Eliminated:    0)
+Constraints : 3845243 (Binary: 84.8% Ternary:  0.7% Other: 14.4%)
+Lemmas      : 1181056 (Binary:  4.0% Ternary:  1.6% Other: 94.4%)
+  Conflicts : 1181056 (Average Length: 811.3) 
+  Loops     : 0      (Average Length: 0.0) 
+  Other     : 0      (Average Length: 0.0) 
+  Deleted   : 0     

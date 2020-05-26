@@ -1,0 +1,94 @@
+% File: 'monkey.bc+'.
+
+:- sorts
+  thing;
+  location.
+
+:- objects
+  monkey,bananas,box     :: thing;
+  l1,l2,l3               :: location.
+
+:- variables
+  B                      :: boolean;
+  Th                     :: thing;
+  L                      :: location.
+
+:- constants
+  loc(thing)             :: simpleFluent(location);
+  hasBananas,onBox       :: simpleFluent;
+
+  walk(location),
+  pushBox(location),
+  climbOn,
+  climbOff,
+  graspBananas           :: action.
+
+
+{loc(Th)=L} after loc(Th)=L.
+{hasBananas=B} after hasBananas=B.
+{onBox=B} after onBox=B.
+
+{walk(L)=B}.
+{pushBox(L)=B}.
+{climbOn=B}.
+{climbOff=B}.
+{graspBananas=B}.
+
+loc(bananas)=L if hasBananas & loc(monkey)=L.
+loc(monkey)=L if onBox & loc(box)=L.
+
+loc(monkey)=L after walk(L).
+false after walk(L) & loc(monkey)=L.
+false after walk(L) & onBox.
+
+loc(box)=L after pushBox(L).
+loc(monkey)=L after pushBox(L).
+false after pushBox(L) & loc(monkey)=L.
+false after pushBox(L) & onBox.
+false after pushBox(L) & loc(monkey)\=loc(box).
+
+onBox after climbOn.
+false after climbOn & onBox.
+false after climbOn & loc(monkey)\=loc(box).
+
+~onBox after climbOff.
+false after climbOff & ~onBox.
+
+hasBananas after graspBananas.
+false after graspBananas & hasBananas.
+false after graspBananas & ~onBox.
+false after graspBananas & loc(monkey)\=loc(bananas).
+
+false after walk(L) & pushBox(L).
+false after walk(L) & climbOn.
+false after pushBox(L) & climbOn.
+false after climbOff & graspBananas.
+
+
+% Prediction
+:- query
+maxstep :: 2;
+0: loc(monkey)=l1 &
+   loc(bananas)=l2 &
+   loc(box)=l3 &
+   walk(l3);
+1: pushBox(l2);
+2: loc(monkey)\= loc(bananas) ++ loc(bananas)\=loc(box).
+
+% Postdiction
+:- query
+label :: 1;
+maxstep :: 2;
+0: walk(l3);
+1: [\/L | pushBox(L)];
+0: loc(box)\=l3.
+
+% Planning
+:- query
+label :: 2;
+maxstep :: 4;
+0: loc(monkey)=l1 &
+   loc(bananas)=l2 &
+   loc(box)=l3;
+maxstep: hasBananas.
+

@@ -1,0 +1,10 @@
+#const n=120.
+#const m=4.
+
+animal(sheep).
+animal(wolf). 
+
+int(0..n).
+small_int(0..m).
+big_int(n-m..n).
+

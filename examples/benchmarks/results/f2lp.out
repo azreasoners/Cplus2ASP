@@ -1,0 +1,399 @@
+% WARNING: F2LP arrow '<-' found. Treating '-' as classical negation. Please use the option -d if you would like '-' to be treated as default negation.
+% Standard description-independent declarations and laws to CCalc-ify ASP
+
+% A derived binary relation between a constant and its domain objects,
+% connected via constant_sort and sort_object
+
+%-------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------
+
+query_label(query) :- true.
+% Selects which query to activate in a based on the value of the const "query"
+
+constant_object(V_constant,Object) :- constant_sort(V_constant,V_sort),sort_object(V_sort,Object).
+
+% constant_posobject relates constants with their positive objects
+% positive objects are defined to be any object that is not 'none'
+% (multi-valued) or 'false' (boolean)
+
+constant_posobject(V_constant,Object) :- constant_object(V_constant,Object),constant_sort(V_constant,boolean),Object!=false.
+
+constant_posobject(V_constant,Object) :- constant_object(V_constant,Object),not constant_sort(V_constant,boolean),Object!=none.
+
+% constant_negobject relates constants with their negative object
+% negative objects are false (boolean) and none (non-boolean)
+constant_negobject(V_constant,false) :- constant_sort(V_constant,boolean).
+
+constant_negobject(V_constant,none) :- not constant_sort(V_constant,boolean),constant(V_constant).
+
+
+%-------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------
+
+% Standard, description-independent declarations of sorts and domains
+
+step(0..maxstep).
+astep(1..maxstep).
+
+#domain step(V_step).
+#domain astep(V_astep).
+
+sort(boolean) :- true.
+#domain boolean(V_boolean).
+sort_object(boolean,V_boolean) :- true.
+
+boolean(true) :- true.
+boolean(false) :- true.
+
+
+sort(computed) :- true.
+#domain computed(V_computed).
+sort_object(computed,V_computed) :- true.
+
+% Constants hierarchy
+
+% Meta-constants to group categories of constants
+
+sort(constant) :- true.
+#domain constant(V_constant).
+sort_object(constant,V_constant) :- true.
+
+%----
+
+% Rigid constants
+sort(rigid) :- true.
+#domain rigid(V_rigid).
+sort_object(rigid,V_rigid) :- true.
+
+%---
+
+% Fluent-based constants
+
+sort(fluent) :- true.
+#domain fluent(V_fluent).
+sort_object(fluent,V_fluent) :- true.
+
+sort(simpleFluent) :- true.
+#domain simpleFluent(V_simpleFluent).
+sort_object(simpleFluent,V_simpleFluent) :- true.
+
+sort(inertialFluent) :- true.
+#domain inertialFluent(V_inertialFluent).
+sort_object(inertialFluent,V_inertialFluent) :- true.
+
+sort(sdFluent) :- true.
+#domain sdFluent(V_sdFluent).
+sort_object(sdFluent,V_sdFluent) :- true.
+
+sort(abFluent) :- true.
+#domain abFluent(V_abFluent).
+sort_object(abFluent,V_abFluent) :- true.
+
+%---
+
+% Action-based constants
+
+sort(action) :- true.
+#domain action(V_action).
+sort_object(action,V_action) :- true.
+
+sort(exogenousAction) :- true.
+#domain exogenousAction(V_exogenousAction).
+sort_object(exogenousAction,V_exogenousAction) :- true.
+
+sort(abAction) :- true.
+#domain abAction(V_abAction).
+sort_object(abAction,V_abAction) :- true.
+
+sort(attribute) :- true.
+#domain attribute(V_attribute).
+sort_object(attribute,V_attribute) :- true.
+
+% A regular action is defined to be any action which isn't an abAction or attribute
+sort(regularAction) :- true.
+#domain regularAction(V_regularAction).
+sort_object(regularAction,V_regularAction) :- true.
+
+%---
+
+% Abnormality constants
+
+sort(abnormality) :- true.
+#domain abnormality(V_abnormality).
+sort_object(abnormality,V_abnormality) :- true.
+
+sort(staticAbnormality) :- true.
+#domain staticAbnormality(V_staticAbnormality).
+sort_object(staticAbnormality,V_staticAbnormality) :- true.
+
+sort(dynamicAbnormality) :- true.
+#domain dynamicAbnormality(V_dynamicAbnormality).
+sort_object(dynamicAbnormality,V_dynamicAbnormality) :- true.
+
+%---
+
+% Subsort relations
+
+constant(V_fluent) :- true.
+constant(V_action) :- true.
+constant(V_rigid) :- true.
+constant(V_abnormality) :- true.
+fluent(V_simpleFluent) :- true.
+simpleFluent(V_inertialFluent) :- true.
+fluent(V_sdFluent) :- true.
+sdFluent(V_abFluent) :- true.
+action(V_exogenousAction) :- true.
+action(V_abAction) :- true.
+action(V_attribute) :- true.
+
+regularAction(V_action) :- not attribute(V_action),not abAction(V_action).
+
+abnormality(V_staticAbnormality) :- true.
+abnormality(V_dynamicAbnormality) :- true.
+
+% Note: This isn't necessary for abnormality constants
+
+
+%-------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------
+
+%%% Description-independent rules to CCalc-ify ASP @ t=0
+
+% Exogeneity for exogenous actions
+exogenous(V_exogenousAction) :- true.
+
+% Exogeneity for attributes
+exogenous(V_attribute) :- true.
+
+% Inertia for inertial fluents
+inertial(V_inertialFluent) :- true.
+
+% anyInitialState: Exogeneity for simple fluents at time 0
+{h(eql(V_simpleFluent,Object),0)} :- constant_object(V_simpleFluent,Object).
+
+
+% exogenous: Grants exogeneity to a constant
+
+% Rigids
+{h(eql(V_rigid,Value))} :- exogenous(V_rigid),constant_object(V_rigid,Value).
+
+% Existence and uniqueness for every constant relative to its domain
+
+% Rigid
+ :- not 1{h(eql(V_rigid,Object1)):constant_object(V_rigid,Object1)}1.
+
+
+%-------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------
+
+%%% Description-independent rules to CCalc-ify ASP @ t>0
+
+% abActions default to false
+{occ(eql(V_abAction,false),V_astep-1)} :- true.
+
+% Default false for abFluents
+{h(eql(V_abFluent,X),V_step)} :- constant_negobject(V_abFluent,X).
+
+
+% Restriction that attributes must take on the value "none" if and only if their linked action does not execute
+ :- {not occ(eql(V_attribute,NegObj1),V_astep-1)}0,constant_negobject(V_action,NegObj2),action_attribute(V_action,V_attribute),constant_negobject(V_attribute,NegObj1),not occ(eql(V_action,NegObj2),V_astep-1).
+ :- {not occ(eql(V_action,NegObj2),V_astep-1)}0,constant_negobject(V_action,NegObj2),action_attribute(V_action,V_attribute),constant_negobject(V_attribute,NegObj1),not occ(eql(V_attribute,NegObj1),V_astep-1).
+
+
+% exogenous: Grants exogeneity to a constant
+
+% Actions
+{occ(eql(V_action,Value),V_astep-1)} :- exogenous(V_action),constant_object(V_action,Value).
+
+% Fluents
+{h(eql(V_fluent,Value),V_step)} :- exogenous(V_fluent),constant_object(V_fluent,Value).
+
+% Abnormality constants should also be exogenous
+{ab_h(V_staticAbnormality,V_step)} :- true.
+{ab_h(V_dynamicAbnormality,V_astep-1)} :- true.
+
+% inertial: Grants inertia to a (non-rigid) fluent
+
+{h(eql(V_fluent,Value),V_astep)} :- inertial(V_fluent),h(eql(V_fluent,Value),V_astep-1),constant_object(V_fluent,Value).
+
+% noconcurrency: If stated as a fact, prevents concurrent execution of Boolean actions
+
+ :- noconcurrency,2{occ(eql(X_action,true),V_astep-1):action(X_action)}.
+
+% strong_noconcurrency: A stronger version of noconcurrency which prevents 2 of any non-attribute, non abAction 
+% action from occurring simultaneously
+
+ :- strong_noconcurrency,2{occ(eql(X_action,X_Object),V_astep-1):regularAction(X_action):constant_posobject(X_action,X_Object)}.
+
+% Existence and uniqueness for every constant relative to its domain
+
+% Fluents (@ t>0)
+ :- not 1{h(eql(V_fluent,Object1),V_step):constant_object(V_fluent,Object1)}1.
+
+% Actions
+ :- not 1{occ(eql(V_action,Object1),V_astep-1):constant_object(V_action,Object1)}1.
+
+
+%-------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------
+
+% Etc
+#hide constant_object/2.
+#hide constant_posobject/2.
+#hide constant_negobject/2.
+#hide constant_sort/2.
+#hide sort_object/2.
+#hide action_attribute/2.
+#hide sort/1.
+#hide sort_object/2.
+#hide boolean/1.
+#hide step/1.
+#hide astep/1.
+#hide constant/1.
+#hide fluent/1.
+#hide simpleFluent/1.
+#hide inertialFluent/1.
+#hide sdFluent/1.
+#hide abFluent/1.
+#hide action/1.
+#hide exogenousAction/1.
+#hide abAction/1.
+#hide attribute/1.
+#hide regularAction/1.
+#hide abnormality/1.
+#hide staticAbnormality/1.
+#hide dynamicAbnormality/1.
+#hide exogenous/1.
+#hide inertial/1.
+#hide noconcurrency.
+#hide strong_noconcurrency.
+#hide query_label/1.
+#hide rigid/1.
+#hide computed/1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% File "/home/jbabb1/workspace/cplus2asp/examples/benchmarks/ferryman-15-4-longcp"
+% 3 sheep an three wolves shall cross a river in a boat
+% which carries at most 2 animals at once 
+% On either side, the wolves may never outnumber the sheep
+% or the sheep will be eaten
+
+% LONG Elaboration: There are, in fact, SMAX shorelines 
+% The goal is to get to #SMAX
+% No-one can be left behind, the boat may only go to S+1
+% the next shore when everyone is off S-1
+
+sort(int) :- true.
+#domain int(V_int).
+sort_object(int,V_int) :- true.
+#hide int(V_int).
+
+sort(type) :- true.
+#domain type(V_type).
+sort_object(type,V_type) :- true.
+#hide type(V_type).
+
+sort(shores) :- true.
+#domain shores(V_shores).
+sort_object(shores,V_shores) :- true.
+#hide shores(V_shores).
+
+sort(not_initial_shores) :- true.
+#domain not_initial_shores(V_not_initial_shores).
+sort_object(not_initial_shores,V_not_initial_shores) :- true.
+#hide not_initial_shores(V_not_initial_shores).
+
+sort(dir) :- true.
+#domain dir(V_dir).
+sort_object(dir,V_dir) :- true.
+#hide dir(V_dir).
+
+
+
+int(0..15).
+type(sheep) :- true.
+type(wolf) :- true.
+shores(1..3).
+not_initial_shores(2..3).
+dir(forward) :- true.
+dir(backward) :- true.
+
+exogenousAction(cross) :- true.
+constant_sort(cross,dir) :- true.
+exogenousAction(carrying(V_type)) :- true.
+constant_sort(carrying(V_type),int) :- true.
+inertialFluent(at(V_shores,V_type)) :- true.
+constant_sort(at(V_shores,V_type),int) :- true.
+inertialFluent(boat_at) :- true.
+constant_sort(boat_at,shores) :- true.
+
+#domain int(I).
+#domain int(I1).
+#domain int(I2).
+#domain int(I_new).
+#domain type(T).
+#domain shores(SH).
+#domain shores(SH1).
+#domain not_initial_shores(NS).
+#domain dir(D).
+
+% don't cross with more of a type than still on the shore
+ :- occ(eql(carrying(T),I),V_astep-1),h(eql(boat_at,SH),V_astep-1),h(eql(at(SH,T),I2),V_astep-1),I>I2.
+
+% don't cross with an empty boat
+#hide _new_pred_1(V_astep).
+ :- not _new_pred_1(V_astep).
+
+% don't cross with more than m animals
+ :- occ(eql(carrying(sheep),I),V_astep-1),occ(eql(carrying(wolf),I1),V_astep-1),I+I1>4.
+
+% Don't move off the map
+ :- occ(eql(cross,forward),V_astep-1),h(eql(boat_at,3),V_astep-1).
+ :- occ(eql(cross,backward),V_astep-1),h(eql(boat_at,1),V_astep-1).
+
+% don't leave animals behind
+#domain int(X_Value_0).
+#domain int(_NV_1).
+ :- occ(eql(cross,forward),V_astep-1),h(eql(boat_at,SH),V_astep-1),_NV_1>0,h(eql(at(SH-1,T),_NV_1),V_astep-1).
+#domain int(X_Value_1).
+#domain int(_NV_2).
+ :- occ(eql(cross,backward),V_astep-1),h(eql(boat_at,SH),V_astep-1),_NV_2>0,h(eql(at(SH+1,T),_NV_2),V_astep-1).
+
+% Update locations
+h(eql(boat_at,SH+1),V_astep) :- occ(eql(cross,forward),V_astep-1),h(eql(boat_at,SH),V_astep-1).
+h(eql(boat_at,SH-1),V_astep) :- occ(eql(cross,backward),V_astep-1),h(eql(boat_at,SH),V_astep-1).
+h(eql(at(SH,T),I+I1),V_astep) :- {not h(eql(boat_at,SH),V_astep)}0,occ(eql(carrying(T),I1),V_astep-1),h(eql(at(SH,T),I),V_astep-1).
+h(eql(at(SH,T),I-I1),V_astep) :- h(eql(at(SH,T),I),V_astep-1),h(eql(boat_at,SH),V_astep-1),occ(eql(carrying(T),I1),V_astep-1).
+
+% don't allow less sheep than wolves when still sheeps here
+ :- h(eql(at(SH,wolf),I),V_step),h(eql(at(SH,sheep),I1),V_step),0<I1,I1<I.
+
+%	maxstep:: 1300;
+%	maxstep:: 130;
+% [Query: Label:0, Maxstep:1::60]
+ :- not h(eql(at(1,wolf),15),0),query_label(0).
+ :- not h(eql(at(1,sheep),15),0),query_label(0).
+ :- not h(eql(at(NS,wolf),0),0),query_label(0).
+ :- not h(eql(at(NS,sheep),0),0),query_label(0).
+ :- query_label(0),not h(eql(boat_at,1),0).
+ :- not h(eql(at(3,wolf),15),maxstep),query_label(0).
+ :- not h(eql(at(3,sheep),15),maxstep),query_label(0).
+
+
+
+#base.
+
+_new_pred_1(V_astep) :- not occ(eql(carrying(T),0),V_astep-1).
+#base.
+true.
+:- false.
+#hide true/0.

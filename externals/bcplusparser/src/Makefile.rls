@@ -1,0 +1,106 @@
+#libtool
+
+AUTOMAKE_OPTIONS = subdir-objects
+
+ACLOCAL_AMFLAGS = -I $(PROJECT_ROOT)/build-scripts
+
+LEMON = $(PROJECT_ROOT)/lemon/lemon
+
+INCLUDE = $(PROJECT_ROOT)/include
+AM_CPPFLAGS = -I $(INCLUDE)
+AM_CFLAGS = -I $(INCLUDE)
+AM_CXXFLAGS = -I $(INCLUDE)
+
+# Debugging Flags
+if DEBUG
+
+AM_CPPFLAGS += -DDEBUG -g3 -O0 -Wall -fno-inline 
+AM_CFLAGS += -DDEBUG -g3 -O0 -Wall -fno-inline
+AM_CXXFLAGS += -DDEBUG -g3 -O0 -Wall -fno-inline
+
+else
+
+AM_CPPFLAGS += -DNDEBUG -O3
+AM_CFLAGS += -O3 
+AM_CXXFLAGS += -DNDEBUG -O3
+
+endif
+
+# RE2C rules
+if MAINTAINER_MODE 
+if HAVE_RE2C
+.re2c.cpp:
+	$(RE2C) -bc $< > $@
+.r2c.cpp:
+	$(RE2C) $< > $@
+else 
+.re2c.cpp:
+	@- echo "ERROR: Configured to build in maintainer mode but re2c is not installed on the computer."
+	@- echo "ERROR: Modified re2c files cannot be compiled into the corresponding .cpp file."
+	@- echo "ERROR: Please install re2c or add the '--disable-maintainer-mode' option during configuration."
+	@- exit 1
+.r2c.cpp:
+	@- echo "ERROR: Configured to build in maintainer mode but re2c is not installed on the computer."
+	@- echo "ERROR: Modified re2c files cannot be compiled into the corresponding .cpp file."
+	@- echo "ERROR: Please install re2c or add the '--disable-maintainer-mode' option during configuration."
+	@- exit 1
+endif
+else
+.re2c.cpp:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild re2c files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.r2c.cpp:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild re2c files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+endif
+
+# lemon rules
+if MAINTAINER_MODE
+.y.h:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $@ $(INCLUDE)/$@
+	mv $(@:.h=.c) $(@:.h=.cpp)
+.yy.h:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $@ $(INCLUDE)/$@
+	mv $(@:.h=.c) $(@:.h=.cpp)
+.ypp.h:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $@ $(INCLUDE)/$@
+	mv $(@:.h=.c) $(@:.h=.cpp)
+
+.y.cpp:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $(@:.cpp=.h) $(INCLUDE)/$(@:.cpp=.h)
+	mv $(@:.cpp=.c) $@
+.yy.cpp:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $(@:.cpp=.h) $(INCLUDE)/$(@:.cpp=.h)
+	mv $(@:.cpp=.c) $@
+.ypp.cpp:
+	$(LEMON) $< T=lemon/lempar.tem.c
+	mv $(@:.cpp=.h) $(INCLUDE)/$(@:.cpp=.h)
+	mv $(@:.cpp=.c) $@
+else
+
+.y.h:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.yy.h:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.ypp.h:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+
+.y.c:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.yy.c:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+.ypp.c:
+	@- echo "WARNING: The system must be configured to build in maintainer mode in order to rebuild lemon files."
+	@- echo "WARNING: These files will not be rebuilt unless you rerun the configure script with the '--enable-maintainer-mode' flag."
+endif
+

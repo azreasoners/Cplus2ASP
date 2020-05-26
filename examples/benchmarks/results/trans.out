@@ -1,0 +1,96 @@
+% File "/home/jbabb1/workspace/cplus2asp/examples/benchmarks/hanoi-8-4-benchmark-bool.cp".
+% Towers of Hanoi
+
+#base.
+sort(disc).
+#domain disc(V_disc).
+sort_object(disc,V_disc).
+#hide disc(V_disc).
+
+location(V_disc).
+sort(location).
+#domain location(V_location).
+sort_object(location,V_location).
+#hide location(V_location).
+
+sort(peg).
+#domain peg(V_peg).
+sort_object(peg,V_peg).
+#hide peg(V_peg).
+
+location(V_disc).
+location(V_peg).
+sort(location).
+#domain location(V_location).
+sort_object(location,V_location).
+#hide location(V_location).
+
+sort(int).
+#domain int(V_int).
+sort_object(int,V_int).
+#hide int(V_int).
+
+
+
+int(1..8).
+disc(disc(V_int)).
+sort(numRange_1_4).
+#domain numRange_1_4(V_numRange_1_4).
+sort_object(numRange_1_4,V_numRange_1_4).
+#hide numRange_1_4(V_numRange_1_4).
+
+numRange_1_4(1).
+numRange_1_4(2).
+numRange_1_4(3).
+numRange_1_4(4).
+peg(peg(V_numRange_1_4)).
+
+simpleFluent(on(V_disc, V_location)).
+constant_sort(on(V_disc, V_location),boolean).
+exogenousAction(move(V_disc, V_location)).
+constant_sort(move(V_disc, V_location),boolean).
+
+#domain disc(D).
+#domain disc(D1).
+#domain peg(P).
+#domain peg(P1).
+#domain location(L).
+#domain location(L1).
+#domain int(I).
+#domain int(I1).
+
+
+(inertial(on(D,L))).
+
+% after moving disc it is at new place
+#cumulative maxstep.
+(h(eql(on(D,L), true), maxstep)) <- occ(eql(move(D,L), true), maxstep-1).
+
+% disc is only on top of one other disc
+#base.
+(h(eql(on(D,L), false), 0)) <- not not ((h(eql(on(D,L1), true), 0))) & (L != L1).
+#cumulative maxstep.
+(h(eql(on(D,L), false), maxstep)) <- not not ((h(eql(on(D,L1), true), maxstep))) & (L != L1).
+
+
+% no concurrency
+(false) <- (occ(eql(move(D,L), true), maxstep-1) & occ(eql(move(D1,L1), true), maxstep-1)) & (D != D1).
+(false) <- (occ(eql(move(D,L), true), maxstep-1) & occ(eql(move(D1,L1), true), maxstep-1)) & (L != L1).
+
+
+% only move disc to location that doesn't have any other disc on top
+(false) <- (occ(eql(move(D,L), true), maxstep-1)) & (h(eql(on(D1,L), true), maxstep-1)) & (D != D1).
+
+% only move disc when it is the topmost disc
+(false) <- (occ(eql(move(D,L), true), maxstep-1)) & (h(eql(on(D1,D), true), maxstep-1)) & (D != D1).
+
+% only move disc on top of bigger disc
+(false) <- (occ(eql(move(disc(I),disc(I1)), true), maxstep-1)) & (I >= I1).
+
+% [Query: Label:0, Maxstep:0::100]
+#base.
+false <- query_label(0) & not (((h(eql(on(disc(8),peg(1)), true), 0)))).
+false <- query_label(0) & not (((((I < 8)) -> (h(eql(on(disc(I),disc(I + 1)), true), 0))))).
+#volatile maxstep.
+false <- query_label(0) & not (((h(eql(on(disc(8),peg(3)), true), maxstep)))).
+false <- query_label(0) & not (((((I < 8)) -> (h(eql(on(disc(I),disc(I + 1)), true), maxstep))))).

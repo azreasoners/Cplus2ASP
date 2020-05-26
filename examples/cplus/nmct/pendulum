@@ -1,0 +1,17 @@
+:- constants
+  right      :: simpleFluent;
+  hold       :: exogenousAction.
+
+hold causes right if right.
+hold causes -right if -right.
+
+default right after -right.
+default -right after right.
+
+  
+  
+:- query 
+maxstep :: 2..2;
+0: -right.
+
+

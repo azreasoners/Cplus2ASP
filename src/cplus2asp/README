@@ -1,0 +1,132 @@
+Cplus2ASP README
+----------------
+
+Cplus2ASP is a wrapper program that handles calling the correct tool chain of programs to translate, prepare, solve, and process CCalc programs using f2lp and ASP solvers.
+
+By default, Cplus2ASP is set up to use cplus2asp.bin, f2lp, gringo, clasp, and as2transition as the translator, pre-processor, grounder, solver, and post-processor (respectively). These can be changed or altered as needed via command-line options (see below).
+
+Typically, Cplus2ASP would be used as follows:
+If you have a standard CCalc input file (or group of files), just call Cplus2ASP and pass them as arguments:
+cplus2asp myFile1.cp myFile2.cp
+Cplus2ASP will bundle the files together, translate them, and then try to find queries in the files. Assuming it finds at least one query, it will list the queries it found and ask you which one to run.
+By default, the first solution will be returned, but if you want to try finding more solutions, add a non-negative integer at the end of the command:
+cplus2asp myFile1.cp myFile2.cp 2
+This does the same thing as the command above, except now Cplus2ASP will try finding 2 solutions to the given query. Using 0 tells Cplus2ASP to return as many solutions as it can find.
+
+When using Cplus2ASP to develop or test a new CCalc program, the following process can make debugging a bit easier:
+1) Take your CCalc input files and pass them to Cplus2ASP like so:
+cplus2asp myFile1.cp myFile2.cp -justtrans >myProgram.f2lp
+This will just call the translator and output the results to the file "myProgram.f2lp", showing any errors that happened during translation.
+2) Fix any errors in your CCalc files and get a clean "myProgram.f2lp" file. After translating a program to f2lp input, call
+cplus2asp myProgram.f2lp -justpre -nostd
+to have f2lp try to parse your program without the "standard" translation files. This makes it easier to catch syntax errors and the like.
+3) Once f2lp is happy with your program, call
+cplus2asp myProgram.f2lp -justpre >myProgram.lp
+to get f2lp's output in the file "myProgram.lp", then call
+cplus2asp myProgram.lp
+to enable the grounder and see if it reports any errors. You can use the myProgram.lp file for line number reference if the grounder complains about syntax or grounding errors, updating it via the calls above as you make corrections to your original CCalc files. Once the grounder stops complaining, the rest of the tool chain should run and return any solutions to the query you tell Cplus2ASP to run.
+
+If the wrong (or no) solutions are coming out the other side, try commmenting out some of the parts of your queries to loosen the constraints. Commenting out constraints or other causal laws can also help shed light on what's causing things to go wrong, and can possibly reveal a law that was incorrectly translated or not quite doing what you intended.
+
+Compiling Cplus2ASP:
+--------------------
+Cplus2ASP expects that gcc (in particular, gcc's C++ compiler, g++) is installed, and that the target system is Unix-like. Any modern C++ compiler should work, you'll just have to compile it manually or modify the makefile.
+Assuming you have a standard setup, type the following lines into your favorite terminal emulator to compile and install Cplus2ASP:
+
+make
+sudo make install
+
+You need sudo (or to be root) for the second command, as by default make will install Cplus2ASP into /usr/local/bin, and support files into /usr/local/lib/cplus2asp. If you'd prefer to install it somewhere else (say, to ~/bin and ~/lib/cplus2asp, respectively), change the variable INSTALLPATH when you install like so:
+
+make INSTALLPATH="~" install
+
+That particular example should let you install Cplus2ASP without having to use sudo or be root.
+
+Command Line:
+-------------
+cplus2asp INPUT_FILES [OPTIONS] [CONSTANTS] [NUM_SOLUTIONS]
+
+INPUT_FILES is a series of files in CCalc, ASP, or f2lp syntax. At least one input file is required. Any input files with extensions .f2lp or .lp will not be passed to the translator, but directly passed to f2lp instead.
+OPTIONS are optional arguments that change the program's behavior.
+CONSTANTS are constant definitions that are passed to the grounder. There are three special constants that are often seen in CCalc programs, and can be useful to manually set. These are not required to be defined if special "hint" comments are placed in the output from the translator. As seen below in the program options, constants are set with "CONST=VALUE" pairs, where CONST is the name of the constant and VALUE is the value to assign to it.
+  The special constants are as follows:
+    maxAdditive - The maximum additive integer (only needed if using additive fluents/actions).
+    maxstep - The maximum time step to consider. May be a range of numbers instead of just a single integer (e.g., "1..5").
+    query - The query number (i.e., label) to select.
+NUM_SOLUTIONS is the desired number of solutions for the solver to find. This should be a non-negative integer (0 or greater). If not specified, defaults to 1. Specifying 0 usually tells the solver to find all solutions (i.e., as many as it can).
+
+Normal Program Options:
+  -add or --additive 
+    includes the standard additive translation support file so that the input files can use additive fluents/actions. Automatically included if the constant maxAdditive is defined.
+  -auto or --automated
+    makes the program run in automated mode, so it won't prompt or ask for any information from the user.
+  CONST=VALUE or -c CONST=VALUE or --const CONST=VALUE
+    declares a constant & value pair to pass to gringo. Unless given in the input files, you will probably need to at least declare values for the constants maxstep, query, and possibly maxAdditive.
+  -mm or --manual-maxstep
+    allows the user to manually control the iterations of queries with ranged maxsteps (vs. the default of wandering through the range until a solution is found). Obviously, this is incompatible with the "-auto" option.
+  --help
+    shows a brief message outlining program usage and command-line options.
+  -v or --version
+    outputs version information.
+
+Extra Program Options:
+  Options with [PROG] or [PROGRAM] in their name affect individual programs in the tool chain, depending on [PROG] or [PROGRAM]'s value.
+  Any option with [PROG] in its name should have [PROG] replaced with one of:
+    gr (grounder), pre (pre-processor), post (post-processor), so (solver), trans (translator), or grso (combined grounder & solver).
+  Replace [PROGRAM] in the applicable options with one of the following:
+    grounder, pre-processor, post-processor, solver, translator, or grounder-solver.
+
+  -[PROG] PATH or --[PROGRAM] PATH
+    gives a new path to the desired tool chain program.
+  -[PROG]opt "OPTIONS" or --[PROGRAM]-opts "OPTIONS"
+    passes OPTIONS to the given tool chain program.
+  -from[PROG] or --from-[PROGRAM]
+    starts running the tool chain from the given program.
+  -just[PROG] or --just-[PROGRAM]
+    removes all but the given program from the tool chain.
+  -nodel or --no-delete
+    stops the program from deleting intermediate files created during processing, grounding, and solving. This can be useful for debugging purposes.
+  -no[PROG] or --no-[PROGRAM]
+    removes the given program from the tool chain.
+  -nostd or --no-standard
+    removes the standard translation files from the call to the pre-processor. Useful if supplying different "standard" files, or for debugging of input file errors.
+  -to[PROG] or --to-[PROGRAM]
+    stops the tool chain after running given program.
+
+Examples of Use:
+----------------
+cplus2asp myProgram.cp
+  would translate and process the file "myProgram.cp", interactively asking which query from the file to run, returning the first solution found (if any).
+cplus2asp myProgram.cp query=1 2
+  does the same as above, except it automatically runs Query 1 (assuming it can find or derive maxstep), and tries to find two solutions to the query.
+cplus2asp myProgram.cp query=1 maxstep=3 -so cmodels 2
+  would do the same as above, but it changes the solver to cmodels and forces maxstep to be 3.
+cplus2asp myProgram.cp -grso clingo
+  uses clingo as a combined grounder & solver, instead of the default of using a separate grounder and solver.
+cplus2asp myProgram.f2lp --just-pre-processor
+  skips running the translator because the input file has the .f2lp extension, just running f2lp (the pre-processor) on the contents of "myProgram.f2lp", outputting the results.
+cplus2asp myProgram.f2lp -postopt "-a"
+  does the same as above, except it also calls the rest of the tool chain and passes the option "-a" to the post-processor, in the default case causing the post-processor to output all predicates (even normally hidden/intermediate ones).
+cplus2asp myProgram.asp -fromgr --to-solver
+  passes the given file (presumed to be pure ASP code) to the grounder, starting the tool chain from there and stopping after running the solver, effectively turning cplus2asp into a pure ASP grounding/solving system.
+
+Revisions and History:
+----------------------
+v2.3 - Implemented "-from[PROG]" and "-to[PROG]" options to give better control over running a partial tool chain.
+v2.2.2 - Fixed bugs, "-notrans" wasn't shutting off the translator, "-gropt" and "-grsoopt" were mixed up. Set up system to track when tool chain programs have errors.
+v2.2.1 - Fixed bug where program might get wrong values back from system calls (depending on OS).
+v2.2 - cplus2asp now supports integrated grounder-solvers (like clingo), using the option -grso / --grounder-solver. Added automatic searching though queries with ranged maxsteps, with an option to switch to manual mode (-mm). Removed support for using piped tool chain commands. Added automated "non-interactive" mode option (-auto).
+v2.1.2 - Tweaked status outputs to be compatible with benchmarking scripts, adjusted output messages to make more sense.
+v2.1.1 - Renamed to cplus2asp, also renamed translator & standard file dependencies.
+v2.1 - Skips translating any files with .f2lp or .lp extensions, not just if all files have those extensions.
+v2.0.1 - Made file name output more friendly, ensured all steps of the tool chain work together properly.
+v2.0 - Added ccalc2asp.bin (translator) to tool chain, including options to control its usage, and an ability to interactively guess critical constant values based on hints given in comments in the input files.
+v1.3.5 - Fixed bug with post-processor not receiving options correctly.
+v1.3.4 - Now passes input file to solver via standard in redirection.
+v1.3.3 - Added option to use pipes instead of intermediate files to send data between tool chain programs (i.e., pre-v1.3 behavior).
+v1.3.2 - Sends input files to the first tool in the tool chain that isn't disabled.
+v1.3.1 - Fixed bug with spaces in path causing odd behavior and errors from tool chain.
+v1.3 - Changed default post-processor to as2transition, changed default standard files to ccalc2asp_std.f2lp & ccalc2asp_additive.f2lp, changed argument handler to allow generic "const=value" arguments without needing "-c" before them, added intermediate file usage and auto-deletion, added options to pass command-line options directly to any of the tool chain programs.
+v1.2 - Added option to un-include the standard translation files from the call to the pre-processor.
+v1.1 - Added options to turn off programs in the tool chain.
+v1.0 - First working version.

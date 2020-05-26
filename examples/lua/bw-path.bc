@@ -1,0 +1,90 @@
+
+% NOTE: This is a BC example of LUA usage
+% Call with: cplus2asp bw-path.bc -l bc
+
+:- begin_lua.
+
+function plan_path(l_loc,l_height,l_loc2,l_height2,r_loc,r_height,r_loc2,r_height2)
+	-- In practice any path calculations can be embeded here.
+	-- For now: Assume that the agent can't move blocks to/from the same position.
+	return l_loc ~= r_loc and l_loc2 ~= r_loc2
+end
+
+:- end_lua.
+
+:- macros
+	N -> 4; M -> 5.
+
+:- sorts
+	loc >> block; 
+	loc >> table;
+	gripper.
+
+:- objects
+	blk(1..N) 				:: block; 
+	tbl(1..M) 				:: table;
+	left, right				:: gripper.
+
+:- constants
+	on(loc) 					:: inertialFluent(loc);
+	pos(loc) 					:: sdFluent(table*);
+	height(loc)					:: sdFluent(0..N);
+	move(gripper,block,loc) 	:: exogenousAction;
+	begin_pos(gripper,loc,0..N)	:: action;
+	dest_pos(gripper,loc,0..N)	:: action.
+
+:- variables
+	I,I1,I2,I3				:: 1..N;
+	H 						:: 0..N;
+	B, B1, B2 				:: block;
+	T 						:: table;
+	L, L1, L2,L3			:: loc;
+	G,G1					:: gripper.
+
+caused false if on(B1)=L , on(B2)=L where B1\=B2.
+
+default pos(B)=none.
+caused pos(T)=T.
+caused pos(B)=T if on(B)=L , pos(L)=T.
+caused false if pos(B)=none.
+
+caused height(T)=0.
+caused height(B)=I if on(B)=L , height(L)=I-1.
+
+move(G,B,L) causes on(B)=L.
+caused false after move(G,B,L) , move(G,B1,L1) 
+	where B\=B1.
+
+caused false after move(G,B,B1) , move(G1,B1,L).
+
+
+default -begin_pos(G,L,H).
+default -dest_pos(G,L,H).
+
+caused begin_pos(G,L,I) if move(G,B,L1) , pos(B)=L  , height(B)=I.
+caused dest_pos(G,L,I)  if move(G,B,L1) , pos(L1)=L , height(L)=I-1.
+
+
+
+caused false after 
+	  	  begin_pos(left,L,I) , dest_pos(left,L1,I1)
+	  	& begin_pos(left,L2,I2) , dest_pos(left,L3,I3)
+	where @plan_path(L,I,L1,I1,L2,I2,L3,I3) = 0.
+
+
+:- query
+	label :: stack;
+	0: on(blk(I))=tbl(I);
+	maxstep: [\/L /\B1| pos(B1)=L].
+
+:- query
+	label :: test_lua;
+	maxstep :: 1;
+	0: on(blk(0))=tbl(0) , on(blk(1))=blk(0);
+	0: [\/L \/ L1 \/G \/ G1 | move(G,blk(0),L) , move(G,blk(1),L1)].
+
+:- query
+	label :: test_lua2;
+	maxstep :: 1;
+	0: on(blk(0))=tbl(0) & on(blk(1))=blk(0);
+	1: pos(blk(0))=pos(blk(1)).

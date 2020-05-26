@@ -1,0 +1,27 @@
+
+
+:- sorts
+	var.
+
+:- objects
+	1..4, foo :: var.
+
+:- constants
+	mv :: var;
+	b(var) :: rigid;
+	mv2(var) :: var.
+
+:- variables
+	V :: var.
+
+% {mv}.
+{mv=V}.
+%{~(mv=V)}.
+%{not (mv=V)}.
+%{~mv}.
+%{not mv}.
+{b(V)}.
+{~b(V)}.
+%false if {mv=V}.
+{mv2(V)=V}.
+

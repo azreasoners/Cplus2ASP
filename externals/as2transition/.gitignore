@@ -1,0 +1,48 @@
+#tmp files
+.*
+!.gitignore
+*~
+
+#GIT files
+GIT_REVISION
+SVN_REVISION
+
+# Autotools tmp files
+/build-scripts
+!/build-scripts/autoclean.sh
+/autom4te.cache
+/stamp-h1
+Makefile
+/config.status
+/config.log
+/config.h
+/aclocal.m4
+Makefile.in
+/config/
+/config.h.in
+/configure
+m4
+.deps
+libtool
+/aclocal.m4
+
+# Compiled Binaries
+/src/as2transition/as2transition
+/build*/
+*.o
+*.la
+*.so*
+*.a
+/lemon/lemon
+
+# Other stuff
+/precompiled
+*.html
+*.tar*
+*.zip
+*.lo
+*.gcno
+*.gcda
+app.info
+coverage_report
+

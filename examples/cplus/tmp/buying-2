@@ -1,0 +1,13 @@
+% Pragma: One or more additive constants have been detected. Including the additive standard file.
+% Pragma: Found a maxAdditive hint. Setting maxAdditive to '7'.
+% Pragma: Running Query 'Query '2''.
+% Pragma: Minimum Step = '1', Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.010
+Prepare   : 0.010
+Prepro.   : 0.000
+No solution.
+

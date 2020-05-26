@@ -1,0 +1,18 @@
+% File 'common1'
+
+:- sorts
+  vessel;
+  location.    % objects of these sorts should be defined elsewhere
+
+:- variables
+  V                      :: vessel;
+  L,L1                   :: location.
+
+:- constants
+  loc(vessel)            :: inertialFluent(location);
+  cross(vessel)          :: exogenousAction;
+  to(vessel)             :: attribute(location) of cross(vessel).
+
+cross(V) causes loc(V)=L if to(V)=L unless ab1(V,L).
+
+nonexecutable cross(V) if to(V)=loc(V) unless ab2(V).

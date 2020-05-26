@@ -1,0 +1,175 @@
+
+#include <iostream>
+#include <cstring>
+#include "babb/utils/memory.h"
+#include "memwrappers.h"
+
+#include "as2transition/parser/Scanner.h"
+#include "as2transition/parser/lemon_parser.h"
+
+namespace u = babb::utils; 
+
+namespace as2transition {
+namespace parser {
+
+
+Scanner::Scanner(std::istream& source, bool stopnewline)
+	: _source(source), _stopnewline(stopnewline),
+	  _buffer(NULL), _buff_sz(0), _cond(yycNORMAL),
+	  _cursor(NULL), _limit(NULL), _marker(NULL), _token(NULL), _newline(false) {
+	fill(256);
+}
+
+Scanner::~Scanner() {
+	if (_buffer) delete[] _buffer;
+}
+
+
+int Scanner::readToken(ReferencedString*& token) {
+
+	int ret;
+	
+
+re2c_start:
+	_marker = _token = _cursor;
+	/*!re2c
+		
+		re2c:define:YYCTYPE						= char;
+		re2c:define:YYMARKER					= _marker;
+		re2c:define:YYCURSOR					= _cursor;
+		re2c:define:YYLIMIT						= _limit;
+		re2c:define:YYGETCONDITION				= _cond;
+		re2c:define:YYGETCONDITION:naked		= 1;
+		re2c:define:YYFILL						= fill;
+
+		ALPH 									= [a-zA-Z_];
+		AN 										= [a-zA-Z0-9_];
+		NUM										= [0-9];
+		WS								 		= [ \t\v\f\n];
+		EOF										= [\X0000];
+
+		INTEGER									= "-"? NUM+;
+		IDENTIFIER								= ALPH AN*;
+
+
+		<NORMAL> IDENTIFIER						{ ret = T_IDENTIFIER;					goto re2c_finish;					}
+		<NORMAL> INTEGER						{ ret = T_INTEGER;						goto re2c_finish;					}
+		<NORMAL> ","							{ ret = T_COMMA;						goto re2c_finish;					}	
+		<NORMAL> "~"							{ ret = T_TILDE;						goto re2c_finish;					}	
+		<NORMAL> "("							{ ret = T_PAREN_L;						goto re2c_finish;					}	
+		<NORMAL> ")"							{ ret = T_PAREN_R;						goto re2c_finish;					}	
+		
+		<NORMAL> ["]							{ _cond = yycDBL_STRING;				goto yyc_DBL_STRING;				}
+		<NORMAL> [']							{ _cond = yycSGL_STRING;				goto yyc_SGL_STRING;				}
+		<NORMAL> EOF							{ ret = T_EOF;							goto re2c_finish;					}
+	
+		<DBL_STRING> [\\]["]					{ 										goto yyc_DBL_STRING; 				}
+		<DBL_STRING> ["]						{ 
+												  _cond = yycNORMAL; 
+												  ret = T_STRING_LITERAL;	
+												  goto re2c_finish;					
+												}
+		<DBL_STRING> .							{										goto yyc_DBL_STRING;				}
+		<DBL_STRING> EOF						{
+												  ret = T_ERR_UNTERMINATED_STRING;
+												  _cond = yycNORMAL;
+												  _cursor--;
+												  goto re2c_finish;					
+												}
+		
+		<SGL_STRING> [\\][']					{ 										goto yyc_SGL_STRING; 				}
+		<SGL_STRING> [']						{ 
+												  _cond = yycNORMAL; 
+												  ret = T_STRING_LITERAL;	
+												  goto re2c_finish;					
+												}
+		<SGL_STRING> .							{										goto yyc_SGL_STRING;				}
+		<SGL_STRING> EOF						{ 
+												  ret = T_ERR_UNTERMINATED_STRING;				
+												  _cond = yycNORMAL;
+												  source->cursor--;
+												  goto re2c_finish;					
+												}
+		
+		<*> WS+									{ goto re2c_start; }
+
+		<*> .									{ ret = T_ERR_UNKNOWN_SYMBOL;			goto re2c_finish;					}
+
+	*/
+re2c_finish:
+	token = new ReferencedString();
+	if (ret != T_EOF) {
+		token->assign(_token, (size_t)(_cursor - _token));
+	} else {
+		token->assign("<EOF>");
+	}
+
+	return ret;
+}
+
+void Scanner::fill(size_t n) {
+
+    char const* first = (_token < _marker) ? _token : _marker;
+
+    size_t remaining = _limit - first;
+    size_t req_sz = remaining + n;
+
+    if (req_sz > _buff_sz) {
+        // oh noes. need more buffer
+        size_t new_sz = req_sz*2;
+        char* new_buf = new char[new_sz];
+        if (first) memcpy(new_buf, first, remaining);
+        if (_buffer) delete[] _buffer;
+        _buffer = new_buf;
+        _buff_sz = new_sz;
+        _limit = new_buf + new_sz;
+    } else {
+        // we can keep the buffer and shift the contents
+        if (first && _buffer) memmove(_buffer, first, remaining);
+    }
+
+    size_t marker_offset = (size_t)(_marker - first);
+    size_t token_offset = (size_t)(_token - first);
+    size_t cursor_offset = (size_t)(_cursor - first);
+
+    _cursor = _buffer + cursor_offset;
+    _marker = _buffer + marker_offset;
+    _token = _buffer + token_offset;
+
+    // Fill the remainder of the buffer
+    char* readpos = _buffer + remaining;
+    int read_amount = _buff_sz - remaining;
+
+
+	if (_stopnewline) {
+		if (!_newline) {
+			char c = _source.get();
+			while (_source.good() && c && c != '\n' && read_amount) {
+				*readpos++ = c;
+				if (--read_amount) {
+					c = _source.get();
+				}
+			}
+			if (c == '\n') _newline = true;
+		}
+
+	} else {
+		_source.read(readpos, read_amount);
+		readpos += _source.gcount();
+		read_amount -= _source.gcount();
+	}
+
+    // if we hit the end fill with EOF
+    if (read_amount) {
+        memset(readpos, '\0', read_amount);
+  	}
+
+
+    if (_source.fail() && !_source.eof()) {
+        std::cerr << "ERROR: An error occurred while reading predicate stream." << std::endl;
+    }
+
+
+}
+
+}}

@@ -1,0 +1,2101 @@
+
+% Running Query 0 with maxstep=1.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.330
+Prepare   : 0.240
+Prepro.   : 0.090
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 4904  
+Rules       : 104431 (1: 103382 2: 511 3: 538)
+Bodies      : 42990 
+Equivalences: 8472   (Atom=Atom: 3352 Body=Body: 0 Other: 5120)
+Tight       : Yes
+Variables   : 42771  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=2.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.560
+Prepare   : 0.400
+Prepro.   : 0.160
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 6264  
+Rules       : 161750 (1: 160139 2: 779 3: 832)
+Bodies      : 70721 
+Equivalences: 10585  (Atom=Atom: 3892 Body=Body: 0 Other: 6693)
+Tight       : Yes
+Variables   : 70289  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=3.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.780
+Prepare   : 0.550
+Prepro.   : 0.230
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 7624  
+Rules       : 219069 (1: 216896 2: 1047 3: 1126)
+Bodies      : 98452 
+Equivalences: 12698  (Atom=Atom: 4432 Body=Body: 0 Other: 8266)
+Tight       : Yes
+Variables   : 97807  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=4.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.000
+Prepare   : 0.700
+Prepro.   : 0.300
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 8984  
+Rules       : 276388 (1: 273653 2: 1315 3: 1420)
+Bodies      : 126183
+Equivalences: 14811  (Atom=Atom: 4972 Body=Body: 0 Other: 9839)
+Tight       : Yes
+Variables   : 125325 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=5.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.240
+Prepare   : 0.860
+Prepro.   : 0.380
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 10344 
+Rules       : 333707 (1: 330410 2: 1583 3: 1714)
+Bodies      : 153914
+Equivalences: 16924  (Atom=Atom: 5512 Body=Body: 0 Other: 11412)
+Tight       : Yes
+Variables   : 152843 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=6.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.480
+Prepare   : 1.030
+Prepro.   : 0.450
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 11704 
+Rules       : 391026 (1: 387167 2: 1851 3: 2008)
+Bodies      : 181645
+Equivalences: 19037  (Atom=Atom: 6052 Body=Body: 0 Other: 12985)
+Tight       : Yes
+Variables   : 180361 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=7.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.710
+Prepare   : 1.200
+Prepro.   : 0.510
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 13064 
+Rules       : 448345 (1: 443924 2: 2119 3: 2302)
+Bodies      : 209376
+Equivalences: 21150  (Atom=Atom: 6592 Body=Body: 0 Other: 14558)
+Tight       : Yes
+Variables   : 207879 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=8.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.040
+Prepare   : 1.440
+Prepro.   : 0.600
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 14424 
+Rules       : 505664 (1: 500681 2: 2387 3: 2596)
+Bodies      : 237107
+Equivalences: 23263  (Atom=Atom: 7132 Body=Body: 0 Other: 16131)
+Tight       : Yes
+Variables   : 235397 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=9.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.310
+Prepare   : 1.640
+Prepro.   : 0.670
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 15784 
+Rules       : 562983 (1: 557438 2: 2655 3: 2890)
+Bodies      : 264838
+Equivalences: 25376  (Atom=Atom: 7672 Body=Body: 0 Other: 17704)
+Tight       : Yes
+Variables   : 262915 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=10.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.540
+Prepare   : 1.780
+Prepro.   : 0.760
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 17144 
+Rules       : 620302 (1: 614195 2: 2923 3: 3184)
+Bodies      : 292569
+Equivalences: 27489  (Atom=Atom: 8212 Body=Body: 0 Other: 19277)
+Tight       : Yes
+Variables   : 290433 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=11.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.800
+Prepare   : 1.970
+Prepro.   : 0.830
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 18504 
+Rules       : 677621 (1: 670952 2: 3191 3: 3478)
+Bodies      : 320300
+Equivalences: 29602  (Atom=Atom: 8752 Body=Body: 0 Other: 20850)
+Tight       : Yes
+Variables   : 317951 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=12.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.060
+Prepare   : 2.160
+Prepro.   : 0.900
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 19864 
+Rules       : 734940 (1: 727709 2: 3459 3: 3772)
+Bodies      : 348031
+Equivalences: 31715  (Atom=Atom: 9292 Body=Body: 0 Other: 22423)
+Tight       : Yes
+Variables   : 345469 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=13.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.330
+Prepare   : 2.340
+Prepro.   : 0.990
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 21224 
+Rules       : 792259 (1: 784466 2: 3727 3: 4066)
+Bodies      : 375762
+Equivalences: 33828  (Atom=Atom: 9832 Body=Body: 0 Other: 23996)
+Tight       : Yes
+Variables   : 372987 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=14.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.590
+Prepare   : 2.530
+Prepro.   : 1.060
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 22584 
+Rules       : 849578 (1: 841223 2: 3995 3: 4360)
+Bodies      : 403493
+Equivalences: 35941  (Atom=Atom: 10372 Body=Body: 0 Other: 25569)
+Tight       : Yes
+Variables   : 400505 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=15.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.900
+Prepare   : 2.760
+Prepro.   : 1.140
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 23944 
+Rules       : 906897 (1: 897980 2: 4263 3: 4654)
+Bodies      : 431224
+Equivalences: 38054  (Atom=Atom: 10912 Body=Body: 0 Other: 27142)
+Tight       : Yes
+Variables   : 428023 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=16.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.140
+Prepare   : 2.910
+Prepro.   : 1.230
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 25304 
+Rules       : 964216 (1: 954737 2: 4531 3: 4948)
+Bodies      : 458955
+Equivalences: 40167  (Atom=Atom: 11452 Body=Body: 0 Other: 28715)
+Tight       : Yes
+Variables   : 455541 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=17.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.400
+Prepare   : 3.120
+Prepro.   : 1.280
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 26664 
+Rules       : 1021535 (1: 1011494 2: 4799 3: 5242)
+Bodies      : 486686
+Equivalences: 42280  (Atom=Atom: 11992 Body=Body: 0 Other: 30288)
+Tight       : Yes
+Variables   : 483059 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=18.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.690
+Prepare   : 3.310
+Prepro.   : 1.380
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 28024 
+Rules       : 1078854 (1: 1068251 2: 5067 3: 5536)
+Bodies      : 514417
+Equivalences: 44393  (Atom=Atom: 12532 Body=Body: 0 Other: 31861)
+Tight       : Yes
+Variables   : 510577 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=19.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.980
+Prepare   : 3.520
+Prepro.   : 1.460
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 29384 
+Rules       : 1136173 (1: 1125008 2: 5335 3: 5830)
+Bodies      : 542148
+Equivalences: 46506  (Atom=Atom: 13072 Body=Body: 0 Other: 33434)
+Tight       : Yes
+Variables   : 538095 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=20.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.220
+Prepare   : 3.680
+Prepro.   : 1.540
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 30744 
+Rules       : 1193492 (1: 1181765 2: 5603 3: 6124)
+Bodies      : 569879
+Equivalences: 48619  (Atom=Atom: 13612 Body=Body: 0 Other: 35007)
+Tight       : Yes
+Variables   : 565613 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=21.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.440
+Prepare   : 3.840
+Prepro.   : 1.600
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 32104 
+Rules       : 1250811 (1: 1238522 2: 5871 3: 6418)
+Bodies      : 597610
+Equivalences: 50732  (Atom=Atom: 14152 Body=Body: 0 Other: 36580)
+Tight       : Yes
+Variables   : 593131 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=22.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.730
+Prepare   : 4.040
+Prepro.   : 1.690
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 33464 
+Rules       : 1308130 (1: 1295279 2: 6139 3: 6712)
+Bodies      : 625341
+Equivalences: 52845  (Atom=Atom: 14692 Body=Body: 0 Other: 38153)
+Tight       : Yes
+Variables   : 620649 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=23.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.990
+Prepare   : 4.210
+Prepro.   : 1.780
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 34824 
+Rules       : 1365449 (1: 1352036 2: 6407 3: 7006)
+Bodies      : 653072
+Equivalences: 54958  (Atom=Atom: 15232 Body=Body: 0 Other: 39726)
+Tight       : Yes
+Variables   : 648167 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=24.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.260
+Prepare   : 4.400
+Prepro.   : 1.860
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 36184 
+Rules       : 1422768 (1: 1408793 2: 6675 3: 7300)
+Bodies      : 680803
+Equivalences: 57071  (Atom=Atom: 15772 Body=Body: 0 Other: 41299)
+Tight       : Yes
+Variables   : 675685 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=25.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.560
+Prepare   : 4.630
+Prepro.   : 1.930
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 37544 
+Rules       : 1480087 (1: 1465550 2: 6943 3: 7594)
+Bodies      : 708534
+Equivalences: 59184  (Atom=Atom: 16312 Body=Body: 0 Other: 42872)
+Tight       : Yes
+Variables   : 703203 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=26.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.820
+Prepare   : 4.790
+Prepro.   : 2.030
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 38904 
+Rules       : 1537406 (1: 1522307 2: 7211 3: 7888)
+Bodies      : 736265
+Equivalences: 61297  (Atom=Atom: 16852 Body=Body: 0 Other: 44445)
+Tight       : Yes
+Variables   : 730721 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=27.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.100
+Prepare   : 4.990
+Prepro.   : 2.110
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 40264 
+Rules       : 1594725 (1: 1579064 2: 7479 3: 8182)
+Bodies      : 763996
+Equivalences: 63410  (Atom=Atom: 17392 Body=Body: 0 Other: 46018)
+Tight       : Yes
+Variables   : 758239 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=28.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.440
+Prepare   : 5.240
+Prepro.   : 2.200
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 41624 
+Rules       : 1652044 (1: 1635821 2: 7747 3: 8476)
+Bodies      : 791727
+Equivalences: 65523  (Atom=Atom: 17932 Body=Body: 0 Other: 47591)
+Tight       : Yes
+Variables   : 785757 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=29.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.710
+Prepare   : 5.440
+Prepro.   : 2.270
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 42984 
+Rules       : 1709363 (1: 1692578 2: 8015 3: 8770)
+Bodies      : 819458
+Equivalences: 67636  (Atom=Atom: 18472 Body=Body: 0 Other: 49164)
+Tight       : Yes
+Variables   : 813275 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=30.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 8.140
+Prepare   : 5.780
+Prepro.   : 2.360
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 44344 
+Rules       : 1766682 (1: 1749335 2: 8283 3: 9064)
+Bodies      : 847189
+Equivalences: 69749  (Atom=Atom: 19012 Body=Body: 0 Other: 50737)
+Tight       : Yes
+Variables   : 840793 (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=31.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 10.120
+Prepare   : 5.820
+Prepro.   : 4.210
+Choices     : 143
+Conflicts   : 17
+Restarts    : 0
+Atoms       : 45704 
+Rules       : 1824001 (1: 1806092 2: 8551 3: 9358)
+Bodies      : 874920
+Equivalences: 71862  (Atom=Atom: 19552 Body=Body: 0 Other: 52310)
+Tight       : Yes
+Variables   : 868311 (Eliminated:    0)
+Constraints : 978081 (Binary: 87.5% Ternary:  0.9% Other: 11.6%)
+Lemmas      : 17     (Binary: 47.1% Ternary:  0.0% Other: 52.9%)
+Conflicts : 17     (Average Length: 3.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=32.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 10.730
+Prepare   : 6.000
+Prepro.   : 4.350
+Choices     : 168
+Conflicts   : 26
+Restarts    : 0
+Atoms       : 47064 
+Rules       : 1881320 (1: 1862849 2: 8819 3: 9652)
+Bodies      : 902651
+Equivalences: 73975  (Atom=Atom: 20092 Body=Body: 0 Other: 53883)
+Tight       : Yes
+Variables   : 895829 (Eliminated:    0)
+Constraints : 1056073 (Binary: 87.7% Ternary:  0.8% Other: 11.4%)
+Lemmas      : 26     (Binary: 11.5% Ternary: 11.5% Other: 76.9%)
+Conflicts : 26     (Average Length: 43.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=33.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 11.310
+Prepare   : 6.190
+Prepro.   : 4.470
+Choices     : 395
+Conflicts   : 105
+Restarts    : 1
+Atoms       : 48424 
+Rules       : 1938639 (1: 1919606 2: 9087 3: 9946)
+Bodies      : 930382
+Equivalences: 76088  (Atom=Atom: 20632 Body=Body: 0 Other: 55456)
+Tight       : Yes
+Variables   : 923347 (Eliminated:    0)
+Constraints : 1134065 (Binary: 87.9% Ternary:  0.8% Other: 11.3%)
+Lemmas      : 105    (Binary: 16.2% Ternary:  8.6% Other: 75.2%)
+Conflicts : 105    (Average Length: 43.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=34.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 15.150
+Prepare   : 6.430
+Prepro.   : 4.640
+Choices     : 1147
+Conflicts   : 393
+Restarts    : 2
+Atoms       : 49784 
+Rules       : 1995958 (1: 1976363 2: 9355 3: 10240)
+Bodies      : 958113
+Equivalences: 78201  (Atom=Atom: 21172 Body=Body: 0 Other: 57029)
+Tight       : Yes
+Variables   : 950865 (Eliminated:    0)
+Constraints : 1212057 (Binary: 88.1% Ternary:  0.7% Other: 11.2%)
+Lemmas      : 393    (Binary:  9.4% Ternary:  4.8% Other: 85.8%)
+Conflicts : 393    (Average Length: 34.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=35.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 12.690
+Prepare   : 6.690
+Prepro.   : 4.730
+Choices     : 1648
+Conflicts   : 623
+Restarts    : 3
+Atoms       : 51144 
+Rules       : 2053277 (1: 2033120 2: 9623 3: 10534)
+Bodies      : 985844
+Equivalences: 80314  (Atom=Atom: 21712 Body=Body: 0 Other: 58602)
+Tight       : Yes
+Variables   : 978383 (Eliminated:    0)
+Constraints : 1290049 (Binary: 88.2% Ternary:  0.7% Other: 11.1%)
+Lemmas      : 623    (Binary:  5.6% Ternary:  2.7% Other: 91.7%)
+Conflicts : 623    (Average Length: 118.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=36.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 14.210
+Prepare   : 6.960
+Prepro.   : 4.880
+Choices     : 2413
+Conflicts   : 971
+Restarts    : 4
+Atoms       : 52504 
+Rules       : 2110596 (1: 2089877 2: 9891 3: 10828)
+Bodies      : 1013575
+Equivalences: 82427  (Atom=Atom: 22252 Body=Body: 0 Other: 60175)
+Tight       : Yes
+Variables   : 1005901 (Eliminated:    0)
+Constraints : 1368041 (Binary: 88.3% Ternary:  0.7% Other: 11.0%)
+Lemmas      : 971    (Binary: 19.6% Ternary: 20.6% Other: 59.8%)
+Conflicts : 971    (Average Length: 98.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=37.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 22.320
+Prepare   : 7.080
+Prepro.   : 5.030
+Choices     : 5043
+Conflicts   : 2482
+Restarts    : 6
+Atoms       : 53864 
+Rules       : 2167915 (1: 2146634 2: 10159 3: 11122)
+Bodies      : 1041306
+Equivalences: 84540  (Atom=Atom: 22792 Body=Body: 0 Other: 61748)
+Tight       : Yes
+Variables   : 1033419 (Eliminated:    0)
+Constraints : 1446033 (Binary: 88.4% Ternary:  0.6% Other: 10.9%)
+Lemmas      : 2482   (Binary: 16.5% Ternary:  7.2% Other: 76.3%)
+Conflicts : 2482   (Average Length: 95.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=38.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 29.780
+Prepare   : 7.370
+Prepro.   : 5.140
+Choices     : 7719
+Conflicts   : 3120
+Restarts    : 6
+Atoms       : 55224 
+Rules       : 2225234 (1: 2203391 2: 10427 3: 11416)
+Bodies      : 1069037
+Equivalences: 86653  (Atom=Atom: 23332 Body=Body: 0 Other: 63321)
+Tight       : Yes
+Variables   : 1060937 (Eliminated:    0)
+Constraints : 1524025 (Binary: 88.5% Ternary:  0.6% Other: 10.8%)
+Lemmas      : 3120   (Binary:  4.4% Ternary:  4.8% Other: 90.8%)
+Conflicts : 3120   (Average Length: 113.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=39.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 22.040
+Prepare   : 7.500
+Prepro.   : 5.290
+Choices     : 8401
+Conflicts   : 2883
+Restarts    : 6
+Atoms       : 56584 
+Rules       : 2282553 (1: 2260148 2: 10695 3: 11710)
+Bodies      : 1096768
+Equivalences: 88766  (Atom=Atom: 23872 Body=Body: 0 Other: 64894)
+Tight       : Yes
+Variables   : 1088455 (Eliminated:    0)
+Constraints : 1602017 (Binary: 88.6% Ternary:  0.6% Other: 10.8%)
+Lemmas      : 2883   (Binary:  6.5% Ternary:  2.2% Other: 91.4%)
+Conflicts : 2883   (Average Length: 119.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=40.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 44.770
+Prepare   : 7.630
+Prepro.   : 5.440
+Choices     : 12939
+Conflicts   : 5988
+Restarts    : 8
+Atoms       : 57944 
+Rules       : 2339872 (1: 2316905 2: 10963 3: 12004)
+Bodies      : 1124499
+Equivalences: 90879  (Atom=Atom: 24412 Body=Body: 0 Other: 66467)
+Tight       : Yes
+Variables   : 1115973 (Eliminated:    0)
+Constraints : 1680009 (Binary: 88.7% Ternary:  0.6% Other: 10.7%)
+Lemmas      : 5988   (Binary:  8.0% Ternary:  9.2% Other: 82.7%)
+Conflicts : 5988   (Average Length: 125.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=41.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 44.100
+Prepare   : 7.860
+Prepro.   : 5.560
+Choices     : 15095
+Conflicts   : 7704
+Restarts    : 9
+Atoms       : 59304 
+Rules       : 2397191 (1: 2373662 2: 11231 3: 12298)
+Bodies      : 1152230
+Equivalences: 92992  (Atom=Atom: 24952 Body=Body: 0 Other: 68040)
+Tight       : Yes
+Variables   : 1143491 (Eliminated:    0)
+Constraints : 1758001 (Binary: 88.8% Ternary:  0.6% Other: 10.7%)
+Lemmas      : 7704   (Binary:  9.4% Ternary:  3.6% Other: 87.0%)
+Conflicts : 7704   (Average Length: 95.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=42.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 41.220
+Prepare   : 8.000
+Prepro.   : 5.720
+Choices     : 9760
+Conflicts   : 4100
+Restarts    : 7
+Atoms       : 60664 
+Rules       : 2454510 (1: 2430419 2: 11499 3: 12592)
+Bodies      : 1179961
+Equivalences: 95105  (Atom=Atom: 25492 Body=Body: 0 Other: 69613)
+Tight       : Yes
+Variables   : 1171009 (Eliminated:    0)
+Constraints : 1835993 (Binary: 88.8% Ternary:  0.5% Other: 10.6%)
+Lemmas      : 4100   (Binary: 11.3% Ternary:  5.4% Other: 83.3%)
+Conflicts : 4100   (Average Length: 84.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=43.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 55.340
+Prepare   : 8.250
+Prepro.   : 5.880
+Choices     : 15786
+Conflicts   : 8236
+Restarts    : 9
+Atoms       : 62024 
+Rules       : 2511829 (1: 2487176 2: 11767 3: 12886)
+Bodies      : 1207692
+Equivalences: 97218  (Atom=Atom: 26032 Body=Body: 0 Other: 71186)
+Tight       : Yes
+Variables   : 1198527 (Eliminated:    0)
+Constraints : 1913985 (Binary: 88.9% Ternary:  0.5% Other: 10.6%)
+Lemmas      : 8236   (Binary:  9.6% Ternary:  3.2% Other: 87.2%)
+Conflicts : 8236   (Average Length: 103.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=44.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 47.210
+Prepare   : 8.420
+Prepro.   : 6.010
+Choices     : 21505
+Conflicts   : 8696
+Restarts    : 9
+Atoms       : 63384 
+Rules       : 2569148 (1: 2543933 2: 12035 3: 13180)
+Bodies      : 1235423
+Equivalences: 99331  (Atom=Atom: 26572 Body=Body: 0 Other: 72759)
+Tight       : Yes
+Variables   : 1226045 (Eliminated:    0)
+Constraints : 1991977 (Binary: 89.0% Ternary:  0.5% Other: 10.5%)
+Lemmas      : 8696   (Binary: 11.2% Ternary:  4.9% Other: 83.9%)
+Conflicts : 8696   (Average Length: 113.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=45.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 59.770
+Prepare   : 8.670
+Prepro.   : 6.150
+Choices     : 19777
+Conflicts   : 9628
+Restarts    : 9
+Atoms       : 64744 
+Rules       : 2626467 (1: 2600690 2: 12303 3: 13474)
+Bodies      : 1263154
+Equivalences: 101444 (Atom=Atom: 27112 Body=Body: 0 Other: 74332)
+Tight       : Yes
+Variables   : 1253563 (Eliminated:    0)
+Constraints : 2069969 (Binary: 89.0% Ternary:  0.5% Other: 10.5%)
+Lemmas      : 9628   (Binary:  9.1% Ternary:  3.7% Other: 87.2%)
+Conflicts : 9628   (Average Length: 103.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=46.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 59.480
+Prepare   : 8.910
+Prepro.   : 6.290
+Choices     : 24289
+Conflicts   : 11347
+Restarts    : 10
+Atoms       : 66104 
+Rules       : 2683786 (1: 2657447 2: 12571 3: 13768)
+Bodies      : 1290885
+Equivalences: 103557 (Atom=Atom: 27652 Body=Body: 0 Other: 75905)
+Tight       : Yes
+Variables   : 1281081 (Eliminated:    0)
+Constraints : 2147961 (Binary: 89.1% Ternary:  0.5% Other: 10.5%)
+Lemmas      : 11347  (Binary: 10.5% Ternary:  3.5% Other: 86.0%)
+Conflicts : 11347  (Average Length: 116.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=47.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 101.330
+Prepare   : 9.080
+Prepro.   : 6.440
+Choices     : 47245
+Conflicts   : 21252
+Restarts    : 11
+Atoms       : 67464 
+Rules       : 2741105 (1: 2714204 2: 12839 3: 14062)
+Bodies      : 1318616
+Equivalences: 105670 (Atom=Atom: 28192 Body=Body: 0 Other: 77478)
+Tight       : Yes
+Variables   : 1308599 (Eliminated:    0)
+Constraints : 2225953 (Binary: 89.1% Ternary:  0.5% Other: 10.4%)
+Lemmas      : 21252  (Binary:  9.1% Ternary:  2.8% Other: 88.1%)
+Conflicts : 21252  (Average Length: 198.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=48.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 122.220
+Prepare   : 9.200
+Prepro.   : 6.570
+Choices     : 50425
+Conflicts   : 25783
+Restarts    : 12
+Atoms       : 68824 
+Rules       : 2798424 (1: 2770961 2: 13107 3: 14356)
+Bodies      : 1346347
+Equivalences: 107783 (Atom=Atom: 28732 Body=Body: 0 Other: 79051)
+Tight       : Yes
+Variables   : 1336117 (Eliminated:    0)
+Constraints : 2303945 (Binary: 89.1% Ternary:  0.5% Other: 10.4%)
+Lemmas      : 25783  (Binary:  9.7% Ternary:  3.2% Other: 87.1%)
+Conflicts : 25783  (Average Length: 164.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=49.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 74.180
+Prepare   : 9.480
+Prepro.   : 6.720
+Choices     : 41793
+Conflicts   : 18420
+Restarts    : 11
+Atoms       : 70184 
+Rules       : 2855743 (1: 2827718 2: 13375 3: 14650)
+Bodies      : 1374078
+Equivalences: 109896 (Atom=Atom: 29272 Body=Body: 0 Other: 80624)
+Tight       : Yes
+Variables   : 1363635 (Eliminated:    0)
+Constraints : 2381937 (Binary: 89.2% Ternary:  0.4% Other: 10.4%)
+Lemmas      : 18420  (Binary: 11.8% Ternary:  2.9% Other: 85.4%)
+Conflicts : 18420  (Average Length: 115.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=50.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 114.400
+Prepare   : 9.670
+Prepro.   : 6.860
+Choices     : 46598
+Conflicts   : 21221
+Restarts    : 11
+Atoms       : 71544 
+Rules       : 2913062 (1: 2884475 2: 13643 3: 14944)
+Bodies      : 1401809
+Equivalences: 112009 (Atom=Atom: 29812 Body=Body: 0 Other: 82197)
+Tight       : Yes
+Variables   : 1391153 (Eliminated:    0)
+Constraints : 2459929 (Binary: 89.2% Ternary:  0.4% Other: 10.3%)
+Lemmas      : 21221  (Binary: 10.9% Ternary:  3.6% Other: 85.5%)
+Conflicts : 21221  (Average Length: 107.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=51.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 140.840
+Prepare   : 9.920
+Prepro.   : 7.000
+Choices     : 58008
+Conflicts   : 26148
+Restarts    : 12
+Atoms       : 72904 
+Rules       : 2970381 (1: 2941232 2: 13911 3: 15238)
+Bodies      : 1429540
+Equivalences: 114122 (Atom=Atom: 30352 Body=Body: 0 Other: 83770)
+Tight       : Yes
+Variables   : 1418671 (Eliminated:    0)
+Constraints : 2537921 (Binary: 89.2% Ternary:  0.4% Other: 10.3%)
+Lemmas      : 26148  (Binary: 10.0% Ternary:  3.3% Other: 86.7%)
+Conflicts : 26148  (Average Length: 118.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=52.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 182.030
+Prepare   : 10.120
+Prepro.   : 7.160
+Choices     : 91464
+Conflicts   : 43028
+Restarts    : 13
+Atoms       : 74264 
+Rules       : 3027700 (1: 2997989 2: 14179 3: 15532)
+Bodies      : 1457271
+Equivalences: 116235 (Atom=Atom: 30892 Body=Body: 0 Other: 85343)
+Tight       : Yes
+Variables   : 1446189 (Eliminated:    0)
+Constraints : 2615913 (Binary: 89.3% Ternary:  0.4% Other: 10.3%)
+Lemmas      : 43028  (Binary:  9.2% Ternary:  4.0% Other: 86.8%)
+Conflicts : 43028  (Average Length: 153.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=53.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 154.130
+Prepare   : 10.380
+Prepro.   : 7.310
+Choices     : 83972
+Conflicts   : 40191
+Restarts    : 13
+Atoms       : 75624 
+Rules       : 3085019 (1: 3054746 2: 14447 3: 15826)
+Bodies      : 1485002
+Equivalences: 118348 (Atom=Atom: 31432 Body=Body: 0 Other: 86916)
+Tight       : Yes
+Variables   : 1473707 (Eliminated:    0)
+Constraints : 2693905 (Binary: 89.3% Ternary:  0.4% Other: 10.3%)
+Lemmas      : 40191  (Binary:  7.5% Ternary:  2.7% Other: 89.8%)
+Conflicts : 40191  (Average Length: 162.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=54.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 180.810
+Prepare   : 10.600
+Prepro.   : 7.440
+Choices     : 99375
+Conflicts   : 44465
+Restarts    : 13
+Atoms       : 76984 
+Rules       : 3142338 (1: 3111503 2: 14715 3: 16120)
+Bodies      : 1512733
+Equivalences: 120461 (Atom=Atom: 31972 Body=Body: 0 Other: 88489)
+Tight       : Yes
+Variables   : 1501225 (Eliminated:    0)
+Constraints : 2771897 (Binary: 89.3% Ternary:  0.4% Other: 10.3%)
+Lemmas      : 44465  (Binary:  9.7% Ternary:  4.1% Other: 86.2%)
+Conflicts : 44465  (Average Length: 153.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=55.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 214.500
+Prepare   : 10.850
+Prepro.   : 7.610
+Choices     : 109771
+Conflicts   : 50110
+Restarts    : 13
+Atoms       : 78344 
+Rules       : 3199657 (1: 3168260 2: 14983 3: 16414)
+Bodies      : 1540464
+Equivalences: 122574 (Atom=Atom: 32512 Body=Body: 0 Other: 90062)
+Tight       : Yes
+Variables   : 1528743 (Eliminated:    0)
+Constraints : 2849889 (Binary: 89.4% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 50110  (Binary:  8.4% Ternary:  3.1% Other: 88.5%)
+Conflicts : 50110  (Average Length: 127.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=56.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 189.210
+Prepare   : 11.020
+Prepro.   : 7.740
+Choices     : 104226
+Conflicts   : 43299
+Restarts    : 13
+Atoms       : 79704 
+Rules       : 3256976 (1: 3225017 2: 15251 3: 16708)
+Bodies      : 1568195
+Equivalences: 124687 (Atom=Atom: 33052 Body=Body: 0 Other: 91635)
+Tight       : Yes
+Variables   : 1556261 (Eliminated:    0)
+Constraints : 2927881 (Binary: 89.4% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 43299  (Binary:  9.6% Ternary:  2.8% Other: 87.6%)
+Conflicts : 43299  (Average Length: 215.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=57.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 256.760
+Prepare   : 11.250
+Prepro.   : 7.910
+Choices     : 121545
+Conflicts   : 52710
+Restarts    : 13
+Atoms       : 81064 
+Rules       : 3314295 (1: 3281774 2: 15519 3: 17002)
+Bodies      : 1595926
+Equivalences: 126800 (Atom=Atom: 33592 Body=Body: 0 Other: 93208)
+Tight       : Yes
+Variables   : 1583779 (Eliminated:    0)
+Constraints : 3005873 (Binary: 89.4% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 52710  (Binary:  7.8% Ternary:  3.3% Other: 88.9%)
+Conflicts : 52710  (Average Length: 143.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=58.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 317.730
+Prepare   : 11.460
+Prepro.   : 8.020
+Choices     : 165931
+Conflicts   : 80793
+Restarts    : 14
+Atoms       : 82424 
+Rules       : 3371614 (1: 3338531 2: 15787 3: 17296)
+Bodies      : 1623657
+Equivalences: 128913 (Atom=Atom: 34132 Body=Body: 0 Other: 94781)
+Tight       : Yes
+Variables   : 1611297 (Eliminated:    0)
+Constraints : 3083865 (Binary: 89.4% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 80793  (Binary:  9.0% Ternary:  3.3% Other: 87.7%)
+Conflicts : 80793  (Average Length: 164.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=59.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 385.960
+Prepare   : 11.730
+Prepro.   : 8.150
+Choices     : 186179
+Conflicts   : 81716
+Restarts    : 14
+Atoms       : 83784 
+Rules       : 3428933 (1: 3395288 2: 16055 3: 17590)
+Bodies      : 1651388
+Equivalences: 131026 (Atom=Atom: 34672 Body=Body: 0 Other: 96354)
+Tight       : Yes
+Variables   : 1638815 (Eliminated:    0)
+Constraints : 3161857 (Binary: 89.5% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 81716  (Binary: 10.0% Ternary:  3.8% Other: 86.2%)
+Conflicts : 81716  (Average Length: 167.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=60.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 394.700
+Prepare   : 12.000
+Prepro.   : 8.310
+Choices     : 207800
+Conflicts   : 90763
+Restarts    : 15
+Atoms       : 85144 
+Rules       : 3486252 (1: 3452045 2: 16323 3: 17884)
+Bodies      : 1679119
+Equivalences: 133139 (Atom=Atom: 35212 Body=Body: 0 Other: 97927)
+Tight       : Yes
+Variables   : 1666333 (Eliminated:    0)
+Constraints : 3239849 (Binary: 89.5% Ternary:  0.4% Other: 10.2%)
+Lemmas      : 90763  (Binary: 10.8% Ternary:  3.5% Other: 85.7%)
+Conflicts : 90763  (Average Length: 203.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=61.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 408.660
+Prepare   : 12.230
+Prepro.   : 8.460
+Choices     : 198223
+Conflicts   : 88912
+Restarts    : 15
+Atoms       : 86504 
+Rules       : 3543571 (1: 3508802 2: 16591 3: 18178)
+Bodies      : 1706850
+Equivalences: 135252 (Atom=Atom: 35752 Body=Body: 0 Other: 99500)
+Tight       : Yes
+Variables   : 1693851 (Eliminated:    0)
+Constraints : 3317841 (Binary: 89.5% Ternary:  0.4% Other: 10.1%)
+Lemmas      : 88912  (Binary: 11.4% Ternary:  3.3% Other: 85.3%)
+Conflicts : 88912  (Average Length: 191.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=62.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 404.310
+Prepare   : 12.410
+Prepro.   : 8.560
+Choices     : 214844
+Conflicts   : 93580
+Restarts    : 15
+Atoms       : 87864 
+Rules       : 3600890 (1: 3565559 2: 16859 3: 18472)
+Bodies      : 1734581
+Equivalences: 137365 (Atom=Atom: 36292 Body=Body: 0 Other: 101073)
+Tight       : Yes
+Variables   : 1721369 (Eliminated:    0)
+Constraints : 3395833 (Binary: 89.5% Ternary:  0.4% Other: 10.1%)
+Lemmas      : 93580  (Binary: 10.9% Ternary:  3.4% Other: 85.7%)
+Conflicts : 93580  (Average Length: 150.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=63.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 501.900
+Prepare   : 12.750
+Prepro.   : 8.740
+Choices     : 219276
+Conflicts   : 97056
+Restarts    : 15
+Atoms       : 89224 
+Rules       : 3658209 (1: 3622316 2: 17127 3: 18766)
+Bodies      : 1762312
+Equivalences: 139478 (Atom=Atom: 36832 Body=Body: 0 Other: 102646)
+Tight       : Yes
+Variables   : 1748887 (Eliminated:    0)
+Constraints : 3473825 (Binary: 89.5% Ternary:  0.4% Other: 10.1%)
+Lemmas      : 97056  (Binary: 11.9% Ternary:  3.8% Other: 84.3%)
+Conflicts : 97056  (Average Length: 152.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=64.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 535.980
+Prepare   : 12.840
+Prepro.   : 8.870
+Choices     : 251812
+Conflicts   : 103669
+Restarts    : 15
+Atoms       : 90584 
+Rules       : 3715528 (1: 3679073 2: 17395 3: 19060)
+Bodies      : 1790043
+Equivalences: 141591 (Atom=Atom: 37372 Body=Body: 0 Other: 104219)
+Tight       : Yes
+Variables   : 1776405 (Eliminated:    0)
+Constraints : 3551817 (Binary: 89.6% Ternary:  0.3% Other: 10.1%)
+Lemmas      : 103669 (Binary: 11.5% Ternary:  3.9% Other: 84.5%)
+Conflicts : 103669 (Average Length: 194.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=65.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 656.620
+Prepare   : 13.160
+Prepro.   : 9.030
+Choices     : 338831
+Conflicts   : 151243
+Restarts    : 16
+Atoms       : 91944 
+Rules       : 3772847 (1: 3735830 2: 17663 3: 19354)
+Bodies      : 1817774
+Equivalences: 143704 (Atom=Atom: 37912 Body=Body: 0 Other: 105792)
+Tight       : Yes
+Variables   : 1803923 (Eliminated:    0)
+Constraints : 3629809 (Binary: 89.6% Ternary:  0.3% Other: 10.1%)
+Lemmas      : 151243 (Binary:  8.4% Ternary:  2.7% Other: 88.9%)
+Conflicts : 151243 (Average Length: 280.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=66.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 857.420
+Prepare   : 13.480
+Prepro.   : 9.170
+Choices     : 397649
+Conflicts   : 175345
+Restarts    : 16
+Atoms       : 93304 
+Rules       : 3830166 (1: 3792587 2: 17931 3: 19648)
+Bodies      : 1845505
+Equivalences: 145817 (Atom=Atom: 38452 Body=Body: 0 Other: 107365)
+Tight       : Yes
+Variables   : 1831441 (Eliminated:    0)
+Constraints : 3707801 (Binary: 89.6% Ternary:  0.3% Other: 10.1%)
+Lemmas      : 175345 (Binary:  8.2% Ternary:  3.2% Other: 88.6%)
+Conflicts : 175345 (Average Length: 235.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=67.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 561.110
+Prepare   : 13.560
+Prepro.   : 9.310
+Choices     : 287144
+Conflicts   : 136656
+Restarts    : 16
+Atoms       : 94664 
+Rules       : 3887485 (1: 3849344 2: 18199 3: 19942)
+Bodies      : 1873236
+Equivalences: 147930 (Atom=Atom: 38992 Body=Body: 0 Other: 108938)
+Tight       : Yes
+Variables   : 1858959 (Eliminated:    0)
+Constraints : 3785793 (Binary: 89.6% Ternary:  0.3% Other: 10.1%)
+Lemmas      : 136656 (Binary:  8.5% Ternary:  3.3% Other: 88.2%)
+Conflicts : 136656 (Average Length: 191.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=68.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 724.720
+Prepare   : 13.770
+Prepro.   : 9.460
+Choices     : 358952
+Conflicts   : 161041
+Restarts    : 16
+Atoms       : 96024 
+Rules       : 3944804 (1: 3906101 2: 18467 3: 20236)
+Bodies      : 1900967
+Equivalences: 150043 (Atom=Atom: 39532 Body=Body: 0 Other: 110511)
+Tight       : Yes
+Variables   : 1886477 (Eliminated:    0)
+Constraints : 3863785 (Binary: 89.6% Ternary:  0.3% Other: 10.1%)
+Lemmas      : 161041 (Binary:  8.8% Ternary:  2.9% Other: 88.3%)
+Conflicts : 161041 (Average Length: 223.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=69.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 708.630
+Prepare   : 13.980
+Prepro.   : 9.590
+Choices     : 317183
+Conflicts   : 144845
+Restarts    : 16
+Atoms       : 97384 
+Rules       : 4002123 (1: 3962858 2: 18735 3: 20530)
+Bodies      : 1928698
+Equivalences: 152156 (Atom=Atom: 40072 Body=Body: 0 Other: 112084)
+Tight       : Yes
+Variables   : 1913995 (Eliminated:    0)
+Constraints : 3941777 (Binary: 89.6% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 144845 (Binary:  8.3% Ternary:  3.1% Other: 88.6%)
+Conflicts : 144845 (Average Length: 210.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=70.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 810.050
+Prepare   : 14.100
+Prepro.   : 9.740
+Choices     : 348959
+Conflicts   : 160579
+Restarts    : 16
+Atoms       : 98744 
+Rules       : 4059442 (1: 4019615 2: 19003 3: 20824)
+Bodies      : 1956429
+Equivalences: 154269 (Atom=Atom: 40612 Body=Body: 0 Other: 113657)
+Tight       : Yes
+Variables   : 1941513 (Eliminated:    0)
+Constraints : 4019769 (Binary: 89.6% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 160579 (Binary:  9.7% Ternary:  2.8% Other: 87.5%)
+Conflicts : 160579 (Average Length: 231.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=71.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1046.670
+Prepare   : 14.190
+Prepro.   : 9.860
+Choices     : 467226
+Conflicts   : 215174
+Restarts    : 17
+Atoms       : 100104
+Rules       : 4116761 (1: 4076372 2: 19271 3: 21118)
+Bodies      : 1984160
+Equivalences: 156382 (Atom=Atom: 41152 Body=Body: 0 Other: 115230)
+Tight       : Yes
+Variables   : 1969031 (Eliminated:    0)
+Constraints : 4097761 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 215174 (Binary:  7.9% Ternary:  3.0% Other: 89.1%)
+Conflicts : 215174 (Average Length: 218.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=72.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1411.580
+Prepare   : 14.480
+Prepro.   : 10.010
+Choices     : 561645
+Conflicts   : 274501
+Restarts    : 17
+Atoms       : 101464
+Rules       : 4174080 (1: 4133129 2: 19539 3: 21412)
+Bodies      : 2011891
+Equivalences: 158495 (Atom=Atom: 41692 Body=Body: 0 Other: 116803)
+Tight       : Yes
+Variables   : 1996549 (Eliminated:    0)
+Constraints : 4175753 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 274501 (Binary:  7.6% Ternary:  2.6% Other: 89.8%)
+Conflicts : 274501 (Average Length: 298.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=73.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 895.920
+Prepare   : 14.610
+Prepro.   : 10.140
+Choices     : 327547
+Conflicts   : 162373
+Restarts    : 16
+Atoms       : 102824
+Rules       : 4231399 (1: 4189886 2: 19807 3: 21706)
+Bodies      : 2039622
+Equivalences: 160608 (Atom=Atom: 42232 Body=Body: 0 Other: 118376)
+Tight       : Yes
+Variables   : 2024067 (Eliminated:    0)
+Constraints : 4253745 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 162373 (Binary:  9.7% Ternary:  3.1% Other: 87.2%)
+Conflicts : 162373 (Average Length: 245.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=74.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2066.520
+Prepare   : 14.820
+Prepro.   : 10.280
+Choices     : 763868
+Conflicts   : 342325
+Restarts    : 18
+Atoms       : 104184
+Rules       : 4288718 (1: 4246643 2: 20075 3: 22000)
+Bodies      : 2067353
+Equivalences: 162721 (Atom=Atom: 42772 Body=Body: 0 Other: 119949)
+Tight       : Yes
+Variables   : 2051585 (Eliminated:    0)
+Constraints : 4331737 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 342325 (Binary:  7.1% Ternary:  2.7% Other: 90.2%)
+Conflicts : 342325 (Average Length: 291.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=75.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1453.520
+Prepare   : 15.050
+Prepro.   : 10.440
+Choices     : 634041
+Conflicts   : 270830
+Restarts    : 17
+Atoms       : 105544
+Rules       : 4346037 (1: 4303400 2: 20343 3: 22294)
+Bodies      : 2095084
+Equivalences: 164834 (Atom=Atom: 43312 Body=Body: 0 Other: 121522)
+Tight       : Yes
+Variables   : 2079103 (Eliminated:    0)
+Constraints : 4409729 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 270830 (Binary:  9.1% Ternary:  2.9% Other: 88.0%)
+Conflicts : 270830 (Average Length: 243.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=76.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1001.140
+Prepare   : 15.310
+Prepro.   : 10.560
+Choices     : 456731
+Conflicts   : 202236
+Restarts    : 17
+Atoms       : 106904
+Rules       : 4403356 (1: 4360157 2: 20611 3: 22588)
+Bodies      : 2122815
+Equivalences: 166947 (Atom=Atom: 43852 Body=Body: 0 Other: 123095)
+Tight       : Yes
+Variables   : 2106621 (Eliminated:    0)
+Constraints : 4487721 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 202236 (Binary:  8.5% Ternary:  2.9% Other: 88.6%)
+Conflicts : 202236 (Average Length: 228.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=77.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1183.780
+Prepare   : 15.620
+Prepro.   : 10.660
+Choices     : 539928
+Conflicts   : 246611
+Restarts    : 17
+Atoms       : 108264
+Rules       : 4460675 (1: 4416914 2: 20879 3: 22882)
+Bodies      : 2150546
+Equivalences: 169060 (Atom=Atom: 44392 Body=Body: 0 Other: 124668)
+Tight       : Yes
+Variables   : 2134139 (Eliminated:    0)
+Constraints : 4565713 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 246611 (Binary:  8.4% Ternary:  2.9% Other: 88.7%)
+Conflicts : 246611 (Average Length: 240.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=78.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1762.720
+Prepare   : 15.760
+Prepro.   : 10.810
+Choices     : 724429
+Conflicts   : 320333
+Restarts    : 18
+Atoms       : 109624
+Rules       : 4517994 (1: 4473671 2: 21147 3: 23176)
+Bodies      : 2178277
+Equivalences: 171173 (Atom=Atom: 44932 Body=Body: 0 Other: 126241)
+Tight       : Yes
+Variables   : 2161657 (Eliminated:    0)
+Constraints : 4643705 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 320333 (Binary:  7.9% Ternary:  2.8% Other: 89.3%)
+Conflicts : 320333 (Average Length: 261.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=79.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2509.440
+Prepare   : 16.120
+Prepro.   : 10.950
+Choices     : 858796
+Conflicts   : 428972
+Restarts    : 18
+Atoms       : 110984
+Rules       : 4575313 (1: 4530428 2: 21415 3: 23470)
+Bodies      : 2206008
+Equivalences: 173286 (Atom=Atom: 45472 Body=Body: 0 Other: 127814)
+Tight       : Yes
+Variables   : 2189175 (Eliminated:    0)
+Constraints : 4721697 (Binary: 89.7% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 428972 (Binary:  7.6% Ternary:  2.5% Other: 89.9%)
+Conflicts : 428972 (Average Length: 285.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=80.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2963.790
+Prepare   : 16.260
+Prepro.   : 11.080
+Choices     : 1009128
+Conflicts   : 455512
+Restarts    : 19
+Atoms       : 112344
+Rules       : 4632632 (1: 4587185 2: 21683 3: 23764)
+Bodies      : 2233739
+Equivalences: 175399 (Atom=Atom: 46012 Body=Body: 0 Other: 129387)
+Tight       : Yes
+Variables   : 2216693 (Eliminated:    0)
+Constraints : 4799689 (Binary: 89.8% Ternary:  0.3% Other: 10.0%)
+Lemmas      : 455512 (Binary:  7.4% Ternary:  2.5% Other: 90.1%)
+Conflicts : 455512 (Average Length: 298.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=81.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2273.830
+Prepare   : 16.440
+Prepro.   : 11.230
+Choices     : 880351
+Conflicts   : 424202
+Restarts    : 18
+Atoms       : 113704
+Rules       : 4689951 (1: 4643942 2: 21951 3: 24058)
+Bodies      : 2261470
+Equivalences: 177512 (Atom=Atom: 46552 Body=Body: 0 Other: 130960)
+Tight       : Yes
+Variables   : 2244211 (Eliminated:    0)
+Constraints : 4877681 (Binary: 89.8% Ternary:  0.3% Other:  9.9%)
+Lemmas      : 424202 (Binary:  7.9% Ternary:  2.6% Other: 89.5%)
+Conflicts : 424202 (Average Length: 257.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=82.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2934.610
+Prepare   : 16.580
+Prepro.   : 11.410
+Choices     : 1044075
+Conflicts   : 451179
+Restarts    : 19
+Atoms       : 115064
+Rules       : 4747270 (1: 4700699 2: 22219 3: 24352)
+Bodies      : 2289201
+Equivalences: 179625 (Atom=Atom: 47092 Body=Body: 0 Other: 132533)
+Tight       : Yes
+Variables   : 2271729 (Eliminated:    0)
+Constraints : 4955673 (Binary: 89.8% Ternary:  0.3% Other:  9.9%)
+Lemmas      : 451179 (Binary:  7.6% Ternary:  2.7% Other: 89.6%)
+Conflicts : 451179 (Average Length: 313.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=83.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2512.090
+Prepare   : 17.010
+Prepro.   : 11.480
+Choices     : 921205
+Conflicts   : 386495
+Restarts    : 18
+Atoms       : 116424
+Rules       : 4804589 (1: 4757456 2: 22487 3: 24646)
+Bodies      : 2316932
+Equivalences: 181738 (Atom=Atom: 47632 Body=Body: 0 Other: 134106)
+Tight       : Yes
+Variables   : 2299247 (Eliminated:    0)
+Constraints : 5033665 (Binary: 89.8% Ternary:  0.3% Other:  9.9%)
+Lemmas      : 386495 (Binary:  7.2% Ternary:  2.4% Other: 90.4%)
+Conflicts : 386495 (Average Length: 284.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=84.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2449.320
+Prepare   : 17.040
+Prepro.   : 11.630
+Choices     : 928952
+Conflicts   : 408707
+Restarts    : 18
+Atoms       : 117784
+Rules       : 4861908 (1: 4814213 2: 22755 3: 24940)
+Bodies      : 2344663
+Equivalences: 183851 (Atom=Atom: 48172 Body=Body: 0 Other: 135679)
+Tight       : Yes
+Variables   : 2326765 (Eliminated:    0)
+Constraints : 5111657 (Binary: 89.8% Ternary:  0.3% Other:  9.9%)
+Lemmas      : 408707 (Binary:  8.7% Ternary:  2.7% Other: 88.6%)
+Conflicts : 408707 (Average Length: 279.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+

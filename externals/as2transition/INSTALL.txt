@@ -1,0 +1,4 @@
+In order to install as2transition, please ensure that your system has autotools 
+(autoconf, autoheader, automake, aclocal) installed (automake must be version 1.9 
+or higher) and run the following command:
+	./bootstrap && ./configure && make && sudo make install

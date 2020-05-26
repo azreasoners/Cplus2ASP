@@ -1,0 +1,113 @@
+#include <string>
+#include <ostream>
+#include <sstream>
+
+#include "memwrappers.h"
+
+#include <boost/lexical_cast.hpp>
+#include <boost/property_tree/ptree.hpp> 
+#include <boost/property_tree/exceptions.hpp> 
+#include <boost/algorithm/string.hpp>
+
+#include "bcplus/symbols/Symbol.h"
+
+namespace bcplus {
+namespace symbols {
+
+char const* Symbol::Type::cstr(type v) {
+	switch (v) {
+		case SORT:    			 return "sort";
+        case CONSTANT: 			 return "constant";
+        case VARIABLE:			 return "variable";
+        case OBJECT: 			 return "object";
+        case MACRO:    			 return "macro";
+        case QUERY:    			 return "query";
+		case RANGE:              return "range";
+		case ERR_INVALID_SYMBOL: return "<invalid>";
+		default:				 return "<BAD_SYMBOL_TYPE>";
+	}
+}
+
+Symbol::Type::type Symbol::Type::val(char const* c) {
+	char const* marker;
+
+	/*!re2c
+		re2c:define:YYCTYPE = "char";
+		re2c:define:YYCURSOR = c;
+		re2c:yyfill:enable = 0;
+		re2c:define:YYMARKER = marker;
+		re2c:indent:top = 1;
+
+		'sort'				{ return SORT; }
+		'constant'			{ return CONSTANT; }
+		'variable'			{ return VARIABLE; }
+		'object'			{ return OBJECT; }
+		'macro'				{ return MACRO; }
+		'query'				{ return QUERY; }
+		'range'				{ return RANGE; }
+		.					{ return ERR_INVALID_SYMBOL; }
+	*/
+}
+
+std::string Symbol::genName(std::string const& base, size_t arity) {
+	return base + "/" + boost::lexical_cast<std::string>(arity);
+}
+
+
+Symbol::Symbol(Type::type type, ReferencedString const* base, size_t arity)
+	: _type(type), _arity(arity), _base(base), _good(true) {
+	_name = new ReferencedString(genName(*base, arity)); 
+	_metadata = NULL;
+}
+
+Symbol::Symbol(Type::type type, boost::property_tree::ptree const& node, std::ostream* err) {
+	bool good = true;
+
+	try {
+		std::string base = node.get("<xmlattr>.base","");
+		int arity = node.get("<xmlattr>.arity",0);
+	
+		if (base == "") {
+			good = false;
+			if (err) *err << "ERROR: Encountered malformed symbol declaration. Expected a 'base' attribute." << std::endl;
+		}
+
+		if (arity < 0) {
+			good = false;
+			if (err) *err << "ERROR: Encountered malformed symbol declaration. Expected an non-negative integer 'arity' attribute." << std::endl;
+		}
+	
+		_type = type;
+		_arity = (size_t)arity;
+		_base = new ReferencedString(base);
+		
+		_name = new ReferencedString(genName(base, arity));
+	} catch (boost::property_tree::ptree_error const& e) {
+		good = false;
+		if (err) *err << "ERROR: Encountered malformed symbol declaration. Expected an non-negative integer 'arity' attribute." << std::endl;
+	}
+
+
+	_good = good;
+	_metadata = NULL;
+}
+
+Symbol::~Symbol() {
+	/* Intentionally left blank */
+}
+
+bool Symbol::operator==(Symbol const& other) const {
+	if (!good() || !other.good()) return false;
+	if (type() != other.type()) return false;
+	if (arity() != other.arity()) return false;
+	if (*base() != *(other.base())) return false;
+	return true;
+}
+
+void Symbol::save(boost::property_tree::ptree& node) const {
+	node.put("<xmlattr>.base", *base());
+	if (arity()) node.put("<xmlattr>.arity", arity());
+}
+
+
+}}

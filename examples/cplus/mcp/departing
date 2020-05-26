@@ -1,0 +1,18 @@
+% File 'departing' 
+
+:- constants 
+  departing(group,location)  :: additiveAction(afValue).
+
+:- macros
+  staying(#1,#2) -> num(#1,#2)-departing(#1,#2).
+
+cross(V) increments departing(G,L) by N if loc(V)=L & howmany(V,G)=N 
+    unless ab11(V,G,L).
+
+% the number of people departing from a location does not exceed the number 
+%  of people there
+always departing(G,L)=<num(G,L) unless ab13(G,L).
+
+% the missionaries staying in a location should not be outnumbered by
+%  the cannibals there.
+always staying(mi,L)\=0 ->> staying(mi,L)>=num(ca,L) unless ab12(L).

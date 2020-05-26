@@ -1,0 +1,6170 @@
+# Hanoi Benchmarking Results
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (incremental)
+# ----------------------------------------------------------------------------------------------------------------------
+$ cplus2asp hanoi-6-3-benchmark.cp --stats query=0
+
+
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Minimum Step = '0', Maximum Step = '100'.
+% Pragma: Searching for 1 solutions.
+=============== step 1 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3733
+Choices  : 0
+Conflicts: 0
+=============== step 2 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 0
+Conflicts: 0
+=============== step 3 ===============
+Models   : 0
+Time     : 0.000 (g: 0.000, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 0
+Conflicts: 0
+=============== step 4 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.010, s: 0.000)
+Rules    : 3213
+Choices  : 0
+Conflicts: 0
+=============== step 5 ===============
+Models   : 0
+Time     : 0.000 (g: 0.000, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 0
+Conflicts: 0
+=============== step 6 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 0
+Conflicts: 0
+=============== step 7 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 1
+Conflicts: 2
+=============== step 8 ===============
+Models   : 0
+Time     : 0.010 (g: 0.000, p: 0.010, s: 0.000)
+Rules    : 3213
+Choices  : 3
+Conflicts: 3
+=============== step 9 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 4
+Conflicts: 4
+=============== step 10 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 6
+Conflicts: 5
+=============== step 11 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 7
+Conflicts: 5
+=============== step 12 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 15
+Conflicts: 8
+=============== step 13 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 60
+Conflicts: 26
+=============== step 14 ===============
+Models   : 0
+Time     : 0.010 (g: 0.000, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 574
+Conflicts: 191
+=============== step 15 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 133
+Conflicts: 75
+=============== step 16 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 396
+Conflicts: 134
+=============== step 17 ===============
+Models   : 0
+Time     : 0.010 (g: 0.000, p: 0.010, s: 0.000)
+Rules    : 3213
+Choices  : 185
+Conflicts: 54
+=============== step 18 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 218
+Conflicts: 73
+=============== step 19 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 276
+Conflicts: 109
+=============== step 20 ===============
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 3213
+Choices  : 369
+Conflicts: 112
+=============== step 21 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.010, s: 0.000)
+Rules    : 3213
+Choices  : 1045
+Conflicts: 321
+=============== step 22 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 449
+Conflicts: 184
+=============== step 23 ===============
+Models   : 0
+Time     : 0.020 (g: 0.000, p: 0.010, s: 0.010)
+Rules    : 3213
+Choices  : 596
+Conflicts: 157
+=============== step 24 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 1112
+Conflicts: 400
+=============== step 25 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 817
+Conflicts: 343
+=============== step 26 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 1119
+Conflicts: 421
+=============== step 27 ===============
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 3213
+Choices  : 974
+Conflicts: 364
+=============== step 28 ===============
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 3213
+Choices  : 1041
+Conflicts: 318
+=============== step 29 ===============
+Models   : 0
+Time     : 0.030 (g: 0.000, p: 0.010, s: 0.020)
+Rules    : 3213
+Choices  : 1753
+Conflicts: 596
+=============== step 30 ===============
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 3213
+Choices  : 2078
+Conflicts: 750
+=============== step 31 ===============
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 3213
+Choices  : 1195
+Conflicts: 396
+=============== step 32 ===============
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 3213
+Choices  : 1540
+Conflicts: 619
+=============== step 33 ===============
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.010, s: 0.040)
+Rules    : 3213
+Choices  : 2247
+Conflicts: 779
+=============== step 34 ===============
+Models   : 0
+Time     : 0.040 (g: 0.000, p: 0.010, s: 0.030)
+Rules    : 3213
+Choices  : 2154
+Conflicts: 657
+=============== step 35 ===============
+Models   : 0
+Time     : 0.040 (g: 0.000, p: 0.010, s: 0.030)
+Rules    : 3213
+Choices  : 1488
+Conflicts: 571
+=============== step 36 ===============
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 3213
+Choices  : 1342
+Conflicts: 356
+=============== step 37 ===============
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.000, s: 0.050)
+Rules    : 3213
+Choices  : 2859
+Conflicts: 1059
+=============== step 38 ===============
+Models   : 0
+Time     : 0.070 (g: 0.010, p: 0.000, s: 0.060)
+Rules    : 3213
+Choices  : 3798
+Conflicts: 1193
+=============== step 39 ===============
+Models   : 0
+Time     : 0.050 (g: 0.010, p: 0.000, s: 0.040)
+Rules    : 3213
+Choices  : 2788
+Conflicts: 871
+=============== step 40 ===============
+Models   : 0
+Time     : 0.070 (g: 0.010, p: 0.000, s: 0.050)
+Rules    : 3213
+Choices  : 3390
+Conflicts: 958
+=============== step 41 ===============
+Models   : 0
+Time     : 0.090 (g: 0.000, p: 0.010, s: 0.070)
+Rules    : 3213
+Choices  : 3736
+Conflicts: 1293
+=============== step 42 ===============
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.000, s: 0.050)
+Rules    : 3213
+Choices  : 2788
+Conflicts: 830
+=============== step 43 ===============
+Models   : 0
+Time     : 0.070 (g: 0.010, p: 0.010, s: 0.050)
+Rules    : 3213
+Choices  : 2437
+Conflicts: 911
+=============== step 44 ===============
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.010, s: 0.040)
+Rules    : 3213
+Choices  : 2020
+Conflicts: 595
+=============== step 45 ===============
+Models   : 0
+Time     : 0.080 (g: 0.010, p: 0.000, s: 0.070)
+Rules    : 3213
+Choices  : 3379
+Conflicts: 1021
+=============== step 46 ===============
+Models   : 0
+Time     : 0.090 (g: 0.010, p: 0.000, s: 0.080)
+Rules    : 3213
+Choices  : 3675
+Conflicts: 1160
+=============== step 47 ===============
+Models   : 0
+Time     : 0.100 (g: 0.020, p: 0.000, s: 0.080)
+Rules    : 3213
+Choices  : 3541
+Conflicts: 1239
+=============== step 48 ===============
+Models   : 0
+Time     : 0.090 (g: 0.020, p: 0.000, s: 0.070)
+Rules    : 3213
+Choices  : 3494
+Conflicts: 1075
+=============== step 49 ===============
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.010, s: 0.040)
+Rules    : 3213
+Choices  : 1178
+Conflicts: 457
+=============== step 50 ===============
+Models   : 0
+Time     : 0.050 (g: 0.010, p: 0.000, s: 0.040)
+Rules    : 3213
+Choices  : 1233
+Conflicts: 423
+=============== step 51 ===============
+Models   : 0
+Time     : 0.050 (g: 0.000, p: 0.010, s: 0.040)
+Rules    : 3213
+Choices  : 2116
+Conflicts: 761
+=============== step 52 ===============
+Models   : 0
+Time     : 0.080 (g: 0.000, p: 0.010, s: 0.060)
+Rules    : 3213
+Choices  : 2899
+Conflicts: 874
+=============== step 53 ===============
+Models   : 0
+Time     : 0.210 (g: 0.010, p: 0.010, s: 0.190)
+Rules    : 3213
+Choices  : 7687
+Conflicts: 2487
+=============== step 54 ===============
+Models   : 0
+Time     : 0.170 (g: 0.000, p: 0.010, s: 0.150)
+Rules    : 3213
+Choices  : 4544
+Conflicts: 1556
+=============== step 55 ===============
+Models   : 0
+Time     : 0.100 (g: 0.010, p: 0.010, s: 0.080)
+Rules    : 3213
+Choices  : 3051
+Conflicts: 1082
+=============== step 56 ===============
+Models   : 0
+Time     : 0.380 (g: 0.010, p: 0.010, s: 0.360)
+Rules    : 3213
+Choices  : 11904
+Conflicts: 3308
+=============== step 57 ===============
+Models   : 0
+Time     : 0.260 (g: 0.000, p: 0.010, s: 0.250)
+Rules    : 3213
+Choices  : 7606
+Conflicts: 2153
+=============== step 58 ===============
+Models   : 0
+Time     : 0.370 (g: 0.010, p: 0.010, s: 0.350)
+Rules    : 3213
+Choices  : 8357
+Conflicts: 2822
+=============== step 59 ===============
+Models   : 0
+Time     : 0.310 (g: 0.000, p: 0.020, s: 0.280)
+Rules    : 3213
+Choices  : 6148
+Conflicts: 2233
+=============== step 60 ===============
+Models   : 0
+Time     : 0.290 (g: 0.010, p: 0.010, s: 0.270)
+Rules    : 3213
+Choices  : 6873
+Conflicts: 2168
+=============== step 61 ===============
+Models   : 0
+Time     : 0.190 (g: 0.010, p: 0.010, s: 0.170)
+Rules    : 3213
+Choices  : 4030
+Conflicts: 1416
+=============== step 62 ===============
+Models   : 0
+Time     : 0.160 (g: 0.010, p: 0.000, s: 0.140)
+Rules    : 3213
+Choices  : 3062
+Conflicts: 868
+=============== step 63 ===============
+Solution: 1
+        0:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=p2
+
+        1:  on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(2)=p3
+
+        2:  on(1)=p2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        3:  on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(3)=p2
+
+        4:  on(1)=2 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=4
+
+        5:  on(1)=4 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(2)=3
+
+        6:  on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        7:  on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(4)=p3
+
+        8:  on(1)=2 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=4
+
+        9:  on(1)=4 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(2)=5
+
+        10:  on(1)=4 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        11:  on(1)=2 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(3)=4
+
+        12:  on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=p2
+
+        13:  on(1)=p2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(2)=3
+
+        14:  on(1)=p2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        15:  on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+        ACTIONS:  move(5)=p2
+
+        16:  on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=6
+
+        17:  on(1)=6 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(2)=5
+
+        18:  on(1)=6 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        19:  on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(3)=6
+
+        20:  on(1)=2 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=4
+
+        21:  on(1)=4 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(2)=3
+
+        22:  on(1)=4 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        23:  on(1)=2 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(4)=5
+
+        24:  on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=4
+
+        25:  on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(2)=p3
+
+        26:  on(1)=4 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        27:  on(1)=2 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(3)=4
+
+        28:  on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=6
+
+        29:  on(1)=6 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(2)=3
+
+        30:  on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(1)=2
+
+        31:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+        ACTIONS:  move(6)=p3
+
+        32:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=6
+
+        33:  on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(2)=p1
+
+        34:  on(1)=6 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        35:  on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(3)=6
+
+        36:  on(1)=2 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=4
+
+        37:  on(1)=4 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(2)=3
+
+        38:  on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        39:  on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(4)=p1
+
+        40:  on(1)=2 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=4
+
+        41:  on(1)=4 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(2)=5
+
+        42:  on(1)=4 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        43:  on(1)=2 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(3)=4
+
+        44:  on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=6
+
+        45:  on(1)=6 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(2)=3
+
+        46:  on(1)=6 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        47:  on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+        ACTIONS:  move(5)=6
+
+        48:  on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=p2
+
+        49:  on(1)=p2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(2)=5
+
+        50:  on(1)=p2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        51:  on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(3)=p2
+
+        52:  on(1)=2 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=4
+
+        53:  on(1)=4 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(2)=3
+
+        54:  on(1)=4 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        55:  on(1)=2 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(4)=5
+
+        56:  on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=4
+
+        57:  on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(2)=p1
+
+        58:  on(1)=4 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        59:  on(1)=2 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(3)=4
+
+        60:  on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=p2
+
+        61:  on(1)=p2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(2)=3
+
+        62:  on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+        ACTIONS:  move(1)=2
+
+        63:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+Models   : 1
+Time     : 0.080 (g: 0.010, p: 0.010, s: 0.060)
+Rules    : 3213
+Choices  : 1130
+Conflicts: 343
+=============== Summary ===============
+SATISFIABLE
+Models      : 1+
+Total Steps : 63
+Time        : 4.320
+Prepare   : 0.500
+Prepro.   : 0.260
+Choices     : 132920
+Conflicts   : 43189
+Restarts    : 155
+Atoms       : 10022
+Rules       : 202939 (1: 194179 2: 1524 3: 7236)
+Bodies      : 118975
+Equivalences: 14296  (Atom=Atom: 535 Body=Body: 0 Other: 13761)
+Tight       : Yes
+Variables   : 109795 (Eliminated:    0)
+Constraints : 42082  (Binary: 84.4% Ternary: 12.3% Other:  3.3%)
+Lemmas      : 43133  (Binary: 11.5% Ternary:  8.8% Other: 79.6%)
+Conflicts : 43133  (Average Length: 12.5)
+Loops     : 0      (Average Length: 0.0)
+Other     : 0      (Average Length: 0.0)
+Deleted   : 0
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v2 (static)
+# ----------------------------------------------------------------------------------------------------------------------
+
+$ cplus2asp hanoi-6-3-benchmark.cp --mode=static-auto --stats query=0 > hanoi.tmp
+
+
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '0'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.000
+Prepare   : 0.000
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 510   
+Rules       : 527    (1: 461 2: 12 3: 54)
+Bodies      : 33    
+Equivalences: 904    (Atom=Atom: 436 Body=Body: 0 Other: 468)
+Tight       : Yes
+Variables   : 72     (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '1'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.010
+Prepare   : 0.010
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 662   
+Rules       : 3736   (1: 3532 2: 36 3: 168)
+Bodies      : 1919  
+Equivalences: 1069   (Atom=Atom: 438 Body=Body: 0 Other: 631)
+Tight       : Yes
+Variables   : 1947   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '2'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.020
+Prepare   : 0.020
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 814   
+Rules       : 6945   (1: 6603 2: 60 3: 282)
+Bodies      : 3800  
+Equivalences: 1229   (Atom=Atom: 440 Body=Body: 0 Other: 789)
+Tight       : Yes
+Variables   : 3822   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '3'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.020
+Prepare   : 0.020
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 966   
+Rules       : 10154  (1: 9674 2: 84 3: 396)
+Bodies      : 5681  
+Equivalences: 1389   (Atom=Atom: 442 Body=Body: 0 Other: 947)
+Tight       : Yes
+Variables   : 5697   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '4'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.040
+Prepare   : 0.030
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 1118  
+Rules       : 13363  (1: 12745 2: 108 3: 510)
+Bodies      : 7562  
+Equivalences: 1549   (Atom=Atom: 444 Body=Body: 0 Other: 1105)
+Tight       : Yes
+Variables   : 7572   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '5'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.040
+Prepare   : 0.030
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 1270  
+Rules       : 16572  (1: 15816 2: 132 3: 624)
+Bodies      : 9443  
+Equivalences: 1709   (Atom=Atom: 446 Body=Body: 0 Other: 1263)
+Tight       : Yes
+Variables   : 9447   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '6'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.050
+Prepare   : 0.040
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 1422  
+Rules       : 19781  (1: 18887 2: 156 3: 738)
+Bodies      : 11324 
+Equivalences: 1869   (Atom=Atom: 448 Body=Body: 0 Other: 1421)
+Tight       : Yes
+Variables   : 11322  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '7'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.060
+Prepare   : 0.040
+Prepro.   : 0.020
+Choices     : 1
+Conflicts   : 1
+Restarts    : 0
+Atoms       : 1574  
+Rules       : 22990  (1: 21958 2: 180 3: 852)
+Bodies      : 13205 
+Equivalences: 2029   (Atom=Atom: 450 Body=Body: 0 Other: 1579)
+Tight       : Yes
+Variables   : 13197  (Eliminated:    0)
+Constraints : 1165   (Binary: 87.0% Ternary:  4.7% Other:  8.2%)
+Lemmas      : 1      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 1      (Average Length: 1.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '8'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.070
+Prepare   : 0.060
+Prepro.   : 0.010
+Choices     : 4
+Conflicts   : 4
+Restarts    : 0
+Atoms       : 1726  
+Rules       : 26199  (1: 25029 2: 204 3: 966)
+Bodies      : 15086 
+Equivalences: 2189   (Atom=Atom: 452 Body=Body: 0 Other: 1737)
+Tight       : Yes
+Variables   : 15072  (Eliminated:    0)
+Constraints : 1870   (Binary: 89.1% Ternary:  4.4% Other:  6.4%)
+Lemmas      : 4      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 4      (Average Length: 1.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '9'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.090
+Prepare   : 0.070
+Prepro.   : 0.020
+Choices     : 14
+Conflicts   : 10
+Restarts    : 0
+Atoms       : 1878  
+Rules       : 29408  (1: 28100 2: 228 3: 1080)
+Bodies      : 16967 
+Equivalences: 2349   (Atom=Atom: 454 Body=Body: 0 Other: 1895)
+Tight       : Yes
+Variables   : 16947  (Eliminated:    0)
+Constraints : 2600   (Binary: 90.0% Ternary:  4.5% Other:  5.5%)
+Lemmas      : 10     (Binary: 10.0% Ternary:  0.0% Other: 90.0%)
+Conflicts : 10     (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '10'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.100
+Prepare   : 0.080
+Prepro.   : 0.020
+Choices     : 31
+Conflicts   : 15
+Restarts    : 0
+Atoms       : 2030  
+Rules       : 32617  (1: 31171 2: 252 3: 1194)
+Bodies      : 18848 
+Equivalences: 2509   (Atom=Atom: 456 Body=Body: 0 Other: 2053)
+Tight       : Yes
+Variables   : 18822  (Eliminated:    0)
+Constraints : 3330   (Binary: 90.5% Ternary:  4.5% Other:  5.0%)
+Lemmas      : 15     (Binary: 13.3% Ternary:  0.0% Other: 86.7%)
+Conflicts : 15     (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '11'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.110
+Prepare   : 0.090
+Prepro.   : 0.020
+Choices     : 50
+Conflicts   : 18
+Restarts    : 0
+Atoms       : 2182  
+Rules       : 35826  (1: 34242 2: 276 3: 1308)
+Bodies      : 20729 
+Equivalences: 2669   (Atom=Atom: 458 Body=Body: 0 Other: 2211)
+Tight       : Yes
+Variables   : 20697  (Eliminated:    0)
+Constraints : 4060   (Binary: 90.8% Ternary:  4.5% Other:  4.7%)
+Lemmas      : 18     (Binary: 11.1% Ternary:  0.0% Other: 88.9%)
+Conflicts : 18     (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '12'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.130
+Prepare   : 0.100
+Prepro.   : 0.030
+Choices     : 84
+Conflicts   : 23
+Restarts    : 0
+Atoms       : 2334  
+Rules       : 39035  (1: 37313 2: 300 3: 1422)
+Bodies      : 22610 
+Equivalences: 2829   (Atom=Atom: 460 Body=Body: 0 Other: 2369)
+Tight       : Yes
+Variables   : 22572  (Eliminated:    0)
+Constraints : 4790   (Binary: 91.0% Ternary:  4.5% Other:  4.5%)
+Lemmas      : 23     (Binary:  8.7% Ternary:  0.0% Other: 91.3%)
+Conflicts : 23     (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '13'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.140
+Prepare   : 0.100
+Prepro.   : 0.030
+Choices     : 112
+Conflicts   : 27
+Restarts    : 0
+Atoms       : 2486  
+Rules       : 42244  (1: 40384 2: 324 3: 1536)
+Bodies      : 24491 
+Equivalences: 2989   (Atom=Atom: 462 Body=Body: 0 Other: 2527)
+Tight       : Yes
+Variables   : 24447  (Eliminated:    0)
+Constraints : 5520   (Binary: 91.2% Ternary:  4.5% Other:  4.3%)
+Lemmas      : 27     (Binary:  7.4% Ternary:  0.0% Other: 92.6%)
+Conflicts : 27     (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '14'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.150
+Prepare   : 0.120
+Prepro.   : 0.020
+Choices     : 137
+Conflicts   : 38
+Restarts    : 0
+Atoms       : 2638  
+Rules       : 45453  (1: 43455 2: 348 3: 1650)
+Bodies      : 26372 
+Equivalences: 3149   (Atom=Atom: 464 Body=Body: 0 Other: 2685)
+Tight       : Yes
+Variables   : 26322  (Eliminated:    0)
+Constraints : 6250   (Binary: 91.3% Ternary:  4.5% Other:  4.2%)
+Lemmas      : 38     (Binary:  7.9% Ternary:  5.3% Other: 86.8%)
+Conflicts : 38     (Average Length: 2.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '15'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.170
+Prepare   : 0.130
+Prepro.   : 0.030
+Choices     : 160
+Conflicts   : 52
+Restarts    : 0
+Atoms       : 2790  
+Rules       : 48662  (1: 46526 2: 372 3: 1764)
+Bodies      : 28253 
+Equivalences: 3309   (Atom=Atom: 466 Body=Body: 0 Other: 2843)
+Tight       : Yes
+Variables   : 28197  (Eliminated:    0)
+Constraints : 6980   (Binary: 91.4% Ternary:  4.5% Other:  4.1%)
+Lemmas      : 52     (Binary: 13.5% Ternary:  7.7% Other: 78.8%)
+Conflicts : 52     (Average Length: 3.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '16'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.760
+Prepare   : 0.710
+Prepro.   : 0.040
+Choices     : 176
+Conflicts   : 62
+Restarts    : 0
+Atoms       : 2942  
+Rules       : 51871  (1: 49597 2: 396 3: 1878)
+Bodies      : 30134 
+Equivalences: 3469   (Atom=Atom: 468 Body=Body: 0 Other: 3001)
+Tight       : Yes
+Variables   : 30072  (Eliminated:    0)
+Constraints : 7710   (Binary: 91.5% Ternary:  4.5% Other:  4.0%)
+Lemmas      : 62     (Binary: 19.4% Ternary:  4.8% Other: 75.8%)
+Conflicts : 62     (Average Length: 3.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '17'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.920
+Prepare   : 0.860
+Prepro.   : 0.040
+Choices     : 301
+Conflicts   : 138
+Restarts    : 1
+Atoms       : 3094  
+Rules       : 55080  (1: 52668 2: 420 3: 1992)
+Bodies      : 32015 
+Equivalences: 3629   (Atom=Atom: 470 Body=Body: 0 Other: 3159)
+Tight       : Yes
+Variables   : 31947  (Eliminated:    0)
+Constraints : 8440   (Binary: 91.5% Ternary:  4.5% Other:  4.0%)
+Lemmas      : 138    (Binary: 15.2% Ternary:  8.7% Other: 76.1%)
+Conflicts : 138    (Average Length: 5.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '18'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.020
+Prepare   : 0.960
+Prepro.   : 0.040
+Choices     : 661
+Conflicts   : 293
+Restarts    : 2
+Atoms       : 3246  
+Rules       : 58289  (1: 55739 2: 444 3: 2106)
+Bodies      : 33896 
+Equivalences: 3789   (Atom=Atom: 472 Body=Body: 0 Other: 3317)
+Tight       : Yes
+Variables   : 33822  (Eliminated:    0)
+Constraints : 9170   (Binary: 91.6% Ternary:  4.5% Other:  3.9%)
+Lemmas      : 293    (Binary: 28.0% Ternary: 14.0% Other: 58.0%)
+Conflicts : 293    (Average Length: 5.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '19'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.180
+Prepare   : 1.120
+Prepro.   : 0.040
+Choices     : 886
+Conflicts   : 396
+Restarts    : 2
+Atoms       : 3398  
+Rules       : 61498  (1: 58810 2: 468 3: 2220)
+Bodies      : 35777 
+Equivalences: 3949   (Atom=Atom: 474 Body=Body: 0 Other: 3475)
+Tight       : Yes
+Variables   : 35697  (Eliminated:    0)
+Constraints : 9900   (Binary: 91.6% Ternary:  4.5% Other:  3.9%)
+Lemmas      : 396    (Binary: 25.8% Ternary:  9.6% Other: 64.6%)
+Conflicts : 396    (Average Length: 5.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '20'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.340
+Prepare   : 1.270
+Prepro.   : 0.040
+Choices     : 1879
+Conflicts   : 833
+Restarts    : 4
+Atoms       : 3550  
+Rules       : 64707  (1: 61881 2: 492 3: 2334)
+Bodies      : 37658 
+Equivalences: 4109   (Atom=Atom: 476 Body=Body: 0 Other: 3633)
+Tight       : Yes
+Variables   : 37572  (Eliminated:    0)
+Constraints : 10630  (Binary: 91.7% Ternary:  4.5% Other:  3.8%)
+Lemmas      : 833    (Binary: 24.7% Ternary: 13.1% Other: 62.2%)
+Conflicts : 833    (Average Length: 6.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '21'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.550
+Prepare   : 1.460
+Prepro.   : 0.060
+Choices     : 2096
+Conflicts   : 911
+Restarts    : 4
+Atoms       : 3702  
+Rules       : 67916  (1: 64952 2: 516 3: 2448)
+Bodies      : 39539 
+Equivalences: 4269   (Atom=Atom: 478 Body=Body: 0 Other: 3791)
+Tight       : Yes
+Variables   : 39447  (Eliminated:    0)
+Constraints : 11360  (Binary: 91.7% Ternary:  4.5% Other:  3.8%)
+Lemmas      : 911    (Binary: 22.7% Ternary: 13.8% Other: 63.4%)
+Conflicts : 911    (Average Length: 7.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '22'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.740
+Prepare   : 1.630
+Prepro.   : 0.060
+Choices     : 2927
+Conflicts   : 1362
+Restarts    : 5
+Atoms       : 3854  
+Rules       : 71125  (1: 68023 2: 540 3: 2562)
+Bodies      : 41420 
+Equivalences: 4429   (Atom=Atom: 480 Body=Body: 0 Other: 3949)
+Tight       : Yes
+Variables   : 41322  (Eliminated:    0)
+Constraints : 12090  (Binary: 91.7% Ternary:  4.5% Other:  3.8%)
+Lemmas      : 1362   (Binary: 16.2% Ternary: 12.1% Other: 71.7%)
+Conflicts : 1362   (Average Length: 7.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '23'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.970
+Prepare   : 1.880
+Prepro.   : 0.060
+Choices     : 2860
+Conflicts   : 1035
+Restarts    : 4
+Atoms       : 4006  
+Rules       : 74334  (1: 71094 2: 564 3: 2676)
+Bodies      : 43301 
+Equivalences: 4589   (Atom=Atom: 482 Body=Body: 0 Other: 4107)
+Tight       : Yes
+Variables   : 43197  (Eliminated:    0)
+Constraints : 12820  (Binary: 91.7% Ternary:  4.5% Other:  3.7%)
+Lemmas      : 1035   (Binary: 23.1% Ternary: 14.3% Other: 62.6%)
+Conflicts : 1035   (Average Length: 5.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '24'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.190
+Prepare   : 2.080
+Prepro.   : 0.070
+Choices     : 3025
+Conflicts   : 1113
+Restarts    : 4
+Atoms       : 4158  
+Rules       : 77543  (1: 74165 2: 588 3: 2790)
+Bodies      : 45182 
+Equivalences: 4749   (Atom=Atom: 484 Body=Body: 0 Other: 4265)
+Tight       : Yes
+Variables   : 45072  (Eliminated:    0)
+Constraints : 13550  (Binary: 91.8% Ternary:  4.5% Other:  3.7%)
+Lemmas      : 1113   (Binary: 22.7% Ternary: 12.7% Other: 64.6%)
+Conflicts : 1113   (Average Length: 5.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '25'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.410
+Prepare   : 2.300
+Prepro.   : 0.070
+Choices     : 2786
+Conflicts   : 1012
+Restarts    : 4
+Atoms       : 4310  
+Rules       : 80752  (1: 77236 2: 612 3: 2904)
+Bodies      : 47063 
+Equivalences: 4909   (Atom=Atom: 486 Body=Body: 0 Other: 4423)
+Tight       : Yes
+Variables   : 46947  (Eliminated:    0)
+Constraints : 14280  (Binary: 91.8% Ternary:  4.5% Other:  3.7%)
+Lemmas      : 1012   (Binary: 19.2% Ternary: 12.0% Other: 68.9%)
+Conflicts : 1012   (Average Length: 6.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '26'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.720
+Prepare   : 2.590
+Prepro.   : 0.070
+Choices     : 3526
+Conflicts   : 1138
+Restarts    : 4
+Atoms       : 4462  
+Rules       : 83961  (1: 80307 2: 636 3: 3018)
+Bodies      : 48944 
+Equivalences: 5069   (Atom=Atom: 488 Body=Body: 0 Other: 4581)
+Tight       : Yes
+Variables   : 48822  (Eliminated:    0)
+Constraints : 15010  (Binary: 91.8% Ternary:  4.5% Other:  3.7%)
+Lemmas      : 1138   (Binary: 21.5% Ternary: 11.9% Other: 66.6%)
+Conflicts : 1138   (Average Length: 6.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '27'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.000
+Prepare   : 2.860
+Prepro.   : 0.080
+Choices     : 4639
+Conflicts   : 1729
+Restarts    : 5
+Atoms       : 4614  
+Rules       : 87170  (1: 83378 2: 660 3: 3132)
+Bodies      : 50825 
+Equivalences: 5229   (Atom=Atom: 490 Body=Body: 0 Other: 4739)
+Tight       : Yes
+Variables   : 50697  (Eliminated:    0)
+Constraints : 15740  (Binary: 91.8% Ternary:  4.5% Other:  3.7%)
+Lemmas      : 1729   (Binary: 17.1% Ternary: 12.1% Other: 70.9%)
+Conflicts : 1729   (Average Length: 7.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '28'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.320
+Prepare   : 3.160
+Prepro.   : 0.070
+Choices     : 6635
+Conflicts   : 2279
+Restarts    : 6
+Atoms       : 4766  
+Rules       : 90379  (1: 86449 2: 684 3: 3246)
+Bodies      : 52706 
+Equivalences: 5389   (Atom=Atom: 492 Body=Body: 0 Other: 4897)
+Tight       : Yes
+Variables   : 52572  (Eliminated:    0)
+Constraints : 16470  (Binary: 91.8% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 2279   (Binary: 18.0% Ternary: 13.5% Other: 68.5%)
+Conflicts : 2279   (Average Length: 7.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '29'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.640
+Prepare   : 3.470
+Prepro.   : 0.080
+Choices     : 7196
+Conflicts   : 2388
+Restarts    : 6
+Atoms       : 4918  
+Rules       : 93588  (1: 89520 2: 708 3: 3360)
+Bodies      : 54587 
+Equivalences: 5549   (Atom=Atom: 494 Body=Body: 0 Other: 5055)
+Tight       : Yes
+Variables   : 54447  (Eliminated:    0)
+Constraints : 17200  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 2388   (Binary: 17.7% Ternary: 12.6% Other: 69.6%)
+Conflicts : 2388   (Average Length: 7.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '30'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.050
+Prepare   : 3.860
+Prepro.   : 0.080
+Choices     : 8123
+Conflicts   : 2454
+Restarts    : 6
+Atoms       : 5070  
+Rules       : 96797  (1: 92591 2: 732 3: 3474)
+Bodies      : 56468 
+Equivalences: 5709   (Atom=Atom: 496 Body=Body: 0 Other: 5213)
+Tight       : Yes
+Variables   : 56322  (Eliminated:    0)
+Constraints : 17930  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 2454   (Binary: 17.8% Ternary: 14.5% Other: 67.8%)
+Conflicts : 2454   (Average Length: 7.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '31'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.680
+Prepare   : 4.460
+Prepro.   : 0.090
+Choices     : 8556
+Conflicts   : 2838
+Restarts    : 6
+Atoms       : 5222  
+Rules       : 100006 (1: 95662 2: 756 3: 3588)
+Bodies      : 58349 
+Equivalences: 5869   (Atom=Atom: 498 Body=Body: 0 Other: 5371)
+Tight       : Yes
+Variables   : 58197  (Eliminated:    0)
+Constraints : 18660  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 2838   (Binary: 16.8% Ternary: 14.0% Other: 69.2%)
+Conflicts : 2838   (Average Length: 7.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '32'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 4.800
+Prepare   : 4.600
+Prepro.   : 0.090
+Choices     : 8057
+Conflicts   : 2506
+Restarts    : 6
+Atoms       : 5374  
+Rules       : 103215 (1: 98733 2: 780 3: 3702)
+Bodies      : 60230 
+Equivalences: 6029   (Atom=Atom: 500 Body=Body: 0 Other: 5529)
+Tight       : Yes
+Variables   : 60072  (Eliminated:    0)
+Constraints : 19390  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 2506   (Binary: 20.7% Ternary: 14.8% Other: 64.5%)
+Conflicts : 2506   (Average Length: 6.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '33'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.320
+Prepare   : 5.010
+Prepro.   : 0.100
+Choices     : 12779
+Conflicts   : 5263
+Restarts    : 8
+Atoms       : 5526  
+Rules       : 106424 (1: 101804 2: 804 3: 3816)
+Bodies      : 62111 
+Equivalences: 6189   (Atom=Atom: 502 Body=Body: 0 Other: 5687)
+Tight       : Yes
+Variables   : 61947  (Eliminated:    0)
+Constraints : 20120  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 5263   (Binary: 13.6% Ternary: 13.5% Other: 72.9%)
+Conflicts : 5263   (Average Length: 9.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '34'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.940
+Prepare   : 5.450
+Prepro.   : 0.100
+Choices     : 23441
+Conflicts   : 8533
+Restarts    : 9
+Atoms       : 5678  
+Rules       : 109633 (1: 104875 2: 828 3: 3930)
+Bodies      : 63992 
+Equivalences: 6349   (Atom=Atom: 504 Body=Body: 0 Other: 5845)
+Tight       : Yes
+Variables   : 63822  (Eliminated:    0)
+Constraints : 20850  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 8533   (Binary: 12.4% Ternary: 13.1% Other: 74.5%)
+Conflicts : 8533   (Average Length: 10.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '35'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.320
+Prepare   : 5.960
+Prepro.   : 0.100
+Choices     : 16798
+Conflicts   : 6334
+Restarts    : 8
+Atoms       : 5830  
+Rules       : 112842 (1: 107946 2: 852 3: 4044)
+Bodies      : 65873 
+Equivalences: 6509   (Atom=Atom: 506 Body=Body: 0 Other: 6003)
+Tight       : Yes
+Variables   : 65697  (Eliminated:    0)
+Constraints : 21580  (Binary: 91.9% Ternary:  4.5% Other:  3.6%)
+Lemmas      : 6334   (Binary: 12.3% Ternary: 12.6% Other: 75.1%)
+Conflicts : 6334   (Average Length: 10.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '36'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.980
+Prepare   : 6.460
+Prepro.   : 0.100
+Choices     : 24883
+Conflicts   : 9094
+Restarts    : 9
+Atoms       : 5982  
+Rules       : 116051 (1: 111017 2: 876 3: 4158)
+Bodies      : 67754 
+Equivalences: 6669   (Atom=Atom: 508 Body=Body: 0 Other: 6161)
+Tight       : Yes
+Variables   : 67572  (Eliminated:    0)
+Constraints : 22310  (Binary: 91.9% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 9094   (Binary: 13.2% Ternary: 11.8% Other: 75.0%)
+Conflicts : 9094   (Average Length: 11.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '37'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.380
+Prepare   : 6.890
+Prepro.   : 0.110
+Choices     : 22577
+Conflicts   : 8664
+Restarts    : 9
+Atoms       : 6134  
+Rules       : 119260 (1: 114088 2: 900 3: 4272)
+Bodies      : 69635 
+Equivalences: 6829   (Atom=Atom: 510 Body=Body: 0 Other: 6319)
+Tight       : Yes
+Variables   : 69447  (Eliminated:    0)
+Constraints : 23040  (Binary: 91.9% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 8664   (Binary: 12.6% Ternary: 12.8% Other: 74.7%)
+Conflicts : 8664   (Average Length: 10.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '38'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 8.170
+Prepare   : 7.660
+Prepro.   : 0.110
+Choices     : 22308
+Conflicts   : 8888
+Restarts    : 9
+Atoms       : 6286  
+Rules       : 122469 (1: 117159 2: 924 3: 4386)
+Bodies      : 71516 
+Equivalences: 6989   (Atom=Atom: 512 Body=Body: 0 Other: 6477)
+Tight       : Yes
+Variables   : 71322  (Eliminated:    0)
+Constraints : 23770  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 8888   (Binary: 10.5% Ternary: 12.3% Other: 77.3%)
+Conflicts : 8888   (Average Length: 11.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '39'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 8.530
+Prepare   : 8.000
+Prepro.   : 0.120
+Choices     : 26061
+Conflicts   : 9284
+Restarts    : 9
+Atoms       : 6438  
+Rules       : 125678 (1: 120230 2: 948 3: 4500)
+Bodies      : 73397 
+Equivalences: 7149   (Atom=Atom: 514 Body=Body: 0 Other: 6635)
+Tight       : Yes
+Variables   : 73197  (Eliminated:    0)
+Constraints : 24500  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 9284   (Binary: 14.1% Ternary: 13.0% Other: 72.9%)
+Conflicts : 9284   (Average Length: 9.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '40'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 9.360
+Prepare   : 8.630
+Prepro.   : 0.130
+Choices     : 32004
+Conflicts   : 12033
+Restarts    : 10
+Atoms       : 6590  
+Rules       : 128887 (1: 123301 2: 972 3: 4614)
+Bodies      : 75278 
+Equivalences: 7309   (Atom=Atom: 516 Body=Body: 0 Other: 6793)
+Tight       : Yes
+Variables   : 75072  (Eliminated:    0)
+Constraints : 25230  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 12033  (Binary: 12.1% Ternary: 12.5% Other: 75.4%)
+Conflicts : 12033  (Average Length: 11.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '41'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 9.960
+Prepare   : 9.250
+Prepro.   : 0.120
+Choices     : 32424
+Conflicts   : 12031
+Restarts    : 10
+Atoms       : 6742  
+Rules       : 132096 (1: 126372 2: 996 3: 4728)
+Bodies      : 77159 
+Equivalences: 7469   (Atom=Atom: 518 Body=Body: 0 Other: 6951)
+Tight       : Yes
+Variables   : 76947  (Eliminated:    0)
+Constraints : 25960  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 12031  (Binary: 12.4% Ternary: 11.5% Other: 76.0%)
+Conflicts : 12031  (Average Length: 11.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '42'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 10.640
+Prepare   : 9.890
+Prepro.   : 0.130
+Choices     : 35355
+Conflicts   : 12663
+Restarts    : 10
+Atoms       : 6894  
+Rules       : 135305 (1: 129443 2: 1020 3: 4842)
+Bodies      : 79040 
+Equivalences: 7629   (Atom=Atom: 520 Body=Body: 0 Other: 7109)
+Tight       : Yes
+Variables   : 78822  (Eliminated:    0)
+Constraints : 26690  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 12663  (Binary: 12.3% Ternary: 13.2% Other: 74.5%)
+Conflicts : 12663  (Average Length: 10.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '43'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 11.880
+Prepare   : 11.160
+Prepro.   : 0.130
+Choices     : 33882
+Conflicts   : 10955
+Restarts    : 9
+Atoms       : 7046  
+Rules       : 138514 (1: 132514 2: 1044 3: 4956)
+Bodies      : 80921 
+Equivalences: 7789   (Atom=Atom: 522 Body=Body: 0 Other: 7267)
+Tight       : Yes
+Variables   : 80697  (Eliminated:    0)
+Constraints : 27420  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 10955  (Binary: 12.1% Ternary: 12.9% Other: 75.0%)
+Conflicts : 10955  (Average Length: 12.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '44'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 12.470
+Prepare   : 11.390
+Prepro.   : 0.140
+Choices     : 51939
+Conflicts   : 17560
+Restarts    : 11
+Atoms       : 7198  
+Rules       : 141723 (1: 135585 2: 1068 3: 5070)
+Bodies      : 82802 
+Equivalences: 7949   (Atom=Atom: 524 Body=Body: 0 Other: 7425)
+Tight       : Yes
+Variables   : 82572  (Eliminated:    0)
+Constraints : 28150  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 17560  (Binary: 11.4% Ternary: 12.8% Other: 75.7%)
+Conflicts : 17560  (Average Length: 12.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 7741  
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '45'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 13.810
+Prepare   : 12.480
+Prepro.   : 0.130
+Choices     : 53667
+Conflicts   : 21645
+Restarts    : 11
+Atoms       : 7350  
+Rules       : 144932 (1: 138656 2: 1092 3: 5184)
+Bodies      : 84683 
+Equivalences: 8109   (Atom=Atom: 526 Body=Body: 0 Other: 7583)
+Tight       : Yes
+Variables   : 84447  (Eliminated:    0)
+Constraints : 28880  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 21645  (Binary:  9.0% Ternary: 11.0% Other: 80.0%)
+Conflicts : 21645  (Average Length: 15.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 7941  
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '46'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 14.160
+Prepare   : 13.030
+Prepro.   : 0.140
+Choices     : 49694
+Conflicts   : 19433
+Restarts    : 11
+Atoms       : 7502  
+Rules       : 148141 (1: 141727 2: 1116 3: 5298)
+Bodies      : 86564 
+Equivalences: 8269   (Atom=Atom: 528 Body=Body: 0 Other: 7741)
+Tight       : Yes
+Variables   : 86322  (Eliminated:    0)
+Constraints : 29610  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 19433  (Binary: 10.4% Ternary: 12.0% Other: 77.6%)
+Conflicts : 19433  (Average Length: 13.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 8143  
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '47'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 15.210
+Prepare   : 13.750
+Prepro.   : 0.140
+Choices     : 57082
+Conflicts   : 21702
+Restarts    : 11
+Atoms       : 7654  
+Rules       : 151350 (1: 144798 2: 1140 3: 5412)
+Bodies      : 88445 
+Equivalences: 8429   (Atom=Atom: 530 Body=Body: 0 Other: 7899)
+Tight       : Yes
+Variables   : 88197  (Eliminated:    0)
+Constraints : 30340  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 21702  (Binary:  9.8% Ternary: 11.0% Other: 79.2%)
+Conflicts : 21702  (Average Length: 15.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 8343  
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '48'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 15.810
+Prepare   : 14.690
+Prepro.   : 0.140
+Choices     : 46878
+Conflicts   : 15391
+Restarts    : 10
+Atoms       : 7806  
+Rules       : 154559 (1: 147869 2: 1164 3: 5526)
+Bodies      : 90326 
+Equivalences: 8589   (Atom=Atom: 532 Body=Body: 0 Other: 8057)
+Tight       : Yes
+Variables   : 90072  (Eliminated:    0)
+Constraints : 31070  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 15391  (Binary: 11.6% Ternary: 12.7% Other: 75.7%)
+Conflicts : 15391  (Average Length: 11.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '49'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 16.540
+Prepare   : 15.530
+Prepro.   : 0.150
+Choices     : 50241
+Conflicts   : 17736
+Restarts    : 11
+Atoms       : 7958  
+Rules       : 157768 (1: 150940 2: 1188 3: 5640)
+Bodies      : 92207 
+Equivalences: 8749   (Atom=Atom: 534 Body=Body: 0 Other: 8215)
+Tight       : Yes
+Variables   : 91947  (Eliminated:    0)
+Constraints : 31800  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 17736  (Binary: 13.3% Ternary: 12.7% Other: 74.0%)
+Conflicts : 17736  (Average Length: 10.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '50'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 17.790
+Prepare   : 16.460
+Prepro.   : 0.150
+Choices     : 58466
+Conflicts   : 19574
+Restarts    : 11
+Atoms       : 8110  
+Rules       : 160977 (1: 154011 2: 1212 3: 5754)
+Bodies      : 94088 
+Equivalences: 8909   (Atom=Atom: 536 Body=Body: 0 Other: 8373)
+Tight       : Yes
+Variables   : 93822  (Eliminated:    0)
+Constraints : 32530  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 19574  (Binary: 10.0% Ternary: 10.9% Other: 79.1%)
+Conflicts : 19574  (Average Length: 14.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 8948  
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '51'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 18.990
+Prepare   : 17.840
+Prepro.   : 0.150
+Choices     : 54676
+Conflicts   : 17948
+Restarts    : 11
+Atoms       : 8262  
+Rules       : 164186 (1: 157082 2: 1236 3: 5868)
+Bodies      : 95969 
+Equivalences: 9069   (Atom=Atom: 538 Body=Body: 0 Other: 8531)
+Tight       : Yes
+Variables   : 95697  (Eliminated:    0)
+Constraints : 33260  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 17948  (Binary: 11.8% Ternary: 13.4% Other: 74.9%)
+Conflicts : 17948  (Average Length: 11.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '52'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 20.220
+Prepare   : 18.810
+Prepro.   : 0.160
+Choices     : 63758
+Conflicts   : 21456
+Restarts    : 11
+Atoms       : 8414  
+Rules       : 167395 (1: 160153 2: 1260 3: 5982)
+Bodies      : 97850 
+Equivalences: 9229   (Atom=Atom: 540 Body=Body: 0 Other: 8689)
+Tight       : Yes
+Variables   : 97572  (Eliminated:    0)
+Constraints : 33990  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 21456  (Binary: 12.0% Ternary: 12.3% Other: 75.8%)
+Conflicts : 21456  (Average Length: 11.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '53'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 20.980
+Prepare   : 19.570
+Prepro.   : 0.160
+Choices     : 61935
+Conflicts   : 20027
+Restarts    : 11
+Atoms       : 8566  
+Rules       : 170604 (1: 163224 2: 1284 3: 6096)
+Bodies      : 99731 
+Equivalences: 9389   (Atom=Atom: 542 Body=Body: 0 Other: 8847)
+Tight       : Yes
+Variables   : 99447  (Eliminated:    0)
+Constraints : 34720  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 20027  (Binary: 11.8% Ternary: 12.5% Other: 75.7%)
+Conflicts : 20027  (Average Length: 12.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '54'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 23.230
+Prepare   : 20.750
+Prepro.   : 0.160
+Choices     : 90310
+Conflicts   : 32278
+Restarts    : 12
+Atoms       : 8718  
+Rules       : 173813 (1: 166295 2: 1308 3: 6210)
+Bodies      : 101612
+Equivalences: 9549   (Atom=Atom: 544 Body=Body: 0 Other: 9005)
+Tight       : Yes
+Variables   : 101322 (Eliminated:    0)
+Constraints : 35450  (Binary: 92.0% Ternary:  4.5% Other:  3.5%)
+Lemmas      : 32278  (Binary:  7.8% Ternary: 10.0% Other: 82.2%)
+Conflicts : 32278  (Average Length: 15.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 10723 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '55'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 23.880
+Prepare   : 21.580
+Prepro.   : 0.170
+Choices     : 95620
+Conflicts   : 32106
+Restarts    : 12
+Atoms       : 8870  
+Rules       : 177022 (1: 169366 2: 1332 3: 6324)
+Bodies      : 103493
+Equivalences: 9709   (Atom=Atom: 546 Body=Body: 0 Other: 9163)
+Tight       : Yes
+Variables   : 103197 (Eliminated:    0)
+Constraints : 36180  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 32106  (Binary: 10.2% Ternary: 12.4% Other: 77.4%)
+Conflicts : 32106  (Average Length: 12.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 10944 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '56'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 25.240
+Prepare   : 23.230
+Prepro.   : 0.170
+Choices     : 88621
+Conflicts   : 28157
+Restarts    : 12
+Atoms       : 9022  
+Rules       : 180231 (1: 172437 2: 1356 3: 6438)
+Bodies      : 105374
+Equivalences: 9869   (Atom=Atom: 548 Body=Body: 0 Other: 9321)
+Tight       : Yes
+Variables   : 105072 (Eliminated:    0)
+Constraints : 36910  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 28157  (Binary: 11.0% Ternary: 11.6% Other: 77.4%)
+Conflicts : 28157  (Average Length: 13.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 10150 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '57'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 26.610
+Prepare   : 24.110
+Prepro.   : 0.170
+Choices     : 106059
+Conflicts   : 34883
+Restarts    : 12
+Atoms       : 9174  
+Rules       : 183440 (1: 175508 2: 1380 3: 6552)
+Bodies      : 107255
+Equivalences: 10029  (Atom=Atom: 550 Body=Body: 0 Other: 9479)
+Tight       : Yes
+Variables   : 106947 (Eliminated:    0)
+Constraints : 37640  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 34883  (Binary: 10.6% Ternary: 12.1% Other: 77.4%)
+Conflicts : 34883  (Average Length: 12.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 11386 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '58'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 27.950
+Prepare   : 25.540
+Prepro.   : 0.180
+Choices     : 100483
+Conflicts   : 32436
+Restarts    : 12
+Atoms       : 9326  
+Rules       : 186649 (1: 178579 2: 1404 3: 6666)
+Bodies      : 109136
+Equivalences: 10189  (Atom=Atom: 552 Body=Body: 0 Other: 9637)
+Tight       : Yes
+Variables   : 108822 (Eliminated:    0)
+Constraints : 38370  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 32436  (Binary: 10.3% Ternary: 11.4% Other: 78.3%)
+Conflicts : 32436  (Average Length: 12.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 10552 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '59'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 31.190
+Prepare   : 27.220
+Prepro.   : 0.180
+Choices     : 128935
+Conflicts   : 48200
+Restarts    : 13
+Atoms       : 9478  
+Rules       : 189858 (1: 181650 2: 1428 3: 6780)
+Bodies      : 111017
+Equivalences: 10349  (Atom=Atom: 554 Body=Body: 0 Other: 9795)
+Tight       : Yes
+Variables   : 110697 (Eliminated:    0)
+Constraints : 39100  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 48200  (Binary:  7.1% Ternary: 10.4% Other: 82.5%)
+Conflicts : 48200  (Average Length: 16.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 24837 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '60'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 31.880
+Prepare   : 28.480
+Prepro.   : 0.190
+Choices     : 130735
+Conflicts   : 40954
+Restarts    : 13
+Atoms       : 9630  
+Rules       : 193067 (1: 184721 2: 1452 3: 6894)
+Bodies      : 112898
+Equivalences: 10509  (Atom=Atom: 556 Body=Body: 0 Other: 9953)
+Tight       : Yes
+Variables   : 112572 (Eliminated:    0)
+Constraints : 39830  (Binary: 92.0% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 40954  (Binary:  9.1% Ternary: 10.8% Other: 80.1%)
+Conflicts : 40954  (Average Length: 14.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 10954 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '61'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 34.180
+Prepare   : 29.440
+Prepro.   : 0.190
+Choices     : 151706
+Conflicts   : 54151
+Restarts    : 13
+Atoms       : 9782  
+Rules       : 196276 (1: 187792 2: 1476 3: 7008)
+Bodies      : 114779
+Equivalences: 10669  (Atom=Atom: 558 Body=Body: 0 Other: 10111)
+Tight       : Yes
+Variables   : 114447 (Eliminated:    0)
+Constraints : 40560  (Binary: 92.1% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 54151  (Binary:  7.9% Ternary: 10.4% Other: 81.6%)
+Conflicts : 54151  (Average Length: 16.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 27116 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '62'.
+% Pragma: Searching for 1 solutions.
+% Pragma: No solutions found.
+UNSATISFIABLE
+Models      : 0     
+Time        : 36.640
+Prepare   : 30.970
+Prepro.   : 0.180
+Choices     : 163025
+Conflicts   : 57262
+Restarts    : 13
+Atoms       : 9934  
+Rules       : 199485 (1: 190863 2: 1500 3: 7122)
+Bodies      : 116660
+Equivalences: 10829  (Atom=Atom: 560 Body=Body: 0 Other: 10269)
+Tight       : Yes
+Variables   : 116322 (Eliminated:    0)
+Constraints : 41290  (Binary: 92.1% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 57262  (Binary:  6.6% Ternary:  9.9% Other: 83.5%)
+Conflicts : 57262  (Average Length: 19.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 23846 
+No solution.
+
+% Pragma: Running Query 'Query 0'.
+% Pragma: Maximum Step = '63'.
+% Pragma: Searching for 1 solutions.
+Solution: 1
+	0:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=p2
+
+	1:  on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(2)=p3
+
+	2:  on(1)=p2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	3:  on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(3)=p2
+
+	4:  on(1)=2 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=4
+
+	5:  on(1)=4 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(2)=3
+
+	6:  on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	7:  on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(4)=p3
+
+	8:  on(1)=2 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=4
+
+	9:  on(1)=4 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(2)=5
+
+	10:  on(1)=4 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	11:  on(1)=2 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(3)=4
+
+	12:  on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=p2
+
+	13:  on(1)=p2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(2)=3
+
+	14:  on(1)=p2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	15:  on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	ACTIONS:  move(5)=p2
+
+	16:  on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=6
+
+	17:  on(1)=6 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(2)=5
+
+	18:  on(1)=6 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	19:  on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(3)=6
+
+	20:  on(1)=2 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=4
+
+	21:  on(1)=4 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(2)=3
+
+	22:  on(1)=4 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	23:  on(1)=2 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(4)=5
+
+	24:  on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=4
+
+	25:  on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(2)=p3
+
+	26:  on(1)=4 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	27:  on(1)=2 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(3)=4
+
+	28:  on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=6
+
+	29:  on(1)=6 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(2)=3
+
+	30:  on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(1)=2
+
+	31:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	ACTIONS:  move(6)=p3
+
+	32:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=6
+
+	33:  on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(2)=p1
+
+	34:  on(1)=6 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	35:  on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(3)=6
+
+	36:  on(1)=2 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=4
+
+	37:  on(1)=4 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(2)=3
+
+	38:  on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	39:  on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(4)=p1
+
+	40:  on(1)=2 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=4
+
+	41:  on(1)=4 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(2)=5
+
+	42:  on(1)=4 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	43:  on(1)=2 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(3)=4
+
+	44:  on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=6
+
+	45:  on(1)=6 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(2)=3
+
+	46:  on(1)=6 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	47:  on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	ACTIONS:  move(5)=6
+
+	48:  on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=p2
+
+	49:  on(1)=p2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(2)=5
+
+	50:  on(1)=p2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	51:  on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(3)=p2
+
+	52:  on(1)=2 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=4
+
+	53:  on(1)=4 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(2)=3
+
+	54:  on(1)=4 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	55:  on(1)=2 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(4)=5
+
+	56:  on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=4
+
+	57:  on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(2)=p1
+
+	58:  on(1)=4 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	59:  on(1)=2 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(3)=4
+
+	60:  on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=p2
+
+	61:  on(1)=p2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(2)=3
+
+	62:  on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	ACTIONS:  move(1)=2
+
+	63:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+SATISFIABLE
+Models      : 1+    
+Time        : 35.680
+Prepare   : 32.650
+Prepro.   : 0.200
+Choices     : 128174
+Conflicts   : 37323
+Restarts    : 12
+Atoms       : 10086 
+Rules       : 202694 (1: 193934 2: 1524 3: 7236)
+Bodies      : 118541
+Equivalences: 10989  (Atom=Atom: 562 Body=Body: 0 Other: 10427)
+Tight       : Yes
+Variables   : 118197 (Eliminated:    0)
+Constraints : 42020  (Binary: 92.1% Ternary:  4.5% Other:  3.4%)
+Lemmas      : 37323  (Binary: 11.6% Ternary: 12.2% Other: 76.2%)
+Conflicts : 37323  (Average Length: 12.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 11555 
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cplus2ASP v1 
+# ----------------------------------------------------------------------------------------------------------------------
+
+$ time cplus2asp.old --translator "cplus2asp.bin.old" --grounder-solver clingo -grsoopt "--stats" hanoi-6-3-benchmark.cp query=0 > hanoi.tmp
+
+
+% Running Query 0 with maxstep=0.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.000
+Prepare   : 0.000
+Prepro.   : 0.000
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 1135  
+Rules       : 1632   (1: 1524 2: 54 3: 54)
+Bodies      : 226   
+Equivalences: 2111   (Atom=Atom: 970 Body=Body: 0 Other: 1141)
+Tight       : Yes
+Variables   : 217    (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=1.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.020
+Prepare   : 0.010
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 1709  
+Rules       : 6337   (1: 6001 2: 168 3: 168)
+Bodies      : 2466  
+Equivalences: 2976   (Atom=Atom: 1202 Body=Body: 0 Other: 1774)
+Tight       : Yes
+Variables   : 2398   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=2.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.030
+Prepare   : 0.020
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 2283  
+Rules       : 11042  (1: 10478 2: 282 3: 282)
+Bodies      : 4701  
+Equivalences: 3836   (Atom=Atom: 1434 Body=Body: 0 Other: 2402)
+Tight       : Yes
+Variables   : 4579   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=3.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.040
+Prepare   : 0.030
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 2857  
+Rules       : 15747  (1: 14955 2: 396 3: 396)
+Bodies      : 6936  
+Equivalences: 4696   (Atom=Atom: 1666 Body=Body: 0 Other: 3030)
+Tight       : Yes
+Variables   : 6760   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=4.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.050
+Prepare   : 0.040
+Prepro.   : 0.010
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 3431  
+Rules       : 20452  (1: 19432 2: 510 3: 510)
+Bodies      : 9171  
+Equivalences: 5556   (Atom=Atom: 1898 Body=Body: 0 Other: 3658)
+Tight       : Yes
+Variables   : 8941   (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=5.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.070
+Prepare   : 0.050
+Prepro.   : 0.020
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 4005  
+Rules       : 25157  (1: 23909 2: 624 3: 624)
+Bodies      : 11406 
+Equivalences: 6416   (Atom=Atom: 2130 Body=Body: 0 Other: 4286)
+Tight       : Yes
+Variables   : 11122  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=6.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.080
+Prepare   : 0.060
+Prepro.   : 0.020
+Choices     : 0
+Conflicts   : 0
+Restarts    : 0
+Atoms       : 4579  
+Rules       : 29862  (1: 28386 2: 738 3: 738)
+Bodies      : 13641 
+Equivalences: 7276   (Atom=Atom: 2362 Body=Body: 0 Other: 4914)
+Tight       : Yes
+Variables   : 13303  (Eliminated:    0)
+Constraints : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Lemmas      : 0      (Binary:  0.0% Ternary:  0.0% Other:  0.0%)
+Conflicts : 0      (Average Length: 0.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=7.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.110
+Prepare   : 0.080
+Prepro.   : 0.030
+Choices     : 1
+Conflicts   : 1
+Restarts    : 0
+Atoms       : 5153  
+Rules       : 34567  (1: 32863 2: 852 3: 852)
+Bodies      : 15876 
+Equivalences: 8136   (Atom=Atom: 2594 Body=Body: 0 Other: 5542)
+Tight       : Yes
+Variables   : 15484  (Eliminated:    0)
+Constraints : 2656   (Binary: 75.4% Ternary:  5.8% Other: 18.8%)
+Lemmas      : 1      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 1      (Average Length: 1.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=8.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.130
+Prepare   : 0.090
+Prepro.   : 0.040
+Choices     : 7
+Conflicts   : 4
+Restarts    : 0
+Atoms       : 5727  
+Rules       : 39272  (1: 37340 2: 966 3: 966)
+Bodies      : 18111 
+Equivalences: 8996   (Atom=Atom: 2826 Body=Body: 0 Other: 6170)
+Tight       : Yes
+Variables   : 17665  (Eliminated:    0)
+Constraints : 3993   (Binary: 78.3% Ternary:  4.8% Other: 16.9%)
+Lemmas      : 4      (Binary:  0.0% Ternary:  0.0% Other:100.0%)
+Conflicts : 4      (Average Length: 1.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=9.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.150
+Prepare   : 0.100
+Prepro.   : 0.050
+Choices     : 17
+Conflicts   : 8
+Restarts    : 0
+Atoms       : 6301  
+Rules       : 43977  (1: 41817 2: 1080 3: 1080)
+Bodies      : 20346 
+Equivalences: 9856   (Atom=Atom: 3058 Body=Body: 0 Other: 6798)
+Tight       : Yes
+Variables   : 19846  (Eliminated:    0)
+Constraints : 5355   (Binary: 79.7% Ternary:  4.4% Other: 15.9%)
+Lemmas      : 8      (Binary: 12.5% Ternary:  0.0% Other: 87.5%)
+Conflicts : 8      (Average Length: 1.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=10.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.170
+Prepare   : 0.120
+Prepro.   : 0.050
+Choices     : 30
+Conflicts   : 13
+Restarts    : 0
+Atoms       : 6875  
+Rules       : 48682  (1: 46294 2: 1194 3: 1194)
+Bodies      : 22581 
+Equivalences: 10716  (Atom=Atom: 3290 Body=Body: 0 Other: 7426)
+Tight       : Yes
+Variables   : 22027  (Eliminated:    0)
+Constraints : 6717   (Binary: 80.6% Ternary:  4.1% Other: 15.3%)
+Lemmas      : 13     (Binary: 30.8% Ternary:  0.0% Other: 69.2%)
+Conflicts : 13     (Average Length: 1.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=11.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.180
+Prepare   : 0.120
+Prepro.   : 0.060
+Choices     : 50
+Conflicts   : 17
+Restarts    : 0
+Atoms       : 7449  
+Rules       : 53387  (1: 50771 2: 1308 3: 1308)
+Bodies      : 24816 
+Equivalences: 11576  (Atom=Atom: 3522 Body=Body: 0 Other: 8054)
+Tight       : Yes
+Variables   : 24208  (Eliminated:    0)
+Constraints : 8079   (Binary: 81.1% Ternary:  3.9% Other: 14.9%)
+Lemmas      : 17     (Binary: 29.4% Ternary:  0.0% Other: 70.6%)
+Conflicts : 17     (Average Length: 1.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=12.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.210
+Prepare   : 0.140
+Prepro.   : 0.060
+Choices     : 67
+Conflicts   : 22
+Restarts    : 0
+Atoms       : 8023  
+Rules       : 58092  (1: 55248 2: 1422 3: 1422)
+Bodies      : 27051 
+Equivalences: 12436  (Atom=Atom: 3754 Body=Body: 0 Other: 8682)
+Tight       : Yes
+Variables   : 26389  (Eliminated:    0)
+Constraints : 9441   (Binary: 81.5% Ternary:  3.8% Other: 14.7%)
+Lemmas      : 22     (Binary: 31.8% Ternary:  0.0% Other: 68.2%)
+Conflicts : 22     (Average Length: 1.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=13.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.230
+Prepare   : 0.160
+Prepro.   : 0.060
+Choices     : 84
+Conflicts   : 29
+Restarts    : 0
+Atoms       : 8597  
+Rules       : 62797  (1: 59725 2: 1536 3: 1536)
+Bodies      : 29286 
+Equivalences: 13296  (Atom=Atom: 3986 Body=Body: 0 Other: 9310)
+Tight       : Yes
+Variables   : 28570  (Eliminated:    0)
+Constraints : 10803  (Binary: 81.8% Ternary:  3.7% Other: 14.4%)
+Lemmas      : 29     (Binary: 31.0% Ternary:  0.0% Other: 69.0%)
+Conflicts : 29     (Average Length: 1.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=14.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.260
+Prepare   : 0.160
+Prepro.   : 0.080
+Choices     : 113
+Conflicts   : 45
+Restarts    : 0
+Atoms       : 9171  
+Rules       : 67502  (1: 64202 2: 1650 3: 1650)
+Bodies      : 31521 
+Equivalences: 14156  (Atom=Atom: 4218 Body=Body: 0 Other: 9938)
+Tight       : Yes
+Variables   : 30751  (Eliminated:    0)
+Constraints : 12165  (Binary: 82.1% Ternary:  3.6% Other: 14.3%)
+Lemmas      : 45     (Binary: 33.3% Ternary:  4.4% Other: 62.2%)
+Conflicts : 45     (Average Length: 1.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=15.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.280
+Prepare   : 0.180
+Prepro.   : 0.080
+Choices     : 139
+Conflicts   : 60
+Restarts    : 0
+Atoms       : 9745  
+Rules       : 72207  (1: 68679 2: 1764 3: 1764)
+Bodies      : 33756 
+Equivalences: 15016  (Atom=Atom: 4450 Body=Body: 0 Other: 10566)
+Tight       : Yes
+Variables   : 32932  (Eliminated:    0)
+Constraints : 13527  (Binary: 82.3% Ternary:  3.6% Other: 14.2%)
+Lemmas      : 60     (Binary: 26.7% Ternary: 15.0% Other: 58.3%)
+Conflicts : 60     (Average Length: 3.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=16.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.300
+Prepare   : 0.190
+Prepro.   : 0.090
+Choices     : 266
+Conflicts   : 118
+Restarts    : 1
+Atoms       : 10319 
+Rules       : 76912  (1: 73156 2: 1878 3: 1878)
+Bodies      : 35991 
+Equivalences: 15876  (Atom=Atom: 4682 Body=Body: 0 Other: 11194)
+Tight       : Yes
+Variables   : 35113  (Eliminated:    0)
+Constraints : 14889  (Binary: 82.4% Ternary:  3.5% Other: 14.1%)
+Lemmas      : 118    (Binary: 27.1% Ternary: 14.4% Other: 58.5%)
+Conflicts : 118    (Average Length: 5.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=17.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.330
+Prepare   : 0.200
+Prepro.   : 0.100
+Choices     : 574
+Conflicts   : 252
+Restarts    : 2
+Atoms       : 10893 
+Rules       : 81617  (1: 77633 2: 1992 3: 1992)
+Bodies      : 38226 
+Equivalences: 16736  (Atom=Atom: 4914 Body=Body: 0 Other: 11822)
+Tight       : Yes
+Variables   : 37294  (Eliminated:    0)
+Constraints : 16251  (Binary: 82.5% Ternary:  3.5% Other: 14.0%)
+Lemmas      : 252    (Binary: 30.2% Ternary: 13.9% Other: 56.0%)
+Conflicts : 252    (Average Length: 5.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=18.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.370
+Prepare   : 0.220
+Prepro.   : 0.110
+Choices     : 1112
+Conflicts   : 500
+Restarts    : 3
+Atoms       : 11467 
+Rules       : 86322  (1: 82110 2: 2106 3: 2106)
+Bodies      : 40461 
+Equivalences: 17596  (Atom=Atom: 5146 Body=Body: 0 Other: 12450)
+Tight       : Yes
+Variables   : 39475  (Eliminated:    0)
+Constraints : 17613  (Binary: 82.6% Ternary:  3.5% Other: 13.9%)
+Lemmas      : 500    (Binary: 24.2% Ternary: 16.2% Other: 59.6%)
+Conflicts : 500    (Average Length: 5.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=19.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.390
+Prepare   : 0.230
+Prepro.   : 0.120
+Choices     : 1067
+Conflicts   : 495
+Restarts    : 3
+Atoms       : 12041 
+Rules       : 91027  (1: 86587 2: 2220 3: 2220)
+Bodies      : 42696 
+Equivalences: 18456  (Atom=Atom: 5378 Body=Body: 0 Other: 13078)
+Tight       : Yes
+Variables   : 41656  (Eliminated:    0)
+Constraints : 18975  (Binary: 82.7% Ternary:  3.4% Other: 13.8%)
+Lemmas      : 495    (Binary: 26.1% Ternary: 14.5% Other: 59.4%)
+Conflicts : 495    (Average Length: 6.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=20.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.410
+Prepare   : 0.250
+Prepro.   : 0.110
+Choices     : 1177
+Conflicts   : 337
+Restarts    : 2
+Atoms       : 12615 
+Rules       : 95732  (1: 91064 2: 2334 3: 2334)
+Bodies      : 44931 
+Equivalences: 19316  (Atom=Atom: 5610 Body=Body: 0 Other: 13706)
+Tight       : Yes
+Variables   : 43837  (Eliminated:    0)
+Constraints : 20337  (Binary: 82.8% Ternary:  3.4% Other: 13.8%)
+Lemmas      : 337    (Binary: 25.5% Ternary: 16.0% Other: 58.5%)
+Conflicts : 337    (Average Length: 5.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=21.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.430
+Prepare   : 0.260
+Prepro.   : 0.110
+Choices     : 1659
+Conflicts   : 595
+Restarts    : 3
+Atoms       : 13189 
+Rules       : 100437 (1: 95541 2: 2448 3: 2448)
+Bodies      : 47166 
+Equivalences: 20176  (Atom=Atom: 5842 Body=Body: 0 Other: 14334)
+Tight       : Yes
+Variables   : 46018  (Eliminated:    0)
+Constraints : 21699  (Binary: 82.9% Ternary:  3.4% Other: 13.7%)
+Lemmas      : 595    (Binary: 25.5% Ternary: 11.6% Other: 62.9%)
+Conflicts : 595    (Average Length: 6.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=22.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.490
+Prepare   : 0.270
+Prepro.   : 0.120
+Choices     : 2827
+Conflicts   : 1240
+Restarts    : 4
+Atoms       : 13763 
+Rules       : 105142 (1: 100018 2: 2562 3: 2562)
+Bodies      : 49401 
+Equivalences: 21036  (Atom=Atom: 6074 Body=Body: 0 Other: 14962)
+Tight       : Yes
+Variables   : 48199  (Eliminated:    0)
+Constraints : 23061  (Binary: 82.9% Ternary:  3.4% Other: 13.7%)
+Lemmas      : 1240   (Binary: 20.1% Ternary: 14.7% Other: 65.2%)
+Conflicts : 1240   (Average Length: 7.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=23.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.510
+Prepare   : 0.290
+Prepro.   : 0.120
+Choices     : 3637
+Conflicts   : 1145
+Restarts    : 4
+Atoms       : 14337 
+Rules       : 109847 (1: 104495 2: 2676 3: 2676)
+Bodies      : 51636 
+Equivalences: 21896  (Atom=Atom: 6306 Body=Body: 0 Other: 15590)
+Tight       : Yes
+Variables   : 50380  (Eliminated:    0)
+Constraints : 24423  (Binary: 83.0% Ternary:  3.4% Other: 13.6%)
+Lemmas      : 1145   (Binary: 23.2% Ternary: 16.9% Other: 59.9%)
+Conflicts : 1145   (Average Length: 6.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=24.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.580
+Prepare   : 0.290
+Prepro.   : 0.140
+Choices     : 4553
+Conflicts   : 1706
+Restarts    : 5
+Atoms       : 14911 
+Rules       : 114552 (1: 108972 2: 2790 3: 2790)
+Bodies      : 53871 
+Equivalences: 22756  (Atom=Atom: 6538 Body=Body: 0 Other: 16218)
+Tight       : Yes
+Variables   : 52561  (Eliminated:    0)
+Constraints : 25785  (Binary: 83.0% Ternary:  3.3% Other: 13.6%)
+Lemmas      : 1706   (Binary: 17.8% Ternary: 14.6% Other: 67.6%)
+Conflicts : 1706   (Average Length: 7.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=25.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.620
+Prepare   : 0.320
+Prepro.   : 0.150
+Choices     : 5728
+Conflicts   : 2324
+Restarts    : 6
+Atoms       : 15485 
+Rules       : 119257 (1: 113449 2: 2904 3: 2904)
+Bodies      : 56106 
+Equivalences: 23616  (Atom=Atom: 6770 Body=Body: 0 Other: 16846)
+Tight       : Yes
+Variables   : 54742  (Eliminated:    0)
+Constraints : 27147  (Binary: 83.1% Ternary:  3.3% Other: 13.6%)
+Lemmas      : 2324   (Binary: 18.2% Ternary: 13.0% Other: 68.8%)
+Conflicts : 2324   (Average Length: 7.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=26.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.610
+Prepare   : 0.330
+Prepro.   : 0.150
+Choices     : 5239
+Conflicts   : 1757
+Restarts    : 5
+Atoms       : 16059 
+Rules       : 123962 (1: 117926 2: 3018 3: 3018)
+Bodies      : 58341 
+Equivalences: 24476  (Atom=Atom: 7002 Body=Body: 0 Other: 17474)
+Tight       : Yes
+Variables   : 56923  (Eliminated:    0)
+Constraints : 28509  (Binary: 83.1% Ternary:  3.3% Other: 13.5%)
+Lemmas      : 1757   (Binary: 19.9% Ternary: 15.5% Other: 64.6%)
+Conflicts : 1757   (Average Length: 7.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=27.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.700
+Prepare   : 0.340
+Prepro.   : 0.170
+Choices     : 7322
+Conflicts   : 2728
+Restarts    : 6
+Atoms       : 16633 
+Rules       : 128667 (1: 122403 2: 3132 3: 3132)
+Bodies      : 60576 
+Equivalences: 25336  (Atom=Atom: 7234 Body=Body: 0 Other: 18102)
+Tight       : Yes
+Variables   : 59104  (Eliminated:    0)
+Constraints : 29871  (Binary: 83.2% Ternary:  3.3% Other: 13.5%)
+Lemmas      : 2728   (Binary: 17.9% Ternary: 12.6% Other: 69.5%)
+Conflicts : 2728   (Average Length: 9.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=28.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.760
+Prepare   : 0.340
+Prepro.   : 0.180
+Choices     : 10054
+Conflicts   : 3759
+Restarts    : 7
+Atoms       : 17207 
+Rules       : 133372 (1: 126880 2: 3246 3: 3246)
+Bodies      : 62811 
+Equivalences: 26196  (Atom=Atom: 7466 Body=Body: 0 Other: 18730)
+Tight       : Yes
+Variables   : 61285  (Eliminated:    0)
+Constraints : 31233  (Binary: 83.2% Ternary:  3.3% Other: 13.5%)
+Lemmas      : 3759   (Binary: 15.2% Ternary: 13.4% Other: 71.3%)
+Conflicts : 3759   (Average Length: 8.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=29.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.750
+Prepare   : 0.370
+Prepro.   : 0.180
+Choices     : 8210
+Conflicts   : 3019
+Restarts    : 6
+Atoms       : 17781 
+Rules       : 138077 (1: 131357 2: 3360 3: 3360)
+Bodies      : 65046 
+Equivalences: 27056  (Atom=Atom: 7698 Body=Body: 0 Other: 19358)
+Tight       : Yes
+Variables   : 63466  (Eliminated:    0)
+Constraints : 32595  (Binary: 83.2% Ternary:  3.3% Other: 13.5%)
+Lemmas      : 3019   (Binary: 17.4% Ternary: 12.6% Other: 70.1%)
+Conflicts : 3019   (Average Length: 8.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=30.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.820
+Prepare   : 0.360
+Prepro.   : 0.200
+Choices     : 10923
+Conflicts   : 3739
+Restarts    : 7
+Atoms       : 18355 
+Rules       : 142782 (1: 135834 2: 3474 3: 3474)
+Bodies      : 67281 
+Equivalences: 27916  (Atom=Atom: 7930 Body=Body: 0 Other: 19986)
+Tight       : Yes
+Variables   : 65647  (Eliminated:    0)
+Constraints : 33957  (Binary: 83.3% Ternary:  3.3% Other: 13.5%)
+Lemmas      : 3739   (Binary: 15.2% Ternary: 12.7% Other: 72.0%)
+Conflicts : 3739   (Average Length: 9.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=31.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 0.930
+Prepare   : 0.380
+Prepro.   : 0.210
+Choices     : 12665
+Conflicts   : 4701
+Restarts    : 7
+Atoms       : 18929 
+Rules       : 147487 (1: 140311 2: 3588 3: 3588)
+Bodies      : 69516 
+Equivalences: 28776  (Atom=Atom: 8162 Body=Body: 0 Other: 20614)
+Tight       : Yes
+Variables   : 67828  (Eliminated:    0)
+Constraints : 35319  (Binary: 83.3% Ternary:  3.3% Other: 13.4%)
+Lemmas      : 4701   (Binary: 16.0% Ternary: 14.6% Other: 69.4%)
+Conflicts : 4701   (Average Length: 9.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=32.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.140
+Prepare   : 0.400
+Prepro.   : 0.220
+Choices     : 19036
+Conflicts   : 6991
+Restarts    : 8
+Atoms       : 19503 
+Rules       : 152192 (1: 144788 2: 3702 3: 3702)
+Bodies      : 71751 
+Equivalences: 29636  (Atom=Atom: 8394 Body=Body: 0 Other: 21242)
+Tight       : Yes
+Variables   : 70009  (Eliminated:    0)
+Constraints : 36681  (Binary: 83.3% Ternary:  3.3% Other: 13.4%)
+Lemmas      : 6991   (Binary: 14.8% Ternary: 13.2% Other: 71.9%)
+Conflicts : 6991   (Average Length: 9.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=33.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.010
+Prepare   : 0.410
+Prepro.   : 0.210
+Choices     : 14350
+Conflicts   : 5488
+Restarts    : 8
+Atoms       : 20077 
+Rules       : 156897 (1: 149265 2: 3816 3: 3816)
+Bodies      : 73986 
+Equivalences: 30496  (Atom=Atom: 8626 Body=Body: 0 Other: 21870)
+Tight       : Yes
+Variables   : 72190  (Eliminated:    0)
+Constraints : 38043  (Binary: 83.3% Ternary:  3.3% Other: 13.4%)
+Lemmas      : 5488   (Binary: 17.1% Ternary: 12.8% Other: 70.1%)
+Conflicts : 5488   (Average Length: 9.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=34.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.260
+Prepare   : 0.400
+Prepro.   : 0.230
+Choices     : 20813
+Conflicts   : 8411
+Restarts    : 9
+Atoms       : 20651 
+Rules       : 161602 (1: 153742 2: 3930 3: 3930)
+Bodies      : 76221 
+Equivalences: 31356  (Atom=Atom: 8858 Body=Body: 0 Other: 22498)
+Tight       : Yes
+Variables   : 74371  (Eliminated:    0)
+Constraints : 39405  (Binary: 83.3% Ternary:  3.3% Other: 13.4%)
+Lemmas      : 8411   (Binary: 12.0% Ternary: 11.7% Other: 76.2%)
+Conflicts : 8411   (Average Length: 12.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=35.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.130
+Prepare   : 0.430
+Prepro.   : 0.230
+Choices     : 16959
+Conflicts   : 6030
+Restarts    : 8
+Atoms       : 21225 
+Rules       : 166307 (1: 158219 2: 4044 3: 4044)
+Bodies      : 78456 
+Equivalences: 32216  (Atom=Atom: 9090 Body=Body: 0 Other: 23126)
+Tight       : Yes
+Variables   : 76552  (Eliminated:    0)
+Constraints : 40767  (Binary: 83.4% Ternary:  3.3% Other: 13.4%)
+Lemmas      : 6030   (Binary: 16.8% Ternary: 13.5% Other: 69.7%)
+Conflicts : 6030   (Average Length: 10.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=36.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.350
+Prepare   : 0.440
+Prepro.   : 0.240
+Choices     : 24151
+Conflicts   : 8417
+Restarts    : 9
+Atoms       : 21799 
+Rules       : 171012 (1: 162696 2: 4158 3: 4158)
+Bodies      : 80691 
+Equivalences: 33076  (Atom=Atom: 9322 Body=Body: 0 Other: 23754)
+Tight       : Yes
+Variables   : 78733  (Eliminated:    0)
+Constraints : 42129  (Binary: 83.4% Ternary:  3.2% Other: 13.4%)
+Lemmas      : 8417   (Binary: 12.7% Ternary: 13.4% Other: 73.9%)
+Conflicts : 8417   (Average Length: 11.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=37.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.370
+Prepare   : 0.450
+Prepro.   : 0.240
+Choices     : 24167
+Conflicts   : 9333
+Restarts    : 9
+Atoms       : 22373 
+Rules       : 175717 (1: 167173 2: 4272 3: 4272)
+Bodies      : 82926 
+Equivalences: 33936  (Atom=Atom: 9554 Body=Body: 0 Other: 24382)
+Tight       : Yes
+Variables   : 80914  (Eliminated:    0)
+Constraints : 43491  (Binary: 83.4% Ternary:  3.2% Other: 13.4%)
+Lemmas      : 9333   (Binary: 13.2% Ternary: 12.5% Other: 74.3%)
+Conflicts : 9333   (Average Length: 11.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=38.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.660
+Prepare   : 0.460
+Prepro.   : 0.250
+Choices     : 31965
+Conflicts   : 11242
+Restarts    : 9
+Atoms       : 22947 
+Rules       : 180422 (1: 171650 2: 4386 3: 4386)
+Bodies      : 85161 
+Equivalences: 34796  (Atom=Atom: 9786 Body=Body: 0 Other: 25010)
+Tight       : Yes
+Variables   : 83095  (Eliminated:    0)
+Constraints : 44853  (Binary: 83.4% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 11242  (Binary: 13.7% Ternary: 12.5% Other: 73.9%)
+Conflicts : 11242  (Average Length: 12.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=39.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.560
+Prepare   : 0.490
+Prepro.   : 0.250
+Choices     : 28409
+Conflicts   : 9832
+Restarts    : 9
+Atoms       : 23521 
+Rules       : 185127 (1: 176127 2: 4500 3: 4500)
+Bodies      : 87396 
+Equivalences: 35656  (Atom=Atom: 10018 Body=Body: 0 Other: 25638)
+Tight       : Yes
+Variables   : 85276  (Eliminated:    0)
+Constraints : 46215  (Binary: 83.4% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 9832   (Binary: 14.5% Ternary: 11.8% Other: 73.7%)
+Conflicts : 9832   (Average Length: 11.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=40.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.610
+Prepare   : 0.490
+Prepro.   : 0.270
+Choices     : 29555
+Conflicts   : 8960
+Restarts    : 9
+Atoms       : 24095 
+Rules       : 189832 (1: 180604 2: 4614 3: 4614)
+Bodies      : 89631 
+Equivalences: 36516  (Atom=Atom: 10250 Body=Body: 0 Other: 26266)
+Tight       : Yes
+Variables   : 87457  (Eliminated:    0)
+Constraints : 47577  (Binary: 83.4% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 8960   (Binary: 14.6% Ternary: 12.4% Other: 73.0%)
+Conflicts : 8960   (Average Length: 10.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=41.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.300
+Prepare   : 0.530
+Prepro.   : 0.270
+Choices     : 42467
+Conflicts   : 15460
+Restarts    : 10
+Atoms       : 24669 
+Rules       : 194537 (1: 185081 2: 4728 3: 4728)
+Bodies      : 91866 
+Equivalences: 37376  (Atom=Atom: 10482 Body=Body: 0 Other: 26894)
+Tight       : Yes
+Variables   : 89638  (Eliminated:    0)
+Constraints : 48939  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 15460  (Binary: 12.0% Ternary: 11.6% Other: 76.3%)
+Conflicts : 15460  (Average Length: 12.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=42.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.240
+Prepare   : 0.530
+Prepro.   : 0.300
+Choices     : 45279
+Conflicts   : 16024
+Restarts    : 10
+Atoms       : 25243 
+Rules       : 199242 (1: 189558 2: 4842 3: 4842)
+Bodies      : 94101 
+Equivalences: 38236  (Atom=Atom: 10714 Body=Body: 0 Other: 27522)
+Tight       : Yes
+Variables   : 91819  (Eliminated:    0)
+Constraints : 50301  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 16024  (Binary: 12.1% Ternary: 11.7% Other: 76.1%)
+Conflicts : 16024  (Average Length: 12.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=43.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.650
+Prepare   : 0.550
+Prepro.   : 0.300
+Choices     : 46943
+Conflicts   : 17358
+Restarts    : 11
+Atoms       : 25817 
+Rules       : 203947 (1: 194035 2: 4956 3: 4956)
+Bodies      : 96336 
+Equivalences: 39096  (Atom=Atom: 10946 Body=Body: 0 Other: 28150)
+Tight       : Yes
+Variables   : 94000  (Eliminated:    0)
+Constraints : 51663  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 17358  (Binary: 10.5% Ternary: 11.5% Other: 78.0%)
+Conflicts : 17358  (Average Length: 13.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=44.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 1.970
+Prepare   : 0.570
+Prepro.   : 0.330
+Choices     : 35369
+Conflicts   : 12703
+Restarts    : 10
+Atoms       : 26391 
+Rules       : 208652 (1: 198512 2: 5070 3: 5070)
+Bodies      : 98571 
+Equivalences: 39956  (Atom=Atom: 11178 Body=Body: 0 Other: 28778)
+Tight       : Yes
+Variables   : 96181  (Eliminated:    0)
+Constraints : 53025  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 12703  (Binary: 11.5% Ternary: 11.9% Other: 76.6%)
+Conflicts : 12703  (Average Length: 12.2) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=45.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.350
+Prepare   : 0.560
+Prepro.   : 0.340
+Choices     : 45741
+Conflicts   : 12826
+Restarts    : 10
+Atoms       : 26965 
+Rules       : 213357 (1: 202989 2: 5184 3: 5184)
+Bodies      : 100806
+Equivalences: 40816  (Atom=Atom: 11410 Body=Body: 0 Other: 29406)
+Tight       : Yes
+Variables   : 98362  (Eliminated:    0)
+Constraints : 54387  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 12826  (Binary: 12.7% Ternary: 13.0% Other: 74.4%)
+Conflicts : 12826  (Average Length: 11.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=46.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 2.630
+Prepare   : 0.580
+Prepro.   : 0.350
+Choices     : 50405
+Conflicts   : 16770
+Restarts    : 10
+Atoms       : 27539 
+Rules       : 218062 (1: 207466 2: 5298 3: 5298)
+Bodies      : 103041
+Equivalences: 41676  (Atom=Atom: 11642 Body=Body: 0 Other: 30034)
+Tight       : Yes
+Variables   : 100543 (Eliminated:    0)
+Constraints : 55749  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 16770  (Binary: 11.1% Ternary: 12.2% Other: 76.7%)
+Conflicts : 16770  (Average Length: 15.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=47.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.430
+Prepare   : 0.610
+Prepro.   : 0.350
+Choices     : 67286
+Conflicts   : 24307
+Restarts    : 11
+Atoms       : 28113 
+Rules       : 222767 (1: 211943 2: 5412 3: 5412)
+Bodies      : 105276
+Equivalences: 42536  (Atom=Atom: 11874 Body=Body: 0 Other: 30662)
+Tight       : Yes
+Variables   : 102724 (Eliminated:    0)
+Constraints : 57111  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 24307  (Binary: 10.9% Ternary: 11.3% Other: 77.8%)
+Conflicts : 24307  (Average Length: 12.9) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=48.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 3.180
+Prepare   : 0.600
+Prepro.   : 0.370
+Choices     : 56503
+Conflicts   : 16976
+Restarts    : 10
+Atoms       : 28687 
+Rules       : 227472 (1: 216420 2: 5526 3: 5526)
+Bodies      : 107511
+Equivalences: 43396  (Atom=Atom: 12106 Body=Body: 0 Other: 31290)
+Tight       : Yes
+Variables   : 104905 (Eliminated:    0)
+Constraints : 58473  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 16976  (Binary: 11.3% Ternary: 12.5% Other: 76.2%)
+Conflicts : 16976  (Average Length: 14.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=49.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.060
+Prepare   : 0.620
+Prepro.   : 0.360
+Choices     : 100429
+Conflicts   : 35723
+Restarts    : 12
+Atoms       : 29261 
+Rules       : 232177 (1: 220897 2: 5640 3: 5640)
+Bodies      : 109746
+Equivalences: 44256  (Atom=Atom: 12338 Body=Body: 0 Other: 31918)
+Tight       : Yes
+Variables   : 107086 (Eliminated:    0)
+Constraints : 59835  (Binary: 83.5% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 35723  (Binary:  9.5% Ternary: 10.0% Other: 80.5%)
+Conflicts : 35723  (Average Length: 16.4) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=50.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.080
+Prepare   : 0.620
+Prepro.   : 0.380
+Choices     : 96229
+Conflicts   : 30760
+Restarts    : 12
+Atoms       : 29835 
+Rules       : 236882 (1: 225374 2: 5754 3: 5754)
+Bodies      : 111981
+Equivalences: 45116  (Atom=Atom: 12570 Body=Body: 0 Other: 32546)
+Tight       : Yes
+Variables   : 109267 (Eliminated:    0)
+Constraints : 61197  (Binary: 83.6% Ternary:  3.2% Other: 13.3%)
+Lemmas      : 30760  (Binary:  9.5% Ternary: 10.7% Other: 79.8%)
+Conflicts : 30760  (Average Length: 17.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=51.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.330
+Prepare   : 0.640
+Prepro.   : 0.390
+Choices     : 92548
+Conflicts   : 32098
+Restarts    : 12
+Atoms       : 30409 
+Rules       : 241587 (1: 229851 2: 5868 3: 5868)
+Bodies      : 114216
+Equivalences: 45976  (Atom=Atom: 12802 Body=Body: 0 Other: 33174)
+Tight       : Yes
+Variables   : 111448 (Eliminated:    0)
+Constraints : 62559  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 32098  (Binary: 10.3% Ternary: 10.8% Other: 78.9%)
+Conflicts : 32098  (Average Length: 15.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=52.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 6.440
+Prepare   : 0.640
+Prepro.   : 0.400
+Choices     : 114540
+Conflicts   : 41228
+Restarts    : 13
+Atoms       : 30983 
+Rules       : 246292 (1: 234328 2: 5982 3: 5982)
+Bodies      : 116451
+Equivalences: 46836  (Atom=Atom: 13034 Body=Body: 0 Other: 33802)
+Tight       : Yes
+Variables   : 113629 (Eliminated:    0)
+Constraints : 63921  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 41228  (Binary:  8.7% Ternary: 10.8% Other: 80.4%)
+Conflicts : 41228  (Average Length: 14.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 17578 
+No solution.
+
+
+% Running Query 0 with maxstep=53.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.140
+Prepare   : 0.660
+Prepro.   : 0.400
+Choices     : 126376
+Conflicts   : 45093
+Restarts    : 13
+Atoms       : 31557 
+Rules       : 250997 (1: 238805 2: 6096 3: 6096)
+Bodies      : 118686
+Equivalences: 47696  (Atom=Atom: 13266 Body=Body: 0 Other: 34430)
+Tight       : Yes
+Variables   : 115810 (Eliminated:    0)
+Constraints : 65283  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 45093  (Binary:  8.8% Ternary:  9.7% Other: 81.5%)
+Conflicts : 45093  (Average Length: 16.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 17953 
+No solution.
+
+
+% Running Query 0 with maxstep=54.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.160
+Prepare   : 0.670
+Prepro.   : 0.400
+Choices     : 91003
+Conflicts   : 32362
+Restarts    : 12
+Atoms       : 32131 
+Rules       : 255702 (1: 243282 2: 6210 3: 6210)
+Bodies      : 120921
+Equivalences: 48556  (Atom=Atom: 13498 Body=Body: 0 Other: 35058)
+Tight       : Yes
+Variables   : 117991 (Eliminated:    0)
+Constraints : 66645  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 32362  (Binary:  9.8% Ternary: 11.3% Other: 78.9%)
+Conflicts : 32362  (Average Length: 15.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=55.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 9.830
+Prepare   : 0.680
+Prepro.   : 0.420
+Choices     : 156175
+Conflicts   : 54930
+Restarts    : 13
+Atoms       : 32705 
+Rules       : 260407 (1: 247759 2: 6324 3: 6324)
+Bodies      : 123156
+Equivalences: 49416  (Atom=Atom: 13730 Body=Body: 0 Other: 35686)
+Tight       : Yes
+Variables   : 120172 (Eliminated:    0)
+Constraints : 68007  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 54930  (Binary:  8.0% Ternary:  9.8% Other: 82.2%)
+Conflicts : 54930  (Average Length: 17.7) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 18702 
+No solution.
+
+
+% Running Query 0 with maxstep=56.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 5.880
+Prepare   : 0.700
+Prepro.   : 0.420
+Choices     : 105012
+Conflicts   : 34750
+Restarts    : 12
+Atoms       : 33279 
+Rules       : 265112 (1: 252236 2: 6438 3: 6438)
+Bodies      : 125391
+Equivalences: 50276  (Atom=Atom: 13962 Body=Body: 0 Other: 36314)
+Tight       : Yes
+Variables   : 122353 (Eliminated:    0)
+Constraints : 69369  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 34750  (Binary:  9.8% Ternary: 11.6% Other: 78.6%)
+Conflicts : 34750  (Average Length: 14.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=57.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 13.770
+Prepare   : 0.710
+Prepro.   : 0.450
+Choices     : 182444
+Conflicts   : 68914
+Restarts    : 14
+Atoms       : 33853 
+Rules       : 269817 (1: 256713 2: 6552 3: 6552)
+Bodies      : 127626
+Equivalences: 51136  (Atom=Atom: 14194 Body=Body: 0 Other: 36942)
+Tight       : Yes
+Variables   : 124534 (Eliminated:    0)
+Constraints : 70731  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 68914  (Binary:  5.9% Ternary:  9.0% Other: 85.1%)
+Conflicts : 68914  (Average Length: 21.6) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 42987 
+No solution.
+
+
+% Running Query 0 with maxstep=58.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 11.220
+Prepare   : 0.730
+Prepro.   : 0.440
+Choices     : 176242
+Conflicts   : 59997
+Restarts    : 14
+Atoms       : 34427 
+Rules       : 274522 (1: 261190 2: 6666 3: 6666)
+Bodies      : 129861
+Equivalences: 51996  (Atom=Atom: 14426 Body=Body: 0 Other: 37570)
+Tight       : Yes
+Variables   : 126715 (Eliminated:    0)
+Constraints : 72093  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 59997  (Binary:  7.4% Ternary:  9.4% Other: 83.2%)
+Conflicts : 59997  (Average Length: 20.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 19826 
+No solution.
+
+
+% Running Query 0 with maxstep=59.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 7.570
+Prepare   : 0.750
+Prepro.   : 0.450
+Choices     : 125376
+Conflicts   : 40469
+Restarts    : 13
+Atoms       : 35001 
+Rules       : 279227 (1: 265667 2: 6780 3: 6780)
+Bodies      : 132096
+Equivalences: 52856  (Atom=Atom: 14658 Body=Body: 0 Other: 38198)
+Tight       : Yes
+Variables   : 128896 (Eliminated:    0)
+Constraints : 73455  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 40469  (Binary:  9.2% Ternary: 10.8% Other: 80.0%)
+Conflicts : 40469  (Average Length: 16.8) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 0     
+No solution.
+
+
+% Running Query 0 with maxstep=60.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 12.200
+Prepare   : 0.750
+Prepro.   : 0.440
+Choices     : 174193
+Conflicts   : 65450
+Restarts    : 14
+Atoms       : 35575 
+Rules       : 283932 (1: 270144 2: 6894 3: 6894)
+Bodies      : 134331
+Equivalences: 53716  (Atom=Atom: 14890 Body=Body: 0 Other: 38826)
+Tight       : Yes
+Variables   : 131077 (Eliminated:    0)
+Constraints : 74817  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 65450  (Binary:  7.3% Ternary:  9.5% Other: 83.2%)
+Conflicts : 65450  (Average Length: 18.3) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 20574 
+No solution.
+
+
+% Running Query 0 with maxstep=61.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 11.010
+Prepare   : 0.750
+Prepro.   : 0.460
+Choices     : 158079
+Conflicts   : 59443
+Restarts    : 14
+Atoms       : 36149 
+Rules       : 288637 (1: 274621 2: 7008 3: 7008)
+Bodies      : 136566
+Equivalences: 54576  (Atom=Atom: 15122 Body=Body: 0 Other: 39454)
+Tight       : Yes
+Variables   : 133258 (Eliminated:    0)
+Constraints : 76179  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 59443  (Binary:  7.2% Ternary:  8.9% Other: 83.9%)
+Conflicts : 59443  (Average Length: 21.0) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 20949 
+No solution.
+
+
+% Running Query 0 with maxstep=62.
+% Searching for 1 solution.
+UNSATISFIABLE
+Models      : 0     
+Time        : 16.200
+Prepare   : 0.780
+Prepro.   : 0.450
+Choices     : 207228
+Conflicts   : 80436
+Restarts    : 14
+Atoms       : 36723 
+Rules       : 293342 (1: 279098 2: 7122 3: 7122)
+Bodies      : 138801
+Equivalences: 55436  (Atom=Atom: 15354 Body=Body: 0 Other: 40082)
+Tight       : Yes
+Variables   : 135439 (Eliminated:    0)
+Constraints : 77541  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 80436  (Binary:  5.5% Ternary:  8.9% Other: 85.7%)
+Conflicts : 80436  (Average Length: 19.1) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 44780 
+No solution.
+
+
+% Running Query 0 with maxstep=63.
+% Searching for 1 solution.
+Solution: 1
+
+	0:  move(1)=p2 on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	1:  move(2)=p3 on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	2:  move(1)=2 on(1)=p2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	3:  move(3)=p2 on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=6 on(6)=p1
+
+	4:  move(1)=4 on(1)=2 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	5:  move(2)=3 on(1)=4 on(2)=p3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	6:  move(1)=2 on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	7:  move(4)=p3 on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p1
+
+	8:  move(1)=4 on(1)=2 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	9:  move(2)=5 on(1)=4 on(2)=3 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	10:  move(1)=2 on(1)=4 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	11:  move(3)=4 on(1)=2 on(2)=5 on(3)=p2 on(4)=p3 on(5)=6 on(6)=p1
+
+	12:  move(1)=p2 on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	13:  move(2)=3 on(1)=p2 on(2)=5 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	14:  move(1)=2 on(1)=p2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	15:  move(5)=p2 on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=6 on(6)=p1
+
+	16:  move(1)=6 on(1)=2 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	17:  move(2)=5 on(1)=6 on(2)=3 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	18:  move(1)=2 on(1)=6 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	19:  move(3)=6 on(1)=2 on(2)=5 on(3)=4 on(4)=p3 on(5)=p2 on(6)=p1
+
+	20:  move(1)=4 on(1)=2 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	21:  move(2)=3 on(1)=4 on(2)=5 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	22:  move(1)=2 on(1)=4 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	23:  move(4)=5 on(1)=2 on(2)=3 on(3)=6 on(4)=p3 on(5)=p2 on(6)=p1
+
+	24:  move(1)=4 on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	25:  move(2)=p3 on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	26:  move(1)=2 on(1)=4 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	27:  move(3)=4 on(1)=2 on(2)=p3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p1
+
+	28:  move(1)=6 on(1)=2 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	29:  move(2)=3 on(1)=6 on(2)=p3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	30:  move(1)=2 on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	31:  move(6)=p3 on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p1
+
+	32:  move(1)=6 on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	33:  move(2)=p1 on(1)=6 on(2)=3 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	34:  move(1)=2 on(1)=6 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	35:  move(3)=6 on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=p2 on(6)=p3
+
+	36:  move(1)=4 on(1)=2 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	37:  move(2)=3 on(1)=4 on(2)=p1 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	38:  move(1)=2 on(1)=4 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	39:  move(4)=p1 on(1)=2 on(2)=3 on(3)=6 on(4)=5 on(5)=p2 on(6)=p3
+
+	40:  move(1)=4 on(1)=2 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	41:  move(2)=5 on(1)=4 on(2)=3 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	42:  move(1)=2 on(1)=4 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	43:  move(3)=4 on(1)=2 on(2)=5 on(3)=6 on(4)=p1 on(5)=p2 on(6)=p3
+
+	44:  move(1)=6 on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	45:  move(2)=3 on(1)=6 on(2)=5 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	46:  move(1)=2 on(1)=6 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	47:  move(5)=6 on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=p2 on(6)=p3
+
+	48:  move(1)=p2 on(1)=2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	49:  move(2)=5 on(1)=p2 on(2)=3 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	50:  move(1)=2 on(1)=p2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	51:  move(3)=p2 on(1)=2 on(2)=5 on(3)=4 on(4)=p1 on(5)=6 on(6)=p3
+
+	52:  move(1)=4 on(1)=2 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	53:  move(2)=3 on(1)=4 on(2)=5 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	54:  move(1)=2 on(1)=4 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	55:  move(4)=5 on(1)=2 on(2)=3 on(3)=p2 on(4)=p1 on(5)=6 on(6)=p3
+
+	56:  move(1)=4 on(1)=2 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	57:  move(2)=p1 on(1)=4 on(2)=3 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	58:  move(1)=2 on(1)=4 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	59:  move(3)=4 on(1)=2 on(2)=p1 on(3)=p2 on(4)=5 on(5)=6 on(6)=p3
+
+	60:  move(1)=p2 on(1)=2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	61:  move(2)=3 on(1)=p2 on(2)=p1 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	62:  move(1)=2 on(1)=p2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+	63:  on(1)=2 on(2)=3 on(3)=4 on(4)=5 on(5)=6 on(6)=p3
+
+SATISFIABLE
+Models      : 1+    
+Time        : 9.430
+Prepare   : 0.780
+Prepro.   : 0.460
+Choices     : 150182
+Conflicts   : 53006
+Restarts    : 13
+Atoms       : 37297 
+Rules       : 298047 (1: 283575 2: 7236 3: 7236)
+Bodies      : 141036
+Equivalences: 56296  (Atom=Atom: 15586 Body=Body: 0 Other: 40710)
+Tight       : Yes
+Variables   : 137620 (Eliminated:    0)
+Constraints : 78903  (Binary: 83.6% Ternary:  3.2% Other: 13.2%)
+Lemmas      : 53006  (Binary:  8.8% Ternary: 10.6% Other: 80.6%)
+Conflicts : 53006  (Average Length: 15.5) 
+Loops     : 0      (Average Length: 0.0) 
+Other     : 0      (Average Length: 0.0) 
+Deleted   : 23868 
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CCALC 
+# ----------------------------------------------------------------------------------------------------------------------
+
+?- loadf 'hanoi-6-3-benchmark.cp'.
+% loading file /usr/local/lib/ccalc/macros.std
+% loading file /home/jbabb1/workspace/cplus2asp/tests/benchmarks/hanoi-6-3-benchmark.cp
+% in transition mode...
+% 168 atoms, 3213 rules, 3717 clauses (150 new atoms)
+% Grounding time: 0.27 seconds
+% Completion time: 0.06 seconds
+% Total time: 0.33 seconds
+true .
+
+?- time(query 0).
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 102 atoms (including new atoms), 198 clauses
+% Writing input clauses... done.  (0.00 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 0.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 318 atoms (including new atoms), 3717 clauses
+% Writing input clauses... done.  (0.01 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 1.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 534 atoms (including new atoms), 7236 clauses
+% Writing input clauses... done.  (0.02 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 2.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 750 atoms (including new atoms), 10755 clauses
+% Writing input clauses... done.  (0.03 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 3.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 966 atoms (including new atoms), 14274 clauses
+% Writing input clauses... done.  (0.05 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 4.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 1182 atoms (including new atoms), 17793 clauses
+% Writing input clauses... done.  (0.05 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 5.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 1398 atoms (including new atoms), 21312 clauses
+% Writing input clauses... done.  (0.07 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 6.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 1614 atoms (including new atoms), 24831 clauses
+% Writing input clauses... done.  (0.08 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 7.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 1830 atoms (including new atoms), 28350 clauses
+% Writing input clauses... done.  (0.08 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 8.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 2046 atoms (including new atoms), 31869 clauses
+% Writing input clauses... done.  (0.10 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 9.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 2262 atoms (including new atoms), 35388 clauses
+% Writing input clauses... done.  (0.11 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 10.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 2478 atoms (including new atoms), 38907 clauses
+% Writing input clauses... done.  (0.12 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 11.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 2694 atoms (including new atoms), 42426 clauses
+% Writing input clauses... done.  (0.13 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 12.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 2910 atoms (including new atoms), 45945 clauses
+% Writing input clauses... done.  (0.14 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 13.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 3126 atoms (including new atoms), 49464 clauses
+% Writing input clauses... done.  (0.15 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 14.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 3342 atoms (including new atoms), 52983 clauses
+% Writing input clauses... done.  (0.16 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 15.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 3558 atoms (including new atoms), 56502 clauses
+% Writing input clauses... done.  (0.18 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 16.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 3774 atoms (including new atoms), 60021 clauses
+% Writing input clauses... done.  (0.20 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 17.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 3990 atoms (including new atoms), 63540 clauses
+% Writing input clauses... done.  (0.20 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 18.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 4206 atoms (including new atoms), 67059 clauses
+% Writing input clauses... done.  (0.22 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 19.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 4422 atoms (including new atoms), 70578 clauses
+% Writing input clauses... done.  (0.22 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 0 seconds, search 1 seconds)
+
+No solution with maxstep 20.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 4638 atoms (including new atoms), 74097 clauses
+% Writing input clauses... done.  (0.24 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 21.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 4854 atoms (including new atoms), 77616 clauses
+% Writing input clauses... done.  (0.25 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 22.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 5070 atoms (including new atoms), 81135 clauses
+% Writing input clauses... done.  (0.27 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 23.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 5286 atoms (including new atoms), 84654 clauses
+% Writing input clauses... done.  (0.27 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 1 seconds, search 0 seconds)
+
+No solution with maxstep 24.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 5502 atoms (including new atoms), 88173 clauses
+% Writing input clauses... done.  (0.29 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 25.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 5718 atoms (including new atoms), 91692 clauses
+% Writing input clauses... done.  (0.30 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 0 seconds (prep 0 seconds, search 0 seconds)
+
+No solution with maxstep 26.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 5934 atoms (including new atoms), 95211 clauses
+% Writing input clauses... done.  (0.31 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 1 seconds (prep 0 seconds, search 1 seconds)
+
+No solution with maxstep 27.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 6150 atoms (including new atoms), 98730 clauses
+% Writing input clauses... done.  (0.33 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 1 seconds, search 1 seconds)
+
+No solution with maxstep 28.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 6366 atoms (including new atoms), 102249 clauses
+% Writing input clauses... done.  (0.33 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 3 seconds (prep 1 seconds, search 2 seconds)
+
+No solution with maxstep 29.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 6582 atoms (including new atoms), 105768 clauses
+% Writing input clauses... done.  (0.34 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 0 seconds, search 2 seconds)
+
+No solution with maxstep 30.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 6798 atoms (including new atoms), 109287 clauses
+% Writing input clauses... done.  (0.36 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 0 seconds, search 2 seconds)
+
+No solution with maxstep 31.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 7014 atoms (including new atoms), 112806 clauses
+% Writing input clauses... done.  (0.36 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 2 seconds (prep 0 seconds, search 2 seconds)
+
+No solution with maxstep 32.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 7230 atoms (including new atoms), 116325 clauses
+% Writing input clauses... done.  (0.38 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 3 seconds (prep 0 seconds, search 3 seconds)
+
+No solution with maxstep 33.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 7446 atoms (including new atoms), 119844 clauses
+% Writing input clauses... done.  (0.39 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 3 seconds (prep 0 seconds, search 3 seconds)
+
+No solution with maxstep 34.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 7662 atoms (including new atoms), 123363 clauses
+% Writing input clauses... done.  (0.40 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 5 seconds (prep 0 seconds, search 5 seconds)
+
+No solution with maxstep 35.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 7878 atoms (including new atoms), 126882 clauses
+% Writing input clauses... done.  (0.42 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 8 seconds (prep 1 seconds, search 7 seconds)
+
+No solution with maxstep 36.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 8094 atoms (including new atoms), 130401 clauses
+% Writing input clauses... done.  (0.42 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 6 seconds (prep 0 seconds, search 6 seconds)
+
+No solution with maxstep 37.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 8310 atoms (including new atoms), 133920 clauses
+% Writing input clauses... done.  (0.44 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 15 seconds (prep 1 seconds, search 14 seconds)
+
+No solution with maxstep 38.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 8526 atoms (including new atoms), 137439 clauses
+% Writing input clauses... done.  (0.45 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 8 seconds (prep 0 seconds, search 8 seconds)
+
+No solution with maxstep 39.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 8742 atoms (including new atoms), 140958 clauses
+% Writing input clauses... done.  (0.46 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 5 seconds (prep 0 seconds, search 5 seconds)
+
+No solution with maxstep 40.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 8958 atoms (including new atoms), 144477 clauses
+% Writing input clauses... done.  (0.47 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 8 seconds (prep 1 seconds, search 7 seconds)
+
+No solution with maxstep 41.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 9174 atoms (including new atoms), 147996 clauses
+% Writing input clauses... done.  (0.49 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 10 seconds (prep 0 seconds, search 10 seconds)
+
+No solution with maxstep 42.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 9390 atoms (including new atoms), 151515 clauses
+% Writing input clauses... done.  (0.50 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 9 seconds (prep 0 seconds, search 9 seconds)
+
+No solution with maxstep 43.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 9606 atoms (including new atoms), 155034 clauses
+% Writing input clauses... done.  (0.50 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 31 seconds (prep 0 seconds, search 31 seconds)
+
+No solution with maxstep 44.
+
+% Shifting atoms and clauses... done. (0.00 seconds)
+% After shifting: 9822 atoms (including new atoms), 158553 clauses
+% Writing input clauses... done.  (0.52 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 26 seconds (prep 0 seconds, search 26 seconds)
+
+No solution with maxstep 45.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 10038 atoms (including new atoms), 162072 clauses
+% Writing input clauses... done.  (0.53 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 23 seconds (prep 1 seconds, search 22 seconds)
+
+No solution with maxstep 46.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 10254 atoms (including new atoms), 165591 clauses
+% Writing input clauses... done.  (0.55 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 39 seconds (prep 0 seconds, search 39 seconds)
+
+No solution with maxstep 47.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 10470 atoms (including new atoms), 169110 clauses
+% Writing input clauses... done.  (0.56 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 34 seconds (prep 0 seconds, search 34 seconds)
+
+No solution with maxstep 48.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 10686 atoms (including new atoms), 172629 clauses
+% Writing input clauses... done.  (0.57 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 30 seconds (prep 1 seconds, search 29 seconds)
+
+No solution with maxstep 49.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 10902 atoms (including new atoms), 176148 clauses
+% Writing input clauses... done.  (0.57 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 56 seconds (prep 0 seconds, search 56 seconds)
+
+No solution with maxstep 50.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 11118 atoms (including new atoms), 179667 clauses
+% Writing input clauses... done.  (0.59 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 26 seconds (prep 1 seconds, search 25 seconds)
+
+No solution with maxstep 51.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 11334 atoms (including new atoms), 183186 clauses
+% Writing input clauses... done.  (0.60 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 35 seconds (prep 1 seconds, search 34 seconds)
+
+No solution with maxstep 52.
+
+% Shifting atoms and clauses... done. (0.02 seconds)
+% After shifting: 11550 atoms (including new atoms), 186705 clauses
+% Writing input clauses... done.  (0.60 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 119 seconds (prep 0 seconds, search 119 seconds)
+
+No solution with maxstep 53.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 11766 atoms (including new atoms), 190224 clauses
+% Writing input clauses... done.  (0.62 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 55 seconds (prep 0 seconds, search 55 seconds)
+
+No solution with maxstep 54.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 11982 atoms (including new atoms), 193743 clauses
+% Writing input clauses... done.  (0.63 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 68 seconds (prep 1 seconds, search 67 seconds)
+
+No solution with maxstep 55.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 12198 atoms (including new atoms), 197262 clauses
+% Writing input clauses... done.  (0.65 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 145 seconds (prep 0 seconds, search 145 seconds)
+
+No solution with maxstep 56.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 12414 atoms (including new atoms), 200781 clauses
+% Writing input clauses... done.  (0.67 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 101 seconds (prep 0 seconds, search 101 seconds)
+
+No solution with maxstep 57.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 12630 atoms (including new atoms), 204300 clauses
+% Writing input clauses... done.  (0.67 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 105 seconds (prep 0 seconds, search 105 seconds)
+
+No solution with maxstep 58.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 12846 atoms (including new atoms), 207819 clauses
+% Writing input clauses... done.  (0.69 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 139 seconds (prep 1 seconds, search 138 seconds)
+
+No solution with maxstep 59.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 13062 atoms (including new atoms), 211338 clauses
+% Writing input clauses... done.  (0.70 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 331 seconds (prep 0 seconds, search 331 seconds)
+
+No solution with maxstep 60.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 13278 atoms (including new atoms), 214857 clauses
+% Writing input clauses... done.  (0.71 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 210 seconds (prep 1 seconds, search 209 seconds)
+
+No solution with maxstep 61.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 13494 atoms (including new atoms), 218376 clauses
+% Writing input clauses... done.  (0.72 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 148 seconds (prep 0 seconds, search 148 seconds)
+
+No solution with maxstep 62.
+
+% Shifting atoms and clauses... done. (0.01 seconds)
+% After shifting: 13710 atoms (including new atoms), 221895 clauses
+% Writing input clauses... done.  (0.71 seconds)
+% Calling relsat 2.0... done.
+% Reading output file(s) from SAT solver... done.
+% Solution time: 181 seconds (prep 0 seconds, search 181 seconds)
+
+0:  on(1)=2  on(2)=3  on(3)=4  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=p2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+1:  on(1)=p2  on(2)=3  on(3)=4  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=p3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+2:  on(1)=p2  on(2)=p3  on(3)=4  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+3:  on(1)=2  on(2)=p3  on(3)=4  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=p2  move(4)=none  move(5)=none  move(6)=none
+
+4:  on(1)=2  on(2)=p3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+5:  on(1)=4  on(2)=p3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+6:  on(1)=4  on(2)=3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+7:  on(1)=2  on(2)=3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=p3  move(5)=none  move(6)=none
+
+8:  on(1)=2  on(2)=3  on(3)=p2  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+9:  on(1)=4  on(2)=3  on(3)=p2  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=5  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+10:  on(1)=4  on(2)=5  on(3)=p2  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+11:  on(1)=2  on(2)=5  on(3)=p2  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=4  move(4)=none  move(5)=none  move(6)=none
+
+12:  on(1)=2  on(2)=5  on(3)=4  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=p2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+13:  on(1)=p2  on(2)=5  on(3)=4  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+14:  on(1)=p2  on(2)=3  on(3)=4  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+15:  on(1)=2  on(2)=3  on(3)=4  on(4)=p3  on(5)=6  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=none  move(5)=p2  move(6)=none
+
+16:  on(1)=2  on(2)=3  on(3)=4  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=6  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+17:  on(1)=6  on(2)=3  on(3)=4  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=5  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+18:  on(1)=6  on(2)=5  on(3)=4  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+19:  on(1)=2  on(2)=5  on(3)=4  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=6  move(4)=none  move(5)=none  move(6)=none
+
+20:  on(1)=2  on(2)=5  on(3)=6  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+21:  on(1)=4  on(2)=5  on(3)=6  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+22:  on(1)=4  on(2)=3  on(3)=6  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+23:  on(1)=2  on(2)=3  on(3)=6  on(4)=p3  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=5  move(5)=none  move(6)=none
+
+24:  on(1)=2  on(2)=3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+25:  on(1)=4  on(2)=3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=p3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+26:  on(1)=4  on(2)=p3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+27:  on(1)=2  on(2)=p3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=4  move(4)=none  move(5)=none  move(6)=none
+
+28:  on(1)=2  on(2)=p3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=6  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+29:  on(1)=6  on(2)=p3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+30:  on(1)=6  on(2)=3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+31:  on(1)=2  on(2)=3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p1
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=p3
+
+32:  on(1)=2  on(2)=3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=6  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+33:  on(1)=6  on(2)=3  on(3)=4  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=p1  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+34:  on(1)=6  on(2)=p1  on(3)=4  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+35:  on(1)=2  on(2)=p1  on(3)=4  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=6  move(4)=none  move(5)=none  move(6)=none
+
+36:  on(1)=2  on(2)=p1  on(3)=6  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+37:  on(1)=4  on(2)=p1  on(3)=6  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+38:  on(1)=4  on(2)=3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+39:  on(1)=2  on(2)=3  on(3)=6  on(4)=5  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=p1  move(5)=none  move(6)=none
+
+40:  on(1)=2  on(2)=3  on(3)=6  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+41:  on(1)=4  on(2)=3  on(3)=6  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=5  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+42:  on(1)=4  on(2)=5  on(3)=6  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+43:  on(1)=2  on(2)=5  on(3)=6  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=4  move(4)=none  move(5)=none  move(6)=none
+
+44:  on(1)=2  on(2)=5  on(3)=4  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=6  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+45:  on(1)=6  on(2)=5  on(3)=4  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+46:  on(1)=6  on(2)=3  on(3)=4  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+47:  on(1)=2  on(2)=3  on(3)=4  on(4)=p1  on(5)=p2  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=none  move(5)=6  move(6)=none
+
+48:  on(1)=2  on(2)=3  on(3)=4  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=p2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+49:  on(1)=p2  on(2)=3  on(3)=4  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=5  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+50:  on(1)=p2  on(2)=5  on(3)=4  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+51:  on(1)=2  on(2)=5  on(3)=4  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=p2  move(4)=none  move(5)=none  move(6)=none
+
+52:  on(1)=2  on(2)=5  on(3)=p2  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+53:  on(1)=4  on(2)=5  on(3)=p2  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+54:  on(1)=4  on(2)=3  on(3)=p2  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+55:  on(1)=2  on(2)=3  on(3)=p2  on(4)=p1  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=none  move(4)=5  move(5)=none  move(6)=none
+
+56:  on(1)=2  on(2)=3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=4  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+57:  on(1)=4  on(2)=3  on(3)=p2  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=p1  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+58:  on(1)=4  on(2)=p1  on(3)=p2  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+59:  on(1)=2  on(2)=p1  on(3)=p2  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=none  move(3)=4  move(4)=none  move(5)=none  move(6)=none
+
+60:  on(1)=2  on(2)=p1  on(3)=4  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=p2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+61:  on(1)=p2  on(2)=p1  on(3)=4  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=none  move(2)=3  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+62:  on(1)=p2  on(2)=3  on(3)=4  on(4)=5  on(5)=6  on(6)=p3
+
+ACTIONS:  move(1)=2  move(2)=none  move(3)=none  move(4)=none  move(5)=none  move(6)=none
+
+63:  on(1)=2  on(2)=3  on(3)=4  on(4)=5  on(5)=6  on(6)=p3
+
+
+% 151,040,271 inferences, 39.500 CPU in 2041.189 seconds (2% CPU, 3823804 Lips)
+true.
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Coala incremental (C encoding)
+# ----------------------------------------------------------------------------------------------------------------------
+
+$ coala hanoi-6-3-benchmark.alc -t | cat - hanoi-6-3-benchmark.stat | iclingo --stats --istats
+=============== step 1 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 7125
+Choices  : 0
+Conflicts: 0
+=============== step 2 ===============
+
+Models   : 0
+Time     : 0.000 (g: 0.000, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 0
+Conflicts: 0
+=============== step 3 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.020, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 0
+Conflicts: 0
+=============== step 4 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 0
+Conflicts: 0
+=============== step 5 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.000, p: 0.010, s: 0.000)
+Rules    : 6507
+Choices  : 0
+Conflicts: 0
+=============== step 6 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.000, p: 0.010, s: 0.000)
+Rules    : 6507
+Choices  : 0
+Conflicts: 0
+=============== step 7 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 1
+Conflicts: 2
+=============== step 8 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 8
+Conflicts: 7
+=============== step 9 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 9
+Conflicts: 5
+=============== step 10 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.020, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 15
+Conflicts: 7
+=============== step 11 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 23
+Conflicts: 9
+=============== step 12 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 6507
+Choices  : 87
+Conflicts: 38
+=============== step 13 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 61
+Conflicts: 25
+=============== step 14 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.010, s: 0.000)
+Rules    : 6507
+Choices  : 60
+Conflicts: 21
+=============== step 15 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 47
+Conflicts: 12
+=============== step 16 ===============
+
+Models   : 0
+Time     : 0.010 (g: 0.010, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 124
+Conflicts: 52
+=============== step 17 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.020, p: 0.000, s: 0.000)
+Rules    : 6507
+Choices  : 289
+Conflicts: 139
+=============== step 18 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.010, s: 0.000)
+Rules    : 6507
+Choices  : 622
+Conflicts: 214
+=============== step 19 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.010, s: 0.000)
+Rules    : 6507
+Choices  : 463
+Conflicts: 171
+=============== step 20 ===============
+
+Models   : 0
+Time     : 0.020 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 6507
+Choices  : 627
+Conflicts: 291
+=============== step 21 ===============
+
+Models   : 0
+Time     : 0.030 (g: 0.020, p: 0.000, s: 0.010)
+Rules    : 6507
+Choices  : 977
+Conflicts: 446
+=============== step 22 ===============
+
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.010)
+Rules    : 6507
+Choices  : 806
+Conflicts: 323
+=============== step 23 ===============
+
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 6507
+Choices  : 1109
+Conflicts: 526
+=============== step 24 ===============
+
+Models   : 0
+Time     : 0.040 (g: 0.010, p: 0.000, s: 0.030)
+Rules    : 6507
+Choices  : 1761
+Conflicts: 807
+=============== step 25 ===============
+
+Models   : 0
+Time     : 0.050 (g: 0.010, p: 0.000, s: 0.030)
+Rules    : 6507
+Choices  : 1568
+Conflicts: 672
+=============== step 26 ===============
+
+Models   : 0
+Time     : 0.040 (g: 0.010, p: 0.000, s: 0.030)
+Rules    : 6507
+Choices  : 1486
+Conflicts: 679
+=============== step 27 ===============
+
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.000, s: 0.050)
+Rules    : 6507
+Choices  : 1821
+Conflicts: 967
+=============== step 28 ===============
+
+Models   : 0
+Time     : 0.030 (g: 0.010, p: 0.000, s: 0.020)
+Rules    : 6507
+Choices  : 839
+Conflicts: 414
+=============== step 29 ===============
+
+Models   : 0
+Time     : 0.060 (g: 0.010, p: 0.000, s: 0.050)
+Rules    : 6507
+Choices  : 1977
+Conflicts: 1099
+=============== step 30 ===============
+
+Models   : 0
+Time     : 0.050 (g: 0.010, p: 0.000, s: 0.040)
+Rules    : 6507
+Choices  : 1789
+Conflicts: 763
+=============== step 31 ===============
+
+Models   : 0
+Time     : 0.110 (g: 0.010, p: 0.010, s: 0.090)
+Rules    : 6507
+Choices  : 3669
+Conflicts: 1648
+=============== step 32 ===============
+
+Models   : 0
+Time     : 0.090 (g: 0.010, p: 0.010, s: 0.070)
+Rules    : 6507
+Choices  : 2272
+Conflicts: 1202
+=============== step 33 ===============
+
+Models   : 0
+Time     : 0.100 (g: 0.000, p: 0.010, s: 0.090)
+Rules    : 6507
+Choices  : 2647
+Conflicts: 1396
+=============== step 34 ===============
+
+Models   : 0
+Time     : 0.120 (g: 0.010, p: 0.000, s: 0.100)
+Rules    : 6507
+Choices  : 3698
+Conflicts: 1514
+=============== step 35 ===============
+
+Models   : 0
+Time     : 0.100 (g: 0.010, p: 0.010, s: 0.080)
+Rules    : 6507
+Choices  : 2295
+Conflicts: 1141
+=============== step 36 ===============
+
+Models   : 0
+Time     : 0.150 (g: 0.010, p: 0.010, s: 0.130)
+Rules    : 6507
+Choices  : 3895
+Conflicts: 1760
+=============== step 37 ===============
+
+Models   : 0
+Time     : 0.100 (g: 0.020, p: 0.000, s: 0.080)
+Rules    : 6507
+Choices  : 2102
+Conflicts: 1084
+=============== step 38 ===============
+
+Models   : 0
+Time     : 0.140 (g: 0.010, p: 0.010, s: 0.120)
+Rules    : 6507
+Choices  : 3149
+Conflicts: 1435
+=============== step 39 ===============
+
+Models   : 0
+Time     : 0.570 (g: 0.010, p: 0.010, s: 0.550)
+Rules    : 6507
+Choices  : 10353
+Conflicts: 5876
+=============== step 40 ===============
+
+Models   : 0
+Time     : 0.280 (g: 0.010, p: 0.010, s: 0.250)
+Rules    : 6507
+Choices  : 4739
+Conflicts: 2703
+=============== step 41 ===============
+
+Models   : 0
+Time     : 0.490 (g: 0.010, p: 0.010, s: 0.460)
+Rules    : 6507
+Choices  : 6109
+Conflicts: 3453
+=============== step 42 ===============
+
+Models   : 0
+Time     : 0.400 (g: 0.020, p: 0.010, s: 0.370)
+Rules    : 6507
+Choices  : 4282
+Conflicts: 2422
+=============== step 43 ===============
+
+Models   : 0
+Time     : 0.970 (g: 0.010, p: 0.010, s: 0.940)
+Rules    : 6507
+Choices  : 10864
+Conflicts: 6605
+=============== step 44 ===============
+
+Models   : 0
+Time     : 0.510 (g: 0.010, p: 0.010, s: 0.480)
+Rules    : 6507
+Choices  : 4931
+Conflicts: 2516
+=============== step 45 ===============
+
+Models   : 0
+Time     : 0.290 (g: 0.010, p: 0.010, s: 0.260)
+Rules    : 6507
+Choices  : 3134
+Conflicts: 1803
+=============== step 46 ===============
+
+Models   : 0
+Time     : 0.650 (g: 0.020, p: 0.010, s: 0.610)
+Rules    : 6507
+Choices  : 7627
+Conflicts: 4040
+=============== step 47 ===============
+
+Models   : 0
+Time     : 0.700 (g: 0.020, p: 0.010, s: 0.670)
+Rules    : 6507
+Choices  : 6680
+Conflicts: 3933
+=============== step 48 ===============
+
+Models   : 0
+Time     : 1.010 (g: 0.010, p: 0.020, s: 0.970)
+Rules    : 6507
+Choices  : 9939
+Conflicts: 5844
+=============== step 49 ===============
+
+Models   : 0
+Time     : 0.770 (g: 0.020, p: 0.020, s: 0.720)
+Rules    : 6507
+Choices  : 6243
+Conflicts: 4136
+=============== step 50 ===============
+
+Models   : 0
+Time     : 1.680 (g: 0.010, p: 0.020, s: 1.650)
+Rules    : 6507
+Choices  : 12359
+Conflicts: 7664
+=============== step 51 ===============
+
+Models   : 0
+Time     : 2.750 (g: 0.010, p: 0.020, s: 2.700)
+Rules    : 6507
+Choices  : 15674
+Conflicts: 9311
+=============== step 52 ===============
+
+Models   : 0
+Time     : 1.910 (g: 0.020, p: 0.020, s: 1.870)
+Rules    : 6507
+Choices  : 8844
+Conflicts: 6761
+=============== step 53 ===============
+
+Models   : 0
+Time     : 3.130 (g: 0.010, p: 0.020, s: 3.060)
+Rules    : 6507
+Choices  : 13537
+Conflicts: 9673
+=============== step 54 ===============
+
+Models   : 0
+Time     : 1.590 (g: 0.010, p: 0.030, s: 1.510)
+Rules    : 6507
+Choices  : 7091
+Conflicts: 4948
+=============== step 55 ===============
+
+Models   : 0
+Time     : 2.400 (g: 0.020, p: 0.020, s: 2.360)
+Rules    : 6507
+Choices  : 10545
+Conflicts: 7153
+=============== step 56 ===============
+
+Models   : 0
+Time     : 0.810 (g: 0.010, p: 0.040, s: 0.760)
+Rules    : 6507
+Choices  : 7305
+Conflicts: 5655
+=============== step 57 ===============
+
+Models   : 0
+Time     : 1.690 (g: 0.020, p: 0.030, s: 1.640)
+Rules    : 6507
+Choices  : 10943
+Conflicts: 8967
+=============== step 58 ===============
+
+Models   : 0
+Time     : 2.600 (g: 0.010, p: 0.030, s: 2.560)
+Rules    : 6507
+Choices  : 10777
+Conflicts: 8748
+=============== step 59 ===============
+
+Models   : 0
+Time     : 3.210 (g: 0.010, p: 0.040, s: 3.160)
+Rules    : 6507
+Choices  : 10720
+Conflicts: 8283
+=============== step 60 ===============
+
+Models   : 0
+Time     : 2.830 (g: 0.020, p: 0.030, s: 2.780)
+Rules    : 6507
+Choices  : 9408
+Conflicts: 6632
+=============== step 61 ===============
+
+Models   : 0
+Time     : 3.760 (g: 0.010, p: 0.040, s: 3.710)
+Rules    : 6507
+Choices  : 10138
+Conflicts: 6890
+=============== step 62 ===============
+
+Models   : 0
+Time     : 8.270 (g: 0.010, p: 0.050, s: 8.210)
+Rules    : 6507
+Choices  : 22851
+Conflicts: 15412
+=============== step 63 ===============
+Answer: 1
+action_move(disc(1),p2,0) action_move(disc(2),p3,1) action_move(disc(1),disc(2),2) action_move(disc(3),p2,3) action_move(disc(1),disc(4),4) action_move(disc(2),disc(3),5) action_move(disc(1),disc(2),6) action_move(disc(4),p3,7) action_move(disc(1),disc(4),8) action_move(disc(2),disc(5),9) action_move(disc(1),disc(2),10) action_move(disc(3),disc(4),11) action_move(disc(1),p2,12) action_move(disc(2),disc(3),13) action_move(disc(1),disc(2),14) action_move(disc(5),p2,15) action_move(disc(1),disc(6),16) action_move(disc(2),disc(5),17) action_move(disc(1),disc(2),18) action_move(disc(3),disc(6),19) action_move(disc(1),disc(4),20) action_move(disc(2),disc(3),21) action_move(disc(1),disc(2),22) action_move(disc(4),disc(5),23) action_move(disc(1),disc(4),24) action_move(disc(2),p3,25) action_move(disc(1),disc(2),26) action_move(disc(3),disc(4),27) action_move(disc(1),disc(6),28) action_move(disc(2),disc(3),29) action_move(disc(1),disc(2),30) action_move(disc(6),p3,31) action_move(disc(1),disc(6),32) action_move(disc(2),p1,33) action_move(disc(1),disc(2),34) action_move(disc(3),disc(6),35) action_move(disc(1),disc(4),36) action_move(disc(2),disc(3),37) action_move(disc(1),disc(2),38) action_move(disc(4),p1,39) action_move(disc(1),disc(4),40) action_move(disc(2),disc(5),41) action_move(disc(1),disc(2),42) action_move(disc(3),disc(4),43) action_move(disc(1),disc(6),44) action_move(disc(2),disc(3),45) action_move(disc(1),disc(2),46) action_move(disc(5),disc(6),47) action_move(disc(1),p2,48) action_move(disc(2),disc(5),49) action_move(disc(1),disc(2),50) action_move(disc(3),p2,51) action_move(disc(1),disc(4),52) action_move(disc(2),disc(3),53) action_move(disc(1),disc(2),54) action_move(disc(4),disc(5),55) action_move(disc(1),disc(4),56) action_move(disc(2),p1,57) action_move(disc(1),disc(2),58) action_move(disc(3),disc(4),59) action_move(disc(1),p2,60) action_move(disc(2),disc(3),61) action_move(disc(1),disc(2),62)
+
+Models   : 1
+Time     : 7.870 (g: 0.010, p: 0.050, s: 7.810)
+Rules    : 6507
+Choices  : 21543
+Conflicts: 12853
+=============== Summary ===============
+SATISFIABLE
+
+Models      : 1+
+Total Steps : 63
+Time        : 52.740
+  Prepare   : 0.720
+  Prepro.   : 0.680
+  Solving   : 51.130
+Choices     : 286932
+Conflicts   : 181150
+Restarts    : 268
+
+Atoms       : 13798
+Rules       : 410559 (1: 410559)
+Bodies      : 156844
+Equivalences: 33750  (Atom=Atom: 1440 Body=Body: 5314 Other: 26996)
+Tight       : Yes
+
+Variables   : 69468  (Eliminated:    0)
+Constraints : 72079  (Binary: 84.7% Ternary: 13.0% Other:  2.3%)
+Lemmas      : 181094 (Binary:  3.3% Ternary:  2.7% Other: 93.9%)
+  Conflicts : 181094 (Average Length: 45.9)
+  Loops     : 0      (Average Length: 0.0)
+  Other     : 0      (Average Length: 0.0)
+  Deleted   : 0
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Coala static (C encoding)
+# ----------------------------------------------------------------------------------------------------------------------
+
+./coala-static.sh hanoi-6-3-benchmark.alc hanoi-6-3-benchmark.stat 63
+
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.010
+  Prepare   : 0.000
+  Prepro.   : 0.010
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.020
+  Prepare   : 0.020
+  Prepro.   : 0.000
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.030
+  Prepare   : 0.020
+  Prepro.   : 0.010
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.060
+  Prepare   : 0.050
+  Prepro.   : 0.010
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.060
+  Prepare   : 0.050
+  Prepro.   : 0.010
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.170
+  Prepare   : 0.150
+  Prepro.   : 0.020
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.220
+  Prepare   : 0.200
+  Prepro.   : 0.020
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.300
+  Prepare   : 0.280
+  Prepro.   : 0.020
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.380
+  Prepare   : 0.350
+  Prepro.   : 0.030
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.490
+  Prepare   : 0.460
+  Prepro.   : 0.030
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.600
+  Prepare   : 0.560
+  Prepro.   : 0.030
+  Solving   : 0.010
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.750
+  Prepare   : 0.710
+  Prepro.   : 0.040
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 0.890
+  Prepare   : 0.830
+  Prepro.   : 0.050
+  Solving   : 0.010
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 1.070
+  Prepare   : 1.010
+  Prepro.   : 0.060
+  Solving   : 0.000
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 1.250
+  Prepare   : 1.180
+  Prepro.   : 0.060
+  Solving   : 0.010
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 1.490
+  Prepare   : 1.410
+  Prepro.   : 0.070
+  Solving   : 0.010
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 1.710
+  Prepare   : 1.630
+  Prepro.   : 0.060
+  Solving   : 0.020
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 2.000
+  Prepare   : 1.910
+  Prepro.   : 0.060
+  Solving   : 0.030
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 2.270
+  Prepare   : 2.170
+  Prepro.   : 0.070
+  Solving   : 0.030
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 2.640
+  Prepare   : 2.500
+  Prepro.   : 0.090
+  Solving   : 0.050
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 3.000
+  Prepare   : 2.870
+  Prepro.   : 0.090
+  Solving   : 0.040
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 3.380
+  Prepare   : 3.230
+  Prepro.   : 0.090
+  Solving   : 0.060
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 3.800
+  Prepare   : 3.610
+  Prepro.   : 0.090
+  Solving   : 0.100
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 4.500
+  Prepare   : 4.270
+  Prepro.   : 0.100
+  Solving   : 0.130
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 4.760
+  Prepare   : 4.530
+  Prepro.   : 0.100
+  Solving   : 0.130
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 5.630
+  Prepare   : 5.300
+  Prepro.   : 0.110
+  Solving   : 0.220
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 6.040
+  Prepare   : 5.640
+  Prepro.   : 0.120
+  Solving   : 0.280
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 6.760
+  Prepare   : 6.180
+  Prepro.   : 0.110
+  Solving   : 0.470
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 7.400
+  Prepare   : 6.870
+  Prepro.   : 0.130
+  Solving   : 0.400
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 8.190
+  Prepare   : 7.550
+  Prepro.   : 0.130
+  Solving   : 0.510
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 9.070
+  Prepare   : 8.390
+  Prepro.   : 0.140
+  Solving   : 0.540
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 10.160
+  Prepare   : 8.950
+  Prepro.   : 0.130
+  Solving   : 1.080
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 11.680
+  Prepare   : 10.370
+  Prepro.   : 0.140
+  Solving   : 1.170
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 12.710
+  Prepare   : 10.910
+  Prepro.   : 0.150
+  Solving   : 1.650
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 14.490
+  Prepare   : 11.910
+  Prepro.   : 0.150
+  Solving   : 2.430
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 15.820
+  Prepare   : 12.800
+  Prepro.   : 0.150
+  Solving   : 2.870
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 14.880
+  Prepare   : 13.400
+  Prepro.   : 0.160
+  Solving   : 1.320
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 16.420
+  Prepare   : 14.660
+  Prepro.   : 0.170
+  Solving   : 1.590
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 19.090
+  Prepare   : 15.570
+  Prepro.   : 0.170
+  Solving   : 3.350
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 20.250
+  Prepare   : 17.640
+  Prepro.   : 0.170
+  Solving   : 2.440
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 21.160
+  Prepare   : 17.410
+  Prepro.   : 0.190
+  Solving   : 3.560
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 21.660
+  Prepare   : 18.550
+  Prepro.   : 0.190
+  Solving   : 2.920
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 24.160
+  Prepare   : 20.520
+  Prepro.   : 0.200
+  Solving   : 3.440
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 27.620
+  Prepare   : 21.360
+  Prepro.   : 0.190
+  Solving   : 6.070
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 30.190
+  Prepare   : 22.670
+  Prepro.   : 0.200
+  Solving   : 7.320
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 29.420
+  Prepare   : 24.320
+  Prepro.   : 0.210
+  Solving   : 4.890
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 36.730
+  Prepare   : 25.840
+  Prepro.   : 0.210
+  Solving   : 10.680
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 38.900
+  Prepare   : 27.360
+  Prepro.   : 0.220
+  Solving   : 11.320
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 38.320
+  Prepare   : 28.940
+  Prepro.   : 0.220
+  Solving   : 9.160
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 40.180
+  Prepare   : 31.360
+  Prepro.   : 0.230
+  Solving   : 8.590
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 45.750
+  Prepare   : 32.670
+  Prepro.   : 0.230
+  Solving   : 12.850
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 48.310
+  Prepare   : 34.780
+  Prepro.   : 0.240
+  Solving   : 13.290
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 45.680
+  Prepare   : 36.290
+  Prepro.   : 0.240
+  Solving   : 9.150
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 58.470
+  Prepare   : 41.690
+  Prepro.   : 0.250
+  Solving   : 16.530
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 75.300
+  Prepare   : 41.310
+  Prepro.   : 0.240
+  Solving   : 33.750
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 65.040
+  Prepare   : 43.260
+  Prepro.   : 0.270
+  Solving   : 21.510
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 81.080
+  Prepare   : 45.010
+  Prepro.   : 0.250
+  Solving   : 35.820
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 71.150
+  Prepare   : 48.670
+  Prepro.   : 0.260
+  Solving   : 22.220
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 88.130
+  Prepare   : 50.030
+  Prepro.   : 0.280
+  Solving   : 37.820
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 84.890
+  Prepare   : 52.510
+  Prepro.   : 0.290
+  Solving   : 32.090
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 85.160
+  Prepare   : 55.920
+  Prepro.   : 0.280
+  Solving   : 28.960
+
+UNSATISFIABLE
+
+Models      : 0     
+Time        : 85.570
+  Prepare   : 58.110
+  Prepro.   : 0.280
+  Solving   : 27.180
+
+Answer: 1
+action_move(disc(6),p3,31) action_move(disc(5),p2,15) action_move(disc(5),disc(6),47) action_move(disc(4),p1,39) action_move(disc(4),p3,7) action_move(disc(4),disc(5),55) action_move(disc(4),disc(5),23) action_move(disc(3),p2,51) action_move(disc(3),p2,3) action_move(disc(3),disc(4),59) action_move(disc(3),disc(4),43) action_move(disc(3),disc(4),27) action_move(disc(3),disc(4),11) action_move(disc(3),disc(6),35) action_move(disc(3),disc(6),19) action_move(disc(2),p1,57) action_move(disc(2),p1,33) action_move(disc(2),p3,25) action_move(disc(2),p3,1) action_move(disc(2),disc(3),61) action_move(disc(2),disc(3),53) action_move(disc(2),disc(3),45) action_move(disc(2),disc(3),37) action_move(disc(2),disc(3),29) action_move(disc(2),disc(3),21) action_move(disc(2),disc(3),13) action_move(disc(2),disc(3),5) action_move(disc(2),disc(5),49) action_move(disc(2),disc(5),41) action_move(disc(2),disc(5),17) action_move(disc(2),disc(5),9) action_move(disc(1),p2,60) action_move(disc(1),p2,48) action_move(disc(1),p2,12) action_move(disc(1),disc(2),62) action_move(disc(1),disc(2),58) action_move(disc(1),disc(2),54) action_move(disc(1),disc(2),50) action_move(disc(1),disc(2),46) action_move(disc(1),disc(2),42) action_move(disc(1),disc(2),38) action_move(disc(1),disc(2),34) action_move(disc(1),disc(2),30) action_move(disc(1),disc(2),26) action_move(disc(1),disc(2),22) action_move(disc(1),disc(2),18) action_move(disc(1),disc(2),14) action_move(disc(1),disc(2),10) action_move(disc(1),disc(2),6) action_move(disc(1),disc(2),2) action_move(disc(1),disc(4),56) action_move(disc(1),disc(4),52) action_move(disc(1),disc(4),40) action_move(disc(1),disc(4),36) action_move(disc(1),disc(4),24) action_move(disc(1),disc(4),20) action_move(disc(1),disc(4),8) action_move(disc(1),disc(4),4) action_move(disc(1),disc(6),44) action_move(disc(1),disc(6),32) action_move(disc(1),disc(6),28) action_move(disc(1),disc(6),16) 
+SATISFIABLE
+
+Models      : 1+    
+Time        : 188.960
+  Prepare   : 61.620
+  Prepro.   : 0.290
+  Solving   : 127.050
+
+

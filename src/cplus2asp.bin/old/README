@@ -1,0 +1,66 @@
+Cplus2ASP.bin README
+--------------------
+
+Cplus2ASP.bin is the standalone translator module for Cplus2ASP. It translates CCalc-style action descriptions into f2lp code, and is typically used as part of the Cplus2ASP system. However, it can be run on its own to produce translated f2lp code without invoking the rest of the Cplus2ASP tool chain.
+
+Compiling Cplus2ASP.bin:
+------------------------
+Cplus2ASP.bin comes with pre-built lexer and parser files. If you wish to (re)build them yourself, make sure you have flex and bison installed, then run these commands in the main source directory:
+
+bison parser.y
+flex flexer.l
+
+Cplus2ASP.bin expects that gcc (in particular, gcc's C++ compiler, g++) is installed, and that the target system is Unix-like. Any modern C++ compiler should work, you'll just have to compile it manually or modify the build setup. Cplu2ASP.bin also requires that CMake be installed on the system.
+Assuming you have a standard setup, go to the "build" directory type the following lines into your favorite terminal emulator to compile and install Cplus2ASP.bin:
+
+./configure.sh
+sudo make install
+
+You need sudo (or to be root) for the second command, as by default make will install Cplus2ASP.bin into /usr/local/bin. If you'd prefer to install it somewhere else, use a program like ccmake to change the cmake variable CMAKE_INSTALL_PREFIX to something other than the default "/usr/local".  Alternatively, run these commands instead:
+
+./configure.sh
+make
+
+and then copy the executable "cplus2asp.bin" file to your desired location.
+
+Command Line:
+-------------
+cplus2asp.bin [OPTIONS] INPUT_FILES
+
+INPUT_FILES is a series of files in CCalc-style syntax. At least one input file is required.
+OPTIONS are optional arguments that change the program's behavior.
+
+Normal Program Options:
+  -o PATH or --output-file PATH
+    outputs the translated f2lp code to the file at PATH instead of the default (standard out).
+  -O PATH or --output-all PATH
+    outputs both the translated f2lp code and any translation error messages to the file at PATH.
+  --help
+    shows a brief message outlining program usage and command-line options.
+  -v or --version
+    outputs the program's version information.
+
+Examples of Use:
+----------------
+cplus2asp myProgram.cp
+  would translate the file "myProgram.cp", outputting the results to standard out.
+cplus2asp -o myProgram.f2lp myProgram.cp
+  does the same as above, except it outputs the translated program to the file "myProgram.f2lp", presumably for later use with the Cplus2ASP system.
+
+Revisions and History:
+----------------------
+<v1.0 - Beta development.
+<v0.8 - Alpha development.
+
+Release Notes:
+--------------
+Cplus2ASP attempts to support or emulate as many features of CCalc as possible. However, certain advanced features of CCalc are not yet fully supported. These include:
+- Use of nested constants. Example: If "isOutside(location)" and "loc(person)" are constants, expressing "isOutside(loc(P))" in a macro, query, or causal law.
+- Support for "where" clauses in macro definitions.
+- Dynamic declaration of numeric range sorts. Example: "p :: inertialFluent(1..5)."
+- The ":- include ..." directive.
+- The ":- show ..." directive.
+- The "min(X,Y)" and "max(X,Y)" built-in CCalc expressions.
+- If "myRigid" is a rigid constant, setting its value with a shortened "myRigid=V" style law. Using the full form "caused myRigid=V" works just fine though.
+
+Attempting to use these features with Cplus2ASP may (depending on the feature) produce an error or silently fail to translate the given action description correctly.  Many of the missing features that are syntactic shortcuts can be worked around by using normal or longer syntax to express the same concept.

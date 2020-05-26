@@ -1,0 +1,83 @@
+% Towers of Hanoi
+
+<fluent> on(disc(D), L) <where> int(D), location(L).
+<action> move(disc(D), L) <where> int(D), location(L).
+
+<inertial> on(disc(D), L), -on(disc(D), L) <where> int(D), location(L).
+
+% after moving disk it is at new place
+<caused> on(disc(D), L) <after> move(disc(D), L) <where> int(D), location(L).
+
+% disc is only on top of one other disc
+<caused> -on(disc(D), L1) <if> on(disc(D), L2) <where> int(D), location(L1;L2), L1!=L2.
+
+% no concurrency
+<nonexecutable> move(disc(D1), L1), move(disc(D2), L2) <where> int(D1;D2), location(L1;L2), D1!=D2.
+<nonexecutable> move(disc(D1), L1), move(disc(D2), L2) <where> int(D1;D2), location(L1;L2), L1!=L2.
+
+% only move disk to location that doesn't have any other disk on top
+<nonexecutable> move(disc(D1), L) <if> on(disc(D2), L) <where> int(D1;D2), location(L), D1!=D2.
+
+% only move disk when it is the topmost disk
+<nonexecutable> move(disc(D1), L) <if> on(disc(D2), disc(D1)) <where> int(D1;D2), location(L), D1!=D2.
+
+% only move disk on top of bigger disk
+<nonexecutable> move(disc(D1), disc(D2)) <where> int(D1;D2), D1>=D2.
+
+% 6 disks
+on(disc(6), p1) <holds at> 0.
+on(disc(5), disc(6)) <holds at> 0.
+on(disc(4), disc(5)) <holds at> 0.
+on(disc(3), disc(4)) <holds at> 0.
+on(disc(2), disc(3)) <holds at> 0.
+on(disc(1), disc(2)) <holds at> 0.
+
+on(disc(6), p3) <holds at> t.
+on(disc(5), disc(6)) <holds at> t.
+on(disc(4), disc(5)) <holds at> t.
+on(disc(3), disc(4)) <holds at> t.
+on(disc(2), disc(3)) <holds at> t.
+on(disc(1), disc(2)) <holds at> t.
+
+% 5 disks
+%on(disc(5), p1) <holds at> 0.
+%on(disc(4), disc(5)) <holds at> 0.
+%on(disc(3), disc(4)) <holds at> 0.
+%on(disc(2), disc(3)) <holds at> 0.
+%on(disc(1), disc(2)) <holds at> 0.
+
+%on(disc(5), p3) <holds at> t.
+%on(disc(4), disc(5)) <holds at> t.
+%on(disc(3), disc(4)) <holds at> t.
+%on(disc(2), disc(3)) <holds at> t.
+%on(disc(1), disc(2)) <holds at> t.
+
+% 4 disks
+%on(disc(4), p1) <holds at> 0.
+%on(disc(3), disc(4)) <holds at> 0.
+%on(disc(2), disc(3)) <holds at> 0.
+%on(disc(1), disc(2)) <holds at> 0.
+
+%on(disc(4), p3) <holds at> t.
+%on(disc(3), disc(4)) <holds at> t.
+%on(disc(2), disc(3)) <holds at> t.
+%on(disc(1), disc(2)) <holds at> t.
+
+
+% 3 disks
+%on(disc(3), p1) <holds at> 0.
+%on(disc(2), disc(3)) <holds at> 0.
+%on(disc(1), disc(2)) <holds at> 0.
+
+%on(disc(3), p3) <holds at> t.
+%on(disc(2), disc(3)) <holds at> t.
+%on(disc(1), disc(2)) <holds at> t.
+
+
+% 2 disks
+%on(disc(2), p1) <holds at> 0.
+%on(disc(1), disc(2)) <holds at> 0.
+
+%on(disc(2), p3) <holds at> t.
+%on(disc(1), disc(2)) <holds at> t.
+

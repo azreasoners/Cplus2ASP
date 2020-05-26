@@ -1,0 +1,205 @@
+% File "/home/jbabb1/workspace/cplus2asp/tests/domains/spacecraft-test".
+% File 'spacecraft-test'
+
+% [MaxAdditive:7]
+% File "spacecraft".
+% File 'spacecraft'
+
+#base.
+sort(integer).
+#domain integer(V_integer).
+sort_object(integer,V_integer).
+#hide integer(V_integer).
+
+sort(axis).
+#domain axis(V_axis).
+sort_object(axis,V_axis).
+#hide axis(V_axis).
+
+sort(jet).
+#domain jet(V_jet).
+sort_object(jet,V_jet).
+#hide jet(V_jet).
+
+
+integer(-maxAdditive..maxAdditive).
+axis(x).
+axis(y).
+axis(z).
+jet(jet1).
+jet(jet2).
+
+#domain axis(Ax).
+#domain jet(J).
+#domain integer(F).
+#domain integer(V).
+#domain integer(V1).
+#domain integer(P).
+
+simpleFluent(pos(V_axis)).
+constant_sort(pos(V_axis),integer).
+additiveFluent(vel(V_axis)).
+constant_sort(vel(V_axis),integer).
+exogenousAction(fire(V_jet)).
+constant_sort(fire(V_jet),boolean).
+integer_star(none).
+integer_star(V_integer).
+sort(integer_star).
+#domain integer_star(V_integer_star).
+sort_object(integer_star,V_integer_star).
+#hide integer_star(V_integer_star).
+
+attribute(force(V_jet, V_axis)).
+constant_sort(force(V_jet, V_axis),integer_star).
+action_attribute(fire(V_jet), force(V_jet, V_axis)).
+
+
+#cumulative maxstep.
+(occ(eql(contribution(fire(J),vel(Ax)), V / 1), maxstep-1)) <- ((occ(eql(fire(J), true), maxstep-1))) & (occ(eql(force(J,Ax), V), maxstep-1)).
+
+
+(h(eql(pos(Ax), P + ((V + V1) / 2)), maxstep)) <- not not ((h(eql(vel(Ax), V1), maxstep))) & h(eql(vel(Ax), V), maxstep-1) & h(eql(pos(Ax), P), maxstep-1) & ((V + V1) \ 2 == 0) & (P + ((V + V1) / 2) >= -maxAdditive) & (P + ((V + V1) / 2) <= maxAdditive).
+
+#base.
+#domain integer_star(X_Value_0).
+#cumulative maxstep.
+(false) <- (occ(eql(fire(J), true), maxstep-1)) & (?[X_Value_0]:((X_Value_0 \ 1 != 0) & occ(eql(force(J,Ax), X_Value_0), maxstep-1))).
+
+#base.
+#domain integer_star(X_Value_1).
+#cumulative maxstep.
+(false) <- (occ(eql(fire(J), true), maxstep-1)) & (?[X_Value_1]:((#abs(X_Value_1) > 2) & (occ(eql(force(J,Ax), X_Value_1), maxstep-1)))).
+
+
+
+% [Query: Label:0, Maxstep:1]
+#base.
+false <- query_label(0) & not ((((h(eql(pos(x), -1), 0) & h(eql(pos(y), 0), 0) & h(eql(pos(z), 1), 0))))).
+false <- query_label(0) & not ((((h(eql(vel(x), 0), 0) & h(eql(vel(y), 1), 0) & h(eql(vel(z), 1), 0))))).
+#volatile maxstep.
+false <- query_label(0) & not ((((h(eql(pos(x), 0), 1) & h(eql(pos(y), 3), 1) & h(eql(pos(z), 1), 1))))).
+
+
+
+%%  
+% | ?- loadf 'spacecraft-test'.
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/macros.std
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/spacecraft-test
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/examples/additive/spacecraft
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/additive
+% % loading file /v/filer1a/v0q031/appsmurf/ccalc.2.0b/arithmetic
+% % in transition mode...
+% % 458 atoms, 5698 rules, 27222 clauses (5460 new atoms)
+% % Grounding time: 12.56 seconds
+% % Completion time: 4.09 seconds
+% % Total time: 16.65 seconds
+% 
+% yes
+% | ?- set(num,all).
+% 
+% yes
+% | ?- query 0.
+% % Shifting atoms and clauses... done. (0.01 seconds)
+% % After shifting: 5918 atoms (including new atoms), 27222 clauses
+% % Writing input clauses... done.  (0.49 seconds)
+% % Calling mChaff spelt3... done.
+% % Reading output file(s) from SAT solver... done.
+% % Solution time: 0.48 seconds (prep 0.33 seconds, search 0.15 seconds)
+% 
+% Solution 1:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)= -2)  fire(jet2,force(x)=1,force(y)=2,force(z)=0)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 2:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)= -2)  fire(jet2,force(x)=0,force(y)=2,force(z)=0)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 3:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)=0)  fire(jet2,force(x)=0,force(y)=2,force(z)= -2)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 4:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)=0)  fire(jet2,force(x)=1,force(y)=2,force(z)= -2)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 5:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=2,force(y)=2,force(z)= -1)  fire(jet2,force(x)=0,force(y)=2,force(z)= -1)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 6:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=1,force(y)=2,force(z)= -1)  fire(jet2,force(x)=1,force(y)=2,force(z)= -1)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 7:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)= -1)  fire(jet2,force(x)=2,force(y)=2,force(z)= -1)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 8:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)= -2)  fire(jet2,force(x)=2,force(y)=2,force(z)=0)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% Solution 9:
+% 
+% 0:  pos(x)=-1  pos(y)=0  pos(z)=1  vel(x)=0  vel(y)=1  vel(z)=1  
+% 
+% ACTIONS:  fire(jet1,force(x)=0,force(y)=2,force(z)=0)  fire(jet2,force(x)=2,force(y)=2,force(z)= -2)  
+% 
+% 1:  pos(x)=0  pos(y)=3  pos(z)=1  vel(x)=2  vel(y)=5  vel(z)=-1  
+% 
+% 
+% 
+% yes
+% | ?- 
+% 
+#base.
+#hide h/2.
+#hide h/1.
+#show h(eql(pos(Ax), V_integer), 0).
+#cumulative maxstep.
+#show h(eql(pos(Ax), V_integer), maxstep).
+#base.
+#show h(eql(vel(Ax), V_integer), 0).
+#cumulative maxstep.
+#show h(eql(vel(Ax), V_integer), maxstep).
+#show occ(eql(fire(J), V_boolean), maxstep-1).
+#show occ(eql(force(J,Ax), V_integer_star), maxstep-1).

@@ -1,0 +1,24 @@
+:- sorts
+  num.
+
+:- objects
+  1..n   :: num.
+
+
+:- variables
+  I, I1, J, J1, N      :: num.
+
+:- constants
+  q(num,num) :: boolean.
+
+{~q(I,J)}.
+n{I,J| q(I,J)}n.
+<- not 1{I| q(I,J)}1.
+<- not 1{J| q(I,J)}1.
+<- not {I| q(I,J) & q(I1,J1) & abs(I1-I)=J1-J}1.
+
+
+
+% 1{I,J|q(I,J)=N}1.
+% <- q(I,J)=N & q(I1,J)=N & I\=I1.
+% <- q(I,J)=N & q(I,J1)=N & J\=J1.
