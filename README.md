@@ -10,6 +10,13 @@ The main orchestrator program of the tool chain acts as a unified interface that
 
 Cplus2ASP is highly configurable, allowing the tools in the toolchain to be turned off or be substituted for other tools, although compatibility among customly selected toolchain components is not recommened. In addition, Cplus2ASP provides a number of pre-configured running modes, which are detailed below.
 
+| Mode        | Description           |
+| ------------- |:-------------:|
+| Incremental      | The default running mode. Utilizes a translation to incremental ASP in order to allow an incremental ASP solver to effeciently iterate over all possible steps. |
+| Reactive      | This is under development.      |
+| Static (auto)	 | Uses the static translation used by previous version of Cplus2ASP. Automatically iterates and resolves for all requested steps until a valid plan is found.      |
+| Static (manual)	 | Similar to Static (auto) except that it allows the user to specify the steps to attempt to solve for.      |
+
 ### Cplus2ASP.bin
 This is the automated translator module for Cplus2ASP. It accepts normal CCalc files as input and translates them into F2LP input. Currently this part of the software tool chain is a prototype, and as such lacks support for some of the more advanced features of CCalc. See the release notes for known limitations of the program.
 
