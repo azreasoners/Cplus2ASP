@@ -1,4 +1,4 @@
-# Cplus2ASP
+# Cplus2ASP V3.1
 Translating and solving CCalc action descriptions using answer set solvers
 
 ## Introduction
