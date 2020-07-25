@@ -4,6 +4,35 @@ Translating and solving CCalc action descriptions using answer set solvers
 ## Introduction
 Cplus2ASP is a system designed to perform a modular translation of action descriptions written for CCalc into answer set programs. The current work comprises a suite of tools that translate CCalc action descriptions, solve the translated ASP programs, and produce answer sets similar to the models output by CCalc. If you're unfamiliar with CCalc, it's an implementation of the action language C+ (an extension of causal logic) that is very useful for describing and reasoning about time- and state-based domains using relatively intuitive syntax. For more information, check out the CCalc website using the link in the side bar. Our goal is to combine the user-friendliness of the CCalc language with the speed of modern answer set solvers to capture the best of both worlds.
 
+## Installation on Linux
+0. [Optional] Create a virtual environment using conda
+```
+conda create --name cplus2asp
+conda activate cplus2asp
+```
+1. Clone the current repository, and cd to the folder of Cplus2ASP
+```
+git clone https://github.com/azreasoners/Cplus2ASP.git
+cd Cplus2ASP
+```
+2. Install the pre-requiresite packages
+```
+sudo apt-get install autoconf automake libtool make
+sudo apt-get install libboost-all-dev flex bison re2c
+```
+3. Grab the current version of boost
+```
+dpkg -s libboost-dev | grep 'Version'
+```
+4. Set the env variable "boost_cv_lib_version" to the version of boost you just got in step 3. Say the output of step 3 is "Version: 1.65.1.0ubuntu1".
+```
+export boost_cv_lib_version=1_65_1
+```
+5. Install with make file
+```
+./bootstrap.sh & make & sudo make install
+```
+
 ## List of Items in the Cplus2ASP System
 ### Cplus2ASP
 The main orchestrator program of the tool chain acts as a unified interface that accepts all input and options, automatically handling the process of calling the programs below in the right order with the correct configurations. While it is possible to manually call each part of the tool chain separately, we highly recommend letting this system handle the details of organizing and executing the software tool chain.
