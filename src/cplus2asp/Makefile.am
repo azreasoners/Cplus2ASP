@@ -5,7 +5,7 @@ include $(top_srcdir)/src/Makefile.shared
 #AM_CXXFLAGS += -DNO_REACTIVE_BRIDGE
 
 
-bin_PROGRAMS = cplus2asp4
+bin_PROGRAMS = cplus2asp
 
 cplus2asp4_CPPFLAGS = $(BOOST_CPPFLAGS)
 cplus2asp4_LDFLAGS = $(BOOST_THREAD_LDFLAGS) $(BOOST_FILESYSTEM_LDFLAGS) $(BOOST_IOSTREAMS_LIBS) $(BOOST_SYSTEM_LDFLAGS)
