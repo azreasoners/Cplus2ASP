@@ -27,7 +27,6 @@ namespace fs = boost::filesystem;
 namespace u = babb::utils;
 using namespace cplus2asp::cplus2asp_bin;
 
-#define DEBUG 
 /// Main driver program
 int main(int argc, char const** argv) {
 

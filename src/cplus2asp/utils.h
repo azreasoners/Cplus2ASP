@@ -34,7 +34,6 @@
 #include <iostream>
 #include <sstream>
 
-#define DEBUG
 
 namespace utils {
 

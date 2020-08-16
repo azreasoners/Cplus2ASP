@@ -13,7 +13,6 @@ namespace cplus2asp_bin {
 
 typedef bcplus::Verb Verb;
 
-#define DEBUG
 
 
 class Configuration : public bcplus::Configuration
