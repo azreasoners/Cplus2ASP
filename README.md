@@ -31,15 +31,18 @@ dpkg -s libboost-dev | grep 'Version'
 ```
 export boost_cv_lib_version=1_65_1
 ```
-5. Install with make file
+5. Install with make file and rename the binary file
 ```
-./bootstrap.sh & make & sudo make install
+./bootstrap.sh
+make
+sudo make install
+sudo mv /usr/local/bin/cplus2asp4 /usr/local/bin/cplus2asp
 ```
 
 ## Example Run on Monkey&Banana Example (BC+)
 You can test different queries by executing
 ```
-cplus2asp4 examples/bc+/monkey.bc+ --language=bc+
+cplus2asp examples/bc+/monkey.bc+ --language=bc+
 ```
 then type a query such as
 ```
