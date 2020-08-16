@@ -36,6 +36,16 @@ export boost_cv_lib_version=1_65_1
 ./bootstrap.sh & make & sudo make install
 ```
 
+## Example Run on Monkey&Banana Example (BC+)
+You can test different queries by executing
+```
+cplus2asp4 examples/bc+/monkey.bc+ --language=bc+
+```
+then type a query such as
+```
+query=2
+```
+
 ## List of Items in the Cplus2ASP System
 ### Cplus2ASP
 The main orchestrator program of the tool chain acts as a unified interface that accepts all input and options, automatically handling the process of calling the programs below in the right order with the correct configurations. While it is possible to manually call each part of the tool chain separately, we highly recommend letting this system handle the details of organizing and executing the software tool chain.
