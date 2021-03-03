@@ -66,7 +66,7 @@ Cplus2ASP is highly configurable, allowing the tools in the toolchain to be turn
 This is the automated translator module for Cplus2ASP. It accepts normal CCalc files as input and translates them into F2LP input. Currently this part of the software tool chain is a prototype, and as such lacks support for some of the more advanced features of CCalc. See the release notes for known limitations of the program.
 
 ### F2LP
-To allow greater flexibility for the translated programs, we use F2LP as the target language of translation. F2LP supports the use of first-order formulas in its rules, transforming them into equivalent ASP code. A guide to F2LP's syntax and usage can be found on the F2LP web page (the link in the side bar will take you there).
+To allow greater flexibility for the translated programs, we use F2LP as the target language of translation. F2LP supports the use of first-order formulas in its rules, transforming them into equivalent ASP code. A guide to F2LP's syntax and usage can be found on the [F2LP GitHub page](https://github.com/azreasoners/F2LP).
 
 Cplus2ASP v3.1 requires F2LP version 1.4 or higher in order to use the default translation method. If a previous version of F2LP is available the program can still run in static compatibility mode (accessed with the --mode=static-auto argument).
 
