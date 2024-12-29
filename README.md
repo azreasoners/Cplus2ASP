@@ -22,7 +22,7 @@ conda install -c potassco clingo \
 && gcc externals/f2lp/f2lp.c -o f2lp \
 && sudo cp f2lp /usr/local/bin/ \
 && sudo apt-get install autoconf automake libtool make \
-&& sudo apt-get install libboost-all-dev flex bison re2c \
+&& sudo apt-get install libboost-all-dev flex bison re2c
 ```
 3. Grab the current version of boost
 ```
@@ -37,7 +37,7 @@ export boost_cv_lib_version=1_65_1
 ./bootstrap.sh \
 && make \
 && sudo make install \
-&& sudo mv /usr/local/bin/cplus2asp4 /usr/local/bin/cplus2asp \
+&& sudo mv /usr/local/bin/cplus2asp4 /usr/local/bin/cplus2asp
 ```
 
 ## Example Run on Monkey&Banana Example (BC+)
