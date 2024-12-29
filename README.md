@@ -28,9 +28,9 @@ conda install -c potassco clingo \
 ```
 dpkg -s libboost-dev | grep 'Version'
 ```
-4. Set the env variable "boost_cv_lib_version" to the version of boost you just got in step 3. Say the output of step 3 is "Version: 1.65.1.0ubuntu1".
+4. Set the env variable "boost_cv_lib_version" to the version of boost you just got in step 3. Say the output of step 3 is "Version: 1.83.0.1ubuntu2".
 ```
-export boost_cv_lib_version=1_65_1
+export boost_cv_lib_version=1_83_0
 ```
 5. Install with make file and rename the binary file
 ```
