@@ -18,6 +18,7 @@ cd Cplus2ASP
 2. Install the pre-requiresite packages
 ```
 conda install -c potassco clingo
+sudo apt-get update
 gcc externals/f2lp/f2lp.c -o f2lp
 sudo cp f2lp /usr/local/bin/
 sudo apt-get install autoconf automake libtool make
