@@ -12,7 +12,7 @@ conda activate cplus2asp
 ```
 1. Clone the current repository, and cd to the folder of Cplus2ASP
 ```
-git clone https://github.com/azreasoners/Cplus2ASP.git
+git clone https://github.com/AdamIshay/Cplus2ASP.git
 cd Cplus2ASP
 ```
 2. Install the pre-requiresite packages
