@@ -7,22 +7,22 @@ Cplus2ASP is a system designed to perform a modular translation of action descri
 ## Installation on Linux
 0. [Optional] Create a virtual environment using conda
 ```
-conda create --name cplus2asp
-conda activate cplus2asp
+conda create --name cplus2asp \
+&& conda activate cplus2asp
 ```
 1. Clone the current repository, and cd to the folder of Cplus2ASP
 ```
-git clone https://github.com/AdamIshay/Cplus2ASP.git
-cd Cplus2ASP
+git clone https://github.com/AdamIshay/Cplus2ASP.git \
+&& cd Cplus2ASP
 ```
 2. Install the pre-requiresite packages
 ```
-conda install -c potassco clingo
-sudo apt-get update
-gcc externals/f2lp/f2lp.c -o f2lp
-sudo cp f2lp /usr/local/bin/
-sudo apt-get install autoconf automake libtool make
-sudo apt-get install libboost-all-dev flex bison re2c
+conda install -c potassco clingo \
+&& sudo apt-get update \
+&& gcc externals/f2lp/f2lp.c -o f2lp \
+&& sudo cp f2lp /usr/local/bin/ \
+&& sudo apt-get install autoconf automake libtool make \
+&& sudo apt-get install libboost-all-dev flex bison re2c \
 ```
 3. Grab the current version of boost
 ```
@@ -34,10 +34,10 @@ export boost_cv_lib_version=1_65_1
 ```
 5. Install with make file and rename the binary file
 ```
-./bootstrap.sh
-make
-sudo make install
-sudo mv /usr/local/bin/cplus2asp4 /usr/local/bin/cplus2asp
+./bootstrap.sh \
+&& make \
+&& sudo make install \
+&& sudo mv /usr/local/bin/cplus2asp4 /usr/local/bin/cplus2asp \
 ```
 
 ## Example Run on Monkey&Banana Example (BC+)
