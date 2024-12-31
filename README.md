@@ -12,7 +12,7 @@ conda create --name cplus2asp \
 ```
 1. Clone the current repository, and cd to the folder of Cplus2ASP
 ```
-git clone https://github.com/AdamIshay/Cplus2ASP.git \
+git clone https://github.com/azreasoners/Cplus2ASP.git \
 && cd Cplus2ASP
 ```
 2. Install the pre-requiresite packages
@@ -32,6 +32,11 @@ dpkg -s libboost-dev | grep 'Version'
 ```
 export boost_cv_lib_version=1_83_0
 ```
+
+<!-- If you need compatibility with older versions of Boost, please use [this](https://github.com/azreasoners/Cplus2ASP/tree/99a4772) previous version of this project. -->
+
+
+
 5. Install with make file and rename the binary file
 ```
 ./bootstrap.sh \
